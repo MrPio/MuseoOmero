@@ -20,7 +20,7 @@ class ControllerGestioneDipendenti(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaGestioneDipendenti, previous : Controller, model : Museo):
+    def __init__(self,view : VistaGestioneDipendenti, previous : Controller, model : Museo):
         pass
 
     def __gotoVistaAssumi(self) -> None:

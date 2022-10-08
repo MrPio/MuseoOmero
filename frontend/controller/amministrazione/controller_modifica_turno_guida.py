@@ -17,7 +17,7 @@ class ControllerModificaTurnoGuida(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaModificaTurnoGuida, previous : Controller, model : TurnoGuida):
+    def __init__(self,view : VistaModificaTurnoGuida, previous : Controller, model : TurnoGuida):
         pass
 
     def __gotoGestisciDipendenti(self) -> None:

@@ -10,7 +10,7 @@
 import QWidget
 
 class WidgetDipendente(QWidget):
-    def create(nome : String, lavoro : String):
+    def __init__(self,nome : str, lavoro : str):
         pass
 
     def __onLicenziaClicked(self) -> None:

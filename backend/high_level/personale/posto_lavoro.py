@@ -15,7 +15,7 @@ class PostoLavoro(GestorePostiLavoro):
     def assumi(dipendente : Dipendente) -> bool:
         pass
 
-    def create(piano : int, numPostazioni : int, descrizione : str = ""):
+    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ""):
         pass
 
     def promuovi(dipendente : Dipendente) -> bool:

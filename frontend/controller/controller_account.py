@@ -20,7 +20,7 @@ class ControllerAccount(Controller):
     def __gotoHome(self) -> None:
         pass
 
-    def create(view : VistaAccount, previous : Controller, home : Controller, account : Dipendente):
+    def __init__(self,view : VistaAccount, previous : Controller, home : Controller, account : Dipendente):
         pass
 
     def connettiEventi(self) -> None:

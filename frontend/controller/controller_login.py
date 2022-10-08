@@ -7,26 +7,34 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+# from backend.high_level.museo import Museo
+# from backend.high_level.personale.dipendente import Dipendente
+from backend.low_level.sicurezza.hashing import Hashing
 from frontend.controller.controller import Controller
-import Museo
-import Hashing
-import Dipendente
-from frontend.view import VistaLogin
+from frontend.view.vista_login import VistaLogin
+
 
 class ControllerLogin(Controller):
-    m_VistaLogin= VistaLogin()
-
-    def __login(username : String, passwordEncr : String) -> Dipendente:
+    def __login(self,username : str, passwordEncr : str) -> None:
         pass
 
     def __onLoginClicked(self) -> None:
-        pass
+        dipendente=self.__login(
+            self.view.getUsernameLineEdit().text,
+            self.__hashing.hash(self.view.getPasswordLineEdit().text)
+        )
 
     def connettiEventi(self) -> None:
-        pass
-
-    def create(view : VistaLogin, model : Museo, home : Controller, repartoScelto : String):
-        pass
+        self.view.getPreviousLabel().mousePressEvent =lambda _: self.gotoHome()
+        self.view.getLoginButton().clicked.connect(self.__onLoginClicked)
 
     def gotoHome(self) -> None:
-        pass
+        self.closeView()
+        self.__home.enableView()
+
+    def __init__(self, view: VistaLogin, model: None, home: Controller, repartoScelto: str,hashing:Hashing):
+        super().__init__(view)
+        self.__model=model
+        self.__home=home
+        self.__repartoScelto=repartoScelto
+        self.__hashing=hashing

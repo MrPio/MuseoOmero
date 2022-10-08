@@ -10,7 +10,7 @@
 import Serializzatore
 
 class SerializzazionePickle(Serializzatore):
-    def create(path : str, filename : str):
+    def __init__(self,path : str, filename : str):
         pass
 
     def serializza(obj : Object) -> None:

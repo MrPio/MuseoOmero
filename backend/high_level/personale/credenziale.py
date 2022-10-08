@@ -19,5 +19,5 @@ class Credenziale:
     def setUsername(newVal : str) -> None:
         pass
 
-    def create(username : str, password : str, hashing : Hashing):
+    def __init__(self,username : str, password : str, hashing : Hashing):
         pass

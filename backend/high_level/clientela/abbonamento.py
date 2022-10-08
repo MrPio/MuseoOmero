@@ -14,7 +14,7 @@ import Documento
 class Abbonamento(Documento):
     m_TipoAbbonamento= TipoAbbonamento()
 
-    def create(dataRilascio : datetimetime = None, tipo : TipoAbbonamento):
+    def __init__(self,dataRilascio : datetimetime = None, tipo : TipoAbbonamento):
         pass
 
     def isScaduto(self) -> bool:

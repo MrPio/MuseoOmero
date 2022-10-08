@@ -23,7 +23,7 @@ class ControllerGestionePostiLavoro(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaGestionePostiLavoro, previous : Controller, model : Museo):
+    def __init__(self,view : VistaGestionePostiLavoro, previous : Controller, model : Museo):
         pass
 
     def gotoVistaModificaPostoLavoro(self) -> None:

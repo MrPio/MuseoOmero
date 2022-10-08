@@ -10,7 +10,7 @@
 import Lavoro
 
 class Amministratore(Lavoro):
-    def create(contratto : Canvas, stipendio : float, fondatore : bool = false):
+    def __init__(self,contratto : Canvas, stipendio : float, fondatore : bool = false):
         pass
 
     def isFonadatore(self) -> bool:

@@ -16,7 +16,7 @@ class ControllerYesNo(Controller):
     def __onAnNoneaClicked(self) -> None:
         pass
 
-    def create(view : VistaYesNo, previous : Controller):
+    def __init__(self,view : VistaYesNo, previous : Controller):
         pass
 
     def __onConfermaClicked(self) -> None:

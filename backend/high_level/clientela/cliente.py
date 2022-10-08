@@ -13,7 +13,7 @@ import Abbonamento
 class Cliente(Visitatore):
     m_Abbonamento= Abbonamento()
 
-    def create(prov : str = "", sesso : Sesso = Sesso.nonSpecificato, nasc : datetime = None, nome : str, cognome : str, codFis : str, email : str= "", tel : int=-1):
+    def __init__(self,prov : str = "", sesso : Sesso = Sesso.nonSpecificato, nasc : datetime = None, nome : str, cognome : str, codFis : str, email : str= "", tel : int=-1):
         pass
 
     def getNome(self) -> str:

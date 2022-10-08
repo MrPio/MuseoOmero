@@ -20,7 +20,7 @@ class ControllerAggiungiOpera(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaAggiungiOpera, previous : Controller, strategy : StrategyAggiungiOpera):
+    def __init__(self,view : VistaAggiungiOpera, previous : Controller, strategy : StrategyAggiungiOpera):
         pass
 
     def __onAggiungiUbicaioneClicked(self) -> None:

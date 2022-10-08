@@ -24,7 +24,7 @@ class Dipendente(Autentificabile):
     def calcolaEta(self) -> int:
         pass
 
-    def create(nome : str, cognome : str, sesso : Sesso = Sesso.nonSpecificato, dataNascita : datetime, curriculum : Canvas = None, email : str):
+    def __init__(self,nome : str, cognome : str, sesso : Sesso = Sesso.nonSpecificato, dataNascita : datetime, curriculum : Canvas = None, email : str):
         pass
 
     def getNome(self) -> str:

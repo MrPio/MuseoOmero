@@ -13,5 +13,5 @@ class MD5Hashing(Hashing):
     def hash(plain : int) -> str:
         pass
 
-    def create():
+    def __init__(self,):
         pass

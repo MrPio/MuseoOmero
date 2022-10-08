@@ -10,7 +10,7 @@
 import Lavoro
 
 class Segretario(Lavoro):
-    def create(contratto : Canvas, stipendio : float):
+    def __init__(self,contratto : Canvas, stipendio : float):
         pass
 
     def getSportelloAssegnato(self) -> int:

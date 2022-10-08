@@ -17,7 +17,7 @@ class ControllerAcquistoBiglietto(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaAcquistoBiglietto, previous : Controller, model : Biglietto):
+    def __init__(self,view : VistaAcquistoBiglietto, previous : Controller, model : Biglietto):
         pass
 
     def __gotoVistaTurniGuide(self) -> None:

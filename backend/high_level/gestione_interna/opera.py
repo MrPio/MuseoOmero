@@ -17,7 +17,7 @@ class Opera:
 
     m_Ubicazione= Ubicazione()
 
-    def create(autore : str, titolo : str, costo : float = 0, descrizione : str, immagine : Image, periodo : PeriodoStorico, nelMuseoAperto : bool):
+    def __init__(self,autore : str, titolo : str, costo : float = 0, descrizione : str, immagine : Image, periodo : PeriodoStorico, nelMuseoAperto : bool):
         pass
 
     def vendi(pagamento : Pagamento) -> bool:

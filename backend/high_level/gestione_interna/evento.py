@@ -10,7 +10,7 @@
 
 
 class Evento:
-    def create(dataInizio : datetimetime, dataFine : datetimetime) -> None:
+    def __init__(self,dataInizio : datetimetime, dataFine : datetimetime) -> None:
         pass
 
     def getDataInizio(self) -> datetimetime:

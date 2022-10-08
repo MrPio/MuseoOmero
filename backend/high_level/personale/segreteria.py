@@ -16,7 +16,7 @@ class Segreteria(PostoLavoro):
 
     m_RichiestaDonazione= RichiestaDonazione()
 
-    def create(piano : int, numPostazioni : int, descr : str = "", sportelli : int):
+    def __init__(self,piano : int, numPostazioni : int, descr : str = "", sportelli : int):
         pass
 
     def getListaLavori(self) -> None:

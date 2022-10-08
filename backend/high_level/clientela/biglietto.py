@@ -20,7 +20,7 @@ class Biglietto(Documento):
     def convalida(self) -> bool:
         pass
 
-    def create(dataRilascio : datetimetime = None, reparto : RepartoMuseo = None, tariffa : Tariffa = None):
+    def __init__(self,dataRilascio : datetimetime = None, reparto : RepartoMuseo = None, tariffa : Tariffa = None):
         pass
 
     def getReparto(self) -> RepartoMuseo:

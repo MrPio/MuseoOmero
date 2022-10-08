@@ -17,7 +17,7 @@ class ControllerVistaAbbonamento(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaAbbonamento, previous : Controller, model : Abbonamento):
+    def __init__(self,view : VistaAbbonamento, previous : Controller, model : Abbonamento):
         pass
 
     def connettiEventi(self) -> None:

@@ -10,7 +10,7 @@
 import datetimetime
 
 class Lavoro:
-    def create(contratto : Canvas, stipendio : float, numPostazione : int):
+    def __init__(self,contratto : Canvas, stipendio : float, numPostazione : int):
         pass
 
     def getDataAssunzione(self) -> datetimetime:

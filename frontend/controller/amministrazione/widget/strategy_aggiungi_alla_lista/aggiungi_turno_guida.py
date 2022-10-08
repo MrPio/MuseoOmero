@@ -14,7 +14,7 @@ class AggiungiTurnoGuida(StrategyAggiungiAllaLista):
     def onClicked(self) -> None:
         pass
 
-    def create(c : ControllerTurniGuide):
+    def __init__(self,c : ControllerTurniGuide):
         pass
 
     def getIcon(self) -> QIcon:

@@ -7,11 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Hashing
+from backend.low_level.sicurezza.hashing import Hashing
+
 
 class SHA256Hashing(Hashing):
-    def hash(plain : int) -> str:
+    def hash(plain: int) -> str:
         pass
 
-    def create():
+    def __init__(self):
         pass

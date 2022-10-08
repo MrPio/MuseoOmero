@@ -13,7 +13,7 @@ import PostoLavoro
 class Amministrazione(PostoLavoro):
     m_Amministratore= Amministratore()
 
-    def create(piano : int, numPostazioni : int, descrizione : str = ""):
+    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ""):
         pass
 
     def getListaLavori(self) -> Amministratore []:

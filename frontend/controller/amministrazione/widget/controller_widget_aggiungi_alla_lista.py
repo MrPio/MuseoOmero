@@ -16,7 +16,7 @@ class ControllerWidgetAggiungiAllaLista(Controller):
 
     m_StrategyAggiungiAllaLista= StrategyAggiungiAllaLista()
 
-    def create(view : WidgetAggiungiAllaLista, parent : Controller, strategy : StrategyAggiungiAllaLista, tipo : String =  ""):
+    def __init__(self,view : WidgetAggiungiAllaLista, parent : Controller, strategy : StrategyAggiungiAllaLista, tipo : str =  ""):
         pass
 
     def __onClicked(self) -> None:

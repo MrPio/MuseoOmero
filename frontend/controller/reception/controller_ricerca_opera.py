@@ -20,7 +20,7 @@ class ControllerRicercaOpera(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaRicercaOpera, previous : Controller, model : Museo, strategy : StrategyRicercaOpera):
+    def __init__(self,view : VistaRicercaOpera, previous : Controller, model : Museo, strategy : StrategyRicercaOpera):
         pass
 
     def __onRicercaClicked(self) -> None:

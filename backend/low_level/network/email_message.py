@@ -13,7 +13,7 @@ class EmailMessage(Notification):
     def send(title : str, content : str) -> None:
         pass
 
-    def create(email : str):
+    def __init__(self,email : str):
         pass
 
     def getEmail(self) -> str:

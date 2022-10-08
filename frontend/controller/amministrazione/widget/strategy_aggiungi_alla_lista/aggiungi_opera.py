@@ -14,7 +14,7 @@ class AggiungiOpera(StrategyAggiungiAllaLista):
     def onClicked(self) -> None:
         pass
 
-    def create(c : ControllerAllestisciMostra):
+    def __init__(self,c : ControllerAllestisciMostra):
         pass
 
     def getIcon(self) -> QIcon:

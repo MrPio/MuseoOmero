@@ -17,7 +17,7 @@ class ControllerWidgetPostoLavoro(Controller):
 
     m_StrategyWidgetDipendente= StrategyWidgetDipendente()
 
-    def create(view : WidgetPostoLavoro, model : PostoLavoro, parent : Controller, strategy : StrategyWidgetDipendente):
+    def __init__(self,view : WidgetPostoLavoro, model : PostoLavoro, parent : Controller, strategy : StrategyWidgetDipendente):
         pass
 
     def __onAssegnaPostoClicked() -> void:

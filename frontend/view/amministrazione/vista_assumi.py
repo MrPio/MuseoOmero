@@ -7,15 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton
 from frontend.view.my_main_window import MyMainWindow
-from ui.location import ROOT_DIR
+
 
 class VistaAssumi(MyMainWindow):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(previous : QMainWindow):
+    def __init__(self,previous : QMainWindow):
         pass
 
     def __onConfermaClicked(self) -> None:

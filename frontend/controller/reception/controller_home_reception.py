@@ -18,7 +18,7 @@ class ControllerHomeReception(Controller):
     def __gotoVistaVistaAcquistoBiglietto(self) -> None:
         pass
 
-    def create(view : VistaHomeReception, home : Controller):
+    def __init__(self,view : VistaHomeReception, home : Controller):
         pass
 
     def __gotoVistaVistaConvalidaBiglietto(self) -> None:
@@ -42,7 +42,7 @@ class ControllerHomeReception(Controller):
     def __gotoVistaVistaAcquistoBiglietto(self) -> None:
         pass
 
-    def create(view : VistaHomeReception, home : Controller, account : Dipendente):
+    def __init__(self,view : VistaHomeReception, home : Controller, account : Dipendente):
         pass
 
     def __gotoVistaVistaConvalidaBiglietto(self) -> None:

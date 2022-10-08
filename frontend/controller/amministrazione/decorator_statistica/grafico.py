@@ -11,7 +11,7 @@ import Statistica
 from frontend.controller.controller import ControllerVistaStatistiche
 
 class Grafico(Statistica):
-    def create(controller : ControllerVistaStatistiche, statistica : Grafico):
+    def __init__(self,controller : ControllerVistaStatistiche, statistica : Grafico):
         pass
 
     def calcola(self) -> None:

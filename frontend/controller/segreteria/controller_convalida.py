@@ -19,7 +19,7 @@ class ControllerConvalida(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaConvalida, previous : Controller, strategy : StrategyConvalida):
+    def __init__(self,view : VistaConvalida, previous : Controller, strategy : StrategyConvalida):
         pass
 
     def __gotoVistaInserimentoManuale(self) -> None:
@@ -34,5 +34,5 @@ class ControllerConvalida(Controller):
     def initializeUi(self) -> None:
         pass
 
-    def finalizza(id : String) -> None:
+    def finalizza(id : str) -> None:
         pass

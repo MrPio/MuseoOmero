@@ -17,7 +17,7 @@ class ControllerVistaReportIncassi(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaReportIncassi, previous : Controller, model : Museo):
+    def __init__(self,view : VistaReportIncassi, previous : Controller, model : Museo):
         pass
 
     def __onVisualizzaClicked(self) -> None:

@@ -20,7 +20,7 @@ class ControllerBackups(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaBackups, previous : Controller, model : Museo):
+    def __init__(self,view : VistaBackups, previous : Controller, model : Museo):
         pass
 
     def __onBackupOraClicked(self) -> None:

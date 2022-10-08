@@ -7,9 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
 from frontend.view.my_main_window import MyMainWindow
-from ui.location import ROOT_DIR
+
 
 class VistaGestisciTurniGuida(MyMainWindow):
     def __gotoPrevious(self) -> None:

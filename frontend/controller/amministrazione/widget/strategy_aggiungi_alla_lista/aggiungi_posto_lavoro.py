@@ -14,7 +14,7 @@ class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
     def onClicked(self) -> None:
         pass
 
-    def create(c : ControllerGestionePostiLavoro):
+    def __init__(self,c : ControllerGestionePostiLavoro):
         pass
 
     def getIcon(self) -> QIcon:

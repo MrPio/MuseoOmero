@@ -1,8 +1,12 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+import os
+import sys
+
+from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-import myres
+from frontend.ui.location import UI_DIR
+from frontend import myres
 
 
 class MyMainWindow(QMainWindow):
@@ -12,22 +16,22 @@ class MyMainWindow(QMainWindow):
         loadUi(uiFile, self)
         # a quanto pare questo trucchetto richiede la versione 5 di pyqt
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
-        self.setWindowIcon(QtGui.QIcon('ico/museum_white.ico'))
-        self.exitButton.clicked.connect(self.close)
+        self.setWindowIcon(QtGui.QIcon(UI_DIR+'ico/museum_white.ico'))
+        self.exitButton.clicked.connect(lambda :os._exit(1))
         self.maximizeButton.clicked.connect(self.maximize)
         self.reduceButton.clicked.connect(self.showMinimized)
 
         self.maxHeight=self.height()
 
         # ATTENZIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # dopo tantissimo try&error ho scoperto che gli errori di rendering sono dovuti
+        # dopo tanti try&error ho scoperto che gli errori di rendering sono dovuti
         # alle seguenti cose:
         # • la superclasse DEVE essere la stessa classe dell'elemento alla radice del .ui
-        # • il CSS nell'elemento radice CAUSA UN MACELLO DI PROBLEMI!
+        # • il CSS nell'elemento radice CAUSA PROBLEMI!
         #   PERSINO COMMENTARLO NON RISOLVE, DEVE ESSERE PROPRIO TOLTO!
-        #   ce lo rimettiamo poi nel file qui sotto, ora funziona tutto.
+        #   Lo rimettiamo poi nel file qui sotto.
         # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        self.setStyleSheet(open('ui/css/main.css', 'r').read())
+        self.setStyleSheet(open(UI_DIR+'/css/main.css', 'r').read())
 
         # poiché si perdono i margini, li setto manualmente
         for bigButton in list(filter(lambda el:'bigbutton'in el.lower(),self.__dict__.keys())):
@@ -41,10 +45,10 @@ class MyMainWindow(QMainWindow):
         objName = self.sender().objectName()
         if not getattr(self,objName+'Status'):
             setattr(self,objName+'Status',True)
-            getattr(self, objName).setStyleSheet(open('ui/css/checkBoxOn.css', 'r').read())
+            getattr(self, objName).setStyleSheet(open(UI_DIR+'/css/checkBoxOn.css', 'r').read())
         else:
             setattr(self,objName+'Status',False)
-            getattr(self, objName).setStyleSheet(open('ui/css/checkBoxOff.css', 'r').read())
+            getattr(self, objName).setStyleSheet(open(UI_DIR+'/css/checkBoxOff.css', 'r').read())
 
     def maximize(self):
         if self.height() > 48:
@@ -83,4 +87,3 @@ class MyMainWindow(QMainWindow):
                              self.width(),
                              self.height())
             self.start = self.end
-

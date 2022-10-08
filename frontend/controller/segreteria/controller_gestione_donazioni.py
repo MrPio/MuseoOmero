@@ -19,7 +19,7 @@ class ControllerGestioneDonazioni(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaGestioneDonazioni, previous : Controller, model : Museo):
+    def __init__(self,view : VistaGestioneDonazioni, previous : Controller, model : Museo):
         pass
 
     def connettiEventi(self) -> None:

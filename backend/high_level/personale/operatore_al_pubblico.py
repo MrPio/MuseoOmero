@@ -14,7 +14,7 @@ from backend.high_level.personale.lavoro import Lavoro
 class OperatoreAlPubblico(Lavoro):
     m_TurnoGuida= TurnoGuida()
 
-    def create(contratto : str, stipendio : float, qualificaGuida : str):
+    def __init__(self,contratto : str, stipendio : float, qualificaGuida : str):
         pass
 
     def assegna(turno : TurnoGuida) -> bool:

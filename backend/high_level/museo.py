@@ -35,8 +35,9 @@ class Museo():
 
     m_Opera = Opera()
 
-    def getInstance(self) -> Museo:
-        pass
+    @staticmethod
+    def getInstance() -> Museo:
+        return None
 
     def getTurniGuide(self) -> list:
         pass

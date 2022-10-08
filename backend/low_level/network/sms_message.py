@@ -13,7 +13,7 @@ class SMSMessage(Notification):
     def send(title : str, content : str) -> None:
         pass
 
-    def create(telefono : int):
+    def __init__(self,telefono : int):
         pass
 
     def getTelefono(self) -> int:

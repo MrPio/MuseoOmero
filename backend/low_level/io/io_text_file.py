@@ -11,7 +11,7 @@ from backend.low_level.io.io_file import IOFile
 
 
 class IOTextFile(IOFile):
-    def create(path: str, filename: str):
+    def __init__(self,path: str, filename: str):
         pass
 
     def salvaFile(self) -> None:

@@ -16,7 +16,7 @@ class QRCode:
     def rigenera(self) -> None:
         pass
 
-    def create():
+    def __init__(self,):
         pass
 
     def getId(self) -> str:

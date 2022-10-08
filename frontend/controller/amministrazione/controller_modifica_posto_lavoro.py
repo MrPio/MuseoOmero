@@ -17,7 +17,7 @@ class ControllerModificaPostoLavoro(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaModificaPostoLavoro, previous : Controller, model : PostoLavoro):
+    def __init__(self,view : VistaModificaPostoLavoro, previous : Controller, model : PostoLavoro):
         pass
 
     def __onConfermaClicked(self) -> None:

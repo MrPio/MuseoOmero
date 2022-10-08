@@ -20,7 +20,7 @@ class ControllerAssumi(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaAssumi, previous : Controller, model : Museo):
+    def __init__(self,view : VistaAssumi, previous : Controller, model : Museo):
         pass
 
     def __onConfermaClicked(self) -> None:

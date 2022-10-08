@@ -13,7 +13,7 @@ import PostoLavoro
 class Reception(PostoLavoro):
     m_OperatoreAlPubblico= OperatoreAlPubblico()
 
-    def create(piano : int, numPostazioni : int, numPOS : int, descrizione : str = ""):
+    def __init__(self,piano : int, numPostazioni : int, numPOS : int, descrizione : str = ""):
         pass
 
     def getNumPos(self) -> int:

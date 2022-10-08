@@ -15,7 +15,7 @@ class Visitatore:
 
     m_Sesso= Sesso()
 
-    def create(prov : str = "", sesso : Sesso = Sesso.NonSpecificato, nasc : datetime = None):
+    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NonSpecificato, nasc : datetime = None):
         pass
 
     def getProvenienza(self) -> str:

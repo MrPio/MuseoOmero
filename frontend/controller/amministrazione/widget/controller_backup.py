@@ -13,7 +13,7 @@ from frontend.controller.controller import Controller
 class ControllerBackup(Controller):
     m_WidgetBackup= WidgetBackup()
 
-    def create(view : WidgetBackup, model : Backup, parent : Controller):
+    def __init__(self,view : WidgetBackup, model : Backup, parent : Controller):
         pass
 
     def __onDownUpButtonClicked(self) -> None:

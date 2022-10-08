@@ -14,7 +14,7 @@ from frontend.view import VistaHomeSegreteria
 class ControllerHomeSegreteria(Controller):
     m_VistaHomeSegreteria= VistaHomeSegreteria()
 
-    def create(view : VistaHomeSegreteria, home : Controller, account : Dipendente):
+    def __init__(self,view : VistaHomeSegreteria, home : Controller, account : Dipendente):
         pass
 
     def __gotoVistaAccount(self) -> None:

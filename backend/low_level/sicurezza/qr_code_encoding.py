@@ -16,5 +16,5 @@ class QRCodeEncoding(Encoding):
     def decode(image : Image) -> str:
         pass
 
-    def create():
+    def __init__(self,):
         pass

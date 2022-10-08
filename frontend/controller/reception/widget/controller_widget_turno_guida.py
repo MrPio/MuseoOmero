@@ -18,7 +18,7 @@ class ControllerWidgetTurnoGuida(Controller):
 
     m_WidgetTurnoGuida= WidgetTurnoGuida()
 
-    def create(view : WidgetTurnoGuida, model : TurnoGuida, biglietto : Biglietto):
+    def __init__(self,view : WidgetTurnoGuida, model : TurnoGuida, biglietto : Biglietto):
         pass
 
     def __onSelezionaClicked(self) -> None:

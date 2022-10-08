@@ -17,7 +17,7 @@ class ControllerMostra(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaMostra, previous : Controller, model : Mostra):
+    def __init__(self,view : VistaMostra, previous : Controller, model : Mostra):
         pass
 
     def __gotoVistaOpera(self) -> None:

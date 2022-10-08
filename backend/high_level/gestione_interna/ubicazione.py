@@ -10,7 +10,7 @@
 
 
 class Ubicazione:
-    def create(piano : int, numeroMagazzino : int, scaffale : str, posizione : int):
+    def __init__(self,piano : int, numeroMagazzino : int, scaffale : str, posizione : int):
         pass
 
     def getPiano(self) -> int:

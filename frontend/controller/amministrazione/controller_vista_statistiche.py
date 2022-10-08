@@ -19,7 +19,7 @@ class ControllerVistaStatistiche(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaStatistiche, previous : Controller):
+    def __init__(self,view : VistaStatistiche, previous : Controller):
         pass
 
     def __onVisualizzaClicked(self) -> None:

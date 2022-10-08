@@ -17,7 +17,7 @@ class ControllerInsericiUbicazione(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaInsericiUbicazione, previous : Controller, model : Ubicazione):
+    def __init__(self,view : VistaInsericiUbicazione, previous : Controller, model : Ubicazione):
         pass
 
     def __onConfermaClicked(self) -> None:

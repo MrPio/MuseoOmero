@@ -20,7 +20,7 @@ class ControllerHomeAmministrazione(Controller):
     def __gotoVistaGestioneDipendenti(self) -> None:
         pass
 
-    def create(view : ControllerHomeAmministrazione, home : Controller, account : Dipendente):
+    def __init__(self,view : ControllerHomeAmministrazione, home : Controller, account : Dipendente):
         pass
 
     def __gotoVistaGestioneTurniGuida(self) -> None:

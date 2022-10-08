@@ -19,5 +19,5 @@ class DropBoxAPI(CloudStorage):
     def listFile(cloudDirectory : str) -> None:
         pass
 
-    def create():
+    def __init__(self,):
         pass

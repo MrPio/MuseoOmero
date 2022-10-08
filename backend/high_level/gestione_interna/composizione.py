@@ -12,7 +12,7 @@ import TipoOpera
 class Composizione:
     m_TipoOpera= TipoOpera()
 
-    def create(altezzaCm : float, larghezzaCm : float, profonditaCm : float, pesoGr : float, tipo : TipoOpera):
+    def __init__(self,altezzaCm : float, larghezzaCm : float, profonditaCm : float, pesoGr : float, tipo : TipoOpera):
         pass
 
     def calcolaArea(self) -> float:

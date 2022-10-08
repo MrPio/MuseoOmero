@@ -32,7 +32,7 @@ class Documento(Convalidabile):
     def acquista(self) -> bool:
         pass
 
-    def create(dataRilascio : datetimetime = None):
+    def __init__(self,dataRilascio : datetimetime = None):
         pass
 
     def getDataRilascio(self) -> datetimetime:

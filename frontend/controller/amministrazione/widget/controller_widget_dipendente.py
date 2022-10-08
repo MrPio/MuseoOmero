@@ -19,7 +19,7 @@ class ControllerWidgetDipendente(Controller):
 
     m_StrategyWidgetDipendente= StrategyWidgetDipendente()
 
-    def create(view : WidgetPostoLavoro, model : PostoLavoro, parent : Controller, strategy : StrategyWidgetDipendente):
+    def __init__(self,view : WidgetPostoLavoro, model : PostoLavoro, parent : Controller, strategy : StrategyWidgetDipendente):
         pass
 
     def __onAssegnaPostoClicked(self) -> None:
@@ -40,7 +40,7 @@ class ControllerWidgetDipendente(Controller):
 class ControllerWidgetDipendente(Controller):
     m_WidgetDipendente= WidgetDipendente()
 
-    def create(view : WidgetDipendente, model : Dipendente):
+    def __init__(self,view : WidgetDipendente, model : Dipendente):
         pass
 
     def __onLicenziaClicked(self) -> None:
@@ -56,7 +56,7 @@ class ControllerWidgetDipendente(Controller):
         pass
 
 class ControllerWidgetDipendente(Controller):
-    def create(view : WidgetPostoLavoro, model : PostoLavoro):
+    def __init__(self,view : WidgetPostoLavoro, model : PostoLavoro):
         pass
 
     def __onAssegnaPostoClicked(self) -> None:

@@ -7,19 +7,40 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
-from frontend.view.my_main_window import MyMainWindow
-from ui.location import ROOT_DIR
+import abc
 
-class Controller:
+from frontend.view.my_main_window import MyMainWindow
+
+
+class Controller(abc.ABC):
+
+    def __init__(self, view: MyMainWindow) -> None:
+        self.view = view
+
     def initializeUi(self) -> None:
+        """
+        Questo metodo inizializza la vista mostrando le informazione contenute nel model
+        """
+        pass
+
+    @abc.abstractmethod
+    def connettiEventi(self) -> None:
+        """
+        Questo metodo assegna gli eventi di interazione dell'utente con i rispettivi metodi
+        """
         pass
 
     def showView(self) -> None:
-        pass
+        self.view.show()
 
-    def connettiEventi(self) -> None:
-        pass
+    def hideView(self) -> None:
+        self.view.hide()
 
-    def create(view : QMainWindow):
-        pass
+    def closeView(self) -> None:
+        self.view.close()
+
+    def disableView(self) -> None:
+        self.view.setEnabled(False)
+
+    def enableView(self) -> None:
+        self.view.setEnabled(True)

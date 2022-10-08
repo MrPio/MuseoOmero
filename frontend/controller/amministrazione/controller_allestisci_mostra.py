@@ -20,7 +20,7 @@ class ControllerAllestisciMostra(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaAllestisciMostra, previous : Controller, model : Mostra):
+    def __init__(self,view : VistaAllestisciMostra, previous : Controller, model : Mostra):
         pass
 
     def __gotoVistaOpera(self) -> None:

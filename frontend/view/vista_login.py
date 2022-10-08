@@ -7,16 +7,24 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton, QLineEdit, QLabel
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
-from ui.location import ROOT_DIR
+
 
 class VistaLogin(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR+'/Login.ui')
+
+    def getPreviousLabel(self)->QLabel:
+        return self.previousLabel
     def getUsernameLineEdit(self) -> QLineEdit:
-        pass
+        return self.usernameLineEdit
 
     def getPasswordLineEdit(self) -> QLineEdit:
-        pass
+        return self.passwordLineEdit
 
     def getLoginButton(self) -> QPushButton:
-        pass
+        return self.ricercaButton

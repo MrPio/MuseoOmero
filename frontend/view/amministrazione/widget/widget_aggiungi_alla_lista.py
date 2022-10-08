@@ -14,7 +14,7 @@ import StrategyTurniGuide
 class WidgetAggiungiAllaLista(QWidget):
     m_StrategyTurniGuide= StrategyTurniGuide()
 
-    def create(action : StrategyAggiungiAllaLista):
+    def __init__(self,action : StrategyAggiungiAllaLista):
         pass
 
     def __onClicked(self) -> None:

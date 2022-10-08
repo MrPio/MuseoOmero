@@ -12,7 +12,7 @@ import Opera
 import Notification
 
 class RichiestaDonazione:
-    def create(opera : Opera, ubicazione : Ubicazione, email : str = "", tel : int = -1):
+    def __init__(self,opera : Opera, ubicazione : Ubicazione, email : str = "", tel : int = -1):
         pass
 
     def accetta(self) -> None:

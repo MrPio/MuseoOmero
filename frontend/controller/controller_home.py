@@ -7,23 +7,30 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.view import VistaHome
+from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 from frontend.controller.controller import Controller
+from frontend.controller.controller_login import ControllerLogin
+from frontend.view.vista_home import VistaHome
+from frontend.view.vista_login import VistaLogin
+
 
 class ControllerHome(Controller):
-    m_VistaHome= VistaHome()
-
     def __onReceptionClicked(self) -> None:
-        pass
+        controller = ControllerLogin(VistaLogin(),None,self,'reception',SHA256Hashing())
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __onSegreteriaClicked(self) -> None:
-        pass
+        print('__onSegreteriaClicked')
 
     def __onAmministrazioneClicked(self) -> None:
-        pass
+        print('__onAmministrazioneClicked')
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getReceptionButton().mousePressEvent =lambda _: self.__onReceptionClicked()
+        self.view.getSegreteriaButton().mousePressEvent =lambda _: self.__onSegreteriaClicked()
+        self.view.getAmministrazioneButton().mousePressEvent =lambda _: self.__onAmministrazioneClicked()
 
-    def create(view : VistaHome):
-        pass
+    def __init__(self, view: VistaHome):
+        super().__init__(view)

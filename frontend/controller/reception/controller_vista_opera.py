@@ -17,7 +17,7 @@ class ControllerVistaOpera(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def create(view : VistaOpera, previous : Controller, model : Opera):
+    def __init__(self,view : VistaOpera, previous : Controller, model : Opera):
         pass
 
     def connettiEventi(self) -> None:

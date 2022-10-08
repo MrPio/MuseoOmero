@@ -13,7 +13,7 @@ import Evento
 class TurnoGuida(Evento):
     m_RepartoMuseo= RepartoMuseo()
 
-    def create(dataInizio : datetimetime, dataFine : datetimetime, reparto : RepartoMuseo, capienza : int, numeroPrenotati : int):
+    def __init__(self,dataInizio : datetimetime, dataFine : datetimetime, reparto : RepartoMuseo, capienza : int, numeroPrenotati : int):
         pass
 
     def isPieno(self) -> bool:

@@ -7,16 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton
 from frontend.view.my_main_window import MyMainWindow
-from ui.location import ROOT_DIR
+from frontend.ui.location import UI_DIR
 
 class VistaHome(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR+'/MainPage.ui')
+
     def getReceptionButton(self) -> QPushButton:
-        pass
+        return self.receptionBigButton
 
     def getSegreteriaButton(self) -> QPushButton:
-        pass
+        return self.segreteriaBigButton
 
     def getAmministrazioneButton(self) -> QPushButton:
-        pass
+        return self.amministrazioneBigButton

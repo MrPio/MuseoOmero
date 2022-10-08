@@ -17,7 +17,7 @@ class ControllerWidgetRichiestaDonazione(Controller):
     def __gotoVistaOpera(self) -> None:
         pass
 
-    def create(view : WidgetRichiestaDonazione, model : RichiestaDonazione):
+    def __init__(self,view : WidgetRichiestaDonazione, model : RichiestaDonazione):
         pass
 
     def __onRifiutaClicked(self) -> None:
