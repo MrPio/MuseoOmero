@@ -31,7 +31,7 @@ class RichiestaDonazione:
         Museo.getInstance().opere.append(self.opera)
         self.notifica('Le comunichiamo che la sua donazione è stata '
                       'accettata in quanto conforme agli standard del'
-                      ' nostro museo  La ringraziamo del suo supporto!')
+                      ' nostro museo. La ringraziamo del suo supporto!')
 
     def rifiuta(self) -> None:
         self.presa_in_carico=True

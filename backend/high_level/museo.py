@@ -20,6 +20,7 @@ from backend.low_level.network.drop_box_api import DropBoxAPI
 
 
 class Museo:
+    
     __backup_path = '/backups/'
     __key = object()
     __instance: Museo = None

@@ -7,7 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import TipoOpera
+from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
+
 
 class Composizione:
     def __init__(self, altezzaCm: float, larghezzaCm: float,
@@ -19,7 +20,11 @@ class Composizione:
         self.peso_gr = pesoGr
 
     def calcolaArea(self) -> float:
-        pass
+        """
+        Metodo per il calcolo dell'area dell'opera.\n
+        :return: il valore <b2>float</b2> dell'area.
+        """
+        return self.altezza_cm * self.larghezza_cm
 
     def calcolaVolume(self) -> float:
         """
