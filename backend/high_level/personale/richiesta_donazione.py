@@ -39,7 +39,7 @@ class RichiestaDonazione:
         self.notifica('Siamo spiacenti di comunicarle che la sua donazione'
                       ' è stata rifiutata perché non conforme agli standard '
                       'del nostro museo, può venire a ritirarla in un '
-                      'qualunque momento. Grazie del suo supporto!')
+                      'qualunque momento. La ringraziamo del suo supporto!')
 
     def notifica(self, msg:str) -> None:
         self.notification.send('Esito richiesta donazione [Museo Omero]',msg)

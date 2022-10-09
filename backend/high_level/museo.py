@@ -7,8 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime
 import os
+from datetime import datetime
 
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.gestione_interna.mostra import Mostra
@@ -16,7 +16,6 @@ from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
-from backend.low_level.network.cloud_storage import CloudStorage
 from backend.low_level.network.drop_box_api import DropBoxAPI
 
 

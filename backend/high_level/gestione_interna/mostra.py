@@ -7,19 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import PeriodoStorico
-import Evento
-import Opera
+from datetime import datetime
+
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.evento import Evento
 
 class Mostra(Evento):
-    m_Opera= Opera()
 
-    m_PeriodoStorico= PeriodoStorico()
-
-    def __init__(self,dataInizio : datetime, dataFine : datetime, titolo : str, descrizione : str, tema : PeriodoStorico, pamphlet : Canvas):
-        pass
+    def __init__(self, dataInizio: datetime, dataFine: datetime, titolo: str, descrizione: str, tema: PeriodoStorico,
+                 pamphlet: PilImage):
+        super().__init__(dataInizio, dataFine)
 
     def getTitolo(self) -> str:
+
         pass
 
     def getDescrizione(self) -> str:

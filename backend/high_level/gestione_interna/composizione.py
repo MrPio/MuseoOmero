@@ -10,28 +10,22 @@
 import TipoOpera
 
 class Composizione:
-    m_TipoOpera= TipoOpera()
-
-    def __init__(self,altezzaCm : float, larghezzaCm : float, profonditaCm : float, pesoGr : float, tipo : TipoOpera):
-        pass
+    def __init__(self, altezzaCm: float, larghezzaCm: float,
+                 profonditaCm: float, pesoGr: float, tipo: TipoOpera):
+        self.tipo_opera = tipo
+        self.altezza_cm = altezzaCm
+        self.larghezza_cm = larghezzaCm
+        self.profondita_cm = profonditaCm
+        self.peso_gr = pesoGr
 
     def calcolaArea(self) -> float:
         pass
 
     def calcolaVolume(self) -> float:
-        pass
+        """
+        Metodo per il calcolo del volume dell'opera.\n
+        :return: il valore <b2>float</b2> del volume.
+        """
+        return self.calcolaArea() * self.profondita_cm
 
-    def getAltezzaCm(self) -> float:
-        pass
 
-    def getLarghezzaCm(self) -> float:
-        pass
-
-    def getProfonditaCm(self) -> float:
-        pass
-
-    def getPesoGr(self) -> float:
-        pass
-
-    def getTipo(self) -> TipoOpera:
-        pass

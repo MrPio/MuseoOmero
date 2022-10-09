@@ -1,14 +1,13 @@
 import ctypes
-import random
 import sys
 
+import cv2
 from PyQt5.QtWidgets import QApplication
 
-from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
-from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
 from frontend.view.vista_home import VistaHome
+
 
 # for name, value in locals().items():
 #     setattr(self,name, value)
@@ -21,12 +20,19 @@ def startApp():
     app = QApplication(sys.argv)
 
     # MVC
-    controller_home=ControllerHome(VistaHome())
+    controller_home = ControllerHome(VistaHome())
     controller_home.connettiEventi()
     controller_home.showView()
     sys.exit(app.exec())
 
 
-if __name__=='__main__':
-    # startApp()
-    print()
+if __name__ == '__main__':
+    startApp()
+    # img = cv2.imread('qrcode.png')
+    # val, _, _ = detector = cv2.QRCodeDetector().detectAndDecode(img)
+    # print(val)
+
+    # img = qrcode.make('Ragazzi ho scoperto che ursino invece la vede la tesina.')
+    # img.save('qrcode.png')
+    # print(QR().decode(filename='qrcode.png'))
+    # print()
