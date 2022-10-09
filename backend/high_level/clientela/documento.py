@@ -7,48 +7,48 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Pagamento
-import QRCode
-import Subscriber
-import Convalidabile
+import datetime
 
-class Documento(Convalidabile):
-    m_QRCode= QRCode()
+from backend.high_level.clientela.qr_code import QRCode
 
-    m_Subscriber= Subscriber()
+import abc
 
+from backend.high_level.clientela.subscriber import Subscriber
+from backend.low_level.pagamenti.pagamento import Pagamento
+from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding
+
+
+class Documento(abc.ABC):
+
+    def __init__(self,pagamento:Pagamento,dataRilascio : datetime.datetime = None):
+        self.pagamento=pagamento
+        self.data_rilascio=dataRilascio
+        self.date_convalida=[]
+        self.pagato=False
+        self.qr_code=QRCode(QRCodeEncoding())
+        self.subscribers=[]
+
+    @abc.abstractmethod
     def calcolaCosto(self) -> float:
         pass
 
+    @abc.abstractmethod
     def convalida(self) -> bool:
         pass
 
-    def stampa(self) -> Canvas:
+    def stampa(self) -> None:
         pass
 
-    def generaQRCode(self) -> QRCode:
-        pass
+    def acquista(self) -> None:
+        self.pagato= self.pagamento.paga(self.calcolaCosto())
 
-    def acquista(self) -> bool:
-        pass
 
-    def __init__(self,dataRilascio : datetimetime = None):
-        pass
+    def subscribe(self,subscriber : Subscriber) -> None:
+        self.subscribers.append(subscriber)
 
-    def getDataRilascio(self) -> datetimetime:
-        pass
-
-    def getDataConvalida(self) -> datetimetime:
-        pass
-
-    def getQRCode(self) -> QRCode:
-        pass
-
-    def subscribe(s : Subscriber) -> None:
-        pass
-
-    def unsubscribe(s : Subscriber) -> None:
-        pass
+    def unsubscribe(self,subscriber : Subscriber) -> None:
+        self.subscribers.remove(subscriber)
 
     def notify(self) -> None:
-        pass
+        for subscriber in self.subscribers:
+            subscriber.update()

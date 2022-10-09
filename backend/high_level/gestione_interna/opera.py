@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetimetime
+import datetime
 import Pagamento
 import Composizione
 import Ubicazione
@@ -53,7 +53,7 @@ class Opera:
     def getPeriodo(self) -> PeriodoStorico:
         pass
 
-    def getDataAcquisiszione(self) -> datetimetime:
+    def getDataAcquisiszione(self) -> datetime:
         pass
 
     def isVenduta(self) -> bool:

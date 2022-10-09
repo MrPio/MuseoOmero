@@ -9,5 +9,8 @@
 #######################################################
 
 
-class TipoOpera:
-    pass
+from enum import Enum
+
+
+class TipoOpera(Enum):
+    TELA,STATUA,QUADRO,FOGLIO,*_= range(100)

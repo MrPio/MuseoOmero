@@ -7,13 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetimetime
+import datetime
 
 class Lavoro:
     def __init__(self,contratto : Canvas, stipendio : float, numPostazione : int):
         pass
 
-    def getDataAssunzione(self) -> datetimetime:
+    def getDataAssunzione(self) -> datetime:
         pass
 
     def getContratto(self) -> Canvas:
@@ -25,7 +25,7 @@ class Lavoro:
     def isLicenziato(self) -> bool:
         pass
 
-    def getDataLicenziamento(self) -> datetimetime:
+    def getDataLicenziamento(self) -> datetime:
         pass
 
     def getNotaLicenziamento(self) -> str:

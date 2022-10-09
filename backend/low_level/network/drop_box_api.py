@@ -10,13 +10,13 @@
 import CloudStorage
 
 class DropBoxAPI(CloudStorage):
-    def download(cloudPath : str, localPath : str) -> None:
+    def download(self,cloudPath : str, localPath : str) -> None:
         pass
 
-    def upload(localPath : str, cloudPath : str) -> None:
+    def upload(self,localPath : str, cloudPath : str) -> None:
         pass
 
-    def listFile(cloudDirectory : str) -> None:
+    def listFile(self,cloudDirectory : str) -> list[str]:
         pass
 
     def __init__(self,):

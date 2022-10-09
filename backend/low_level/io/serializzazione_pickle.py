@@ -7,20 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Serializzatore
+from backend.low_level.io.serializzatore import Serializzatore
+
 
 class SerializzazionePickle(Serializzatore):
-    def __init__(self,path : str, filename : str):
+
+    def serializza(self,path,obj : object) -> None:
         pass
 
-    def serializza(obj : Object) -> None:
-        pass
-
-    def deserializza(self) -> Object:
-        pass
-
-    def getPath(self) -> str:
-        pass
-
-    def getFilename(self) -> str:
+    def deserializza(self,path) -> object:
         pass

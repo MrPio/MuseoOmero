@@ -7,34 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Sesso
-import Biglietto
+import datetime
+
+from backend.high_level.clientela.enum.sesso import Sesso
+
 
 class Visitatore:
-    m_Biglietto= Biglietto()
 
-    m_Sesso= Sesso()
-
-    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NonSpecificato, nasc : datetime = None):
-        pass
-
-    def getProvenienza(self) -> str:
-        pass
-
-    def setProvenienza(newVal : str) -> None:
-        pass
-
-    def getSesso(self) -> Sesso:
-        pass
-
-    def setSesso(newVal : Sesso) -> None:
-        pass
-
-    def getDataNascita(self) -> datetimetime:
-        pass
-
-    def setDataNascita(newVal : datetimetime) -> None:
-        pass
-
-    def getListaBiglietti(self) -> Biglietto:
-        pass
+    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, nasc : datetime.datetime = None):
+        self.provenienza=prov
+        self.sesso=sesso
+        self.data_nascita=nasc
+        self.biglietti=[]

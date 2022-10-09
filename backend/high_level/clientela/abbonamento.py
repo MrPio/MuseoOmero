@@ -7,30 +7,33 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import TipoAbbonamento
 import datetime
-import Documento
+
+from backend.high_level.clientela.documento import Documento
+from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
+from backend.low_level.pagamenti.nexi_api import NexiApi
+
 
 class Abbonamento(Documento):
-    m_TipoAbbonamento= TipoAbbonamento()
 
-    def __init__(self,dataRilascio : datetimetime = None, tipo : TipoAbbonamento):
-        pass
+    def __init__(self, tipo: TipoAbbonamento, dataRilascio: datetime.datetime = None):
+        super().__init__(NexiApi(), dataRilascio)
+        self.data_ultimo_rinnovo = dataRilascio
+        self.tipo = tipo
 
-    def isScaduto(self) -> bool:
-        pass
-
-    def giorniAllaScadenza(self) -> int:
-        pass
-
-    def getTipo(self) -> TipoAbbonamento:
-        pass
+    def calcolaCosto(self) -> float:
+        return self.tipo.cost
 
     def convalida(self) -> bool:
-        pass
+        self.date_convalida.append(datetime.datetime.now())
+        return self.pagato and not self.isScaduto()
 
-    def getDataUltimoRinnovo(self) -> datetime:
-        pass
+    def isScaduto(self) -> bool:
+        return self.giorniAllaScadenza() > 0
 
-    def rinnova(tipo : TipoAbbonamento) -> float:
-        pass
+    def giorniAllaScadenza(self) -> int:
+        return self.tipo.days - (datetime.datetime.now() - self.data_ultimo_rinnovo).days
+
+    def rinnova(self, tipo: TipoAbbonamento) -> None:
+        self.tipo = tipo
+        self.acquista()

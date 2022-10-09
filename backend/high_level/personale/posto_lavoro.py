@@ -7,16 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Lavoro
-import Dipendente
-import GestorePostiLavoro
+from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.lavoro import Lavoro
+import abc
 
-class PostoLavoro(GestorePostiLavoro):
+class PostoLavoro(abc.ABC):
     def assumi(dipendente : Dipendente) -> bool:
         pass
 
-    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ""):
-        pass
+    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ''):
+        self.piano=piano
+        self.numero_postazioni_totali=numPostazioni
+        self.descrizione=descrizione
+        self.numero_postazioni_occupate=0
+        self.lavori=[]
 
     def promuovi(dipendente : Dipendente) -> bool:
         pass

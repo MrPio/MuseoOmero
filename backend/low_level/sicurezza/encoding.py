@@ -8,10 +8,13 @@
 # 
 #######################################################
 
+import abc
 
-class Encoding:
-    def encode(text : str) -> Image:
+
+class Encoding(abc.ABC):
+    @abc.abstractmethod
+    def encode(self,text : str) -> Image:
         pass
-
-    def decode(image : Image) -> str:
+    @abc.abstractmethod
+    def decode(self,image : Image) -> str:
         pass

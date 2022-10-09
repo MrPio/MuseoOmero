@@ -8,117 +8,105 @@
 # 
 #######################################################
 import datetime
+import os
 
-from backend.high_level.clientela.enum.sesso import Sesso
-from backend.high_level.clientela.visitatore import Visitatore
-from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
-from backend.high_level.gestione_interna.mostra import Mostra
-from backend.high_level.gestione_interna.opera import Opera
-from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.personale.dipendente import Dipendente
-from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
-from backend.high_level.personale.posto_lavoro import PostoLavoro
-from backend.low_level.io.serializzatore import Serializzatore
+from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
 from backend.low_level.network.cloud_storage import CloudStorage
+from backend.low_level.network.drop_box_api import DropBoxAPI
 
 
-class Museo():
-    m_Dipendente = Dipendente()
+class Museo:
+    __backup_path = '/backups/'
+    __key = object()
+    __instance: Museo = None
+    __cloud_storage = DropBoxAPI()
+    __serializzatore = SerializzazionePickle()
 
-    m_Visitatore = Visitatore()
-
-    m_Mostra = Mostra()
-
-    m_TurnoGuida = TurnoGuida()
-
-    m_PostoLavoro = PostoLavoro()
-
-    m_Opera = Opera()
+    def __init__(self, key) -> None:
+        assert (key == Museo.__key), \
+            "Per garantire la presenza di una sola istanza del classificatore Museo, utilizza il metodo Museo.getInstance"
+        self.nome = 'Museo Omero'
+        self.sito_web = 'https://www.museoomero.it/'
+        self.data_fondazione = datetime.datetime(1993, 5, 29)
+        self.indirizzo = 'Mole Vanvitelliana, Banchina Giovanni da Chio, 28, 60100 Ancona AN'
+        self.telefono_fisso = '0712811935'
+        self.email = 'info@museoomero.it'
+        self.descrizione = "Il Museo tattile statale Omero di Ancona è uno dei pochi musei " \
+                           "tattili al mondo. L'istituto fa conoscere l'arte attraverso il tatto," \
+                           " dando ai visitatori la possibilità di vedere con le mani. Nato per" \
+                           " promuovere l'integrazione delle persone con disabilità visiva è " \
+                           "uno spazio accessibile a tutti."
+        self.visitatori = []
+        self.dipendenti = []
+        self.posti_lavoro = []
+        self.mostre = []
+        self.opere = []
 
     @staticmethod
     def getInstance() -> Museo:
+        """
+        nel rispetto del pattern Singleton, questo metodo mi garanitisce l'univocità dell'istanza.
+        Si cerca localmente l'oggetto, poi sul cloud se non lo si trova. Solo in ultima possibilità viene creato nuvo.
+        :return: l'unica istanza di Museo
+        """
+        if not os.path.exists(Museo.__backup_path):
+            os.makedirs(Museo.__backup_path)
+
+        if Museo.__instance == None:
+            if (last_backup := Museo.__get_last_backup()) == '':
+                Museo.__download_last_backups()
+                global last_backup
+                last_backup = Museo.__get_last_backup()
+            if last_backup == '':
+                Museo.__instance = Museo(Museo.__key)
+            else:
+                Museo.__instance = Museo.__serializzatore.deserializza(last_backup)
+        return Museo.__instance
+
+    def login(self, username: str, enc_password: str) -> Dipendente | None:
+        for dipendente in self.dipendenti:
+            if dipendente.autentifica(username, enc_password):
+                return dipendente
         return None
 
-    def getTurniGuide(self) -> list:
-        pass
+    @staticmethod
+    def __newest_date(list: list[str], format: str = '%Y-%m-%d %H-%M-%S') -> str:
+        """
+        data una lista di date sotto forma di stringhe, mi ritorna la stringa della data più recente
+        :param list: la lista di date sotto forma di stringhe
+        :param format: il formato in cui vengono fornite le date, e con il quale viene formattata quella di ritorno
+        :return: la data più recente o '' se lista vuota
+        """
+        dates = []
+        for date in list:
+            dates.append(datetime.datetime.strptime(date, format))
+        dates.sort()
+        return dates[-1].strftime(format) if len(dates) > 0 else ''
 
-    def getGuide(self) -> list:
-        pass
+    @staticmethod
+    def __get_last_backup() -> str:
+        files = next(os.walk(Museo.__backup_path), (None, None, []))[2]
+        newest = Museo.__newest_date([file.split('museo ')[1].split('.pickle')[0] for file in files])
+        return 'museo ' + newest + '.pickle' if len(newest) > 0 else ''
 
-    def getPostiLavoro(self) -> list:
-        pass
+    @staticmethod
+    def __download_last_backups() -> None:
+        """
+        scarica il backup più recente se non già presente sul disco
+        """
+        files = Museo.__cloud_storage.listFile(Museo.__backup_path)
+        newest = Museo.__newest_date([file.split('museo ')[1].split('.pickle')[0] for file in files])
+        file_to_download = 'museo ' + newest + '.pickle' if len(newest) > 0 else ''
+        if file_to_download == '' or file_to_download in next(os.walk(Museo.__backup_path), (None, None, []))[2]:
+            return
+        path = Museo.__backup_path + file_to_download
+        Museo.__cloud_storage.download(path, path)
 
-    def login(username: str, password: str) -> Dipendente:
-        pass
+    def make_backup(self) -> None:
+        local_path = Museo.__backup_path + 'museo ' + datetime.datetime.now().strftime(
+            '%Y-%m-%d %H-%M-%S') + '.pickle'
+        cloud_path = local_path
 
-    def getDipendenti(self) -> list:
-        pass
-
-    def getName(self) -> str:
-        pass
-
-    def getSitoWeb(self) -> str:
-        pass
-
-    def rimuoviTurno(guida: OperatoreAlPubblico, turno: TurnoGuida) -> bool:
-        pass
-
-    def __create(self) -> None:
-        pass
-
-    def setSitoWeb(newVal: str) -> None:
-        pass
-
-    def getDataFondazione(self) -> datetime.datetime:
-        pass
-
-    def getIndirizzo(self) -> str:
-        pass
-
-    def getTelefonoFisso(self) -> int:
-        pass
-
-    def setTelefonoFisso(newVal: int) -> None:
-        pass
-
-    def getEmail(self) -> str:
-        pass
-
-    def setEmail(newVal: str) -> None:
-        pass
-
-    def setDescrizione(newVal: str) -> None:
-        pass
-
-    def getDescrizione(self) -> str:
-        pass
-
-    def backup(self) -> None:
-        pass
-
-    def getSerializzatore(self) -> Serializzatore:
-        pass
-
-    def setSerializzatore(newVal: Serializzatore) -> None:
-        pass
-
-    def getCloudStorage(self) -> CloudStorage:
-        pass
-
-    def setCloudStorage(newVal: CloudStorage) -> None:
-        pass
-
-    def initializeInstance(nome: str, sitoWeb: str, dataFondazione: datetime, indirizzo: str, telefonoFisso: int,
-                           email: str, descrizione: str) -> None:
-        pass
-
-    def aggiungiTurno(guida: OperatoreAlPubblico, reparto: RepartoMuseo, dataInizio: datetime.datetime,
-                      dataFine: datetime.datetime) -> None:
-        pass
-
-    def aggiungiDipendente(nome: str, cognome: str, dataNascita: datetime.datetime, sesso: Sesso = Sesso.nonSpecificato,
-                           curriculum: str = None) -> None:
-        pass
-
-    def rimuoviDipendente(dipendente: Dipendente) -> bool:
-        pass
+        self.serializzatore.serializza(local_path, self)
+        self.cloud_storage.upload(local_path, cloud_path)

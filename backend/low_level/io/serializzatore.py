@@ -7,11 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import abc
 
 
-class Serializzatore:
-    def serializza(obj : Object) -> None:
+class Serializzatore(abc.ABC):
+    @abc.abstractmethod
+    def serializza(self,path,obj: object) -> None:
         pass
 
-    def deserializza(self) -> Object:
+    @abc.abstractmethod
+    def deserializza(self,path) -> object:
         pass

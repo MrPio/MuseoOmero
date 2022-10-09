@@ -8,7 +8,8 @@
 # 
 #######################################################
 
-
-class Subscriber:
-    def updatetime(self) -> None:
+import abc
+class Subscriber(abc.ABC):
+    @abc.abstractmethod
+    def update(self,) -> None:
         pass

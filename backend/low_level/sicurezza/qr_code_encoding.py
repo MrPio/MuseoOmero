@@ -7,13 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Encoding
+from backend.low_level.sicurezza.encoding import Encoding
+
 
 class QRCodeEncoding(Encoding):
-    def encode(text : str) -> Image:
+    def encode(self,text : str) ->  None:
         pass
 
-    def decode(image : Image) -> str:
+    def decode(self,image : None) -> str:
         pass
 
     def __init__(self,):

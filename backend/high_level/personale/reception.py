@@ -22,5 +22,5 @@ class Reception(PostoLavoro):
     def setNumPos(newVal : int) -> None:
         pass
 
-    def getListaLavori(self) -> OperatoreAlPubblico []:
+    def getListaLavori(self) -> list[OperatoreAlPubblico]:
         pass

@@ -10,14 +10,14 @@
 
 
 class Evento:
-    def __init__(self,dataInizio : datetimetime, dataFine : datetimetime) -> None:
+    def __init__(self,dataInizio : datetime, dataFine : datetime) -> None:
         pass
 
-    def getDataInizio(self) -> datetimetime:
+    def getDataInizio(self) -> datetime:
         pass
 
-    def getDataFine(self) -> datetimetime:
+    def getDataFine(self) -> datetime:
         pass
 
-    def getDataPianificazione(self) -> datetimetime:
+    def getDataPianificazione(self) -> datetime:
         pass

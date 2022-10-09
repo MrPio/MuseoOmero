@@ -7,8 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import abc
 
 
-class Notification:
+class Notification(abc.ABC):
+
+    @abc.abstractmethod
+
     def send(title : str, content : str) -> None:
         pass

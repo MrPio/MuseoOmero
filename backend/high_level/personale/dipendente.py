@@ -8,7 +8,7 @@
 # 
 #######################################################
 import datetime
-import datetimetime
+import datetime
 import Credenziale
 import Lavoro
 import Autentificabile
@@ -18,7 +18,7 @@ class Dipendente(Autentificabile):
 
     m_Lavoro= Lavoro()
 
-    def autentifica(username : str, password : str) -> None:
+    def autentifica(username : str, enc_password : str) -> bool:
         pass
 
     def calcolaEta(self) -> int:
@@ -42,7 +42,7 @@ class Dipendente(Autentificabile):
     def setCurriculum(newVal : Canvas) -> None:
         pass
 
-    def getDataRegistrazione(self) -> datetimetime:
+    def getDataRegistrazione(self) -> datetime:
         pass
 
     def getSesso(self) -> Sesso:

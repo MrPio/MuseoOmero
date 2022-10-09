@@ -3,6 +3,8 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
+from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
 from frontend.view.vista_home import VistaHome
@@ -11,7 +13,7 @@ from frontend.view.vista_home import VistaHome
 #     setattr(self,name, value)
 
 
-if __name__=='__main__':
+def startApp():
     myappid = 'museum.1.0'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
@@ -22,3 +24,12 @@ if __name__=='__main__':
     controller_home.connettiEventi()
     controller_home.showView()
     sys.exit(app.exec())
+
+def ciao():
+    return 3
+
+if __name__=='__main__':
+    # startApp()
+    if (login:=ciao()) == 2 :
+        print(login)
+    print(login)

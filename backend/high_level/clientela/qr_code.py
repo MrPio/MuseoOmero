@@ -7,20 +7,22 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Encoding
+import random
+import string
+
+from backend.low_level.sicurezza.encoding import Encoding
+
 
 class QRCode:
-    def __genara(self) -> None:
-        pass
+    def __init__(self, encoding: Encoding):
+        self.id = self.__genara()
+        self.encoding = encoding
+
+    def __genara(self) -> str:
+        return ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
 
     def rigenera(self) -> None:
-        pass
+        self.id = self.__genara()
 
-    def __init__(self,):
-        pass
-
-    def getId(self) -> str:
-        pass
-
-    def getImage(self) -> PilImage:
-        pass
+    def getImage(self) -> None:
+        return self.encoding.encode(self.id)

@@ -7,8 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Pagamento
+from backend.low_level.pagamenti.pagamento import Pagamento
+
 
 class NexiApi(Pagamento):
-    def paga(costo : float) -> bool:
+    def paga(self,costo : float) -> bool:
         pass

@@ -7,35 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Visitatore
-import Abbonamento
+import datetime
+
+from backend.high_level.clientela.enum.sesso import Sesso
+from backend.high_level.clientela.visitatore import Visitatore
+
 
 class Cliente(Visitatore):
-    m_Abbonamento= Abbonamento()
-
-    def __init__(self,prov : str = "", sesso : Sesso = Sesso.nonSpecificato, nasc : datetime = None, nome : str, cognome : str, codFis : str, email : str= "", tel : int=-1):
-        pass
-
-    def getNome(self) -> str:
-        pass
-
-    def getCognome(self) -> str:
-        pass
-
-    def getDataRegistrazione(self) -> datetimetime:
-        pass
-
-    def getEmail(self) -> str:
-        pass
-
-    def setEmail(newVal : str) -> None:
-        pass
-
-    def getTelefono(self) -> int:
-        pass
-
-    def setTelefono(newVal : int) -> None:
-        pass
-
-    def getCodiceFiscale(self) -> str:
-        pass
+    def __init__(self, nome: str, cognome: str, codFis: str, prov: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
+                 nasc: datetime.datetime = None, email: str = "", tel: str = ''):
+        super().__init__(prov, sesso, nasc)
+        self.nome=nome
+        self.cognome=cognome
+        self.codice_fiscale=codFis
+        self.email=email
+        self.telefono=tel
+        self.abbonamenti=[]
+        self.data_registrazione=datetime.datetime.now()

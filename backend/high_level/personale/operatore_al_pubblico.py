@@ -20,7 +20,7 @@ class OperatoreAlPubblico(Lavoro):
     def assegna(turno : TurnoGuida) -> bool:
         pass
 
-    def getListaTurni(self) -> TurnoGuida:
+    def getListaTurni(self) -> list[TurnoGuida]:
         pass
 
     def rimuovi(turno : TurnoGuida) -> bool:

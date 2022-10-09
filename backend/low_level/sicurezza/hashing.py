@@ -8,7 +8,11 @@
 # 
 #######################################################
 
+import abc
 
-class Hashing:
-    def hash(plain : str) -> str:
+
+class Hashing(abc.ABC):
+
+    @abc.abstractmethod
+    def hash(plain: str) -> str:
         pass

@@ -7,14 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import abc
 
 
-class CloudStorage:
-    def download(cloudPath : str, localPath : str) -> None:
+class CloudStorage(abc.ABC):
+    @abc.abstractmethod
+
+    def download(self,cloudPath : str, localPath : str) -> None:
         pass
+    @abc.abstractmethod
 
-    def upload(localPath : str, cloudPath : str) -> None:
+    def upload(self,localPath : str, cloudPath : str) -> None:
         pass
+    @abc.abstractmethod
 
-    def listFile(cloudDirectory : str) -> None:
+    def listFile(self,cloudDirectory : str) -> None:
         pass

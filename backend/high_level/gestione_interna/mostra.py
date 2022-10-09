@@ -16,7 +16,7 @@ class Mostra(Evento):
 
     m_PeriodoStorico= PeriodoStorico()
 
-    def __init__(self,dataInizio : datetimetime, dataFine : datetimetime, titolo : str, descrizione : str, tema : PeriodoStorico, pamphlet : Canvas):
+    def __init__(self,dataInizio : datetime, dataFine : datetime, titolo : str, descrizione : str, tema : PeriodoStorico, pamphlet : Canvas):
         pass
 
     def getTitolo(self) -> str:

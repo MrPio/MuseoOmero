@@ -7,11 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import abc
 
 
-class IOFile:
+class IOFile(abc.ABC):
+    @abc.abstractmethod
+
     def salvaFile(self) -> None:
         pass
+    @abc.abstractmethod
 
     def leggiFile(self) -> str:
         pass
