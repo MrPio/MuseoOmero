@@ -11,16 +11,7 @@
 
 class Ubicazione:
     def __init__(self,piano : int, numeroMagazzino : int, scaffale : str, posizione : int):
-        pass
-
-    def getPiano(self) -> int:
-        pass
-
-    def getNumeroMagazzino(self) -> int:
-        pass
-
-    def getScaffale(self) -> str:
-        pass
-
-    def getPosizione(self) -> int:
-        pass
+        self.piano=piano
+        self.numero_magazzino=numeroMagazzino
+        self.scaffale=scaffale
+        self.posizione=posizione

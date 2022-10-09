@@ -8,28 +8,18 @@
 # 
 #######################################################
 from datetime import datetime
+from PIL.Image import Image
 
 from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
 from backend.high_level.gestione_interna.evento import Evento
 
+
 class Mostra(Evento):
 
     def __init__(self, dataInizio: datetime, dataFine: datetime, titolo: str, descrizione: str, tema: PeriodoStorico,
-                 pamphlet: PilImage):
+                 pamphlet: Image = None):
         super().__init__(dataInizio, dataFine)
-
-    def getTitolo(self) -> str:
-
-        pass
-
-    def getDescrizione(self) -> str:
-        pass
-
-    def getTema(self) -> PeriodoStorico:
-        pass
-
-    def getPamphlet(self) -> Canvas:
-        pass
-
-    def setPamphlet(newVal : Canvas) -> None:
-        pass
+        self.titolo = titolo
+        self.descrizione = descrizione
+        self.tema = tema
+        self.pamphlet = pamphlet

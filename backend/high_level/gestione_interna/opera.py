@@ -7,57 +7,36 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime
-import Pagamento
-import Composizione
-import Ubicazione
+from PIL.Image import Image
+
+from backend.high_level.gestione_interna.composizione import Composizione
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.gestione_interna.ubicazione import Ubicazione
+from backend.low_level.pagamenti.pagamento import Pagamento
+
 
 class Opera:
-    m_Composizione= Composizione()
 
-    m_Ubicazione= Ubicazione()
+    def __init__(self, autore: str, titolo: str,
+                 descrizione: str, immagine: Image, periodo: PeriodoStorico,
+                 reparto: RepartoMuseo, costo: float = 0, composizione: Composizione = None,
+                 ubicazione: Ubicazione = None):
+        self.autore = autore
+        self.titolo = titolo
+        self.descrizione = descrizione
+        self.immagine = immagine
+        self.periodo = periodo
+        self.reparto = reparto
+        self.costo = costo
+        self.composizione = composizione
+        self.ubicazione = ubicazione
+        self.venduta=False
 
-    def __init__(self,autore : str, titolo : str, costo : float = 0, descrizione : str, immagine : Image, periodo : PeriodoStorico, nelMuseoAperto : bool):
-        pass
+    def vendi(self, pagamento: Pagamento) -> bool:
+        if not self.isVendibile():
+            return False
+        return pagamento.paga(costo=self.costo)
 
-    def vendi(pagamento : Pagamento) -> bool:
-        pass
-
-    def isVendibile():
-        pass
-
-    def getAutore(self) -> str:
-        pass
-
-    def getTitolo(self) -> str:
-        pass
-
-    def getCosto(self) -> float:
-        pass
-
-    def setCosto(newVal : float) -> None:
-        pass
-
-    def getDescrizione(self) -> str:
-        pass
-
-    def setDescrizione(newVal : str) -> None:
-        pass
-
-    def getImmagine(self) -> Image:
-        pass
-
-    def setImmagine(newVal : Image) -> None:
-        pass
-
-    def getPeriodo(self) -> PeriodoStorico:
-        pass
-
-    def getDataAcquisiszione(self) -> datetime:
-        pass
-
-    def isVenduta(self) -> bool:
-        pass
-
-    def isNelMuseoAperto(self) -> bool:
-        pass
+    def isVendibile(self):
+        return self.reparto == RepartoMuseo.MOSTRA

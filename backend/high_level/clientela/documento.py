@@ -39,8 +39,9 @@ class Documento(abc.ABC):
     def stampa(self) -> None:
         pass
 
-    def acquista(self) -> None:
+    def acquista(self) -> bool:
         self.pagato= self.pagamento.paga(self.calcolaCosto())
+        return self.pagato
 
 
     def subscribe(self,subscriber : Subscriber) -> None:
