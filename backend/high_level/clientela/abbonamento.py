@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
 from backend.high_level.clientela.documento import Documento
 from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
@@ -16,7 +16,7 @@ from backend.low_level.pagamenti.nexi_api import NexiApi
 
 class Abbonamento(Documento):
 
-    def __init__(self, tipo: TipoAbbonamento, dataRilascio: datetime.datetime = None):
+    def __init__(self, tipo: TipoAbbonamento, dataRilascio: datetime = None):
         super().__init__(NexiApi(), dataRilascio)
         self.data_ultimo_rinnovo = dataRilascio
         self.tipo = tipo
@@ -25,14 +25,14 @@ class Abbonamento(Documento):
         return self.tipo.cost
 
     def convalida(self) -> bool:
-        self.date_convalida.append(datetime.datetime.now())
+        self.date_convalida.append(datetime.now())
         return self.pagato and not self.isScaduto()
 
     def isScaduto(self) -> bool:
         return self.giorniAllaScadenza() > 0
 
     def giorniAllaScadenza(self) -> int:
-        return self.tipo.days - (datetime.datetime.now() - self.data_ultimo_rinnovo).days
+        return self.tipo.days - (datetime.now() - self.data_ultimo_rinnovo).days
 
     def rinnova(self, tipo: TipoAbbonamento) -> None:
         self.tipo = tipo

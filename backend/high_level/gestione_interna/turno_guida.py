@@ -7,26 +7,24 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import RepartoMuseo
-import Evento
+from datetime import datetime
+
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.gestione_interna.evento import Evento
+
 
 class TurnoGuida(Evento):
-    m_RepartoMuseo= RepartoMuseo()
 
-    def __init__(self,dataInizio : datetime, dataFine : datetime, reparto : RepartoMuseo, capienza : int, numeroPrenotati : int):
-        pass
+    def __init__(self, dataInizio: datetime, dataFine: datetime, reparto: RepartoMuseo, capienza: int,
+                 numeroPrenotati: int = 0):
+        super().__init__(dataInizio, dataFine)
+        self.durata = dataFine - dataInizio
+        self.reparto: RepartoMuseo = reparto
+        self.capienza = capienza
+        self.numero_prenotati = numeroPrenotati
 
     def isPieno(self) -> bool:
-        pass
+        return self.numero_prenotati >= self.capienza
 
     def isTerminato(self) -> bool:
-        pass
-
-    def getReparto(self) -> RepartoMuseo:
-        pass
-
-    def getCapienza(self) -> int:
-        pass
-
-    def getNumeroPrenotati(self) -> int:
-        pass
+        return datetime.now() > self.data_fine

@@ -7,14 +7,25 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Amministratore
-import PostoLavoro
+import random
+
+from backend.high_level.personale.amministratore import Amministratore
+from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.posto_lavoro import PostoLavoro
+
 
 class Amministrazione(PostoLavoro):
-    m_Amministratore= Amministratore()
 
-    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ""):
-        pass
+    def __init__(self, piano: int, numPostazioni: int, descrizione: str = ""):
+        super().__init__(piano, numPostazioni, descrizione)
 
-    def getListaLavori(self) -> Amministratore []:
-        pass
+    def assumi(self, dipendente: Dipendente) -> bool:
+        lavoro = Amministratore(
+            contratto='contratto a tempo indeterminato',
+            stipendio=max(800.0, random.gauss(2400, 200)),
+            numPostazione=len(self.lavori) + 1,
+            fondatore=False
+        )
+        if esito := dipendente.assumi(lavoro=lavoro):
+            self.lavori.append(lavoro)
+        return esito

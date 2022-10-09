@@ -11,7 +11,7 @@ from backend.low_level.sicurezza.encoding import Encoding
 
 
 class QRCodeEncoding(Encoding):
-    def encode(self,text : str) ->  None:
+    def encode(self,text : str) ->  pilimage:
         pass
 
     def decode(self,image : None) -> str:

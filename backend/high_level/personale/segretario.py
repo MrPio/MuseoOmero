@@ -7,14 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Lavoro
+from backend.high_level.personale.lavoro import Lavoro
+
 
 class Segretario(Lavoro):
-    def __init__(self,contratto : Canvas, stipendio : float):
-        pass
-
-    def getSportelloAssegnato(self) -> int:
-        pass
-
-    def setSportelloAssegnato(newVal : int) -> None:
-        pass
+    def __init__(self, stipendio: float, numPostazione: int, sportelloAssegnato: int, contratto: str = ''):
+        super().__init__(stipendio, numPostazione, contratto)
+        self.sportello_assegnato = sportelloAssegnato

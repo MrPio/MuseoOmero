@@ -7,14 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Lavoro
+from backend.high_level.personale.lavoro import Lavoro
+
 
 class Amministratore(Lavoro):
-    def __init__(self,contratto : Canvas, stipendio : float, fondatore : bool = false):
-        pass
-
-    def isFonadatore(self) -> bool:
-        pass
-
-    def setFonadatore(newVal : bool) -> None:
-        pass
+    def __init__(self,  stipendio: float, numPostazione: int, contratto: str = '', fondatore: bool = False):
+        super().__init__(stipendio, numPostazione, contratto)
+        self.fondatore = fondatore

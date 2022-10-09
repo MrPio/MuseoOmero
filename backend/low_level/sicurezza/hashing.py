@@ -14,5 +14,5 @@ import abc
 class Hashing(abc.ABC):
 
     @abc.abstractmethod
-    def hash(plain: str) -> str:
+    def hash(self, plain: str) -> str:
         pass

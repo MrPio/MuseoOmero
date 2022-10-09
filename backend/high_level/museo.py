@@ -7,10 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 import os
 
+from backend.high_level.clientela.visitatore import Visitatore
+from backend.high_level.gestione_interna.mostra import Mostra
+from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
 from backend.low_level.network.cloud_storage import CloudStorage
 from backend.low_level.network.drop_box_api import DropBoxAPI
@@ -28,7 +32,7 @@ class Museo:
             "Per garantire la presenza di una sola istanza del classificatore Museo, utilizza il metodo Museo.getInstance"
         self.nome = 'Museo Omero'
         self.sito_web = 'https://www.museoomero.it/'
-        self.data_fondazione = datetime.datetime(1993, 5, 29)
+        self.data_fondazione = datetime(1993, 5, 29)
         self.indirizzo = 'Mole Vanvitelliana, Banchina Giovanni da Chio, 28, 60100 Ancona AN'
         self.telefono_fisso = '0712811935'
         self.email = 'info@museoomero.it'
@@ -37,11 +41,11 @@ class Museo:
                            " dando ai visitatori la possibilità di vedere con le mani. Nato per" \
                            " promuovere l'integrazione delle persone con disabilità visiva è " \
                            "uno spazio accessibile a tutti."
-        self.visitatori = []
-        self.dipendenti = []
-        self.posti_lavoro = []
-        self.mostre = []
-        self.opere = []
+        self.visitatori: list[Visitatore] = []
+        self.dipendenti: list[Dipendente] = []
+        self.posti_lavoro: list[PostoLavoro] = []
+        self.mostre: list[Mostra] = []
+        self.opere: list[Opera] = []
 
     @staticmethod
     def getInstance() -> Museo:
@@ -80,7 +84,7 @@ class Museo:
         """
         dates = []
         for date in list:
-            dates.append(datetime.datetime.strptime(date, format))
+            dates.append(datetime.strptime(date, format))
         dates.sort()
         return dates[-1].strftime(format) if len(dates) > 0 else ''
 
@@ -104,7 +108,7 @@ class Museo:
         Museo.__cloud_storage.download(path, path)
 
     def make_backup(self) -> None:
-        local_path = Museo.__backup_path + 'museo ' + datetime.datetime.now().strftime(
+        local_path = Museo.__backup_path + 'museo ' + datetime.now().strftime(
             '%Y-%m-%d %H-%M-%S') + '.pickle'
         cloud_path = local_path
 

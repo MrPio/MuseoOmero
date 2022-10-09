@@ -7,20 +7,21 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
+from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
 
 
 class Cliente(Visitatore):
     def __init__(self, nome: str, cognome: str, codFis: str, prov: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
-                 nasc: datetime.datetime = None, email: str = "", tel: str = ''):
+                 nasc: datetime = None, email: str = "", tel: str = ''):
         super().__init__(prov, sesso, nasc)
         self.nome=nome
         self.cognome=cognome
         self.codice_fiscale=codFis
         self.email=email
         self.telefono=tel
-        self.abbonamenti=[]
-        self.data_registrazione=datetime.datetime.now()
+        self.abbonamenti:list[Abbonamento]=[]
+        self.data_registrazione=datetime.now()

@@ -7,17 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Hashing
+from backend.low_level.sicurezza.hashing import Hashing
+
 
 class Credenziale:
-    def verifica(password : str) -> bool:
-        pass
 
-    def getUsername(self) -> str:
-        pass
+    def __init__(self, username: str, password: str, hashing: Hashing):
+        self.username = username
+        self.hashing: Hashing = hashing
+        self.enc_password = self.hashing.hash(password)
 
-    def setUsername(newVal : str) -> None:
-        pass
-
-    def __init__(self,username : str, password : str, hashing : Hashing):
-        pass
+    def verifica(self, password: str) -> bool:
+        return password== self.enc_password

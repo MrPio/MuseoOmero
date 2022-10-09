@@ -7,20 +7,31 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import OperatoreAlPubblico
-import PostoLavoro
+import random
+
+from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+from backend.high_level.personale.posto_lavoro import PostoLavoro
+
 
 class Reception(PostoLavoro):
-    m_OperatoreAlPubblico= OperatoreAlPubblico()
 
-    def __init__(self,piano : int, numPostazioni : int, numPOS : int, descrizione : str = ""):
-        pass
+    def __init__(self, piano: int, numPostazioni: int, numPOS: int, descrizione: str = ""):
+        super().__init__(piano, numPostazioni, descrizione)
+        """
+        Le postcondizioni riguardanti l'attributo 'lavori' della classe reception, sottoclasse di PostoLavoro,
+        sono aumentate, ma non le precondizioni.
+        """
+        self.numero_point_of_sales = numPOS
+        self.lavori: list[OperatoreAlPubblico] = []
 
-    def getNumPos(self) -> int:
-        pass
-
-    def setNumPos(newVal : int) -> None:
-        pass
-
-    def getListaLavori(self) -> list[OperatoreAlPubblico]:
-        pass
+    def assumi(self, dipendente: Dipendente) -> bool:
+        lavoro = OperatoreAlPubblico(
+            contratto='contratto a tempo indeterminato',
+            stipendio=max(800.0, random.gauss(1500, 300)),
+            qualificaGuida='livello base',
+            numPostazione=len(self.lavori) + 1
+        )
+        if esito := dipendente.assumi(lavoro=lavoro):
+            self.lavori.append(lavoro)
+        return esito

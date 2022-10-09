@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
 from backend.high_level.clientela.documento import Documento
 from backend.high_level.clientela.enum.tariffa import Tariffa
@@ -32,8 +32,8 @@ class Biglietto(Documento):
             return self.tariffa.cost + (5.00 if self.__hasGuida() else 0.00)
 
     def convalida(self) -> bool:
-        self.date_convalida.append(datetime.datetime.now())
-        return self.pagato and (datetime.datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24
+        self.date_convalida.append(datetime.now())
+        return self.pagato and (datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24
 
     def __hasGuida(self) -> bool:
         return self.guida is None

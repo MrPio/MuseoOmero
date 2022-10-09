@@ -7,37 +7,39 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Ubicazione
-import Opera
-import Notification
+from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.gestione_interna.ubicazione import Ubicazione
+from backend.high_level.museo import Museo
+from backend.low_level.network.notification import Notification
+
 
 class RichiestaDonazione:
-    def __init__(self,opera : Opera, ubicazione : Ubicazione, email : str = "", tel : int = -1):
-        pass
+    def __init__(self, opera: Opera, ubicazioneProvvisoria: Ubicazione,notification: Notification,
+                 email: str = "", tel: str = ''):
+        self.opera = opera
+        self.ubicazione = ubicazioneProvvisoria
+        self.email_donante = email
+        self.telefono_donante = tel
+        self.accettata = False
+        self.presa_in_carico=False
+        self.notification:Notification =notification
 
-    def accetta(self) -> None:
-        pass
+    def accetta(self, nuovaUbicazione: Ubicazione) -> None:
+        self.presa_in_carico=True
+        self.accettata = True
+        self.opera.ubicazione = nuovaUbicazione
+        Museo.getInstance().opere.append(self.opera)
+        self.notifica('Le comunichiamo che la sua donazione è stata '
+                      'accettata in quanto conforme agli standard del'
+                      ' nostro museo  La ringraziamo del suo supporto!')
 
     def rifiuta(self) -> None:
-        pass
+        self.presa_in_carico=True
+        self.accettata = False
+        self.notifica('Siamo spiacenti di comunicarle che la sua donazione'
+                      ' è stata rifiutata perché non conforme agli standard '
+                      'del nostro museo, può venire a ritirarla in un '
+                      'qualunque momento. Grazie del suo supporto!')
 
-    def notifica(channel : Notification) -> None:
-        pass
-
-    def getOpera(self) -> Opera:
-        pass
-
-    def getEmailDonante(self) -> str:
-        pass
-
-    def setEmailDonante(newVal : str) -> None:
-        pass
-
-    def getUbicazione(self) -> Ubicazione:
-        pass
-
-    def getTelefonoDonante(self) -> int:
-        pass
-
-    def setTelefonoDonante(newVal : int) -> None:
-        pass
+    def notifica(self, msg:str) -> None:
+        self.notification.send('Esito richiesta donazione [Museo Omero]',msg)

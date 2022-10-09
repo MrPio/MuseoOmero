@@ -7,46 +7,48 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
-import datetime
-import Credenziale
-import Lavoro
-import Autentificabile
+from datetime import datetime
 
-class Dipendente(Autentificabile):
-    m_Credenziale= Credenziale()
+from backend.high_level.clientela.enum.sesso import Sesso
+from backend.high_level.personale.credenziale import Credenziale
+from backend.high_level.personale.lavoro import Lavoro
 
-    m_Lavoro= Lavoro()
 
-    def autentifica(username : str, enc_password : str) -> bool:
-        pass
+class Dipendente():
+
+    def __init__(self, nome: str, cognome: str, dataNascita: datetime, email: str,
+                 sesso: Sesso = Sesso.NON_SPECIFICATO, curriculum: str = '', ):
+        self.nome = nome
+        self.cognome = cognome
+        self.data_nascita = dataNascita
+        self.email = email
+        self.sesso = sesso
+        self.curriculum = curriculum
+        self.credenziale: Credenziale | None = None
+        self.lavoro: Lavoro | None = None
+        self.lavori_passati: list[Lavoro] = []
+
+    def assumi(self, lavoro: Lavoro) -> bool:
+        if self.lavoro is None:
+            self.lavoro = Lavoro
+            return True
+        return False
+
+    def licenzia(self, notaLicenziamento: str) -> bool:
+        if self.lavoro is not None:
+            self.lavoro.licenzia(notaLicenziamento)
+            self.lavori_passati.append(self.lavoro)
+            self.lavoro = None
+            return True
+        return False
+
+    def autentifica(self, username: str, enc_password: str) -> bool:
+        if self.credenziale is not None:
+            return self.credenziale.username == username and self.credenziale.verifica(enc_password)
+        return False
 
     def calcolaEta(self) -> int:
-        pass
-
-    def __init__(self,nome : str, cognome : str, sesso : Sesso = Sesso.nonSpecificato, dataNascita : datetime, curriculum : Canvas = None, email : str):
-        pass
-
-    def getNome(self) -> str:
-        pass
-
-    def getCognome(self) -> str:
-        pass
-
-    def getDataNascita(self) -> datetime:
-        pass
-
-    def getCurriculum(self) -> Canvas:
-        pass
-
-    def setCurriculum(newVal : Canvas) -> None:
-        pass
-
-    def getDataRegistrazione(self) -> datetime:
-        pass
-
-    def getSesso(self) -> Sesso:
-        pass
-
-    def getEmail(self) -> str:
-        pass
+        today = datetime.today()
+        # int(True) is 1 and int(False) is 0:
+        return today.year - self.data_nascita.year - \
+               ((today.month, today.day) < (self.data_nascita.month, self.data_nascita.day))

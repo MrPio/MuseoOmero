@@ -7,35 +7,21 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
 class Lavoro:
-    def __init__(self,contratto : Canvas, stipendio : float, numPostazione : int):
-        pass
+    def __init__(self, stipendio : float, numPostazione : int,contratto : str=''):
+        self.stipendio=stipendio
+        self.numero_postazione=numPostazione
+        self.contratto=contratto
+        self.data_assunzione=datetime.now()
+        self.licenziato=False
+        self.data_licenziamento=None
+        self.nota_licenziamento=''
 
-    def getDataAssunzione(self) -> datetime:
-        pass
-
-    def getContratto(self) -> Canvas:
-        pass
-
-    def getStipendio(self) -> float:
-        pass
-
-    def isLicenziato(self) -> bool:
-        pass
-
-    def getDataLicenziamento(self) -> datetime:
-        pass
-
-    def getNotaLicenziamento(self) -> str:
-        pass
-
-    def licenzia(notaLicenziamento : str) -> None:
-        pass
-
-    def getNumPostazione(self) -> int:
-        pass
-
-    def setNumPostazione(newVal : int) -> None:
-        pass
+    def licenzia(self,notaLicenziamento : str) -> None:
+        if self.licenziato:
+            return
+        self.nota_licenziamento=notaLicenziamento
+        self.data_licenziamento=datetime.now()
+        self.licenziato=True

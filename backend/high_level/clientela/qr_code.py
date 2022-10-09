@@ -11,12 +11,13 @@ import random
 import string
 
 from backend.low_level.sicurezza.encoding import Encoding
+from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding
 
 
 class QRCode:
-    def __init__(self, encoding: Encoding):
+    def __init__(self, encoding: Encoding = QRCodeEncoding()):
         self.id = self.__genara()
-        self.encoding = encoding
+        self.encoding: Encoding = encoding
 
     def __genara(self) -> str:
         return ''.join(random.choice(string.ascii_uppercase) for _ in range(10))

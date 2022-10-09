@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
 from backend.high_level.clientela.qr_code import QRCode
 
@@ -20,13 +20,13 @@ from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding
 
 class Documento(abc.ABC):
 
-    def __init__(self,pagamento:Pagamento,dataRilascio : datetime.datetime = None):
+    def __init__(self,pagamento:Pagamento,dataRilascio : datetime = None):
         self.pagamento=pagamento
         self.data_rilascio=dataRilascio
-        self.date_convalida=[]
         self.pagato=False
         self.qr_code=QRCode(QRCodeEncoding())
-        self.subscribers=[]
+        self.date_convalida:list[datetime]=[]
+        self.subscribers:list[Subscriber]=[]
 
     @abc.abstractmethod
     def calcolaCosto(self) -> float:

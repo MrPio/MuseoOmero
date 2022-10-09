@@ -1,4 +1,5 @@
 import ctypes
+import random
 import sys
 
 from PyQt5.QtWidgets import QApplication
@@ -25,11 +26,7 @@ def startApp():
     controller_home.showView()
     sys.exit(app.exec())
 
-def ciao():
-    return 3
 
 if __name__=='__main__':
     # startApp()
-    if (login:=ciao()) == 2 :
-        print(login)
-    print(login)
+    print()

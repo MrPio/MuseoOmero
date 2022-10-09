@@ -7,17 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from datetime import datetime
 
 
 class Evento:
     def __init__(self,dataInizio : datetime, dataFine : datetime) -> None:
-        pass
+        self.data_inizio = dataInizio
+        self.data_fine = dataFine
+        self.data_pianificazione=datetime.now()
 
-    def getDataInizio(self) -> datetime:
-        pass
-
-    def getDataFine(self) -> datetime:
-        pass
-
-    def getDataPianificazione(self) -> datetime:
-        pass

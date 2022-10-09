@@ -7,47 +7,26 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from backend.high_level.personale.dipendente import Dipendente
-from backend.high_level.personale.lavoro import Lavoro
 import abc
 
+from backend.high_level.personale.dipendente import Dipendente
+
+
 class PostoLavoro(abc.ABC):
-    def assumi(dipendente : Dipendente) -> bool:
+    def __init__(self, piano: int, numPostazioni: int, descrizione: str = ''):
+        self.piano = piano
+        self.numero_postazioni_totali = numPostazioni
+        self.descrizione = descrizione
+        self.lavori = []
+
+    @abc.abstractmethod
+    def assumi(self, dipendente: Dipendente) -> bool:
         pass
 
-    def __init__(self,piano : int, numPostazioni : int, descrizione : str = ''):
-        self.piano=piano
-        self.numero_postazioni_totali=numPostazioni
-        self.descrizione=descrizione
-        self.numero_postazioni_occupate=0
-        self.lavori=[]
-
-    def promuovi(dipendente : Dipendente) -> bool:
-        pass
-
-    def getPiano(self) -> int:
-        pass
-
-    def licenzia(lavoro : Lavoro) -> bool:
-        pass
-
-    def getNumPostazioni(self) -> int:
-        pass
-
-    def setNumPostazioni(newVal : int) -> None:
-        pass
-
-    def getDescrizione(self) -> str:
-        pass
-
-    def setDescrizione(newVal : str) -> None:
-        pass
-
-    def getNumPostazioniOccupate(self) -> int:
-        pass
-
-    def getListaLavori(self) -> Lavoro []:
-        pass
-
-    def getLavoratori(self) -> Lavoro []:
-        pass
+    def licenzia(self, dipendente: Dipendente, notaLicensiamento: str) -> bool:
+        for lavoro in self.lavori:
+            if lavoro is dipendente.lavoro:
+                self.lavori.remove(lavoro)
+                dipendente.licenzia(notaLicensiamento)
+                return True
+        return False

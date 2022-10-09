@@ -14,5 +14,5 @@ class Notification(abc.ABC):
 
     @abc.abstractmethod
 
-    def send(title : str, content : str) -> None:
+    def send(self,title : str, content : str) -> None:
         pass

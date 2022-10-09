@@ -7,15 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 
+from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.clientela.enum.sesso import Sesso
 
 
 class Visitatore:
 
-    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, nasc : datetime.datetime = None):
+    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, nasc : datetime = None):
         self.provenienza=prov
         self.sesso=sesso
         self.data_nascita=nasc
-        self.biglietti=[]
+        self.biglietti:list[Biglietto]=[]

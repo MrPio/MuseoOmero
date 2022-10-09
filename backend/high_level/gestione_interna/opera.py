@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime
 import Pagamento
 import Composizione
 import Ubicazione

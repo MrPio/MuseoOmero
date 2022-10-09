@@ -7,20 +7,26 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Segretario
-import RichiestaDonazione
-import PostoLavoro
+from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.posto_lavoro import PostoLavoro
+from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
+from backend.high_level.personale.segretario import Segretario
+
 
 class Segreteria(PostoLavoro):
-    m_Segretario= Segretario()
-
-    m_RichiestaDonazione= RichiestaDonazione()
-
-    def __init__(self,piano : int, numPostazioni : int, descr : str = "", sportelli : int):
-        pass
-
-    def getListaLavori(self) -> None:
-        pass
-
-    def getListaLavori(self) -> Segretario []:
-        pass
+    def __init__(self, piano: int, numPostazioni: int, sportelli: int, telFisso:str, descr: str = ""):
+        super().__init__(piano, numPostazioni)
+        self.sportelli=sportelli
+        self.telefono_fisso=telFisso
+        self.descrizione=descr
+        self.richieste_donazione: list[RichiestaDonazione] = []
+    def assumi(self, dipendente: Dipendente) -> bool:
+        lavoro = Segretario(
+            contratto='contratto a tempo indeterminato',
+            stipendio=max(800.0, random.gauss(1300, 260)),
+            numPostazione=len(self.lavori) + 1,
+            sportelloAssegnato=len(self.lavori) + 1
+        )
+        if esito := dipendente.assumi(lavoro=lavoro):
+            self.lavori.append(lavoro)
+        return esito
