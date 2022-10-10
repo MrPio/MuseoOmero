@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton
+
 from frontend.view.my_main_window import MyMainWindow
 
 

@@ -30,4 +30,5 @@ def startApp():
 
 
 if __name__ == '__main__':
+    #TODO continuare a runnure e a risolvere tutti gli errori che si presentano
     startApp()
