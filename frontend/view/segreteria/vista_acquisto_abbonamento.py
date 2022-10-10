@@ -12,32 +12,36 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAcquistoAbbonamento(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/CompraAbbonamento.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getNomeLineEdit(self) -> QLineEdit:
-        pass
+        return self.nomeLineEdit
 
     def getCognomeLineEdit(self) -> QLineEdit:
-        pass
+        return self.cognomeLineEdit
 
     def getCodiceFiscaleLineEdit(self) -> QLineEdit:
-        pass
+        return self.codiceFiscaleLineEdit
 
     def getProvenienzaLineEdit(self) -> QLineEdit:
-        pass
+        return self.provenienzaLineEdit
 
     def getDataNascitaLineEdit(self) -> QLineEdit:
-        pass
+        return self.dataNascitaLineEdit
 
     def getSessoComboBox(self) -> QComboBox:
-        pass
+        return self.sessoComboBox
 
     def getDurataComboBox(self) -> QComboBox:
-        pass
+        return self.durataComboBox
 
     def getCostoLabel(self) -> QLabel:
-        pass
+        return self.costoLabel
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

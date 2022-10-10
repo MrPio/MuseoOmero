@@ -12,29 +12,33 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAccount(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaAccount.ui')
+
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
     def getNomeLabel(self) -> QLabel:
-        pass
+        return self.nomeLabel
 
     def getDataNascitaLabel(self) -> QLabel:
-        pass
+        return self.dataNascitaLabel
 
     def getSessoLabel(self) -> QLabel:
-        pass
+        return self.sessoLabel
 
     def getDataAssunzioneLabel(self) -> QLabel:
-        pass
+        return self.dataAssunzioneLabel
 
     def getEmailLabel(self) -> QLabel:
-        pass
+        return self.emailLabel
 
     def getOccupazioneLabel(self) -> QLabel:
-        pass
+        return self.occupazioneLabel
 
     def getDataAssegnazioneLavoroLabel(self) -> QLabel:
-        pass
+        return self.dataAssegnazioneLavoroLabel
 
     def getLogoutButton(self) -> QPushButton:
-        pass
+        return self.logoutButton

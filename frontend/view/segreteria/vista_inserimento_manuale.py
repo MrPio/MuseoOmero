@@ -12,8 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaInserimentoManuale(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR+'/InserisciManualmente.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getIdLineEdit(self) -> QLineEdit:
-        pass
+        return self.idLineEdit
+
+    def getConfermaButton(self) -> QPushButton:
+        return self.confermaButton

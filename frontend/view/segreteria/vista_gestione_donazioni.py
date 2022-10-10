@@ -12,8 +12,12 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaGestioneDonazioni(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR+'/VistaGestisciDonazioni.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getDonazioniListView(self) -> QListView:
-        pass
+        return self.donazioniListView

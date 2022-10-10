@@ -12,14 +12,19 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaConvalida(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/Convalida.ui')
+
+
     def getHeaderLabel(self) -> QLabel:
-        pass
+        return self.headerLabel
 
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getInserisciManualmenteButton(self) -> QPushButton:
-        pass
+        return self.inserisciManualmenteButton
 
     def getScannerizzaButton(self) -> QPushButton:
-        pass
+        return self.scannerizzaButton

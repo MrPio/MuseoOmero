@@ -12,20 +12,24 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAbbonamento(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaAbbonamento.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getNomeLabel(self) -> QLabel:
-        pass
+        return self.nomeLabel
 
     def getCognomeLabel(self) -> QLabel:
-        pass
+        return self.cognomeLabel
 
     def getCodiceFiscaleLabel(self) -> QLabel:
-        pass
+        return self.codiceFiscaleLabel
 
     def getScadenzaLabel(self) -> QLabel:
-        pass
+        return self.scadenzaLabel
 
     def getQrCodeImage(self) -> QLabel:
-        pass
+        return self.qrCodeImage

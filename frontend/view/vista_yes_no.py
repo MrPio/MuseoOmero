@@ -12,8 +12,12 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaYesNo(MyMainWindow):
-    def getAnNoneaButton(self) -> QPushButton:
-        pass
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/Y-N Message.ui')
+
+    def getAnnullaButton(self) -> QPushButton:
+        return self.annullaButton
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

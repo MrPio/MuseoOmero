@@ -12,14 +12,18 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaRinnovoAbbonamento(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/RinnovaAbbonamento.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getQrCodeImage(self) -> QLabel:
-        pass
+        return self.qrCodeImage
 
     def getDurataComboBox(self) -> QComboBox:
-        pass
+        return self.durataComboBox
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton
