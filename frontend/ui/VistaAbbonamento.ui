@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>746</height>
+    <height>686</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -228,7 +228,7 @@ font: 14pt &quot;Lato&quot;;</string>
      <string>HomeSegreteria ➜ VistaAbbonamento</string>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -269,7 +269,7 @@ background-color: rgba(173, 237, 255, 0);
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="qrCodeBigButton">
+   <widget class="QLabel" name="qrCodeImage">
     <property name="geometry">
      <rect>
       <x>175</x>
@@ -571,7 +571,7 @@ background-color: rgba(255, 255, 255,0);
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QLabel" name="cognomeLabe">
+   <widget class="QLabel" name="cognomeLabel">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -694,7 +694,7 @@ background-color: rgba(173, 237, 255, 0);
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="dataLabel">
+   <widget class="QLabel" name="scadenzaLabel">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -713,67 +713,14 @@ background-color: rgba(255, 255, 255,0);
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="confermaButton">
-    <property name="geometry">
-     <rect>
-      <x>176</x>
-      <y>670</y>
-      <width>180</width>
-      <height>45</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Lato</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
- background-color:rgb(104, 194, 253);
- border-style: solid;
- border-radius:22px;
-color: rgb(255, 255, 255);
-font: 14pt &quot;Lato&quot;;
-}
-
-QPushButton::hover{
-
-
-	border-color : rgb(15, 138, 204);
-	color: white;
-border-width:0;
-}
-
-QPushButton::pressed{
-	border-color:rgb(104, 194, 253);
-	border-width:4;
-	background-color : white;
-	color:rgb(104, 194, 253);
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Conferma</string>
-    </property>
-   </widget>
    <zorder>label_3</zorder>
    <zorder>label</zorder>
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
    <zorder>titoloLabel</zorder>
-   <zorder>previousLabel</zorder>
-   <zorder>qrCodeBigButton</zorder>
+   <zorder>previousButton</zorder>
+   <zorder>qrCodeImage</zorder>
    <zorder>label_5</zorder>
    <zorder>label_4</zorder>
    <zorder>label_6</zorder>
@@ -781,13 +728,12 @@ QPushButton::pressed{
    <zorder>label_10</zorder>
    <zorder>label_11</zorder>
    <zorder>nomeLabel</zorder>
-   <zorder>cognomeLabe</zorder>
+   <zorder>cognomeLabel</zorder>
    <zorder>codiceFiscaleLabel</zorder>
    <zorder>label_7</zorder>
    <zorder>label_8</zorder>
    <zorder>label_12</zorder>
-   <zorder>dataLabel</zorder>
-   <zorder>confermaButton</zorder>
+   <zorder>scadenzaLabel</zorder>
   </widget>
  </widget>
  <resources>

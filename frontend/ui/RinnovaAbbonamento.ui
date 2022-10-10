@@ -353,7 +353,7 @@ text-align: center;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QFrame" name="qrCodeFrame">
+   <widget class="QFrame" name="qrCodeImage">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -375,7 +375,7 @@ text-align: center;</string>
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="confermaButton">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -426,7 +426,7 @@ QPushButton::pressed{
      <string>Conferma</string>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>477</x>
@@ -628,9 +628,9 @@ QPushButton::pressed{
    <zorder>importoTotaleLabel</zorder>
    <zorder>costoTotaleLabel</zorder>
    <zorder>label_10</zorder>
-   <zorder>qrCodeFrame</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>qrCodeImage</zorder>
+   <zorder>confermaButton</zorder>
+   <zorder>previousButton</zorder>
    <zorder>maximizeButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>reduceButton</zorder>

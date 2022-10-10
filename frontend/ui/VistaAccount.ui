@@ -369,7 +369,7 @@ text-align: center;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="ricercaButton">
+   <widget class="QPushButton" name="logoutButton">
     <property name="geometry">
      <rect>
       <x>115</x>
@@ -757,7 +757,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>E-mail</string>
     </property>
    </widget>
-   <widget class="QLabel" name="impiegoLabel">
+   <widget class="QLabel" name="occupazioneLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -863,7 +863,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="dataImpiegoLabel">
+   <widget class="QLabel" name="dataAssegnazioneLavoroLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -881,7 +881,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Data</string>
     </property>
    </widget>
-   <widget class="QLabel" name="dataLabel">
+   <widget class="QLabel" name="dataAssunzioneLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -909,7 +909,7 @@ background-color: rgba(255, 255, 255,0);</string>
    <zorder>titoloLabel</zorder>
    <zorder>label_3</zorder>
    <zorder>label_7</zorder>
-   <zorder>ricercaButton</zorder>
+   <zorder>logoutButton</zorder>
    <zorder>label_20</zorder>
    <zorder>label_21</zorder>
    <zorder>label_8</zorder>
@@ -923,13 +923,13 @@ background-color: rgba(255, 255, 255,0);</string>
    <zorder>dataNascitaLabel</zorder>
    <zorder>sessoLabel</zorder>
    <zorder>emailLabel</zorder>
-   <zorder>impiegoLabel</zorder>
+   <zorder>occupazioneLabel</zorder>
    <zorder>label_16</zorder>
    <zorder>label_19</zorder>
    <zorder>label_22</zorder>
    <zorder>label_23</zorder>
-   <zorder>dataImpiegoLabel</zorder>
-   <zorder>dataLabel</zorder>
+   <zorder>dataAssegnazioneLavoroLabel</zorder>
+   <zorder>dataAssunzioneLabel</zorder>
   </widget>
  </widget>
  <resources>
