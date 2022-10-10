@@ -7,11 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Hashing
+from backend.low_level.sicurezza.hashing import Hashing
+import hashlib
 
 class MD5Hashing(Hashing):
-    def hash(plain : int) -> str:
-        pass
 
-    def __init__(self,):
-        pass
+    def hash(self, plain: str) -> str:
+        '''
+        Metodo di hashing con l'algoritmo MD5
+        :return it testo hash-ato
+        '''
+        return hashlib.md5(plain.encode('utf-8')).hexdigest()

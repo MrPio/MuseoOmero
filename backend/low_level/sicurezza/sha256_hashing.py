@@ -8,12 +8,14 @@
 # 
 #######################################################
 from backend.low_level.sicurezza.hashing import Hashing
-
+import hashlib
 
 
 class SHA256Hashing(Hashing):
-    def hash(plain: int) -> str:
-        pass
 
-    def __init__(self):
-        pass
+    def hash(self, plain: str) -> str:
+        '''
+        Metodo di hashing con l'algoritmo SHA256
+        :return it testo hash-ato
+        '''
+        return hashlib.sha256(plain.encode('utf-8')).hexdigest()
