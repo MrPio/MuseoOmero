@@ -8,11 +8,9 @@
 # 
 #######################################################
 import abc
-import random
 
 
 class Pagamento(abc.ABC):
     @abc.abstractmethod
     def paga(self, costo: float) -> bool:
-        # simulazione embedded
-        return random.choices([True, False],[3,1])
+        pass

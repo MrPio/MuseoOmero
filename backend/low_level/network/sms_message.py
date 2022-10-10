@@ -7,14 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Notification
+from backend.low_level.network.notification import Notification
+
 
 class SMSMessage(Notification):
-    def send(title : str, content : str) -> None:
-        pass
+    def __init__(self, telefono: int):
+        self.telefono = telefono
 
-    def __init__(self,telefono : int):
-        pass
-
-    def getTelefono(self) -> int:
+    def send(self, title: str, content: str) -> None:
+        # necessario un numero telefono di business e relative api
         pass

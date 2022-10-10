@@ -10,6 +10,7 @@
 from backend.low_level.sicurezza.hashing import Hashing
 
 
+
 class SHA256Hashing(Hashing):
     def hash(plain: int) -> str:
         pass

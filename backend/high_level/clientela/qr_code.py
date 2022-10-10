@@ -27,3 +27,4 @@ class QRCode:
 
     def getImage(self) -> None:
         return self.encoding.encode(self.id)
+

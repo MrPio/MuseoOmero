@@ -15,17 +15,18 @@ from backend.high_level.gestione_interna.mostra import Mostra
 from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.posto_lavoro import PostoLavoro
+from backend.low_level.io.serializzatore import Serializzatore
 from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
+from backend.low_level.network.cloud_storage import CloudStorage
 from backend.low_level.network.drop_box_api import DropBoxAPI
 
 
 class Museo:
-    
-    __backup_path = '/backups/'
+    __backup_path = 'backups/'
     __key = object()
     __instance: Museo = None
-    __cloud_storage = DropBoxAPI()
-    __serializzatore = SerializzazionePickle()
+    __cloud_storage:CloudStorage = DropBoxAPI()
+    __serializzatore:Serializzatore = SerializzazionePickle()
 
     def __init__(self, key) -> None:
         assert (key == Museo.__key), \
@@ -108,9 +109,11 @@ class Museo:
         Museo.__cloud_storage.download(path, path)
 
     def make_backup(self) -> None:
-        local_path = Museo.__backup_path + 'museo ' + datetime.now().strftime(
-            '%Y-%m-%d %H-%M-%S') + '.pickle'
+        local_path = Museo.__backup_path
         cloud_path = local_path
 
-        self.serializzatore.serializza(local_path, self)
-        self.cloud_storage.upload(local_path, cloud_path)
+        filename= 'museo ' + datetime.now().strftime(
+            '%Y-%m-%d %H-%M-%S') + '.pickle'
+
+        Museo.__serializzatore.serializza(self,local_path,filename)
+        Museo.__cloud_storage.upload(local_path, filename)

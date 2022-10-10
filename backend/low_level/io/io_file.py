@@ -12,10 +12,9 @@ import abc
 
 class IOFile(abc.ABC):
     @abc.abstractmethod
-
-    def salvaFile(self) -> None:
+    def salvaFile(self, content: bytes, path: str, filename:str) -> None:
         pass
-    @abc.abstractmethod
 
-    def leggiFile(self) -> str:
+    @abc.abstractmethod
+    def leggiFile(self, path: str) -> str:
         pass

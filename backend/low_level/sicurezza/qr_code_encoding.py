@@ -7,6 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import PIL
+import cv2
+import qrcode
+
 from backend.low_level.sicurezza.encoding import Encoding
 
 
@@ -17,5 +21,5 @@ class QRCodeEncoding(Encoding):
     def decode(self,image : None) -> str:
         pass
 
-    def __init__(self,):
-        pass
+
+

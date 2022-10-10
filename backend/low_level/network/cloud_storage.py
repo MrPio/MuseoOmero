@@ -12,14 +12,13 @@ import abc
 
 class CloudStorage(abc.ABC):
     @abc.abstractmethod
-
-    def download(self,cloudPath : str, localPath : str) -> None:
+    def download(self, cloudPath: str, localPath: str) -> None:
         pass
-    @abc.abstractmethod
 
-    def upload(self,localPath : str, cloudPath : str) -> None:
+    @abc.abstractmethod
+    def upload(self, path: str, filename: str) -> None:
         pass
-    @abc.abstractmethod
 
-    def listFile(self,cloudDirectory : str) -> None:
+    @abc.abstractmethod
+    def listFile(self, cloudDirectory: str) -> None:
         pass

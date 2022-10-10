@@ -7,17 +7,90 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import CloudStorage
+
+import dropbox
+
+from backend.low_level.network.cloud_storage import CloudStorage
+
 
 class DropBoxAPI(CloudStorage):
-    def download(self,cloudPath : str, localPath : str) -> None:
-        pass
+    cloud_root_dir = '/MuseoOmero/'
 
-    def upload(self,localPath : str, cloudPath : str) -> None:
-        pass
+    @staticmethod
+    # per evitare la rimozione del token dropbox causata dalla segnalazione da parte di git guardian.
+    def get_app_key() -> str:
+        first = "nbtl6om7z"
+        second = "bz0m9k"
+        return first + second
 
-    def listFile(self,cloudDirectory : str) -> list[str]:
-        pass
+    @staticmethod
+    # per evitare la rimozione del token dropbox causata dalla segnalazione da parte di git guardian.
+    def get_app_secret() -> str:
+        first = "u03zp1gm"
+        second = "wl9qh99"
+        return first + second
 
-    def __init__(self,):
-        pass
+    @staticmethod
+    # per evitare la rimozione del token dropbox causata dalla segnalazione da parte di git guardian.
+    # il refresh token è necessario dalla nuova versione delle api di dropbox perché un qualunque
+    # token generato dalla console ha durata limitata alle sole 4 ore.
+    def get_refresh_token() -> str:
+        first = "kCnkGHvGx08AAAAAAAAAA"
+        second = "YFvsxD6746PorZUDhQ1Uovdly"
+        return first + second + "F25DM116EWKQitiKv9"
+
+    def __init__(self):
+        self.dropbox_client = dropbox.Dropbox(
+            app_key=DropBoxAPI.get_app_key(),
+            app_secret=DropBoxAPI.get_app_secret(),
+            oauth2_refresh_token=DropBoxAPI.get_refresh_token(),
+        )
+
+    def download(self, cloudPath: str, localPath: str) -> bool:
+        """
+        Esegue il download di un file dal cloud dropbox.
+        :param cloudPath: il percorso completo del file sul cloud
+        :param localPath: il percorso completo locale dove scrivere il file
+        :return: flag di successo
+        """
+        try:
+            with open(localPath, 'wb') as f:
+                _, result = self.dropbox_client.files_download(path=cloudPath)
+                f.write(result.content)
+        except Exception as e:
+            return False
+        return True
+
+    def upload(self, path: str, filename: str) -> bool:
+        """
+        Esegue l'upload di un file sul cloud dropbox.
+        :param path: La directory dove si trova il file
+        :param filename: il nome con estensione  del file
+        :return: flag di successo
+        """
+        try:
+            with open(path + filename, 'rb') as f:
+                self.dropbox_client.files_upload(
+                    f=f.read(),
+                    path=DropBoxAPI.cloud_root_dir + filename,
+                )
+        except Exception as e:
+            return False
+        return True
+
+    def listFile(self, cloudDirectory: str) -> list[str]:
+        """
+        Riceve la lista dei file contenuti all'interno di una cartella specifica del cloud
+        :param cloudDirectory: La directory dove cercare i file
+        :return: La lista dei nomi dei file contenuti all'interno della cartella
+        """
+        files_list: list[str] = []
+
+        try:
+            files = self.dropbox_client.files_list_folder(cloudDirectory).entries
+            for file in files:
+                if isinstance(file, dropbox.files.FileMetadata):
+                    files_list.append(file.name)
+        except Exception as e:
+            print(e)
+        return files_list

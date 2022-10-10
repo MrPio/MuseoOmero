@@ -7,13 +7,43 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
+import pickle
+
 from backend.low_level.io.serializzatore import Serializzatore
 
 
 class SerializzazionePickle(Serializzatore):
 
-    def serializza(self,path,obj : object) -> None:
-        pass
+    def serializza(self, obj: object, path: str, filename: str) -> bool:
+        """
+        Viene serializzato un oggetto su file nel percorso specificato
+        creando ricorsivamente le cartelle necessarie se possibile.
+        :param obj: l'oggetto da serializzare
+        :param path: il percorso dove scrivere il file
+        :param filename: il nome con estensione del file
+        :return: flag di successo
+        """
+        try:
+            if not os.path.exists(path):
+                os.makedirs(path)
+        except Exception as e:
+            return False
 
-    def deserializza(self,path) -> object:
-        pass
+        with open(path + filename, 'wb') as writer:
+            pickle.dump(obj, writer, pickle.HIGHEST_PROTOCOL)
+        return True
+
+    def deserializza(self, path) -> object:
+        """
+        Viene letto un file binario contenente un oggetto serializzato
+         data la sua posizione.
+        :param path: il percorso dove leggere il file
+        :return: l'oggetto deserializzato dal file binario.
+        :raises: _pickle.UnpicklingError se il file è danneggiato o non un file pickle
+        """
+        if not os.path.exists(path):
+            print('{} does not exist'.format(path))
+            return None
+        with open(path, 'rb') as reader:
+            return pickle.load(reader)

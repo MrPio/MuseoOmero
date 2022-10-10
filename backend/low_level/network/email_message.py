@@ -7,14 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Notification
+
+from backend.low_level.network.notification import Notification
+
 
 class EmailMessage(Notification):
-    def send(title : str, content : str) -> None:
-        pass
+    def __init__(self, email: str):
+        self.email = email
 
-    def __init__(self,email : str):
-        pass
-
-    def getEmail(self) -> str:
+    def send(self, title: str, content: str) -> None:
+        # Gmail Account for Development necessario
         pass

@@ -12,7 +12,7 @@ import abc
 
 class Serializzatore(abc.ABC):
     @abc.abstractmethod
-    def serializza(self,path,obj: object) -> None:
+    def serializza(self,obj: object, path:str, filename:str) -> bool:
         pass
 
     @abc.abstractmethod

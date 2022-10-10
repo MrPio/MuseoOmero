@@ -10,6 +10,8 @@
 
 import abc
 
+from PIL.Image import Image
+
 
 class Encoding(abc.ABC):
     @abc.abstractmethod

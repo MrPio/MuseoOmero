@@ -1,7 +1,6 @@
 import ctypes
 import sys
 
-import cv2
 from PyQt5.QtWidgets import QApplication
 
 from frontend.controller.controller_home import ControllerHome
@@ -28,11 +27,5 @@ def startApp():
 
 if __name__ == '__main__':
     startApp()
-    # img = cv2.imread('qrcode.png')
-    # val, _, _ = detector = cv2.QRCodeDetector().detectAndDecode(img)
-    # print(val)
 
-    # img = qrcode.make('Ragazzi ho scoperto che ursino invece la vede la tesina.')
-    # img.save('qrcode.png')
-    # print(QR().decode(filename='qrcode.png'))
     # print()
