@@ -7,9 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtWidgets import QPushButton, QLineEdit, QLabel
+
+from frontend.view.my_main_window import MyMainWindow
 
 
-class VistaReportIncassi:
+class VistaReportIncassi(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
         pass
 

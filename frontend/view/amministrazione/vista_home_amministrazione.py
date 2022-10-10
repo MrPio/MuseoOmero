@@ -8,33 +8,39 @@
 # 
 #######################################################
 from PyQt5.QtWidgets import QPushButton, QLabel
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaHomeAmministrazione(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/HomeAmministrazione.ui')
+
     def getAccountIcon(self) -> QLabel:
-        pass
+        return self.accountButton
 
     def getGestisciDipendentiButton(self) -> QPushButton:
-        pass
+        return self.gestisciDipendentiBigButton
 
     def getGestisciStruttureButton(self) -> QPushButton:
-        pass
+        return self.gestisciStruttureBigButton
 
     def getGestisciTurniGuideButton(self) -> QPushButton:
-        pass
+        return self.gestisciTurniGuideBigButton
 
     def getGestisciMostreButton(self) -> QPushButton:
-        pass
+        return self.gestisciMostreBigButton
 
     def getVisualizzaStatisticheButton(self) -> QPushButton:
-        pass
+        return self.visualizzaStatisticheBigButton
 
     def getVisualizzaReportIncassi(self) -> QPushButton:
-        pass
+        return self.visualizzaReportIncassiBigButton
 
     def getAcquistaOpereButton(self) -> QPushButton:
-        pass
+        return self.acquistaOpereBigButton
 
     def getGestisciBackupsButton(self) -> QPushButton:
-        pass
+        return self.gestisciBackupBigButton

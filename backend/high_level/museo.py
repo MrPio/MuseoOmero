@@ -24,7 +24,7 @@ from backend.low_level.network.drop_box_api import DropBoxAPI
 class Museo:
     __backup_path = 'backups/'
     __key = object()
-    __instance: Museo = None
+    __instance:'Museo' = None
     __cloud_storage:CloudStorage = DropBoxAPI()
     __serializzatore:Serializzatore = SerializzazionePickle()
 
@@ -49,7 +49,7 @@ class Museo:
         self.opere: list[Opera] = []
 
     @staticmethod
-    def getInstance() -> Museo:
+    def getInstance() -> 'Museo':
         """
         nel rispetto del pattern Singleton, questo metodo mi garanitisce l'univocità dell'istanza.
         Si cerca localmente l'oggetto, poi sul cloud se non lo si trova. Solo in ultima possibilità viene creato nuvo.
@@ -59,9 +59,9 @@ class Museo:
             os.makedirs(Museo.__backup_path)
 
         if Museo.__instance == None:
-            if (last_backup := Museo.__get_last_backup()) == '':
+            last_backup = Museo.__get_last_backup()
+            if last_backup == '':
                 Museo.__download_last_backups()
-                global last_backup
                 last_backup = Museo.__get_last_backup()
             if last_backup == '':
                 Museo.__instance = Museo(Museo.__key)

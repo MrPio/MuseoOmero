@@ -7,12 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.view import VistaGestioneMostre
+from frontend.view.amministrazione.vista_gestione_mostre import VistaGestioneMostre
+
 
 class ControllerGestioneMostre(Controller):
-    m_VistaGestioneMostre= VistaGestioneMostre()
 
     def __gotoPrevious(self) -> None:
         pass

@@ -7,7 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerAggiungiOpera
+from frontend.controller.reception.controller_aggiungi_opera import ControllerAggiungiOpera
+
 
 class StrategyAggiungiOpera:
     def initializeUi(c : ControllerAggiungiOpera) -> None:

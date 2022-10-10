@@ -26,7 +26,7 @@ class ControllerTurniGuide(Controller):
     def gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaTurniGuide, previous : Controller, model : Museo):
+    def __init__(self,view : VistaTurniGuide, previous : Controller, model : Museo,strategy:StrategyTurniGuide):
         pass
 
     def gotoVistaModificaTurnoGuida(self) -> None:

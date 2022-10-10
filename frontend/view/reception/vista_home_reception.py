@@ -8,21 +8,27 @@
 # 
 #######################################################
 from PyQt5.QtWidgets import QPushButton, QLabel
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaHomeReception(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/HomeReception.ui')
+
     def getAccountIcon(self) -> QLabel:
-        pass
+        return self.accountButton
 
     def getAcquistoBigliettoButton(self) -> QPushButton:
-        pass
+        return self.acquistaBigliettoBigButton
 
     def getConvalidaBigliettoButton(self) -> QPushButton:
-        pass
+        return self.convalidaBigliettoBigButton
 
     def getVendiOperaButton(self) -> QPushButton:
-        pass
+        return self.vendiOperaBigButton
 
     def getEffettuaDonazioneButton(self) -> QPushButton:
-        pass
+        return self.riceviDonazioneBigButton

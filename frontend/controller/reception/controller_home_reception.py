@@ -7,52 +7,88 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.museo import Museo
+from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
-import Dipendente
-from frontend.view import VistaHomeReception
+from frontend.controller.controller_account import ControllerAccount
+from frontend.controller.reception.controller_acquisto_biglietto import ControllerAcquistoBiglietto
+from frontend.controller.reception.controller_aggiungi_opera import ControllerAggiungiOpera
+from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
+from frontend.controller.reception.strategy_aggiungi_opera.strategy_ricevi_donazione import StrategyRiceviDonazione
+from frontend.controller.reception.strategy_ricerca_opera.strategy_vendi_opera import StrategyVendiOpera
+from frontend.controller.segreteria.controller_convalida import ControllerConvalida
+from frontend.controller.segreteria.strategy_convalida.strategy_convalida_biglietto import StrategyConvalidaBiglietto
+from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
+from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
+from frontend.view.reception.vista_home_reception import VistaHomeReception
+from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+from frontend.view.segreteria.vista_convalida import VistaConvalida
+from frontend.view.vista_account import VistaAccount
+
 
 class ControllerHomeReception(Controller):
+    def __init__(self, view: VistaHomeReception, home: Controller, dipendente: Dipendente):
+        super().__init__(view)
+        self.view: VistaHomeReception = view
+        self.home = home
+        self.dipendente = dipendente
+
     def __gotoVistaAccount(self) -> None:
-        pass
+        controller = ControllerAccount(
+            view=VistaAccount(),
+            previous=self,
+            home=self.home,
+            dipendente=self.dipendente,
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
-    def __gotoVistaVistaAcquistoBiglietto(self) -> None:
-        pass
+    def __gotoVistaAcquistoBiglietto(self) -> None:
+        controller = ControllerAcquistoBiglietto(
+            view=VistaAcquistoBiglietto(),
+            previous=self,
+            model=Biglietto(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
-    def __init__(self,view : VistaHomeReception, home : Controller):
-        pass
-
-    def __gotoVistaVistaConvalidaBiglietto(self) -> None:
-        pass
+    def __gotoVistaConvalidaBiglietto(self) -> None:
+        controller = ControllerConvalida(
+            view=VistaConvalida(),
+            previous=self,
+            strategy=StrategyConvalidaBiglietto(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
-        pass
+        controller = ControllerRicercaOpera(
+            view=VistaRicercaOpera(),
+            previous=self,
+            model=Museo.getInstance(),
+            strategy=StrategyVendiOpera(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaEffettuaDonazione(self) -> None:
-        pass
+        controller = ControllerAggiungiOpera(
+            view=VistaAggiungiOpera(),
+            previous=self,
+            strategy=StrategyRiceviDonazione(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __connettiEventi(self) -> None:
-        pass
-
-class ControllerHomeReception(Controller):
-    m_VistaHomeReception= VistaHomeReception()
-
-    def __gotoVistaAccount(self) -> None:
-        pass
-
-    def __gotoVistaVistaAcquistoBiglietto(self) -> None:
-        pass
-
-    def __init__(self,view : VistaHomeReception, home : Controller, account : Dipendente):
-        pass
-
-    def __gotoVistaVistaConvalidaBiglietto(self) -> None:
-        pass
-
-    def __gotoVistaRicercaOpera(self) -> None:
-        pass
-
-    def __gotoVistaEffettuaDonazione(self) -> None:
-        pass
-
-    def connettiEventi(self) -> None:
-        pass
+        self.view.getAccountIcon().mousePressEvent = lambda _: self.__gotoVistaAccount()
+        self.view.getAcquistoBigliettoButton().clicked.connect(self.__gotoVistaAcquistoBiglietto)
+        self.view.getConvalidaBigliettoButton().clicked.connect(self.__gotoVistaConvalidaBiglietto)
+        self.view.getVendiOperaButton().clicked.connect(self.__gotoVistaRicercaOpera)
+        self.view.getEffettuaDonazioneButton().clicked.connect(self.__gotoVistaEffettuaDonazione)

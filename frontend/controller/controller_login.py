@@ -9,32 +9,60 @@
 #######################################################
 # from backend.high_level.museo import Museo
 # from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.museo import Museo
+from backend.high_level.personale.amministrazione import Amministrazione
+from backend.high_level.personale.dipendente import Dipendente
+from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+from backend.high_level.personale.segretario import Segretario
 from backend.low_level.sicurezza.hashing import Hashing
+from frontend.controller.amministrazione.controller_home_amministrazione import ControllerHomeAmministrazione
 from frontend.controller.controller import Controller
+from frontend.controller.reception.controller_home_reception import ControllerHomeReception
+from frontend.controller.segreteria.controller_home_segreteria import ControllerHomeSegreteria
+from frontend.view.amministrazione.vista_home_amministrazione import VistaHomeAmministrazione
+from frontend.view.reception.vista_home_reception import VistaHomeReception
+from frontend.view.segreteria.vista_home_segreteria import VistaHomeSegreteria
 from frontend.view.vista_login import VistaLogin
 
 
 class ControllerLogin(Controller):
-    def __login(self,username : str, passwordEncr : str) -> None:
-        pass
-
-    def __onLoginClicked(self) -> None:
-        dipendente=self.__login(
-            self.view.getUsernameLineEdit().text,
-            self.__hashing.hash(self.view.getPasswordLineEdit().text)
+    def __login(self, username: str, passwordEncr: str) -> Dipendente:
+        return self.__model.login(
+            username=username,
+            enc_password=passwordEncr,
         )
 
+    def __onLoginClicked(self) -> None:
+        dipendente = self.__login(
+            self.view.getUsernameLineEdit().text(),
+            self.__hashing.hash(self.view.getPasswordLineEdit().text()),
+        )
+        map={
+            OperatoreAlPubblico:ControllerHomeReception(VistaHomeReception(),self.__home,dipendente),
+            Segretario: ControllerHomeSegreteria(VistaHomeSegreteria(),self.__home,dipendente),
+            Amministrazione: ControllerHomeAmministrazione(VistaHomeAmministrazione(),self.__home,dipendente),
+        }
+        controller:Controller=map[type(dipendente.lavoro)]
+
+        controller.connettiEventi()
+        controller.showView()
+        self.closeView()
+
+
+
+
     def connettiEventi(self) -> None:
-        self.view.getPreviousLabel().mousePressEvent =lambda _: self.gotoHome()
+        self.view.getPreviousLabel().mousePressEvent = lambda _: self.gotoHome()
         self.view.getLoginButton().clicked.connect(self.__onLoginClicked)
 
     def gotoHome(self) -> None:
         self.closeView()
         self.__home.enableView()
 
-    def __init__(self, view: VistaLogin, model: None, home: Controller, repartoScelto: str,hashing:Hashing):
+    def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str, hashing: Hashing):
         super().__init__(view)
-        self.__model=model
-        self.__home=home
-        self.__repartoScelto=repartoScelto
-        self.__hashing=hashing
+        self.view: VistaLogin = view
+        self.__model = model
+        self.__home = home
+        self.__repartoScelto = repartoScelto
+        self.__hashing = hashing

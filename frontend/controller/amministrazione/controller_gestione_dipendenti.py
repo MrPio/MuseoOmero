@@ -7,15 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
 from frontend.controller.controller import Controller
-from frontend.view import VistaGestioneDipendenti
-from frontend.controller.controller import ControllerWidgetDipendente
+from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
+
 
 class ControllerGestioneDipendenti(Controller):
-    m_VistaGestioneDipendenti= VistaGestioneDipendenti()
-
-    m_ControllerWidgetDipendente= ControllerWidgetDipendente()
 
     def __gotoPrevious(self) -> None:
         pass
@@ -29,5 +27,5 @@ class ControllerGestioneDipendenti(Controller):
     def connettiEventi(self) -> None:
         pass
 
-    def __renderizzaDipendenti(self) -> ControllerWidgetDipendente []:
+    def __renderizzaDipendenti(self) -> list[ControllerWidgetDipendente]:
         pass

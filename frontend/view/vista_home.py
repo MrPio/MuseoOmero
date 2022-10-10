@@ -8,8 +8,10 @@
 # 
 #######################################################
 from PyQt5.QtWidgets import QPushButton
-from frontend.view.my_main_window import MyMainWindow
+
 from frontend.ui.location import UI_DIR
+from frontend.view.my_main_window import MyMainWindow
+
 
 class VistaHome(MyMainWindow):
 

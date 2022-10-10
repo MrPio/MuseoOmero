@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-import Museo
-from frontend.view import VistaReportIncassi
+from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
+
 
 class ControllerVistaReportIncassi(Controller):
-    m_VistaReportIncassi= VistaReportIncassi()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaReportIncassi, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaReportIncassi, previous: Controller, model: Museo):
+        super().__init__(view)
 
     def __onVisualizzaClicked(self) -> None:
         pass

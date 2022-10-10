@@ -7,8 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerWidgetDipendente
+
 
 class StrategyWidgetDipendente:
-    def initializeUi(c : ControllerWidgetDipendente) -> None:
+    def initializeUi(c : 'ControllerWidgetDipendente') -> None:
         pass

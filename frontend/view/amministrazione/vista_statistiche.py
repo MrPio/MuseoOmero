@@ -7,9 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from frontend.view.my_main_window import MyMainWindow
 
 
-class VistaStatistiche:
+class VistaStatistiche(MyMainWindow):
     def getMeseLineEdit(self) -> QLineEdit:
         pass
 

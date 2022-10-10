@@ -13,7 +13,7 @@ from frontend.view.my_main_window import MyMainWindow
 
 class VistaAccount(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getNomeLabel(self) -> QLabel:
         pass

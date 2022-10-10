@@ -9,12 +9,14 @@
 #######################################################
 import abc
 
+from PyQt5.QtWidgets import QWidget
+
 from frontend.view.my_main_window import MyMainWindow
 
 
 class Controller(abc.ABC):
 
-    def __init__(self, view: MyMainWindow) -> None:
+    def __init__(self, view: MyMainWindow|QWidget) -> None:
         self.view = view
 
     def initializeUi(self) -> None:

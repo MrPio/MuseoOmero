@@ -7,20 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtChart import QChartView
+
 from frontend.controller.controller import Controller
-from frontend.view import VistaStatistiche
-import Statistica
+from frontend.view.amministrazione.vista_statistiche import VistaStatistiche
+
 
 class ControllerVistaStatistiche(Controller):
-    m_VistaStatistiche= VistaStatistiche()
-
-    m_Statistica= Statistica()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaStatistiche, previous : Controller):
-        pass
+    def __init__(self, view: VistaStatistiche, previous: Controller):
+        super().__init__(view)
 
     def __onVisualizzaClicked(self) -> None:
         pass

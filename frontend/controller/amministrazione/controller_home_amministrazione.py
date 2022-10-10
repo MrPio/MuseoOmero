@@ -7,36 +7,136 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
+from backend.high_level.personale.dipendente import Dipendente
+from frontend.controller.amministrazione.controller_acquisto_opere import ControllerAcquistoOpere
+from frontend.controller.amministrazione.controller_backups import ControllerBackups
+from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
+from frontend.controller.amministrazione.controller_gestione_mostre import ControllerGestioneMostre
+from frontend.controller.amministrazione.controller_gestione_posti_lavoro import ControllerGestionePostiLavoro
+from frontend.controller.amministrazione.controller_vista_report_incassi import ControllerVistaReportIncassi
+from frontend.controller.amministrazione.controller_vista_statistiche import ControllerVistaStatistiche
 from frontend.controller.controller import Controller
-import Dipendente
-from frontend.view import VistaHomeAmministrazione
+from frontend.controller.controller_account import ControllerAccount
+from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
+from frontend.controller.reception.strategy_turni_guide.strategy_gestisci_turni_guide import StrategyGestisciTurniGuide
+from frontend.view.amministrazione.vista_acquisto_opere import VistaAcquistoOpere
+from frontend.view.amministrazione.vista_backups import VistaBackups
+from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
+from frontend.view.amministrazione.vista_gestione_mostre import VistaGestioneMostre
+from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGestionePostiLavoro
+from frontend.view.amministrazione.vista_home_amministrazione import VistaHomeAmministrazione
+from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
+from frontend.view.amministrazione.vista_statistiche import VistaStatistiche
+from frontend.view.reception.vista_turni_guide import VistaTurniGuide
+from frontend.view.vista_account import VistaAccount
+
 
 class ControllerHomeAmministrazione(Controller):
-    m_VistaHomeAmministrazione= VistaHomeAmministrazione()
+    def __init__(self, view: VistaHomeAmministrazione, home: Controller, dipendente: Dipendente):
+        super().__init__(view)
+        self.view: VistaHomeAmministrazione = view
+        self.home = home
+        self.dipendente = dipendente
 
     def __gotoVistaAccount(self) -> None:
-        pass
+        controller = ControllerAccount(
+            view=VistaAccount(),
+            previous=self,
+            home=self.home,
+            dipendente=self.dipendente,
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaGestioneDipendenti(self) -> None:
-        pass
+        controller = ControllerGestioneDipendenti(
+            view=VistaGestioneDipendenti(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
-    def __init__(self,view : ControllerHomeAmministrazione, home : Controller, account : Dipendente):
-        pass
+    def __gotoGestionePostiLavoro(self) -> None:
+        controller = ControllerGestionePostiLavoro(
+            view=VistaGestionePostiLavoro(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaGestioneTurniGuida(self) -> None:
-        pass
+        controller = ControllerTurniGuide(
+            view=VistaTurniGuide(),
+            previous=self,
+            model=Museo.getInstance(),
+            strategy=StrategyGestisciTurniGuide(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaGestioneMostre(self) -> None:
-        pass
+        controller = ControllerGestioneMostre(
+            view=VistaGestioneMostre(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaStatistiche(self) -> None:
-        pass
+        controller = ControllerVistaStatistiche(
+            view=VistaStatistiche(),
+            previous=self,
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
+
+    def __gotoVistaReportIncassi(self) -> None:
+        controller = ControllerVistaReportIncassi(
+            view=VistaReportIncassi(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaAcquistaOpere(self) -> None:
-        pass
+        controller = ControllerAcquistoOpere(
+            view=VistaAcquistoOpere(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def __gotoVistaBackups(self) -> None:
-        pass
+        controller = ControllerBackups(
+            view=VistaBackups(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getAccountIcon().mousePressEvent = lambda _: self.__gotoVistaAccount()
+        self.view.getGestisciDipendentiButton().clicked.connect(self.__gotoVistaGestioneDipendenti)
+        self.view.getGestisciStruttureButton().clicked.connect(self.__gotoGestionePostiLavoro)
+        self.view.getGestisciTurniGuideButton().clicked.connect(self.__gotoVistaGestioneTurniGuida)
+        self.view.getGestisciMostreButton().clicked.connect(self.__gotoVistaGestioneMostre)
+        self.view.getVisualizzaStatisticheButton().clicked.connect(self.__gotoVistaStatistiche)
+        self.view.getVisualizzaReportIncassi().clicked.connect(self.__gotoVistaReportIncassi)
+        self.view.getAcquistaOpereButton().clicked.connect(self.__gotoVistaAcquistaOpere)
+        self.view.getGestisciBackupsButton().clicked.connect(self.__gotoVistaBackups)

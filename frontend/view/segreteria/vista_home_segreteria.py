@@ -8,21 +8,27 @@
 # 
 #######################################################
 from PyQt5.QtWidgets import QLabel
+from PyQt6.QtWidgets import QPushButton
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaHomeSegreteria(MyMainWindow):
+    def __init__(self):
+        super().__init__(UI_DIR + '/HomeSegreteria.ui')
+
     def getAccountIcon(self) -> QLabel:
-        pass
+        return self.accountButton
 
-    def getAcquistaAbbonamentoButton(self) -> int:
-        pass
+    def getAcquistaAbbonamentoButton(self) -> QPushButton:
+        return self.acquistaAbbonamentoBigButton
 
-    def getConvalidaAbbonamentoButton(self) -> int:
-        pass
+    def getConvalidaAbbonamentoButton(self) -> QPushButton:
+        return self.convalidaBigliettoBigButton
 
-    def getGestisciDonazioneButton(self) -> int:
-        pass
+    def getGestisciDonazioneButton(self) -> QPushButton:
+        return self.gestisciDonazioneBigButton
 
-    def getRinnovoAbbonamentoButton(self) -> int:
-        pass
+    def getRinnovoAbbonamentoButton(self) -> QPushButton:
+        return self.rinnovoAbbonamentoBigButton

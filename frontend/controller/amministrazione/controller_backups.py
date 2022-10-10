@@ -7,15 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.widget.controller_widget_backup import  ControllerWidgetBackup
 from frontend.controller.controller import Controller
-from frontend.view import VistaBackups
-from frontend.controller.controller import ControllerBackup
+from frontend.view.amministrazione.vista_backups import VistaBackups
+
 
 class ControllerBackups(Controller):
-    m_VistaBackups= VistaBackups()
-
-    m_ControllerBackup= ControllerBackup()
 
     def __gotoPrevious(self) -> None:
         pass
@@ -32,5 +30,5 @@ class ControllerBackups(Controller):
     def initializeUi(self) -> None:
         pass
 
-    def __renderizzaBackups(self) -> ControllerWidgetBackup []:
+    def __renderizzaBackups(self) -> list[ControllerWidgetBackup]:
         pass

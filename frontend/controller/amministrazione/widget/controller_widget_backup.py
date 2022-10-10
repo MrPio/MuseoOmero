@@ -7,13 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import WidgetBackup
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
+from frontend.view.amministrazione.widget.widget_backup import WidgetBackup
 
-class ControllerBackup(Controller):
-    m_WidgetBackup= WidgetBackup()
 
-    def __init__(self,view : WidgetBackup, model : Backup, parent : Controller):
+class ControllerWidgetBackup(Controller):
+
+    def __init__(self,view : WidgetBackup, model : Museo, parent : Controller):
         pass
 
     def __onDownUpButtonClicked(self) -> None:
@@ -25,5 +26,5 @@ class ControllerBackup(Controller):
     def connettiEventi(self) -> None:
         pass
 
-    def initializeUi():
+    def initializeUi(self):
         pass

@@ -16,10 +16,11 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaLogin(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR+'/Login.ui')
+        super().__init__(UI_DIR + '/Login.ui')
 
-    def getPreviousLabel(self)->QLabel:
+    def getPreviousLabel(self) -> QLabel:
         return self.previousLabel
+
     def getUsernameLineEdit(self) -> QLineEdit:
         return self.usernameLineEdit
 

@@ -7,24 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro import ControllerWidgetPostoLavoro
 from frontend.controller.controller import Controller
-from frontend.view import VistaGestionePostiLavoro
-from frontend.controller.controller import ControllerWidgetDipendente
-from frontend.controller.controller import ControllerWidgetAggiungiAllaLista
+from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGestionePostiLavoro
+
 
 class ControllerGestionePostiLavoro(Controller):
-    m_ControllerWidgetDipendente= ControllerWidgetDipendente()
-
-    m_ControllerWidgetAggiungiAllaLista= ControllerWidgetAggiungiAllaLista()
-
-    m_VistaGestionePostiLavoro= VistaGestionePostiLavoro()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaGestionePostiLavoro, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaGestionePostiLavoro, previous: Controller, model: Museo):
+        super().__init__(view)
 
     def gotoVistaModificaPostoLavoro(self) -> None:
         pass
@@ -32,7 +27,7 @@ class ControllerGestionePostiLavoro(Controller):
     def connettiEventi(self) -> None:
         pass
 
-    def __renderizzaPostiLavoro(self) -> ControllerWidgetPostoLavoro []:
+    def __renderizzaPostiLavoro(self) -> list[ControllerWidgetPostoLavoro]:
         pass
 
     def initializeUi(self) -> None:
