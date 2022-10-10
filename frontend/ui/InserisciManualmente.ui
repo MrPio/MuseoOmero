@@ -248,7 +248,7 @@ background-color:rgba(255, 255, 255,0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -388,7 +388,7 @@ background-color: rgba(255, 255, 255,0);
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Inserisci qui l'identificativo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="idLineEdit">
     <property name="geometry">
      <rect>
       <x>152</x>
