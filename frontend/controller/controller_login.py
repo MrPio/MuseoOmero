@@ -10,6 +10,7 @@
 # from backend.high_level.museo import Museo
 # from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.museo import Museo
+from backend.high_level.personale.amministratore import Amministratore
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
@@ -26,43 +27,50 @@ from frontend.view.vista_login import VistaLogin
 
 
 class ControllerLogin(Controller):
-    def __login(self, username: str, passwordEncr: str) -> Dipendente:
+    def __login(self, username: str, password: str) -> Dipendente:
         return self.__model.login(
             username=username,
-            enc_password=passwordEncr,
+            password=password,
         )
 
     def __onLoginClicked(self) -> None:
+        username = self.view.getUsernameLineEdit().text()
+        password = self.view.getPasswordLineEdit().text()
+
         dipendente = self.__login(
-            self.view.getUsernameLineEdit().text(),
-            self.__hashing.hash(self.view.getPasswordLineEdit().text()),
+            username=username,
+            password=password,
         )
-        map={
-            OperatoreAlPubblico:ControllerHomeReception(VistaHomeReception(),self.__home,dipendente),
-            Segretario: ControllerHomeSegreteria(VistaHomeSegreteria(),self.__home,dipendente),
-            Amministrazione: ControllerHomeAmministrazione(VistaHomeAmministrazione(),self.__home,dipendente),
+        if dipendente is None:
+            self.view.getErrorLabel().setText(
+                'Compila correttamente i campi' if len(username) < 1 or len(password) < 1 else 'Username o password errati!')
+            self.view.getErrorLabel().setVisible(True)
+            return
+
+        map = {
+            OperatoreAlPubblico: ControllerHomeReception(VistaHomeReception(), self.__home, dipendente),
+            Segretario: ControllerHomeSegreteria(VistaHomeSegreteria(), self.__home, dipendente),
+            Amministratore: ControllerHomeAmministrazione(VistaHomeAmministrazione(), self.__home, dipendente),
         }
-        controller:Controller=map[type(dipendente.lavoro)]
+        controller: Controller = map[type(dipendente.lavoro)]
 
         controller.connettiEventi()
         controller.showView()
         self.closeView()
-
-
-
+        self.__home.enableView().closeView()
 
     def connettiEventi(self) -> None:
-        self.view.getPreviousLabel().mousePressEvent = lambda _: self.gotoHome()
+        self.view.getPreviousLabel().mouseReleaseEvent = lambda _: self.gotoHome()
         self.view.getLoginButton().clicked.connect(self.__onLoginClicked)
 
     def gotoHome(self) -> None:
         self.closeView()
         self.__home.enableView()
 
-    def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str, hashing: Hashing):
+    def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str):
         super().__init__(view)
         self.view: VistaLogin = view
         self.__model = model
         self.__home = home
         self.__repartoScelto = repartoScelto
-        self.__hashing = hashing
+        self.view.getErrorLabel().setVisible(False)

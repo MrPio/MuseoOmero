@@ -7,15 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import random
+import string
+
 from backend.low_level.sicurezza.hashing import Hashing
+from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 
 
 class Credenziale:
 
-    def __init__(self, username: str, password: str, hashing: Hashing):
+    def __init__(self, username: str, password: str = '', hashing: Hashing = SHA256Hashing()):
         self.username = username
         self.hashing: Hashing = hashing
-        self.enc_password = self.hashing.hash(password)
+        rand_pass = ''.join(random.choice(string.digits + string.ascii_letters) for _ in range(6))
+        self.enc_password = self.hashing.hash(password if password != '' else rand_pass)
 
     def verifica(self, password: str) -> bool:
-        return password== self.enc_password
+        return self.hashing.hash(password) == self.enc_password

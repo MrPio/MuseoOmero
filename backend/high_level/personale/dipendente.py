@@ -17,20 +17,22 @@ from backend.high_level.personale.lavoro import Lavoro
 class Dipendente():
 
     def __init__(self, nome: str, cognome: str, dataNascita: datetime, email: str,
-                 sesso: Sesso = Sesso.NON_SPECIFICATO, curriculum: str = '', ):
+                 sesso: Sesso = Sesso.NON_SPECIFICATO, curriculum: str = '',
+                 credenziale: Credenziale = None, lavoro: Lavoro | None = None, autogenerato:bool=False):
         self.nome = nome
         self.cognome = cognome
         self.data_nascita = dataNascita
         self.email = email
         self.sesso = sesso
         self.curriculum = curriculum
-        self.credenziale: Credenziale | None = None
-        self.lavoro: Lavoro | None = None
+        self.credenziale = Credenziale(nome + cognome) if credenziale == None else credenziale
+        self.lavoro = lavoro
+        self.autogenerato=autogenerato
         self.lavori_passati: list[Lavoro] = []
 
     def assumi(self, lavoro: Lavoro) -> bool:
         if self.lavoro is None:
-            self.lavoro = Lavoro
+            self.lavoro = lavoro
             return True
         return False
 
@@ -42,9 +44,9 @@ class Dipendente():
             return True
         return False
 
-    def autentifica(self, username: str, enc_password: str) -> bool:
+    def autentifica(self, username: str, password: str) -> bool:
         if self.credenziale is not None:
-            return self.credenziale.username == username and self.credenziale.verifica(enc_password)
+            return self.credenziale.username == username and self.credenziale.verifica(password)
         return False
 
     def calcolaEta(self) -> int:

@@ -21,6 +21,9 @@ class VistaLogin(MyMainWindow):
     def getPreviousLabel(self) -> QLabel:
         return self.previousLabel
 
+    def getErrorLabel(self)->QLabel:
+        return self.errorLabel
+
     def getUsernameLineEdit(self) -> QLineEdit:
         return self.usernameLineEdit
 

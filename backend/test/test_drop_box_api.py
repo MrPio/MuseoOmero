@@ -37,3 +37,6 @@ class TestDropBoxAPI(TestCase):
                 cloudDirectory=DropBoxAPI.cloud_root_dir,
             ),
         )
+
+    def test_list_file2(self):
+        print(self.dropbox_api.listFile(DropBoxAPI.cloud_root_dir +'backups/'))

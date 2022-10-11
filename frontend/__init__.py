@@ -1,6 +1,7 @@
 import ctypes
 import sys
 
+import winotify
 from PyQt5.QtWidgets import QApplication
 
 from frontend.controller.controller_home import ControllerHome
@@ -30,4 +31,8 @@ def startApp():
 
 if __name__ == '__main__':
     # TODO continuare a runnure e a risolvere tutti gli errori che si presentano
-    startApp()
+    # startApp()
+    toast= winotify.Notification('Museo Omero', 'Primo Accesso', 'Benvenuto! Per favore, prima di iniziare '
+                                                          'l\'urtilizzo del software registra i dipendenti',duration= 'short')
+    toast.show()
+

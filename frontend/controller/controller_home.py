@@ -27,7 +27,6 @@ class ControllerHome(Controller):
             model=Museo.getInstance(),
             home=self,
             repartoScelto=reparto,
-            hashing=SHA256Hashing(),
         )
         controller.connettiEventi()
         controller.showView()
@@ -43,6 +42,6 @@ class ControllerHome(Controller):
         self.__gotoLogin('amministrazione')
 
     def connettiEventi(self) -> None:
-        self.view.getReceptionButton().mousePressEvent = lambda _: self.__onReceptionClicked()
-        self.view.getSegreteriaButton().mousePressEvent = lambda _: self.__onSegreteriaClicked()
-        self.view.getAmministrazioneButton().mousePressEvent = lambda _: self.__onAmministrazioneClicked()
+        self.view.getReceptionButton().mouseReleaseEvent = lambda _: self.__onReceptionClicked()
+        self.view.getSegreteriaButton().mouseReleaseEvent = lambda _: self.__onSegreteriaClicked()
+        self.view.getAmministrazioneButton().mouseReleaseEvent = lambda _: self.__onAmministrazioneClicked()

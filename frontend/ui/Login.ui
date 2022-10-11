@@ -522,6 +522,35 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>107</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+text-align: left;
+ background-color:#e39797;
+color: #FFFFFF;
+font: 14pt &quot;Lato&quot;;
+border-radius: 15;
+}</string>
+    </property>
+    <property name="text">
+     <string>Username o password errati!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>riquadroAzzurro</zorder>
    <zorder>label_2</zorder>
@@ -537,8 +566,17 @@ QPushButton::pressed{
    <zorder>reduceButton</zorder>
    <zorder>maximizeButton</zorder>
    <zorder>exitButton</zorder>
+   <zorder>errorLabel</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>usernameLineEdit</tabstop>
+  <tabstop>passwordLineEdit</tabstop>
+  <tabstop>ricercaButton</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+ </tabstops>
  <resources>
   <include location="res/res.qrc"/>
  </resources>

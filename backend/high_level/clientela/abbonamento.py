@@ -16,7 +16,7 @@ from backend.low_level.pagamenti.nexi_api import NexiApi
 
 class Abbonamento(Documento):
 
-    def __init__(self, tipo: TipoAbbonamento, dataRilascio: datetime = None):
+    def __init__(self, tipo: TipoAbbonamento=TipoAbbonamento.MENSILE, dataRilascio: datetime = None):
         super().__init__(NexiApi(), dataRilascio)
         self.data_ultimo_rinnovo = dataRilascio
         self.tipo = tipo

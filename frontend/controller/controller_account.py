@@ -22,6 +22,10 @@ class ControllerAccount(Controller):
 
     def __init__(self, view: VistaAccount, previous: Controller, home: Controller, dipendente: Dipendente):
         super().__init__(view)
+        self.view: VistaAccount = view
+        self.previous=previous
+        self.home = home
+        self.dipendente = dipendente
 
 
     def connettiEventi(self) -> None:

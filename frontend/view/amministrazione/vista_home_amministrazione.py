@@ -21,25 +21,25 @@ class VistaHomeAmministrazione(MyMainWindow):
     def getAccountIcon(self) -> QLabel:
         return self.accountButton
 
-    def getGestisciDipendentiButton(self) -> QPushButton:
+    def getGestisciDipendentiButton(self) -> QLabel:
         return self.gestisciDipendentiBigButton
 
-    def getGestisciStruttureButton(self) -> QPushButton:
+    def getGestisciStruttureButton(self) -> QLabel:
         return self.gestisciStruttureBigButton
 
-    def getGestisciTurniGuideButton(self) -> QPushButton:
+    def getGestisciTurniGuideButton(self) -> QLabel:
         return self.gestisciTurniGuideBigButton
 
-    def getGestisciMostreButton(self) -> QPushButton:
+    def getGestisciMostreButton(self) -> QLabel:
         return self.gestisciMostreBigButton
 
-    def getVisualizzaStatisticheButton(self) -> QPushButton:
+    def getVisualizzaStatisticheButton(self) -> QLabel:
         return self.visualizzaStatisticheBigButton
 
-    def getVisualizzaReportIncassi(self) -> QPushButton:
+    def getVisualizzaReportIncassi(self) -> QLabel:
         return self.visualizzaReportIncassiBigButton
 
-    def getAcquistaOpereButton(self) -> QPushButton:
+    def getAcquistaOpereButton(self) -> QLabel:
         return self.acquistaOpereBigButton
 
     def getGestisciBackupsButton(self) -> QPushButton:

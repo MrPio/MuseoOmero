@@ -44,5 +44,6 @@ class Controller(abc.ABC):
     def disableView(self) -> None:
         self.view.setEnabled(False)
 
-    def enableView(self) -> None:
+    def enableView(self) -> 'Controller':
         self.view.setEnabled(True)
+        return self

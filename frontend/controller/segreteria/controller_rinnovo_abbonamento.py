@@ -17,7 +17,7 @@ class ControllerRinnovoAbbonamento(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento):
+    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento|None=None):
         super().__init__(view)
 
     def __onConfermaClicked(self) -> None:

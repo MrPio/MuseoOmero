@@ -35,60 +35,60 @@ class ControllerHomeReception(Controller):
         self.dipendente = dipendente
 
     def __gotoVistaAccount(self) -> None:
-        controller = ControllerAccount(
+        self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             dipendente=self.dipendente,
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaAcquistoBiglietto(self) -> None:
-        controller = ControllerAcquistoBiglietto(
+        self.next = ControllerAcquistoBiglietto(
             view=VistaAcquistoBiglietto(),
             previous=self,
             model=Biglietto(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaConvalidaBiglietto(self) -> None:
-        controller = ControllerConvalida(
+        self.next = ControllerConvalida(
             view=VistaConvalida(),
             previous=self,
             strategy=StrategyConvalidaBiglietto(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
-        controller = ControllerRicercaOpera(
+        self.next = ControllerRicercaOpera(
             view=VistaRicercaOpera(),
             previous=self,
             model=Museo.getInstance(),
             strategy=StrategyVendiOpera(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaEffettuaDonazione(self) -> None:
-        controller = ControllerAggiungiOpera(
+        self.next = ControllerAggiungiOpera(
             view=VistaAggiungiOpera(),
             previous=self,
             strategy=StrategyRiceviDonazione(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
-    def __connettiEventi(self) -> None:
-        self.view.getAccountIcon().mousePressEvent = lambda _: self.__gotoVistaAccount()
-        self.view.getAcquistoBigliettoButton().clicked.connect(self.__gotoVistaAcquistoBiglietto)
-        self.view.getConvalidaBigliettoButton().clicked.connect(self.__gotoVistaConvalidaBiglietto)
-        self.view.getVendiOperaButton().clicked.connect(self.__gotoVistaRicercaOpera)
-        self.view.getEffettuaDonazioneButton().clicked.connect(self.__gotoVistaEffettuaDonazione)
+    def connettiEventi(self) -> None:
+        self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
+        self.view.getAcquistoBigliettoButton().mouseReleaseEvent = lambda _: self.__gotoVistaAcquistoBiglietto()
+        self.view.getConvalidaBigliettoButton().mouseReleaseEvent = lambda _: self.__gotoVistaConvalidaBiglietto()
+        self.view.getVendiOperaButton().mouseReleaseEvent = lambda _: self.__gotoVistaRicercaOpera()
+        self.view.getEffettuaDonazioneButton().mouseReleaseEvent = lambda _: self.__gotoVistaEffettuaDonazione()

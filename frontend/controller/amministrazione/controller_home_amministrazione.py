@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import winotify
+
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.amministrazione.controller_acquisto_opere import ControllerAcquistoOpere
@@ -38,105 +40,121 @@ class ControllerHomeAmministrazione(Controller):
         self.view: VistaHomeAmministrazione = view
         self.home = home
         self.dipendente = dipendente
+        self.initializeUi()
+
+    def initializeUi(self) -> None:
+        if self.dipendente.autogenerato:
+            winotify.Notification('Museo Omero','Primo Accesso','Benvenuto! Per favore, prima di iniziare '
+                                                              'l\'urtilizzo del software registra i dipendenti','short')
+            for el in [
+                self.view.getGestisciBackupsButton(),
+                self.view.getAcquistaOpereButton(),
+                self.view.getVisualizzaReportIncassi(),
+                self.view.getGestisciMostreButton(),
+                self.view.getGestisciTurniGuideButton(),
+                self.view.getGestisciStruttureButton(),
+                self.view.getVisualizzaStatisticheButton()
+            ]:
+                el.setEnabled(False)
 
     def __gotoVistaAccount(self) -> None:
-        controller = ControllerAccount(
+        self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             dipendente=self.dipendente,
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaGestioneDipendenti(self) -> None:
-        controller = ControllerGestioneDipendenti(
+        self.next = ControllerGestioneDipendenti(
             view=VistaGestioneDipendenti(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoGestionePostiLavoro(self) -> None:
-        controller = ControllerGestionePostiLavoro(
+        self.next = ControllerGestionePostiLavoro(
             view=VistaGestionePostiLavoro(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaGestioneTurniGuida(self) -> None:
-        controller = ControllerTurniGuide(
+        self.next = ControllerTurniGuide(
             view=VistaTurniGuide(),
             previous=self,
             model=Museo.getInstance(),
             strategy=StrategyGestisciTurniGuide(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaGestioneMostre(self) -> None:
-        controller = ControllerGestioneMostre(
+        self.next = ControllerGestioneMostre(
             view=VistaGestioneMostre(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaStatistiche(self) -> None:
-        controller = ControllerVistaStatistiche(
+        self.next = ControllerVistaStatistiche(
             view=VistaStatistiche(),
             previous=self,
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaReportIncassi(self) -> None:
-        controller = ControllerVistaReportIncassi(
+        self.next = ControllerVistaReportIncassi(
             view=VistaReportIncassi(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaAcquistaOpere(self) -> None:
-        controller = ControllerAcquistoOpere(
+        self.next = ControllerAcquistoOpere(
             view=VistaAcquistoOpere(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaBackups(self) -> None:
-        controller = ControllerBackups(
+        self.next = ControllerBackups(
             view=VistaBackups(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def connettiEventi(self) -> None:
-        self.view.getAccountIcon().mousePressEvent = lambda _: self.__gotoVistaAccount()
-        self.view.getGestisciDipendentiButton().clicked.connect(self.__gotoVistaGestioneDipendenti)
-        self.view.getGestisciStruttureButton().clicked.connect(self.__gotoGestionePostiLavoro)
-        self.view.getGestisciTurniGuideButton().clicked.connect(self.__gotoVistaGestioneTurniGuida)
-        self.view.getGestisciMostreButton().clicked.connect(self.__gotoVistaGestioneMostre)
-        self.view.getVisualizzaStatisticheButton().clicked.connect(self.__gotoVistaStatistiche)
-        self.view.getVisualizzaReportIncassi().clicked.connect(self.__gotoVistaReportIncassi)
-        self.view.getAcquistaOpereButton().clicked.connect(self.__gotoVistaAcquistaOpere)
-        self.view.getGestisciBackupsButton().clicked.connect(self.__gotoVistaBackups)
+        self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
+        self.view.getGestisciDipendentiButton().mouseReleaseEvent = lambda _: self.__gotoVistaGestioneDipendenti()
+        self.view.getGestisciStruttureButton().mouseReleaseEvent = lambda _: self.__gotoGestionePostiLavoro()
+        self.view.getGestisciTurniGuideButton().mouseReleaseEvent = lambda _: self.__gotoVistaGestioneTurniGuida()
+        self.view.getGestisciMostreButton().mouseReleaseEvent = lambda _: self.__gotoVistaGestioneMostre()
+        self.view.getVisualizzaStatisticheButton().mouseReleaseEvent = lambda _: self.__gotoVistaStatistiche()
+        self.view.getVisualizzaReportIncassi().mouseReleaseEvent = lambda _: self.__gotoVistaReportIncassi()
+        self.view.getAcquistaOpereButton().mouseReleaseEvent = lambda _: self.__gotoVistaAcquistaOpere()
+        self.view.getGestisciBackupsButton().mouseReleaseEvent = lambda _: self.__gotoVistaBackups()

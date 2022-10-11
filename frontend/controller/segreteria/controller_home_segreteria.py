@@ -7,6 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
@@ -34,59 +35,58 @@ class ControllerHomeSegreteria(Controller):
         self.dipendente = dipendente
 
     def __gotoVistaAccount(self) -> None:
-        controller = ControllerAccount(
+        self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             dipendente=self.dipendente,
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaAcquistoAbbonamento(self) -> None:
-        controller = ControllerAcquistoAbbonamento(
+        self.next = ControllerAcquistoAbbonamento(
             view=VistaAcquistoAbbonamento(),
             previous=self,
-            model=Museo.getInstance(),
+            model=Abbonamento(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaConvalida(self) -> None:
-        controller = ControllerConvalida(
+        self.next = ControllerConvalida(
             view=VistaConvalida(),
             previous=self,
             strategy=StrategyConvalidaAbbonamento(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaGestioneDonazioni(self) -> None:
-        controller = ControllerGestioneDonazioni(
+        self.next = ControllerGestioneDonazioni(
             view=VistaGestioneDonazioni(),
             previous=self,
             model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def __gotoVistaRinnovoAbbonamento(self) -> None:
-        controller = ControllerRinnovoAbbonamento(
+        self.next = ControllerRinnovoAbbonamento(
             view=VistaRinnovoAbbonamento(),
             previous=self,
-            model=Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
 
     def connettiEventi(self) -> None:
-        self.view.getAccountIcon().mousePressEvent = lambda _: self.__gotoVistaAccount()
-        self.view.getAcquistaAbbonamentoButton().clicked.connect(self.__gotoVistaAcquistoAbbonamento)
-        self.view.getConvalidaAbbonamentoButton().clicked.connect(self.__gotoVistaConvalida)
-        self.view.getGestisciDonazioneButton().clicked.connect(self.__gotoVistaGestioneDonazioni)
-        self.view.getRinnovoAbbonamentoButton().clicked.connect(self.__gotoVistaRinnovoAbbonamento)
+        self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
+        self.view.getAcquistaAbbonamentoButton().mouseReleaseEvent = lambda _: self.__gotoVistaAcquistoAbbonamento()
+        self.view.getConvalidaAbbonamentoButton().mouseReleaseEvent = lambda _: self.__gotoVistaConvalida()
+        self.view.getGestisciDonazioneButton().mouseReleaseEvent = lambda _: self.__gotoVistaGestioneDonazioni()
+        self.view.getRinnovoAbbonamentoButton().mouseReleaseEvent = lambda _: self.__gotoVistaRinnovoAbbonamento()

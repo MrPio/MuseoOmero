@@ -13,6 +13,8 @@ from datetime import datetime
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.gestione_interna.mostra import Mostra
 from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.personale.amministratore import Amministratore
+from backend.high_level.personale.credenziale import Credenziale
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.low_level.io.serializzatore import Serializzatore
@@ -22,7 +24,7 @@ from backend.low_level.network.drop_box_api import DropBoxAPI
 
 
 class Museo:
-    __backup_path = '/backups/'
+    __backup_path = 'backups/'
     __key = object()
     __instance: 'Museo' = None
     __cloud_storage: CloudStorage = DropBoxAPI()
@@ -48,6 +50,25 @@ class Museo:
         self.mostre: list[Mostra] = []
         self.opere: list[Opera] = []
 
+        self.dipendenti.append(
+            Dipendente(
+                nome='admin',
+                cognome='admin',
+                dataNascita=datetime.now(),
+                email='admin@admin.admin',
+                credenziale=Credenziale(
+                    username='admin',
+                    password='admin',
+                ),
+                lavoro=Amministratore(
+                    stipendio=0,
+                    numPostazione=0,
+                    fondatore=True,
+                ),
+                autogenerato=True,
+            )
+        )
+
     @staticmethod
     def getInstance() -> 'Museo':
         """
@@ -63,15 +84,21 @@ class Museo:
             if last_backup == '':
                 Museo.__download_last_backups()
                 last_backup = Museo.__get_last_backup()
+                if last_backup != '':
+                    print('ho trovato un backup su cloud, download in corso...')
+
             if last_backup == '':
+                print('non ho trovato né un backup locale, né un backup su '
+                      'cloud --> creo una nuova istanza di Museo.')
                 Museo.__instance = Museo(Museo.__key)
             else:
+                print('ho trovato il seguente backup --> {}'.format(last_backup))
                 Museo.__instance = Museo.__serializzatore.deserializza(last_backup)
         return Museo.__instance
 
-    def login(self, username: str, enc_password: str) -> Dipendente | None:
+    def login(self, username: str, password: str) -> Dipendente | None:
         for dipendente in self.dipendenti:
-            if dipendente.autentifica(username, enc_password):
+            if dipendente.autentifica(username, password):
                 return dipendente
         return None
 
@@ -100,13 +127,13 @@ class Museo:
         """
         scarica il backup più recente se non già presente sul disco
         """
-        files = Museo.__cloud_storage.listFile(Museo.__backup_path)
+        files = Museo.__cloud_storage.listFile(DropBoxAPI.cloud_root_dir + Museo.__backup_path)
         newest = Museo.__newest_date([file.split('museo ')[1].split('.pickle')[0] for file in files])
         file_to_download = 'museo ' + newest + '.pickle' if len(newest) > 0 else ''
         if file_to_download == '' or file_to_download in next(os.walk(Museo.__backup_path), (None, None, []))[2]:
             return
         path = Museo.__backup_path + file_to_download
-        Museo.__cloud_storage.download(path, path)
+        Museo.__cloud_storage.download(DropBoxAPI.cloud_root_dir + path, path)
 
     def make_backup(self) -> None:
         local_path = Museo.__backup_path
