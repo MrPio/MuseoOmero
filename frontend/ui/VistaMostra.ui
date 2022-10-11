@@ -189,7 +189,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -625,7 +625,7 @@ text-align: center;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="nomeLabel">
+   <widget class="QLabel" name="titoloLabel_2">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -674,7 +674,7 @@ background-color: rgba(255, 255, 255,0);
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_3</zorder>
    <zorder>titoloLabel_3</zorder>
@@ -685,7 +685,7 @@ background-color: rgba(255, 255, 255,0);
    <zorder>label_6</zorder>
    <zorder>label_4</zorder>
    <zorder>label_5</zorder>
-   <zorder>nomeLabel</zorder>
+   <zorder>titoloLabel_2</zorder>
    <zorder>periodoStoricoLabel</zorder>
   </widget>
  </widget>

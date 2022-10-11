@@ -186,7 +186,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -1071,7 +1071,7 @@ background-color: rgba(173, 237, 255, 0);
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLineEdit" name="titoloOperaLineEdit">
+   <widget class="QLineEdit" name="titoloLineEdit">
     <property name="geometry">
      <rect>
       <x>266</x>
@@ -1287,7 +1287,7 @@ margin:-3px -3px -3px -10px;
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="cambiaButton">
+   <widget class="QPushButton" name="ubicazioneButton">
     <property name="geometry">
      <rect>
       <x>292</x>
@@ -1340,7 +1340,7 @@ QPushButton::pressed{
      <string>Cambia</string>
     </property>
    </widget>
-   <widget class="QLabel" name="contenitoreFotoLabel">
+   <widget class="QLabel" name="dropZoneLabel">
     <property name="geometry">
      <rect>
       <x>46</x>
@@ -1487,7 +1487,7 @@ QPushButton::pressed{
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_6</zorder>
    <zorder>label_14</zorder>
@@ -1509,12 +1509,12 @@ QPushButton::pressed{
    <zorder>label_22</zorder>
    <zorder>label_23</zorder>
    <zorder>label_24</zorder>
-   <zorder>titoloOperaLineEdit</zorder>
+   <zorder>titoloLineEdit</zorder>
    <zorder>autoreLineEdit</zorder>
    <zorder>dimensioniLineEdit</zorder>
    <zorder>periodoStoricoComboBox</zorder>
-   <zorder>cambiaButton</zorder>
-   <zorder>contenitoreFotoLabel</zorder>
+   <zorder>ubicazioneButton</zorder>
+   <zorder>dropZoneLabel</zorder>
    <zorder>label_25</zorder>
    <zorder>immagioneLabel</zorder>
    <zorder>confermaButton</zorder>

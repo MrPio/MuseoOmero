@@ -228,7 +228,7 @@ font: 14pt &quot;Lato&quot;;</string>
      <string>GestisciPostiLavoro ➜ ModificaPostiLavoro</string>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>444</x>
