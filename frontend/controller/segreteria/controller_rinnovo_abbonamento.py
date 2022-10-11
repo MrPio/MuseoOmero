@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Abbonamento
+from backend.high_level.clientela.abbonamento import Abbonamento
 from frontend.controller.controller import Controller
-from frontend.view import VistaRinnovoAbbonamento
+from frontend.view.segreteria.vista_rinnovo_abbonamento import VistaRinnovoAbbonamento
+
 
 class ControllerRinnovoAbbonamento(Controller):
-    m_VistaRinnovoAbbonamento= VistaRinnovoAbbonamento()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaRinnovoAbbonamento, previous : Controller, model : Abbonamento):
-        pass
+    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento):
+        super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
         pass

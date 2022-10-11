@@ -7,11 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerRicercaOpera
 
 class StrategyRicercaOpera:
-    def initializeUi(c : ControllerRicercaOpera) -> None:
+    def initializeUi(c : 'ControllerRicercaOpera') -> None:
         pass
 
-    def onOperaClicked(c : ControllerRicercaOpera) -> None:
+    def onOperaClicked(c : 'ControllerRicercaOpera') -> None:
         pass

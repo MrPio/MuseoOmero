@@ -7,21 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import RichiestaDonazione
+from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from frontend.controller.controller import Controller
-from frontend.view import VistaAggiungiOpera
-import StrategyAggiungiOpera
+from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
+from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
+
 
 class ControllerAggiungiOpera(Controller):
-    m_VistaAggiungiOpera= VistaAggiungiOpera()
-
-    m_StrategyAggiungiOpera= StrategyAggiungiOpera()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaAggiungiOpera, previous : Controller, strategy : StrategyAggiungiOpera):
-        pass
+    def __init__(self, view: VistaAggiungiOpera, previous: Controller, strategy: StrategyAggiungiOpera):
+        super().__init__(view)
 
     def __onAggiungiUbicaioneClicked(self) -> None:
         pass

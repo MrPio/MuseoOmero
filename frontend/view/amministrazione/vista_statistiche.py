@@ -7,8 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton
-
+from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QCheckBox
 from frontend.view.my_main_window import MyMainWindow
 
 
@@ -16,13 +15,13 @@ class VistaStatistiche(MyMainWindow):
     def getMeseLineEdit(self) -> QLineEdit:
         pass
 
-    def getProvenienzaCheckBox(self) -> MyCheckBox:
+    def getProvenienzaCheckBox(self) -> QCheckBox:
         pass
 
-    def getEtaCheckBox(self) -> MyCheckBox:
+    def getEtaCheckBox(self) -> QCheckBox:
         pass
 
-    def getSessoCheckBox(self) -> MyCheckBox:
+    def getSessoCheckBox(self) -> QCheckBox:
         pass
 
     def getVisualizzaButton(self) -> QPushButton:

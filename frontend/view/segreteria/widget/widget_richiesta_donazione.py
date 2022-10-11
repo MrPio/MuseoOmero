@@ -7,7 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import QWidget
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+
 
 class WidgetRichiestaDonazione(QWidget):
     def getIcon(self) -> QLabel:

@@ -7,27 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.view import VistaTurniGuide
-import StrategyTurniGuide
-from frontend.controller.controller import ControllerWidgetTurnoGuida
-from frontend.controller.controller import ControllerWidgetAggiungiAllaLista
+from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.controller.reception.widget.controller_widget_turno_guida import ControllerWidgetTurnoGuida
+from frontend.view.reception.vista_turni_guide import VistaTurniGuide
+
 
 class ControllerTurniGuide(Controller):
-    m_ControllerWidgetTurnoGuida= ControllerWidgetTurnoGuida()
-
-    m_ControllerWidgetAggiungiAllaLista= ControllerWidgetAggiungiAllaLista()
-
-    m_StrategyTurniGuide= StrategyTurniGuide()
-
-    m_VistaTurniGuide= VistaTurniGuide()
 
     def gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaTurniGuide, previous : Controller, model : Museo,strategy:StrategyTurniGuide):
-        pass
+    def __init__(self, view: VistaTurniGuide, previous: Controller, model: Museo, strategy: StrategyTurniGuide):
+        super().__init__(view)
 
     def gotoVistaModificaTurnoGuida(self) -> None:
         pass
@@ -41,7 +34,7 @@ class ControllerTurniGuide(Controller):
     def connettiEventi(self) -> None:
         pass
 
-    def __renderizzaTurniGuida(self) -> ControllerWidgetTurnoGuida []:
+    def __renderizzaTurniGuida(self) -> list[ControllerWidgetTurnoGuida]:
         pass
 
     def initializeUi(strategy : StrategyTurniGuide) -> None:

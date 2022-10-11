@@ -7,11 +7,11 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerConvalida
+
 
 class StrategyConvalida:
-    def initializeUi(c : ControllerConvalida) -> None:
+    def initializeUi(c : 'ControllerConvalida') -> None:
         pass
 
-    def finalizza(c : ControllerConvalida) -> None:
+    def finalizza(c : 'ControllerConvalida') -> None:
         pass

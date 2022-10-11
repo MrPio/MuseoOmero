@@ -7,12 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Dipendente
+from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
-from frontend.view import VistaAccount
+from frontend.view.vista_account import VistaAccount
+
 
 class ControllerAccount(Controller):
-    m_VistaAccount= VistaAccount()
 
     def __gotoPrevious(self) -> None:
         pass
@@ -20,8 +20,9 @@ class ControllerAccount(Controller):
     def __gotoHome(self) -> None:
         pass
 
-    def __init__(self,view : VistaAccount, previous : Controller, home : Controller, dipendente : Dipendente):
-        pass
+    def __init__(self, view: VistaAccount, previous: Controller, home: Controller, dipendente: Dipendente):
+        super().__init__(view)
+
 
     def connettiEventi(self) -> None:
         pass

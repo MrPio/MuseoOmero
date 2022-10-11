@@ -22,11 +22,11 @@ from backend.low_level.network.drop_box_api import DropBoxAPI
 
 
 class Museo:
-    __backup_path = 'backups/'
+    __backup_path = '/backups/'
     __key = object()
-    __instance:'Museo' = None
-    __cloud_storage:CloudStorage = DropBoxAPI()
-    __serializzatore:Serializzatore = SerializzazionePickle()
+    __instance: 'Museo' = None
+    __cloud_storage: CloudStorage = DropBoxAPI()
+    __serializzatore: Serializzatore = SerializzazionePickle()
 
     def __init__(self, key) -> None:
         assert (key == Museo.__key), \
@@ -110,10 +110,9 @@ class Museo:
 
     def make_backup(self) -> None:
         local_path = Museo.__backup_path
-        cloud_path = local_path
 
-        filename= 'museo ' + datetime.now().strftime(
+        filename = 'museo ' + datetime.now().strftime(
             '%Y-%m-%d %H-%M-%S') + '.pickle'
 
-        Museo.__serializzatore.serializza(self,local_path,filename)
+        Museo.__serializzatore.serializza(self, local_path, filename)
         Museo.__cloud_storage.upload(local_path, filename)

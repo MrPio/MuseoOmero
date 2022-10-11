@@ -7,18 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerAggiungiOpera
-import StrategyAggiungiOpera
+from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
+
 
 class StrategyRiceviDonazione(StrategyAggiungiOpera):
-    def initializeUi(c : ControllerAggiungiOpera) -> None:
+    def initializeUi(c : 'ControllerAggiungiOpera') -> None:
         pass
 
-    def onConfermaClicked(c : ControllerAggiungiOpera) -> None:
-        pass
-
-    def initializeUi(c : ControllerAggiungiOpera) -> None:
-        pass
-
-    def onConfermaClicked(c : ControllerAggiungiOpera) -> None:
+    def onConfermaClicked(c : 'ControllerAggiungiOpera') -> None:
         pass

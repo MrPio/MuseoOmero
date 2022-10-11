@@ -8,19 +8,17 @@
 # 
 #######################################################
 from frontend.controller.controller import Controller
-import StrategyConvalida
-from frontend.view import VistaConvalida
+from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
+from frontend.view.segreteria.vista_convalida import VistaConvalida
+
 
 class ControllerConvalida(Controller):
-    m_StrategyConvalida= StrategyConvalida()
-
-    m_VistaConvalida= VistaConvalida()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaConvalida, previous : Controller, strategy : StrategyConvalida):
-        pass
+    def __init__(self, view: VistaConvalida, previous: Controller, strategy: StrategyConvalida):
+        super().__init__(view)
 
     def __gotoVistaInserimentoManuale(self) -> None:
         pass

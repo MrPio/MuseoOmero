@@ -7,12 +7,11 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.reception.controller_aggiungi_opera import ControllerAggiungiOpera
 
 
 class StrategyAggiungiOpera:
-    def initializeUi(c : ControllerAggiungiOpera) -> None:
+    def initializeUi(c : 'ControllerAggiungiOpera') -> None:
         pass
 
-    def onConfermaClicked(c : ControllerAggiungiOpera) -> None:
+    def onConfermaClicked(c : 'ControllerAggiungiOpera') -> None:
         pass

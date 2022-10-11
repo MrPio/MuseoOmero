@@ -7,25 +7,25 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.view import VistaGestioneDonazioni
-from frontend.controller.controller import ControllerWidgetRichiestaDonazione
+from frontend.controller.segreteria.widget.controller_widget_richiesta_donazione import \
+    ControllerWidgetRichiestaDonazione
+from frontend.view.segreteria.vista_gestione_donazioni import VistaGestioneDonazioni
+
 
 class ControllerGestioneDonazioni(Controller):
-    m_ControllerWidgetRichiestaDonazione= ControllerWidgetRichiestaDonazione()
-
-    m_VistaGestioneDonazioni= VistaGestioneDonazioni()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaGestioneDonazioni, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaGestioneDonazioni, previous: Controller, model: Museo):
+        super().__init__(view)
 
     def connettiEventi(self) -> None:
         pass
 
-    def __renderizzaRichiestaDonazioni(self) -> ControllerWidgetRichiestaDonazione []:
+    def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
         pass
 
     def initializeUi(self) -> None:

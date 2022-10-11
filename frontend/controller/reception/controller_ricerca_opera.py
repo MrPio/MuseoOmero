@@ -7,21 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Museo
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-import StrategyRicercaOpera
-from frontend.view import VistaRicercaOpera
+from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+
 
 class ControllerRicercaOpera(Controller):
-    m_StrategyRicercaOpera= StrategyRicercaOpera()
-
-    m_VistaRicercaOpera= VistaRicercaOpera()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaRicercaOpera, previous : Controller, model : Museo, strategy : StrategyRicercaOpera):
-        pass
+    def __init__(self, view: VistaRicercaOpera, previous: Controller, model: Museo, strategy: StrategyRicercaOpera):
+        super().__init__(view)
 
     def __onRicercaClicked(self) -> None:
         pass

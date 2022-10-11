@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import RichiestaDonazione
-import WidgetRichiestaDonazione
+from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from frontend.controller.controller import Controller
+from frontend.view.segreteria.widget.widget_richiesta_donazione import WidgetRichiestaDonazione
+
 
 class ControllerWidgetRichiestaDonazione(Controller):
-    m_WidgetRichiestaDonazione= WidgetRichiestaDonazione()
 
     def __gotoVistaOpera(self) -> None:
         pass
 
-    def __init__(self,view : WidgetRichiestaDonazione, model : RichiestaDonazione):
-        pass
+    def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):
+        super().__init__(view)
 
     def __onRifiutaClicked(self) -> None:
         pass

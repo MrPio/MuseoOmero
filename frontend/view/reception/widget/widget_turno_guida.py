@@ -7,7 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import QWidget
+from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
+
 
 class WidgetTurnoGuida(QWidget):
     def getIcon(self) -> QLabel:

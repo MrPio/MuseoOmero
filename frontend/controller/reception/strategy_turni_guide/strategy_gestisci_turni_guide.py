@@ -7,13 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerTurniGuide
-from frontend.controller.controller import ControllerWidgetTurnoGuida
-import StrategyTurniGuide
+from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+
 
 class StrategyGestisciTurniGuide(StrategyTurniGuide):
-    def initializeUi(c : ControllerTurniGuide) -> None:
+    def initializeUi(c : 'ControllerTurniGuide') -> None:
         pass
 
-    def initializeWidgetUi(c : ControllerWidgetTurnoGuida) -> None:
+    def initializeWidgetUi(c : 'ControllerWidgetTurnoGuida') -> None:
         pass

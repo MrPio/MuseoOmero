@@ -7,19 +7,17 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import TurnoGuida
-import Biglietto
-import WidgetTurnoGuida
-import StrategyTurnoGuida
+from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from frontend.controller.controller import Controller
+from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
+
 
 class ControllerWidgetTurnoGuida(Controller):
-    m_StrategyTurnoGuida= StrategyTurnoGuida()
 
-    m_WidgetTurnoGuida= WidgetTurnoGuida()
-
-    def __init__(self,view : WidgetTurnoGuida, model : TurnoGuida, biglietto : Biglietto):
-        pass
+    def __init__(self, view: WidgetTurnoGuida, model: TurnoGuida, biglietto: Biglietto):
+        super().__init__(view)
 
     def __onSelezionaClicked(self) -> None:
         pass
@@ -33,5 +31,5 @@ class ControllerWidgetTurnoGuida(Controller):
     def connettiEventi(self) -> None:
         pass
 
-    def initializeUi(strategy : StrategyTurnoGuida) -> None:
+    def initializeUi(strategy : StrategyTurniGuide) -> None:
         pass

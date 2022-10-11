@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Abbonamento
+from backend.high_level.clientela.abbonamento import Abbonamento
 from frontend.controller.controller import Controller
-from frontend.view import VistaAcquistoAbbonamento
+from frontend.view.segreteria.vista_acquisto_abbonamento import VistaAcquistoAbbonamento
+
 
 class ControllerAcquistoAbbonamento(Controller):
-    m_VistaAcquistoAbbonamento= VistaAcquistoAbbonamento()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaAcquistoAbbonamento, previous : Controller, model : Abbonamento):
-        pass
+    def __init__(self, view: VistaAcquistoAbbonamento, previous: Controller, model: Abbonamento):
+        super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
         pass

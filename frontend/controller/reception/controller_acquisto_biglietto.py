@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Biglietto
+from backend.high_level.clientela.biglietto import Biglietto
 from frontend.controller.controller import Controller
-from frontend.view import VistaAcquistoBiglietto
+from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
+
 
 class ControllerAcquistoBiglietto(Controller):
-    m_VistaAcquistoBiglietto= VistaAcquistoBiglietto()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaAcquistoBiglietto, previous : Controller, model : Biglietto):
-        pass
+    def __init__(self, view: VistaAcquistoBiglietto, previous: Controller, model: Biglietto):
+        super().__init__(view)
 
     def __gotoVistaTurniGuide(self) -> None:
         pass

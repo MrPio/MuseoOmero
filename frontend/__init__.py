@@ -3,7 +3,6 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
 from frontend.view.vista_home import VistaHome
@@ -21,7 +20,7 @@ def startApp():
     app = QApplication(sys.argv)
 
     # MVC
-    vista_home=VistaHome()
+    vista_home = VistaHome()
     controller_home = ControllerHome(vista_home)
     controller_home.connettiEventi()
     controller_home.showView()
@@ -30,5 +29,5 @@ def startApp():
 
 
 if __name__ == '__main__':
-    #TODO continuare a runnure e a risolvere tutti gli errori che si presentano
+    # TODO continuare a runnure e a risolvere tutti gli errori che si presentano
     startApp()
