@@ -22,6 +22,7 @@ from frontend.controller.controller import Controller
 from frontend.controller.controller_account import ControllerAccount
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
 from frontend.controller.reception.strategy_turni_guide.strategy_gestisci_turni_guide import StrategyGestisciTurniGuide
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_acquisto_opere import VistaAcquistoOpere
 from frontend.view.amministrazione.vista_backups import VistaBackups
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
@@ -44,8 +45,13 @@ class ControllerHomeAmministrazione(Controller):
 
     def initializeUi(self) -> None:
         if self.dipendente.autogenerato:
-            winotify.Notification('Museo Omero','Primo Accesso','Benvenuto! Per favore, prima di iniziare '
-                                                              'l\'urtilizzo del software registra i dipendenti','short')
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Primo Accesso',
+                msg='Benvenuto! Per favore, prima di iniziare l\'utilizzo del software registra i dipendenti',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
             for el in [
                 self.view.getGestisciBackupsButton(),
                 self.view.getAcquistaOpereButton(),

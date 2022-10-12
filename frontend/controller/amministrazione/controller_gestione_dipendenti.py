@@ -7,10 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtWidgets import QPushButton, QVBoxLayout
+
 from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
+from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipendente
 
 
 class ControllerGestioneDipendenti(Controller):
@@ -18,8 +21,18 @@ class ControllerGestioneDipendenti(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaGestioneDipendenti, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: Museo):
+        super().__init__(view)
+        self.view: VistaGestioneDipendenti = view
+        self.previous=previous
+        self.model=model
+
+        self.er=WidgetDipendente()
+        self.d=self.er.getWidget()
+        self.d.show()
+        self.view.verticalLayout.addWidget(self.d)
+        self.view.verticalLayout.addWidget(self.view.getAssumiButton())
+        #for widget in self.__renderizzaDipendenti():
 
     def __gotoVistaAssumi(self) -> None:
         pass

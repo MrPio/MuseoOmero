@@ -4,8 +4,10 @@ import sys
 import winotify
 from PyQt5.QtWidgets import QApplication
 
+from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
+from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
 from frontend.view.vista_home import VistaHome
 
 
@@ -21,8 +23,8 @@ def startApp():
     app = QApplication(sys.argv)
 
     # MVC
-    vista_home = VistaHome()
-    controller_home = ControllerHome(vista_home)
+    vista_home = VistaGestioneDipendenti()
+    controller_home = ControllerGestioneDipendenti(vista_home,None,None)
     controller_home.connettiEventi()
     controller_home.showView()
 
@@ -31,8 +33,5 @@ def startApp():
 
 if __name__ == '__main__':
     # TODO continuare a runnure e a risolvere tutti gli errori che si presentano
-    # startApp()
-    toast= winotify.Notification('Museo Omero', 'Primo Accesso', 'Benvenuto! Per favore, prima di iniziare '
-                                                          'l\'urtilizzo del software registra i dipendenti',duration= 'short')
-    toast.show()
+    startApp()
 

@@ -7,27 +7,27 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import QWidget
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 
-class WidgetDipendente(QWidget):
-    def __init__(self,nome : str, lavoro : str):
-        pass
+from frontend.ui.location import UI_DIR
+from frontend.view.my_main_window import MyMainWindow
 
-    def __onLicenziaClicked(self) -> None:
-        pass
 
-    def __onPromuoviClicked(self) -> None:
-        pass
+class WidgetDipendente(MyMainWindow):
+    def __init__(self):
+        super().__init__(UI_DIR + '/ListViewTemplate.ui')
 
-class WidgetDipendente(QWidget):
+    def getWidget(self) -> QWidget:
+        return self.selezionaDipendenteWidget
+
     def getNomeLabel(self) -> QLabel:
-        pass
+        return self.getWidget().nomeLabel
 
-    def getThumbnailIcon(self) -> QLabel:
-        pass
+    def getIcon(self) -> QLabel:
+        return self.getWidget().iconLabel
 
     def getLicenziaButton(self) -> QPushButton:
-        pass
+        return self.getWidget().licenziaButton
 
     def getPromuoviButton(self) -> QPushButton:
-        pass
+        return self.getWidget().promuoviButton

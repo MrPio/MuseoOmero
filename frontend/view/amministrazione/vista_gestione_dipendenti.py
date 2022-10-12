@@ -7,16 +7,21 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QListView
+from PyQt5.QtWidgets import QPushButton, QListView, QWidget
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaGestioneDipendenti(MyMainWindow):
-    def getPreviousButton(self) -> QPushButton:
-        pass
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaGestisciDipendenti.ui')
 
-    def getTurniGuideListView(self) -> QListView:
-        pass
+    def getPreviousButton(self) -> QPushButton:
+        return self.previousLabel
+
+    def getTurniGuideListView(self) -> QWidget:
+        return self.scrollAreaWidgetContents
 
     def getAssumiButton(self) -> QPushButton:
-        pass
+        return self.assumiButton
