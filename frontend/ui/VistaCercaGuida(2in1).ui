@@ -408,7 +408,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
+    <widget class="QWidget" name="turniGuideListView">
      <property name="geometry">
       <rect>
        <x>0</x>

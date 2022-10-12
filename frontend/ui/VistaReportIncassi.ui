@@ -824,7 +824,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="graficoFrame">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -865,7 +865,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="frecciaSxLabel">
+   <widget class="QLabel" name="leftArrowIcon">
     <property name="geometry">
      <rect>
       <x>34</x>
@@ -893,7 +893,7 @@ background-color: rgba(255, 255, 255,0);
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="frecciaDxLabel">
+   <widget class="QLabel" name="rightArrowIcon">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -1135,10 +1135,10 @@ text-align: center;</string>
    <zorder>bigliettiLabel</zorder>
    <zorder>venditaOpereLabel</zorder>
    <zorder>risultatoLabel</zorder>
-   <zorder>frame</zorder>
+   <zorder>graficoFrame</zorder>
    <zorder>titoloLabel_4</zorder>
-   <zorder>frecciaSxLabel</zorder>
-   <zorder>frecciaDxLabel</zorder>
+   <zorder>leftArrowIcon</zorder>
+   <zorder>rightArrowIcon</zorder>
    <zorder>label_11</zorder>
    <zorder>meseLineEdit</zorder>
    <zorder>label_16</zorder>

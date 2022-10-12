@@ -439,7 +439,7 @@ background-color: rgba(255, 249, 190, 255);</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="listaOpereGridLayout">
         <property name="leftMargin">
          <number>8</number>
         </property>

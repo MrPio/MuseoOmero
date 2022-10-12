@@ -222,7 +222,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>357</x>
@@ -905,7 +905,7 @@ background-color: rgba(255, 255, 255,0);</string>
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_3</zorder>
    <zorder>label_7</zorder>

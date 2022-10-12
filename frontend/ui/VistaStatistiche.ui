@@ -756,7 +756,7 @@ border-color: rgb(255,255, 255);
      <string/>
     </property>
    </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="visualizzaStatisticheFrame">
     <property name="geometry">
      <rect>
       <x>62</x>
@@ -1098,7 +1098,7 @@ background-color: rgba(255, 255, 255,0);
    <zorder>label_17</zorder>
    <zorder>rightArrowIcon</zorder>
    <zorder>sessoCheckBox</zorder>
-   <zorder>frame</zorder>
+   <zorder>visualizzaStatisticheFrame</zorder>
    <zorder>etaCheckBox</zorder>
    <zorder>provenienzaCheckBox</zorder>
    <zorder>label_16</zorder>

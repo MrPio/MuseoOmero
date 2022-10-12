@@ -1383,7 +1383,7 @@ text-align: center;
 font-size: 18px &quot;Lato light&quot;</string>
     </property>
     <property name="text">
-     <string>Aggiungi immagione:</string>
+     <string>Aggiungi immagine:</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -1395,7 +1395,7 @@ font-size: 18px &quot;Lato light&quot;</string>
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="immagioneLabel">
+   <widget class="QLabel" name="fotoLabel">
     <property name="geometry">
      <rect>
       <x>221</x>
@@ -1516,7 +1516,7 @@ QPushButton::pressed{
    <zorder>ubicazioneButton</zorder>
    <zorder>dropZoneLabel</zorder>
    <zorder>label_25</zorder>
-   <zorder>immagioneLabel</zorder>
+   <zorder>fotoLabel</zorder>
    <zorder>confermaButton</zorder>
   </widget>
  </widget>
