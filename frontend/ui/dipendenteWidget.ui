@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>110</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="dipendenteWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>380</width>
+     <height>110</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>110</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>116</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 22px;
+background-color:#fff9be;
+border-width:0px;
+
+QLabel{
+border-width:0;
+font: 20pt &quot;Lato Light&quot;;
+}
+QLineEdit{
+border-width:0;
+font: 14pt &quot;Lato Light&quot;;
+}
+QComboBox{
+border-width:0;
+font: 14pt &quot;Lato Light&quot;;
+}
+QAbstractItemView {
+    border: 3px solid  rgb(104, 194, 253);  
+border-radius:8px;
+  selection-background-color:  rgb(104, 194, 253);
+margin:-2px;
+text-align:center;
+border-width:5;
+}</string>
+   </property>
+   <widget class="QLabel" name="iconLabel">
+    <property name="geometry">
+     <rect>
+      <x>17</x>
+      <y>14</y>
+      <width>84</width>
+      <height>84</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>84</width>
+      <height>84</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>84</width>
+      <height>84</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 16px;
+background-color: rgba(255, 255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="res/res.qrc">:/icons/shield_FILL1_wght500_GRAD200_opsz48_risultato.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
+    </property>
+    <property name="indent">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="nomeLabel">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>16</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 20px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+</string>
+    </property>
+    <property name="text">
+     <string>Luca Gialli</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="promuoviButton">
+    <property name="geometry">
+     <rect>
+      <x>248</x>
+      <y>60</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:rgb(104, 194, 253);
+ border-style: solid;
+ border-radius:16px;
+color: rgb(255, 255, 255);
+	font: 13pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+
+
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:rgb(104, 194, 253);
+	border-width:2;
+	background-color : white;
+	color:rgb(104, 194, 253);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Promuovi</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="licenziaButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>112</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:#e39797;
+ border-style: solid;
+ border-radius:16px;
+color: rgb(255, 255, 255);
+	font: 13pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+
+
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:#e39797;
+	border-width:2;
+	background-color : white;
+	color: #e39797;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Licenzia</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="res/res.qrc"/>
+  <include location="../../../../../../Program Files (x86)/Qt Designer/res/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
