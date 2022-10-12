@@ -228,7 +228,7 @@ font: 14pt &quot;Lato&quot;;</string>
      <string>HomeAmministrazione ➜ AcquistaOpera</string>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -269,7 +269,7 @@ background-color: rgba(173, 237, 255, 0);
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="ricercaSulWebBigButton">
+   <widget class="QLabel" name="ricercaSulWebButton">
     <property name="geometry">
      <rect>
       <x>66</x>
@@ -311,7 +311,7 @@ background-color: rgb(244, 233, 140);
      <number>17</number>
     </property>
    </widget>
-   <widget class="QLabel" name="inserisciManualmenteBigButton">
+   <widget class="QLabel" name="inserisciManualmenteButton">
     <property name="geometry">
      <rect>
       <x>261</x>
