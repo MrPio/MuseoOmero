@@ -186,7 +186,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -615,7 +615,7 @@ text-align: center;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="frecciaSxLabel">
+   <widget class="QLabel" name="frecciaSinistra">
     <property name="geometry">
      <rect>
       <x>68</x>
@@ -643,7 +643,7 @@ background-color: rgba(255, 255, 255,0);
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="frecciaDxLabel">
+   <widget class="QLabel" name="frecciaDestra">
     <property name="geometry">
      <rect>
       <x>447</x>
@@ -679,14 +679,14 @@ background-color: rgba(255, 255, 255,0);
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>scrollArea</zorder>
    <zorder>titoloLabel_3</zorder>
    <zorder>label_11</zorder>
    <zorder>label_4</zorder>
-   <zorder>frecciaSxLabel</zorder>
-   <zorder>frecciaDxLabel</zorder>
+   <zorder>frecciaSinistra</zorder>
+   <zorder>frecciaDestra</zorder>
   </widget>
  </widget>
  <resources>

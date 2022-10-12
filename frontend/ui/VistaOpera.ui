@@ -854,7 +854,7 @@ text-align: center;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="titoloOperaLabel">
+   <widget class="QLabel" name="titoloLabel_2">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -891,7 +891,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QLabel" name="sizeLabel">
+   <widget class="QLabel" name="dimensioniLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -927,7 +927,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QLabel" name="periodoStoricoLabel">
+   <widget class="QLabel" name="periodoLabel">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -981,7 +981,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>

@@ -493,7 +493,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Età</string>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>426</x>
@@ -690,7 +690,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_9">
+   <widget class="QLabel" name="rightArrowIcon">
     <property name="geometry">
      <rect>
       <x>421</x>
@@ -851,7 +851,7 @@ border-color: rgb(255,255, 255);
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="dataLineEdit_2">
+   <widget class="QLineEdit" name="meseLineEdit">
     <property name="geometry">
      <rect>
       <x>278</x>
@@ -984,7 +984,7 @@ text-align: center;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="leftArrowIcon">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -1090,23 +1090,23 @@ background-color: rgba(255, 255, 255,0);
    <zorder>label_5</zorder>
    <zorder>label_6</zorder>
    <zorder>label_14</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>visualizzaButton</zorder>
    <zorder>label_13</zorder>
    <zorder>label_8</zorder>
    <zorder>label_17</zorder>
-   <zorder>label_9</zorder>
+   <zorder>rightArrowIcon</zorder>
    <zorder>sessoCheckBox</zorder>
    <zorder>frame</zorder>
    <zorder>etaCheckBox</zorder>
    <zorder>provenienzaCheckBox</zorder>
    <zorder>label_16</zorder>
    <zorder>label_11</zorder>
-   <zorder>dataLineEdit_2</zorder>
+   <zorder>meseLineEdit</zorder>
    <zorder>titoloLabel_4</zorder>
    <zorder>autoreLabel</zorder>
-   <zorder>label_7</zorder>
+   <zorder>leftArrowIcon</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>label_10</zorder>

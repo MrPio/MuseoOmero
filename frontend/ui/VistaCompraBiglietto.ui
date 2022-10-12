@@ -533,7 +533,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Abbonamento</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -695,7 +695,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Costo totale:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="importoTotaleLabel">
+   <widget class="QLabel" name="costoLabel">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -796,7 +796,7 @@ text-align: center;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="ricercaButton_2">
+   <widget class="QPushButton" name="verificaAbbonamentoButton">
     <property name="geometry">
      <rect>
       <x>264</x>
@@ -849,7 +849,7 @@ QPushButton::pressed{
      <string>Verifica</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ricercaButton_3">
+   <widget class="QPushButton" name="cercaGuidaButton">
     <property name="geometry">
      <rect>
       <x>264</x>
@@ -902,7 +902,7 @@ QPushButton::pressed{
      <string>Cerca guida</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="tipoRicercaComboBox">
+   <widget class="QComboBox" name="tipoBigliettoComboBox">
     <property name="geometry">
      <rect>
       <x>284</x>
@@ -986,7 +986,7 @@ margin:-3px -3px -3px -10px;
      </property>
     </item>
    </widget>
-   <widget class="QComboBox" name="tipoRicercaComboBox_2">
+   <widget class="QComboBox" name="tariffaComboBox">
     <property name="geometry">
      <rect>
       <x>284</x>
@@ -1178,18 +1178,18 @@ margin:-3px -3px -3px -10px;
    <zorder>label_14</zorder>
    <zorder>autoreLabel</zorder>
    <zorder>sizeLabel</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_13</zorder>
    <zorder>label_8</zorder>
    <zorder>label_10</zorder>
    <zorder>label_15</zorder>
-   <zorder>importoTotaleLabel</zorder>
+   <zorder>costoLabel</zorder>
    <zorder>confermaButton</zorder>
-   <zorder>ricercaButton_2</zorder>
-   <zorder>ricercaButton_3</zorder>
-   <zorder>tipoRicercaComboBox</zorder>
-   <zorder>tipoRicercaComboBox_2</zorder>
+   <zorder>verificaAbbonamentoButton</zorder>
+   <zorder>cercaGuidaButton</zorder>
+   <zorder>tipoBigliettoComboBox</zorder>
+   <zorder>tariffaComboBox</zorder>
    <zorder>label_11</zorder>
    <zorder>label_12</zorder>
    <zorder>label_16</zorder>

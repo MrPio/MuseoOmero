@@ -543,7 +543,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Biglietti</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -705,7 +705,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Risultato:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="acquistaOperaLabel">
+   <widget class="QLabel" name="acquistoOpereLabel">
     <property name="geometry">
      <rect>
       <x>265</x>
@@ -793,7 +793,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="importoTotaleLabel">
+   <widget class="QLabel" name="risultatoLabel">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -960,7 +960,7 @@ text-align: center;</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="dataLineEdit">
+   <widget class="QLineEdit" name="meseLineEdit">
     <property name="geometry">
      <rect>
       <x>277</x>
@@ -1032,7 +1032,7 @@ border-width:3;
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="ricercaButton">
+   <widget class="QPushButton" name="visualizzaButton">
     <property name="geometry">
      <rect>
       <x>136</x>
@@ -1124,25 +1124,25 @@ text-align: center;</string>
    <zorder>label_14</zorder>
    <zorder>autoreLabel</zorder>
    <zorder>sizeLabel</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_13</zorder>
    <zorder>label_8</zorder>
    <zorder>label_10</zorder>
    <zorder>label_15</zorder>
-   <zorder>acquistaOperaLabel</zorder>
+   <zorder>acquistoOpereLabel</zorder>
    <zorder>abbonamentiLabel</zorder>
    <zorder>bigliettiLabel</zorder>
    <zorder>venditaOpereLabel</zorder>
-   <zorder>importoTotaleLabel</zorder>
+   <zorder>risultatoLabel</zorder>
    <zorder>frame</zorder>
    <zorder>titoloLabel_4</zorder>
    <zorder>frecciaSxLabel</zorder>
    <zorder>frecciaDxLabel</zorder>
    <zorder>label_11</zorder>
-   <zorder>dataLineEdit</zorder>
+   <zorder>meseLineEdit</zorder>
    <zorder>label_16</zorder>
-   <zorder>ricercaButton</zorder>
+   <zorder>visualizzaButton</zorder>
   </widget>
  </widget>
  <resources>

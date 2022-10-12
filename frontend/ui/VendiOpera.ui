@@ -237,7 +237,7 @@ QPushButton::pressed{
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -336,7 +336,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="parametroRicercaLineEdit">
     <property name="geometry">
      <rect>
       <x>78</x>
@@ -488,7 +488,7 @@ margin:-3px -3px -3px -10px;
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="ricercaButton">
     <property name="geometry">
      <rect>
       <x>138</x>
@@ -754,14 +754,14 @@ background-color: rgba(255, 249, 190, 255);</string>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
    <zorder>label_11</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_3</zorder>
    <zorder>titoloLabel_3</zorder>
-   <zorder>lineEdit</zorder>
+   <zorder>parametroRicercaLineEdit</zorder>
    <zorder>label_4</zorder>
    <zorder>tipoRicercaComboBox</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>ricercaButton</zorder>
    <zorder>titoloLabel_4</zorder>
    <zorder>scrollArea</zorder>
   </widget>
