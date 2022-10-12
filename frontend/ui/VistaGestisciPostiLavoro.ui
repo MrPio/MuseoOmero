@@ -186,7 +186,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -408,7 +408,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
+    <widget class="QWidget" name="receptionsListView">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -615,7 +615,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+    <widget class="QWidget" name="segreterieListView">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -831,7 +831,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents_3">
+    <widget class="QWidget" name="amministrazioniListView">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -930,7 +930,7 @@ text-align: center;</string>
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>scrollArea</zorder>
    <zorder>titoloLabel</zorder>

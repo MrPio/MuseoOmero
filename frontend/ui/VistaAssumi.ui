@@ -533,7 +533,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <string>Sesso*:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>424</x>
@@ -655,7 +655,7 @@ text-align: center;</string>
      <number>0</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="ricercaButton">
+   <widget class="QPushButton" name="confermaButton">
     <property name="geometry">
      <rect>
       <x>139</x>
@@ -1134,7 +1134,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
+    <widget class="QWidget" name="postiLavoroListView">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1288,7 +1288,7 @@ margin:-3px -3px -3px -10px;
      </property>
     </item>
    </widget>
-   <widget class="QLineEdit" name="dataLineEdit">
+   <widget class="QLineEdit" name="dataNascitaLineEdit">
     <property name="geometry">
      <rect>
       <x>264</x>
@@ -1372,7 +1372,7 @@ border-width:3;
      <string>Cognome</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="nomelineEdit">
+   <widget class="QLineEdit" name="nomeLineEdit">
     <property name="geometry">
      <rect>
       <x>264</x>
@@ -1424,11 +1424,11 @@ border-width:3;
    <zorder>label_14</zorder>
    <zorder>autoreLabel</zorder>
    <zorder>sizeLabel</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_13</zorder>
    <zorder>label_8</zorder>
-   <zorder>ricercaButton</zorder>
+   <zorder>confermaButton</zorder>
    <zorder>sessoComboBox</zorder>
    <zorder>label_11</zorder>
    <zorder>label_12</zorder>
@@ -1441,9 +1441,9 @@ border-width:3;
    <zorder>label_15</zorder>
    <zorder>sizeLabel_2</zorder>
    <zorder>impiegoComboBox</zorder>
-   <zorder>dataLineEdit</zorder>
+   <zorder>dataNascitaLineEdit</zorder>
    <zorder>cognomeLineEdit</zorder>
-   <zorder>nomelineEdit</zorder>
+   <zorder>nomeLineEdit</zorder>
   </widget>
  </widget>
  <resources>

@@ -189,7 +189,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="previousLabel">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>450</x>
@@ -855,7 +855,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="TitoloLineEdit">
+   <widget class="QLineEdit" name="titoloLineEdit">
     <property name="geometry">
      <rect>
       <x>276</x>
@@ -891,7 +891,7 @@ border-width:3;
      <string>Titolo</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="tipoRicercaComboBox">
+   <widget class="QComboBox" name="periodoStoricoComboBox">
     <property name="geometry">
      <rect>
       <x>292</x>
@@ -1011,7 +1011,7 @@ margin:-3px -3px -3px -10px;
      </property>
     </item>
    </widget>
-   <widget class="QSpinBox" name="DurataSpinBox">
+   <widget class="QSpinBox" name="durataSpinBox">
     <property name="geometry">
      <rect>
       <x>316</x>
@@ -1099,7 +1099,7 @@ QSpinBox::down-arrow::pressed{
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>previousLabel</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_3</zorder>
    <zorder>titoloLabel_3</zorder>
@@ -1117,9 +1117,9 @@ QSpinBox::down-arrow::pressed{
    <zorder>label_8</zorder>
    <zorder>label_9</zorder>
    <zorder>label_16</zorder>
-   <zorder>TitoloLineEdit</zorder>
-   <zorder>tipoRicercaComboBox</zorder>
-   <zorder>DurataSpinBox</zorder>
+   <zorder>titoloLineEdit</zorder>
+   <zorder>periodoStoricoComboBox</zorder>
+   <zorder>durataSpinBox</zorder>
   </widget>
  </widget>
  <resources>
