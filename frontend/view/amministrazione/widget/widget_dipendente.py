@@ -11,23 +11,21 @@ from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
+from frontend.view.my_widget import MyWidget
 
 
-class WidgetDipendente(MyMainWindow):
-    def __init__(self):
-        super().__init__(UI_DIR + '/ListViewTemplate.ui')
-
-    def getWidget(self) -> QWidget:
-        return self.selezionaDipendenteWidget
+class WidgetDipendente(MyWidget):
+    def __init__(self,parent):
+        super().__init__(UI_DIR + '/dipendenteWidget.ui',parent)
 
     def getNomeLabel(self) -> QLabel:
-        return self.getWidget().nomeLabel
+        return self.nomeLabel
 
     def getIcon(self) -> QLabel:
-        return self.getWidget().iconLabel
+        return self.iconLabel
 
     def getLicenziaButton(self) -> QPushButton:
-        return self.getWidget().licenziaButton
+        return self.licenziaButton
 
     def getPromuoviButton(self) -> QPushButton:
-        return self.getWidget().promuoviButton
+        return self.promuoviButton
