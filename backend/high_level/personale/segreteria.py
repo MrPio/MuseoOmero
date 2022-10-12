@@ -14,8 +14,8 @@ from backend.high_level.personale.segretario import Segretario
 
 
 class Segreteria(PostoLavoro):
-    def __init__(self, piano: int, numPostazioni: int, sportelli: int, telFisso:str, descr: str = ""):
-        super().__init__(piano, numPostazioni)
+    def __init__(self, nome:str,piano: int, numPostazioni: int, sportelli: int, telFisso:str, descr: str = ""):
+        super().__init__(nome,piano, numPostazioni)
         self.sportelli=sportelli
         self.telefono_fisso=telFisso
         self.descrizione=descr

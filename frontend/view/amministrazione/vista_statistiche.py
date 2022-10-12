@@ -7,7 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QCheckBox
+from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QCheckBox, QFrame
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 

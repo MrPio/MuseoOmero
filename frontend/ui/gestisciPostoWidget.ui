@@ -51,7 +51,7 @@
 background-color:#fff9be;
 border-width:0px;</string>
    </property>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="rimuoviButton">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -104,7 +104,7 @@ QPushButton::pressed{
      <string>Rimuovi</string>
     </property>
    </widget>
-   <widget class="QLabel" name="immagineLabel_23">
+   <widget class="QLabel" name="iconLabel">
     <property name="geometry">
      <rect>
       <x>17</x>
@@ -154,7 +154,7 @@ background-color: rgba(255, 255, 255, 255);</string>
      <number>10</number>
     </property>
    </widget>
-   <widget class="QLabel" name="titoloLabel_12">
+   <widget class="QLabel" name="titoloLabel">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -176,7 +176,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="titoloLabel_14">
+   <widget class="QLabel" name="postiLiberiLabel">
     <property name="geometry">
      <rect>
       <x>117</x>
@@ -207,7 +207,7 @@ font: 25 italic 14pt &quot;Lato&quot;;	</string>
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="modificaButton">
     <property name="geometry">
      <rect>
       <x>248</x>
@@ -258,6 +258,59 @@ QPushButton::pressed{
     </property>
     <property name="text">
      <string>Modifica</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="assegnaButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>66</y>
+      <width>232</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:rgb(104, 194, 253);
+ border-style: solid;
+ border-radius:16px;
+color: rgb(255, 255, 255);
+	font: 15pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+
+
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:rgb(104, 194, 253);
+	border-width:2;
+	background-color : white;
+	color:rgb(104, 194, 253);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Assegna posto</string>
     </property>
    </widget>
   </widget>

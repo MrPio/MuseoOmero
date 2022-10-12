@@ -1324,7 +1324,7 @@ border-width:3;
 }</string>
     </property>
     <property name="inputMask">
-     <string>00/00/0000;0</string>
+     <string>00/00/0000;#</string>
     </property>
     <property name="text">
      <string>//</string>

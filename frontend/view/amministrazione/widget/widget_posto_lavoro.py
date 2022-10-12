@@ -20,6 +20,9 @@ class WidgetPostoLavoro(QWidget):
     def getPostiDisponibiliLabel(self) -> QLabel:
         pass
 
+    def getPostiLiberiLabel(self) -> QLabel:
+        pass
+
     def getAssegnaPostoButton(self) -> QPushButton:
         pass
 

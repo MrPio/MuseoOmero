@@ -16,8 +16,8 @@ from backend.high_level.personale.posto_lavoro import PostoLavoro
 
 class Amministrazione(PostoLavoro):
 
-    def __init__(self, piano: int, numPostazioni: int, descrizione: str = ""):
-        super().__init__(piano, numPostazioni, descrizione)
+    def __init__(self,nome:str, piano: int, numPostazioni: int, descrizione: str = ""):
+        super().__init__(nome,piano, numPostazioni, descrizione)
 
     def assumi(self, dipendente: Dipendente) -> bool:
         lavoro = Amministratore(

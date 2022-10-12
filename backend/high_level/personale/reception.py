@@ -16,8 +16,8 @@ from backend.high_level.personale.posto_lavoro import PostoLavoro
 
 class Reception(PostoLavoro):
 
-    def __init__(self, piano: int, numPostazioni: int, numPOS: int, descrizione: str = ""):
-        super().__init__(piano, numPostazioni, descrizione)
+    def __init__(self, nome:str,piano: int, numPostazioni: int, numPOS: int, descrizione: str = ""):
+        super().__init__(nome,piano, numPostazioni, descrizione)
         """
         Le postcondizioni riguardanti l'attributo 'lavori' della classe reception, sottoclasse di PostoLavoro,
         sono aumentate, ma non le precondizioni.

@@ -31,4 +31,11 @@ class ControllerGestionePostiLavoro(Controller):
         pass
 
     def initializeUi(self) -> None:
-        pass
+        self.posti_lavoro = self.__renderizzaPostiLavoro()
+        matches={
+            Reception:self.verticalLayout,
+            Segreteria:self.verticalLayout_2,
+            Amministrazione:self.verticalLayout_3,
+        }
+        for controller in self.posti_lavoro:
+            matches[type(controller.model)].addWidget(controller.view.widget)

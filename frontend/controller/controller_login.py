@@ -60,7 +60,7 @@ class ControllerLogin(Controller):
         self.__home.enableView().closeView()
 
     def connettiEventi(self) -> None:
-        self.view.getPreviousLabel().mouseReleaseEvent = lambda _: self.gotoHome()
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.gotoHome()
         self.view.getLoginButton().clicked.connect(self.__onLoginClicked)
 
     def gotoHome(self) -> None:

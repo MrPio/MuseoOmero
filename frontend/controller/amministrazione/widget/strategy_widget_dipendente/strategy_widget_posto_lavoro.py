@@ -8,7 +8,8 @@
 # 
 #######################################################
 
-
-class StrategyWidgetDipendente:
-    def initializeUi(c : 'ControllerWidgetDipendente') -> None:
+import abc
+class StrategyWidgetPostoLavoro(abc.ABC):
+    @abc.abstractmethod
+    def initializeUi(self, c : 'ControllerWidgetPostoLavoro') -> None:
         pass

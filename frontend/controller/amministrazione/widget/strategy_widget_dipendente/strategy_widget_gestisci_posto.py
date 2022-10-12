@@ -7,12 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerWidgetDipendente
-import StrategyWidgetDipendente
+from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
+    StrategyWidgetPostoLavoro
 
-class StrategyWidgetGestisciPosto(StrategyWidgetDipendente):
-    def initializeUi(c : ControllerWidgetDipendente) -> None:
-        pass
 
-    def initializeUi(c : ControllerWidgetDipendente) -> None:
-        pass
+class StrategyWidgetGestisciPosto(StrategyWidgetPostoLavoro):
+    def initializeUi(self, c : 'ControllerWidgetPostoLavoro') -> None:
+        c.view.getAssegnaPostoButton().setVisible(False)
+        c.view.getModificaButton().setVisible(True)
+        c.view.getRimuoviButton().setVisible(True)

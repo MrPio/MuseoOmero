@@ -7,14 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QComboBox, QSpinBox
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaModificaTurnoGuida(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR + '/ModificaTurnoGuida')
+        super().__init__(UI_DIR + '/ModificaTurnoGuida.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
@@ -22,11 +24,17 @@ class VistaModificaTurnoGuida(MyMainWindow):
     def getCambiaButton(self) -> QPushButton:
         return self.cambiaButton
 
-    def getCapienzaLineEdit(self) -> QLineEdit:
-        pass
+    def getCapienzaSpinBox(self) -> QSpinBox:
+        return self.capienzaSpinBox
 
-    def getOraInizioLineEdit(self) -> QLineEdit:
-        pass
+    def getOreComboBox(self) -> QComboBox:
+        return self.oreComboBox
+
+    def getMinutiComboBox(self) -> QComboBox:
+        return self.minutiComboBox
 
     def getDurataComboBox(self) -> QComboBox:
         return self.durataComboBox
+
+    def getConfermaButton(self) -> QPushButton:
+        return self.confermaButton

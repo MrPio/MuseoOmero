@@ -7,9 +7,15 @@
 # Original author: MrPio
 # 
 #######################################################
+from PyQt5.QtGui import QPixmap
+
+from backend.high_level.personale import posto_lavoro
+from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.posto_lavoro import PostoLavoro
-from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_dipendente import \
-    StrategyWidgetDipendente
+from backend.high_level.personale.reception import Reception
+from backend.high_level.personale.segreteria import Segreteria
+from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
+    StrategyWidgetPostoLavoro
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
@@ -17,11 +23,16 @@ from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPosto
 class ControllerWidgetPostoLavoro(Controller):
 
     def __init__(self, view: WidgetPostoLavoro, model: PostoLavoro, parent: Controller,
-                 strategy: StrategyWidgetDipendente):
+                 strategy: StrategyWidgetPostoLavoro):
         super().__init__(view)
+        self.view: WidgetPostoLavoro = view
+        self.model = model
+        self.parent = parent
+        self.strategy = strategy
+        self.initializeUi()
 
     def __onAssegnaPostoClicked(self) -> None:
-        pass
+        self.parent.lavoro_scelto=self.model
 
     def __onRimuoviClicked(self) -> None:
         pass
@@ -30,7 +41,18 @@ class ControllerWidgetPostoLavoro(Controller):
         pass
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getAssegnaPostoButton().clicked.connect(self.__onAssegnaPostoClicked)
+        self.view.getRimuoviButton().clicked.connect(self.__onRimuoviClicked)
+        self.view.getModificaButton().clicked.connect(self.__gotoVistaModificaPostoLavoro)
 
     def initializeUi(self):
-        pass
+        self.strategy.initializeUi(self)
+        self.view.getNomeLabel().setText('{} (piano {})'.format(self.model.nome, self.model.piano))
+
+        pixmaps = {
+            Reception: QPixmap(":/icons/theater_comedy_FILL1_wght500_GRAD200_opsz48_risultato.png"),
+            Segreteria: QPixmap(":/icons/fax_FILL1_wght500_GRAD200_opsz48_risultato.png"),
+            Amministrazione: QPixmap(":/icons/shield_FILL1_wght500_GRAD200_opsz48_risultato"),
+            None: QPixmap(":/icons/person_FILL1_wght600_GRAD200_opsz48_risultato"),
+        }
+        self.view.getIcon().setPixmap(pixmaps[type(self.model)])

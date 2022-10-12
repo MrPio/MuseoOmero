@@ -4,6 +4,7 @@ import sys
 import winotify
 from PyQt5.QtWidgets import QApplication
 
+from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
@@ -24,7 +25,7 @@ def startApp():
 
     # MVC
     vista_home = VistaGestioneDipendenti()
-    controller_home = ControllerGestioneDipendenti(vista_home,None,None)
+    controller_home = ControllerGestioneDipendenti(vista_home,None,Museo.getInstance())
     controller_home.connettiEventi()
     controller_home.showView()
 
@@ -32,6 +33,6 @@ def startApp():
 
 
 if __name__ == '__main__':
-    # TODO continuare a runnure e a risolvere tutti gli errori che si presentano
+    # TODO fare vista inserisciUbicazione
     startApp()
 

@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import PostoLavoro
+from backend.high_level.personale.posto_lavoro import PostoLavoro
 from frontend.controller.controller import Controller
-from frontend.view import VistaModificaPostoLavoro
+from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
+
 
 class ControllerModificaPostoLavoro(Controller):
-    m_VistaModificaPostoLavoro= VistaModificaPostoLavoro()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaModificaPostoLavoro, previous : Controller, model : PostoLavoro):
-        pass
+    def __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
+        super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
         pass

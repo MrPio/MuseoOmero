@@ -7,13 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QSpacerItem, QSizePolicy
-from PyQt5.uic import loadUi
 
 from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.controller_assumi import ControllerAssumi
 from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
 from frontend.controller.controller import Controller
-from frontend.ui.location import UI_DIR
+from frontend.view.amministrazione.vista_assumi import VistaAssumi
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
 from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipendente
 
@@ -21,25 +20,45 @@ from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipende
 class ControllerGestioneDipendenti(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: Museo):
         super().__init__(view)
         self.view: VistaGestioneDipendenti = view
-        self.previous=previous
-        self.model=model
-
-        self.btn=[WidgetDipendente(self.view.scrollAreaWidgetContents) for _ in range(200)]
-        for i in range(200):
-            self.view.verticalLayout.addWidget(self.btn[i].widget)
-
-        #for widget in self.__renderizzaDiendenti():
+        self.previous = previous
+        self.model = model
+        self.initializeUi()
 
     def __gotoVistaAssumi(self) -> None:
-        pass
+        controller = ControllerAssumi(
+            view=VistaAssumi(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getAssumiButton().mouseReleaseEvent = lambda _: self.__gotoVistaAssumi()
 
     def __renderizzaDipendenti(self) -> list[ControllerWidgetDipendente]:
-        pass
+        result = []
+        for dipendente in self.model.dipendenti:
+            new_widget = WidgetDipendente(self.view.scrollAreaWidgetContents)
+
+            result.append(ControllerWidgetDipendente(
+                view=new_widget,
+                model=dipendente,
+            ))
+        return result
+
+    def initializeUi(self) -> None:
+        self.dipendenti = self.__renderizzaDipendenti()
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.verticalLayout.count())):
+            self.view.verticalLayout.itemAt(i).widget().setParent(None)
+        for controller in self.dipendenti:
+            self.view.verticalLayout.addWidget(controller.view.widget)
