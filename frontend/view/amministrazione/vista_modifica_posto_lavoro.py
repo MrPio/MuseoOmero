@@ -12,11 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaModificaPostoLavoro(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/ModificaPostoLavoro')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getNomeLineEdit(self) -> QLineEdit:
-        pass
+        return self.nomeLineEdit
 
     def getPianoLineEdit(self) -> QLineEdit:
         pass
@@ -25,4 +29,4 @@ class VistaModificaPostoLavoro(MyMainWindow):
         pass
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

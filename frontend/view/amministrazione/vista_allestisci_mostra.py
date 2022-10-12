@@ -12,17 +12,24 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAllestisciMostra(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaAllestisciMostra.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getTitoloLineEdit(self) -> QLineEdit:
-        pass
+        return self.titoloLineEdit
 
     def getPeriodoStoricoComboBox(self) -> QComboBox:
-        pass
+        return self.periodoStoricoComboBox
 
-    def getDurataLineEdit(self) -> QLineEdit:
-        pass
+    def getDurataSpinBox(self) -> QSpinBox:
+        return self.durataSpinBox
 
     def getListaOpere(self) -> list[QLabel]:
         pass
+
+    def getConfermaButton(self) -> QPushButton:
+        return self.confermaButton

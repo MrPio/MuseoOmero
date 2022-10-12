@@ -14,6 +14,7 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaGestioneDipendenti(MyMainWindow):
+
     def __init__(self):
         super().__init__(UI_DIR + '/VistaGestisciDipendenti.ui')
 

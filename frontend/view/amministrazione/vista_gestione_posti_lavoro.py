@@ -12,14 +12,18 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaGestionePostiLavoro(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaGestisciPostiLavoro')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getReceptionsListView(self) -> QListView:
-        pass
+        return self.receptionsListView
 
     def getSegreterieListView(self) -> QListView:
-        pass
+        return self.segreterieListView
 
     def getAmministrazioniListView(self) -> QListView:
-        pass
+        return self.amministrazioniListView

@@ -12,11 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaBackups(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaBackup.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getBackupsListView(self) -> QListView:
-        pass
+        return self.backupsListView
 
     def getBackupOraButton(self) -> QPushButton:
-        pass
+        return self.backupOraButton

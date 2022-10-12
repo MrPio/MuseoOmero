@@ -12,11 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaModificaTurnoGuida(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/ModificaTurnoGuida')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getCambiaButton(self) -> QPushButton:
-        pass
+        return self.cambiaButton
 
     def getCapienzaLineEdit(self) -> QLineEdit:
         pass
@@ -25,4 +29,4 @@ class VistaModificaTurnoGuida(MyMainWindow):
         pass
 
     def getDurataComboBox(self) -> QComboBox:
-        pass
+        return self.durataComboBox

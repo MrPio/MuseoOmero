@@ -1,3 +1,4 @@
+
 #######################################################
 # 
 # VistaOpera.py
@@ -12,29 +13,33 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaOpera(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaOpera.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getImmagineLabel(self) -> QLabel:
-        pass
+        return self.immagineLabel
 
     def getTitoloLabel(self) -> QLabel:
-        pass
+        return self.titoloLabel_2
 
     def getAutoreLabel(self) -> QLabel:
-        pass
+        return self.autoreLabel
 
     def getDimensioniLabel(self) -> QLabel:
-        pass
+        return self.dimensioniLabel
+
+    def getTipoLabel(self) -> QLabel:
+        return self.tipoLabel
 
     def getPeriodoLabel(self) -> QLabel:
-        pass
+        return self.periodoLabel
 
     def getUbicazioneLabel(self) -> QLabel:
-        pass
+        return self.ubicazioneLabel
 
     def getCostoLabel(self) -> QLabel:
-        pass
-
-    def getCambiaUbicazioneButton(self) -> QPushButton:
-        pass
+        return self.costoLabel

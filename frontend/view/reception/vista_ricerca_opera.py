@@ -12,20 +12,24 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaRicercaOpera(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VendiOpera.ui')
+
     def getHeaderLabel(self) -> QLabel:
-        pass
+        return self.headerLabel
 
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getParametroRicercaLineEdit(self) -> QLineEdit:
-        pass
+        return self.parametroRicercaLineEdit
 
     def getTipoRicercaComboBox(self) -> QComboBox:
-        pass
+        return self.tipoRicercaComboBox
 
     def getRicercaButton(self) -> QPushButton:
-        pass
+        return self.ricercaButton
 
     def getRisultatiListView(self) -> QListView:
         pass

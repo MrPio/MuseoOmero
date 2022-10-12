@@ -12,14 +12,18 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaMostra(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaMostra')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getTitoloLabel(self) -> QLabel:
-        pass
+        return self.titoloLabel_2
 
     def getPeriodoStoricoLabel(self) -> QLabel:
-        pass
+        return self.periodoStoricoLabel
 
-    def getListaOpere(self) -> QLabel []:
+    def getListaOpere(self) -> list[QLabel]:
         pass

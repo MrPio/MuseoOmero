@@ -12,29 +12,33 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAggiungiOpera(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/RiceviDonazione.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getTitloloLineEdit(self) -> QLineEdit:
-        pass
+        return self.titoloLineEdit
 
     def getAutoreLineEdit(self) -> QLineEdit:
-        pass
+        return self.autoreLineEdit
 
     def getDimensioniLineEdit(self) -> QLineEdit:
-        pass
+        return self.dimensioniLineEdit
 
     def getPeriodoStoricoComboBox(self) -> QComboBox:
-        pass
+        return self.periodoStoricoComboBox
 
     def getUbicazioneButton(self) -> QPushButton:
-        pass
+        return self.ubicazioneButton
 
     def getFotoLabel(self) -> QLabel:
         pass
 
     def getDropZoneLabel(self) -> QLabel:
-        pass
+        return self.dropZoneLabel
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

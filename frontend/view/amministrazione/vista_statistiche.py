@@ -12,23 +12,30 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaStatistiche(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaStatistiche')
+
+    def getPreviousButton(self) -> QPushButton:
+        return self.previousButton
+
     def getMeseLineEdit(self) -> QLineEdit:
-        pass
+        return self.meseLineEdit
 
     def getProvenienzaCheckBox(self) -> QCheckBox:
-        pass
+        return self.provenienzaCheckBox
 
     def getEtaCheckBox(self) -> QCheckBox:
-        pass
+        return self.etaCheckBox
 
     def getSessoCheckBox(self) -> QCheckBox:
-        pass
+        return self.sessoCheckBox
 
     def getVisualizzaButton(self) -> QPushButton:
-        pass
+        return self.visualizzaButton
 
     def getRightArrowIcon(self) -> QLabel:
-        pass
+        return self.rightArrowIcon
 
     def getLeftArrowIcon(self) -> QLabel:
-        pass
+        return self.leftArrowIcon

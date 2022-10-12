@@ -12,23 +12,27 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaTurniGuide(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaCercaGuida(2in1).ui')
+
     def getHeaderLabel(self) -> QLabel:
-        pass
+        return self.headerLabel
 
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getDataLineEdit(self) -> QLineEdit:
-        pass
+        return self.dataLineEdit
 
     def getRicercaButton(self) -> QPushButton:
-        pass
+        return self.ricercaButton
 
     def getFrecciaSinistra(self) -> QLabel:
-        pass
+        return self.frecciaSinistra
 
     def getFrecciaDestra(self) -> QLabel:
-        pass
+        return self.frecciaDestra
 
     def getTurniGuideListView(self) -> QListView:
-        pass
+        return self.turniGuideListView

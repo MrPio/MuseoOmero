@@ -12,23 +12,27 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAcquistoBiglietto(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaCompraBiglietto.ui')
+
     def getTipoBigliettoComboBox(self) -> QPushButton:
-        pass
+        return self.tipoBigliettoComboBox
 
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getCercaGuidaButton(self) -> QPushButton:
-        pass
+        return self.cercaGuidaButton
 
     def getVerificaAbbonamentoButton(self) -> QPushButton:
-        pass
+        return self.verificaAbbonamentoButton
 
     def getCostoLabel(self) -> QLabel:
-        pass
+        return self.costoLabel
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton
 
     def getTariffaComboBox(self) -> QComboBox:
-        pass
+        return self.tariffaComboBox

@@ -13,26 +13,30 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaReportIncassi(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaReportIncassi')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getMeseLineEdit(self) -> QLineEdit:
-        pass
+        return self.meseLineEdit
 
     def getVisualizzaButton(self) -> QPushButton:
-        pass
+        return self.visualizzaButton
 
     def getAcquistoOpereLabel(self) -> QLabel:
-        pass
+        return self.acquistoOpereLabel
 
     def getVenditaOpereLabel(self) -> QLabel:
-        pass
+        return self.venditaOpereLabel
 
     def getAbbonamentiLabel(self) -> QLabel:
-        pass
+        return self.abbonamentiLabel
 
     def getBigliettiLabel(self) -> QLabel:
-        pass
+        return self.bigliettiLabel
 
     def getRisultatoLabel(self) -> QLabel:
-        pass
+        return self.risultatoLabel

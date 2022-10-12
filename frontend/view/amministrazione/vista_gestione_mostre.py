@@ -12,11 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaGestioneMostre(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/GestisciMostre')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getVisualizzaMostraAttualeButton(self) -> QPushButton:
-        pass
+        return self.visualizzaMostraAttualeButton
 
     def getAllestisciNuovaMostraButton(self) -> QPushButton:
-        pass
+        return self.allestisciNuovaMostraButton

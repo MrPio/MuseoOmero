@@ -12,36 +12,30 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAssumi(MyMainWindow):
-    def __gotoPrevious(self) -> None:
-        pass
 
-    def __init__(self,previous : QMainWindow):
-        pass
+    def __init__(self):
+        super().__init__(UI_DIR + '/VistaAssumi.ui')
 
-    def __onConfermaClicked(self) -> None:
-        pass
-
-class VistaAssumi(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getNomeLineEdit(self) -> QLineEdit:
-        pass
+        return self.nomeLineEdit
 
     def getCognomeLineEdit(self) -> QLineEdit:
-        pass
+        return self.cognomeLineEdit
 
     def getDataNascitaLineEdit(self) -> QLineEdit:
-        pass
+        return self.dataNascitaLineEdit
 
     def getSessoComboBox(self) -> QComboBox:
-        pass
+        return self.sessoComboBox
 
     def getImpiegoComboBox(self) -> QComboBox:
-        pass
+        return self.impiegoComboBox
 
     def getPostiLavoroListView(self) -> QListView:
-        pass
+        return self.postiLavoroListView
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

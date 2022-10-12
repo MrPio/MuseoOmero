@@ -12,11 +12,15 @@ from frontend.view.my_main_window import MyMainWindow
 
 
 class VistaAcquistoOpere(MyMainWindow):
+
+    def __init__(self):
+        super().__init__(UI_DIR + '/AcquistaOpera.ui')
+
     def getPreviousButton(self) -> QPushButton:
-        pass
+        return self.previousButton
 
     def getRicercaSulWebButton(self) -> QPushButton:
-        pass
+        return self.ricercaSulWebButton
 
     def getInserisciManualmenteButton(self) -> QPushButton:
-        pass
+        return self.inserisciManualmenteButton
