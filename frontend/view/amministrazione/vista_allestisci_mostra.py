@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton, QLabel, QLineEdit, QComboBox
 from frontend.view.my_main_window import MyMainWindow
 
 
@@ -24,5 +24,5 @@ class VistaAllestisciMostra(MyMainWindow):
     def getDurataLineEdit(self) -> QLineEdit:
         pass
 
-    def getListaOpere(self) -> QLabel []:
+    def getListaOpere(self) -> list[QLabel]:
         pass

@@ -29,15 +29,16 @@ class ControllerGestioneDipendenti(Controller):
         self.previous=previous
         self.model=model
 
-        # self.er=WidgetDipendente(self.view.scrollAreaWidgetContents)
-        # self.er2 = WidgetDipendente(self.view.scrollAreaWidgetContents)
-        # self.er2.getNomeLabel().setText('secondo')
-        # self.er3 = WidgetDipendente(self.view.scrollAreaWidgetContents)
-        # self.er4 =WidgetDipendente(self.view.scrollAreaWidgetContents)
-        # self.er5 =WidgetDipendente(self.view.scrollAreaWidgetContents)
-        btn=[QPushButton('sss') for _ in range(50)]
-        for i in range(50):
-            self.view.verticalLayout.addWidget(btn[i])
+        self.er=WidgetDipendente(self.view.scrollAreaWidgetContents)
+        self.er2 = WidgetDipendente(self.view.scrollAreaWidgetContents)
+        self.er2.getNomeLabel().setText('secondo')
+        self.er3 = WidgetDipendente(self.view.scrollAreaWidgetContents)
+        self.er4 =WidgetDipendente(self.view.scrollAreaWidgetContents)
+        self.er5 =WidgetDipendente(self.view.scrollAreaWidgetContents)
+        # self.btn=[WidgetDipendente(self.view.scrollAreaWidgetContents) for _ in range(200)]
+        # self.btn
+        # for i in range(200):
+        #     self.view.verticalLayout.addWidget(self.btn[i].widget)
 
         #for widget in self.__renderizzaDiendenti():
 
