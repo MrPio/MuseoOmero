@@ -21,11 +21,14 @@ class VistaRinnovoAbbonamento(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
-    def getQrCodeImage(self) -> QLabel:
+    def getQrCodeImage(self) -> QFrame:
         return self.qrCodeImage
 
     def getDurataComboBox(self) -> QComboBox:
         return self.durataComboBox
+
+    def getImportoTotaleLabel(self) -> QLabel:
+        return self.importoTotaleLabel
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton

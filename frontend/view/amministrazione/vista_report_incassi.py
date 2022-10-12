@@ -16,13 +16,19 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaReportIncassi(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR + '/VistaReportIncassi')
+        super().__init__(UI_DIR + '/VistaReportIncassi.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
     def getMeseLineEdit(self) -> QLineEdit:
         return self.meseLineEdit
+
+    def getRightArrowIcon(self) -> QLabel:
+        return self.rightArrowIcon
+
+    def getLeftArrowIcon(self) -> QLabel:
+        return self.leftArrowIcon
 
     def getVisualizzaButton(self) -> QPushButton:
         return self.visualizzaButton
@@ -41,3 +47,6 @@ class VistaReportIncassi(MyMainWindow):
 
     def getRisultatoLabel(self) -> QLabel:
         return self.risultatoLabel
+
+    def getGraficoFrame(self) -> QFrame:
+        return self.graficoFrame

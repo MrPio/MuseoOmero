@@ -14,7 +14,7 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaMostra(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR + '/VistaMostra')
+        super().__init__(UI_DIR + '/VistaMostra.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
@@ -25,5 +25,5 @@ class VistaMostra(MyMainWindow):
     def getPeriodoStoricoLabel(self) -> QLabel:
         return self.periodoStoricoLabel
 
-    def getListaOpere(self) -> list[QLabel]:
-        pass
+    def getListaOpereGridLayout(self) -> QGridLayout:
+        return self.listaOpereGridLayout

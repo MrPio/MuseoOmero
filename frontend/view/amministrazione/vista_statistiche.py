@@ -16,7 +16,7 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaStatistiche(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR + '/VistaStatistiche')
+        super().__init__(UI_DIR + '/VistaStatistiche.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
@@ -35,6 +35,9 @@ class VistaStatistiche(MyMainWindow):
 
     def getVisualizzaButton(self) -> QPushButton:
         return self.visualizzaButton
+
+    def getVisualizzaStatisticheFrame(self) -> QFrame:
+        return self.visualizzaStatisticheFrame
 
     def getRightArrowIcon(self) -> QLabel:
         return self.rightArrowIcon

@@ -14,7 +14,7 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaGestioneMostre(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR + '/GestisciMostre')
+        super().__init__(UI_DIR + '/GestisciMostre.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton

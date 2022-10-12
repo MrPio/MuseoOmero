@@ -19,7 +19,7 @@ class VistaGestioneDipendenti(MyMainWindow):
         super().__init__(UI_DIR + '/VistaGestisciDipendenti.ui')
 
     def getPreviousButton(self) -> QPushButton:
-        return self.previousLabel
+        return self.previousButton
 
     def getTurniGuideListView(self) -> QWidget:
         return self.scrollAreaWidgetContents

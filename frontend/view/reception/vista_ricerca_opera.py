@@ -33,5 +33,5 @@ class VistaRicercaOpera(MyMainWindow):
     def getRicercaButton(self) -> QPushButton:
         return self.ricercaButton
 
-    def getRisultatiListView(self) -> QListView:
-        pass
+    def getRisultatiGridLayout(self) -> QGridLayout:
+        return self.risultatiGridLayout

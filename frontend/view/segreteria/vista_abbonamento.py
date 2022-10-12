@@ -33,3 +33,6 @@ class VistaAbbonamento(MyMainWindow):
 
     def getQrCodeImage(self) -> QLabel:
         return self.qrCodeImage
+
+    def getConfermaButton(self) -> QPushButton:
+        return self.confermaButton

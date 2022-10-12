@@ -28,6 +28,9 @@ class VistaAggiungiOpera(MyMainWindow):
     def getDimensioniLineEdit(self) -> QLineEdit:
         return self.dimensioniLineEdit
 
+    def getTipoComboBox(self) -> QComboBox:
+        return self.tipoComboBox
+
     def getPeriodoStoricoComboBox(self) -> QComboBox:
         return self.periodoStoricoComboBox
 
@@ -35,7 +38,7 @@ class VistaAggiungiOpera(MyMainWindow):
         return self.ubicazioneButton
 
     def getFotoLabel(self) -> QLabel:
-        pass
+        return self.fotoLabel
 
     def getDropZoneLabel(self) -> QLabel:
         return self.dropZoneLabel

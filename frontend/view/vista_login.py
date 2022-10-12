@@ -18,8 +18,8 @@ class VistaLogin(MyMainWindow):
     def __init__(self):
         super().__init__(UI_DIR + '/Login.ui')
 
-    def getPreviousLabel(self) -> QLabel:
-        return self.previousLabel
+    def getPreviousButton(self) -> QLabel:
+        return self.previousButton
 
     def getErrorLabel(self) -> QLabel:
         return self.errorLabel
@@ -31,4 +31,4 @@ class VistaLogin(MyMainWindow):
         return self.passwordLineEdit
 
     def getLoginButton(self) -> QPushButton:
-        return self.ricercaButton
+        return self.loginButton
