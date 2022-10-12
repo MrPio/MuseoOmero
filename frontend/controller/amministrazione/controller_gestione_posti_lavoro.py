@@ -7,28 +7,63 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+
+from PyQt5.QtGui import QPixmap
+
 from backend.high_level.museo import Museo
+from backend.high_level.personale.amministrazione import Amministrazione
+from backend.high_level.personale.reception import Reception
+from backend.high_level.personale.segreteria import Segreteria
+from frontend.controller.amministrazione.controller_modifica_posto_lavoro import ControllerModificaPostoLavoro
 from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro import ControllerWidgetPostoLavoro
+from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_gestisci_posto import \
+    StrategyWidgetGestisciPosto
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGestionePostiLavoro
 
+from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
+from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
 class ControllerGestionePostiLavoro(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaGestionePostiLavoro, previous: Controller, model: Museo):
         super().__init__(view)
+        self.view: VistaGestionePostiLavoro = view
+        self.previous = previous
+        self.model = model
+        self.initializeUi()
 
     def gotoVistaModificaPostoLavoro(self) -> None:
-        pass
+        controller = ControllerModificaPostoLavoro(
+            view=VistaModificaPostoLavoro(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        controller.connettiEventi()
+        controller.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
 
     def __renderizzaPostiLavoro(self) -> list[ControllerWidgetPostoLavoro]:
-        pass
+        result=[]
+        for posto_lavoro in self.model.posti_lavoro:
+            new_widget = WidgetPostoLavoro(self.view.scrollAreaWidgetContents)
+
+            result.append(ControllerWidgetPostoLavoro(
+                view=new_widget,
+                model=posto_lavoro,
+                parent=self,
+                strategy=StrategyWidgetGestisciPosto(),
+            ))
+        return result
+
+
 
     def initializeUi(self) -> None:
         self.posti_lavoro = self.__renderizzaPostiLavoro()
