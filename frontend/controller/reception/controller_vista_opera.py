@@ -15,7 +15,8 @@ from frontend.view.reception.vista_opera import VistaOpera
 class ControllerVistaOpera(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaOpera, previous: Controller, model: Opera):
         super().__init__(view)
@@ -30,7 +31,8 @@ class ControllerVistaOpera(Controller):
     #     pass
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        #TODO cambiaUbicazioneClicked
 
     def initializeUi(self) -> None:
         self.view.getAutoreLabel().setText()

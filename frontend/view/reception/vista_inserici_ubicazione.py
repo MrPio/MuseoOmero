@@ -15,17 +15,23 @@ from frontend.view.my_main_window import MyMainWindow
 
 class VistaInsericiUbicazione(MyMainWindow):
 
-    def getPianoLineEdit(self) -> QLineEdit:
-        pass
+    def __init__(self):
+        super().__init__(UI_DIR + '/InserisciUbicazione.ui')
 
-    def getNumeroMagazzinoLineEdit(self) -> QLineEdit:
-        pass
+    def getPreviousButton(self) -> QPushButton:
+        return self.previousButton
 
-    def getScaffaleLineEdit(self) -> QLineEdit:
-        pass
+    def getPianoSpinBox(self) -> QSpinBox:
+        return self.pianoSpinBox
+
+    def getNumeroMagazzinoSpinBox(self) -> QSpinBox:
+        return self.numeroMagazzinoSpinBox
+
+    def getScaffaleSpinBox(self) -> QSpinBox:
+        return self.scaffaleSpinBox
 
     def getPosizioneSpinBox(self) -> QSpinBox:
         return self.posizioneSpinBox
 
     def getConfermaButton(self) -> QPushButton:
-        pass
+        return self.confermaButton

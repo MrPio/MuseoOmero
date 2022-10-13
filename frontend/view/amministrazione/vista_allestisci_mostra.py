@@ -8,6 +8,8 @@
 # 
 #######################################################
 from PyQt5.QtWidgets import QPushButton, QLabel, QLineEdit, QComboBox
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 

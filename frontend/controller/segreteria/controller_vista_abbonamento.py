@@ -7,17 +7,26 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Abbonamento
+from backend.high_level.clientela.abbonamento import Abbonamento
 from frontend.controller.controller import Controller
-from frontend.view import VistaAbbonamento
+from frontend.view.segreteria.vista_abbonamento import VistaAbbonamento
 
 class ControllerVistaAbbonamento(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
-    def __init__(self,view : VistaAbbonamento, previous : Controller, model : Abbonamento):
-        pass
+    def __init__(self, view: VistaAbbonamento, previous: Controller, model: Abbonamento):
+        super().__init__(view)
+        self.view: VistaAbbonamento = view
+        self.previous = previous
+        self.model = model
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+
+    def initializeUi(self) -> None:
+        self.view.getCodiceFiscaleLabel().setText()
+        self.view.getCognomeLabel().setText()
+        #TODO finire inizializeUi

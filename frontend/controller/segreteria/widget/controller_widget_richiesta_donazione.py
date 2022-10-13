@@ -25,6 +25,8 @@ class ControllerWidgetRichiestaDonazione(Controller):
 
     def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):
         super().__init__(view)
+        self.view: WidgetRichiestaDonazione = view
+        self.model = model
 
     def __onRifiutaClicked(self) -> None:
         self.model.rifiuta()
@@ -33,4 +35,10 @@ class ControllerWidgetRichiestaDonazione(Controller):
         self.model.accetta(self.model.ubicazione)
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getAccettaButton().clicked.connect(self.__onAccettaClicked)
+        self.view.getRifiutaButton().clicked.connect(self.__onRifiutaClicked)
+        self.view.getIcon().mouseReleaseEvent = lambda _: self.__gotoVistaOpera()
+
+    def initializeUi(self) -> None:
+        # TODO foto
+        self.view.getTitoloLabel().setText(self.model.opera.titolo)
