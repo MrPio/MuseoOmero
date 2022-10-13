@@ -11,7 +11,7 @@ from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strat
     StrategyWidgetPostoLavoro
 
 class StrategyWidgetAssegnaPosto(StrategyWidgetPostoLavoro):
-    def initializeUi(c : 'ControllerWidgetPostoLavoro') -> None:
+    def initializeUi(self,c : 'ControllerWidgetPostoLavoro') -> None:
         c.view.getAssegnaPostoButton().setVisible(True)
         c.view.getModificaButton().setVisible(False)
         c.view.getRimuoviButton().setVisible(False)

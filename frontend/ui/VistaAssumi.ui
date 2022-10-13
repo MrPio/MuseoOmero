@@ -1134,7 +1134,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="widgetResizable">
      <bool>true</bool>
     </property>
-    <widget class="QWidget" name="postiLavoroListView">
+    <widget class="QWidget" name="scrollAreaWidgetContents">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1446,6 +1446,21 @@ border-width:3;
    <zorder>nomeLineEdit</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nomeLineEdit</tabstop>
+  <tabstop>cognomeLineEdit</tabstop>
+  <tabstop>dataNascitaLineEdit</tabstop>
+  <tabstop>sessoComboBox</tabstop>
+  <tabstop>impiegoComboBox</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+ </tabstops>
  <resources>
   <include location="res.qrc"/>
   <include location="res/res.qrc"/>

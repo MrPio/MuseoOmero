@@ -14,7 +14,7 @@ from backend.high_level.personale.dipendente import Dipendente
 
 class PostoLavoro(abc.ABC):
     def __init__(self, nome:str , piano: int, numPostazioni: int, descrizione: str = ''):
-        self.nome=nome,
+        self.nome=nome
         self.piano = piano
         self.numero_postazioni_totali = numPostazioni
         self.descrizione = descrizione

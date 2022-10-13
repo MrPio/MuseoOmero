@@ -58,7 +58,7 @@ class ControllerHomeAmministrazione(Controller):
                 self.view.getVisualizzaReportIncassi(),
                 self.view.getGestisciMostreButton(),
                 self.view.getGestisciTurniGuideButton(),
-                self.view.getGestisciStruttureButton(),
+                # self.view.getGestisciStruttureButton(),
                 self.view.getVisualizzaStatisticheButton()
             ]:
                 el.setEnabled(False)
@@ -68,7 +68,7 @@ class ControllerHomeAmministrazione(Controller):
             view=VistaAccount(),
             previous=self,
             home=self.home,
-            dipendente=self.dipendente,
+            model=self.dipendente,
         )
         self.next.connettiEventi()
         self.next.showView()

@@ -1,10 +1,13 @@
 import os
 import sys
 
+import winotify
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+
+from backend.high_level.museo import Museo
 from frontend.ui.location import UI_DIR
 from frontend import myres
 
@@ -17,7 +20,7 @@ class MyMainWindow(QMainWindow):
         # a quanto pare questo trucchetto richiede la versione 5 di pyqt
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         self.setWindowIcon(QtGui.QIcon(UI_DIR + '/ico/museum_white.ico'))
-        self.exitButton.clicked.connect(lambda: os._exit(1))
+        self.exitButton.clicked.connect(self.save_and_exit)
         self.maximizeButton.clicked.connect(self.maximize)
         self.reduceButton.clicked.connect(self.showMinimized)
 
@@ -86,3 +89,14 @@ class MyMainWindow(QMainWindow):
                              self.width(),
                              self.height())
             self.start = self.end
+
+    def save_and_exit(self):
+        winotify.Notification(
+            app_id='Museo Omero',
+            title='Backup in corso',
+            msg='Attendi, sto effettuando il backup del museo locale...',
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        ).show()
+        Museo.getInstance().make_backup()
+        os._exit(1)

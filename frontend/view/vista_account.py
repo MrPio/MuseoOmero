@@ -18,7 +18,7 @@ class VistaAccount(MyMainWindow):
     def __init__(self):
         super().__init__(UI_DIR + '/VistaAccount.ui')
 
-    def getPreviousButton(self) -> QPushButton:
+    def getPreviousButton(self) -> QLabel:
         return self.previousButton
 
     def getNomeLabel(self) -> QLabel:

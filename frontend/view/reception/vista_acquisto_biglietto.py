@@ -20,7 +20,7 @@ class VistaAcquistoBiglietto(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
-    def getTipoBigliettoComboBox(self) -> QPushButton:
+    def getTipoBigliettoComboBox(self) -> QComboBox:
         return self.tipoBigliettoComboBox
 
     def getTariffaComboBox(self) -> QComboBox:

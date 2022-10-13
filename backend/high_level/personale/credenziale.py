@@ -10,16 +10,28 @@
 import random
 import string
 
+import winotify
+
 from backend.low_level.sicurezza.hashing import Hashing
 from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
+from frontend.ui.location import UI_DIR
 
 
 class Credenziale:
-
+    # TODO Nella vista account l'utente deve poter cambiare la sua password
     def __init__(self, username: str, password: str = '', hashing: Hashing = SHA256Hashing()):
         self.username = username
         self.hashing: Hashing = hashing
         rand_pass = ''.join(random.choice(string.digits + string.ascii_letters) for _ in range(6))
+        if password == '':
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Nuovo Account',
+                msg='• Username --> {} \r\n• Password --> {} \r\nPuoi cambiarla in un qualunque '
+                    'momento nella vista del tuo account.'.format(self.username, rand_pass),
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='long',
+            ).show()
         self.enc_password = self.hashing.hash(password if password != '' else rand_pass)
 
     def verifica(self, password: str) -> bool:

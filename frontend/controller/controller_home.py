@@ -7,10 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import winotify
+
 from backend.high_level.museo import Museo
 from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 from frontend.controller.controller import Controller
 from frontend.controller.controller_login import ControllerLogin
+from frontend.ui.location import UI_DIR
 from frontend.view.vista_home import VistaHome
 from frontend.view.vista_login import VistaLogin
 
@@ -31,6 +34,16 @@ class ControllerHome(Controller):
         controller.connettiEventi()
         controller.showView()
         self.disableView()
+
+        if len(Museo.getInstance().dipendenti)==1 and Museo.getInstance().dipendenti[0].autogenerato:
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Primo Accesso',
+                msg='• Username --> {admin} \r\n• Password --> {admin} \r\nNon appena '
+                    'crei un account amministratore rimuoverò questo account temporaneo',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
 
     def __onReceptionClicked(self) -> None:
         self.__gotoLogin('reception')

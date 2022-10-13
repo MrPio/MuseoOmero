@@ -7,21 +7,37 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Opera
+from backend.high_level.gestione_interna.opera import Opera
 from frontend.controller.controller import Controller
-from frontend.view import VistaOpera
+from frontend.view.reception.vista_opera import VistaOpera
+
 
 class ControllerVistaOpera(Controller):
-    m_VistaOpera= VistaOpera()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaOpera, previous : Controller, model : Opera):
-        pass
+    def __init__(self, view: VistaOpera, previous: Controller, model: Opera):
+        super().__init__(view)
+        self.view: VistaOpera = view
+        self.previous = previous
+        self.model = model
+
+        self.connettiEventi()
+        self.initializeUi()
+
+    # def __onCambiaUbicazioneClicked(self) -> None:
+    #     pass
 
     def connettiEventi(self) -> None:
         pass
 
-    def __onCambiaUbicazioneClicked(self) -> None:
-        pass
+    def initializeUi(self) -> None:
+        self.view.getAutoreLabel().setText()
+        self.view.getCostoLabel().setText()
+        self.view.getDimensioniLabel().setText()
+        self.view.getImmagineLabel().setText()
+        self.view.getPeriodoLabel().setText()
+        self.view.getTitoloLabel().setText()
+        self.view.getUbicazioneLabel().setText()
+        #TODO cambiaUbicazioneButton

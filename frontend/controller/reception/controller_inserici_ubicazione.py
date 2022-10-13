@@ -7,9 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Ubicazione
+from backend.high_level.gestione_interna.ubicazione import Ubicazione
 from frontend.controller.controller import Controller
-from frontend.view import VistaInsericiUbicazione
+from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
+
 
 class ControllerInsericiUbicazione(Controller):
     m_VistaInsericiUbicazione= VistaInsericiUbicazione()

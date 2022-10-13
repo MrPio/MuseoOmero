@@ -74,3 +74,4 @@ class ControllerLogin(Controller):
         self.__home = home
         self.__repartoScelto = repartoScelto
         self.view.getErrorLabel().setVisible(False)
+

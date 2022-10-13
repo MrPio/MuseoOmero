@@ -9,22 +9,28 @@
 #######################################################
 from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from frontend.controller.controller import Controller
+from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
+from frontend.view.reception.vista_opera import VistaOpera
 from frontend.view.segreteria.widget.widget_richiesta_donazione import WidgetRichiestaDonazione
 
 
 class ControllerWidgetRichiestaDonazione(Controller):
 
     def __gotoVistaOpera(self) -> None:
-        pass
+        self.next = ControllerVistaOpera(
+            view=VistaOpera(),
+            previous=self,
+            model=self.model.opera,
+        )
 
     def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):
         super().__init__(view)
 
     def __onRifiutaClicked(self) -> None:
-        pass
+        self.model.rifiuta()
 
     def __onAccettaClicked(self) -> None:
-        pass
+        self.model.accetta(self.model.ubicazione)
 
     def connettiEventi(self) -> None:
         pass

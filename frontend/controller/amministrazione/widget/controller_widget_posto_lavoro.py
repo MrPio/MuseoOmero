@@ -7,9 +7,9 @@
 # Original author: MrPio
 # 
 #######################################################
+import winotify
 from PyQt5.QtGui import QPixmap
 
-from backend.high_level.personale import posto_lavoro
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.reception import Reception
@@ -17,6 +17,7 @@ from backend.high_level.personale.segreteria import Segreteria
 from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
     StrategyWidgetPostoLavoro
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
 
@@ -30,9 +31,20 @@ class ControllerWidgetPostoLavoro(Controller):
         self.parent = parent
         self.strategy = strategy
         self.initializeUi()
+        self.connettiEventi()
 
     def __onAssegnaPostoClicked(self) -> None:
-        self.parent.lavoro_scelto=self.model
+        self.parent.lavoro_scelto = self.model
+        winotify.Notification(
+            app_id='Museo Omero',
+            title='Posto Selezionato',
+            msg='Hai selezionato --> {}'.format(self.model.nome),
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        ).show()
+        for controller in self.parent.posti_lavoro:
+            controller.view.setEnabled(True)
+        self.view.setEnabled(False)
 
     def __onRimuoviClicked(self) -> None:
         pass
@@ -47,7 +59,10 @@ class ControllerWidgetPostoLavoro(Controller):
 
     def initializeUi(self):
         self.strategy.initializeUi(self)
+        print(self.model.nome)
         self.view.getNomeLabel().setText('{} (piano {})'.format(self.model.nome, self.model.piano))
+        self.view.getPostiLiberiLabel().setText('posti liberi {}/{}'.format(
+            len(self.model.lavori), self.model.numero_postazioni_totali))
 
         pixmaps = {
             Reception: QPixmap(":/icons/theater_comedy_FILL1_wght500_GRAD200_opsz48_risultato.png"),

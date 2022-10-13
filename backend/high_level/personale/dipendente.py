@@ -29,6 +29,7 @@ class Dipendente():
         self.lavoro = lavoro
         self.autogenerato=autogenerato
         self.lavori_passati: list[Lavoro] = []
+        self.data_registrazione=datetime.now()
 
     def assumi(self, lavoro: Lavoro) -> bool:
         if self.lavoro is None:

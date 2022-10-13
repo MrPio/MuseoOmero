@@ -31,6 +31,18 @@ class Biglietto(Documento):
         else:
             return self.tariffa.cost + (5.00 if self.__hasGuida() else 0.00)
 
+    def set_tariffa(self, newVal: Tariffa):
+        self.tariffa = newVal
+        self.notify()
+
+    def set_reparto(self, newVal: RepartoMuseo):
+        self.reparto_museo = newVal
+        self.notify()
+
+    def set_turno_guida(self, newVal: TurnoGuida):
+        self.guida = newVal
+        self.notify()
+
     def convalida(self) -> bool:
         self.date_convalida.append(datetime.now())
         return self.pagato and (datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>522</width>
-    <height>480</height>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -377,7 +377,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>157</x>
-      <y>405</y>
+      <y>420</y>
       <width>209</width>
       <height>52</height>
      </rect>
@@ -428,9 +428,9 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>121</x>
-      <y>226</y>
+      <y>222</y>
       <width>121</width>
-      <height>22</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -445,7 +445,7 @@ text-align: center;
 font-size: 18px &quot;Lato light&quot;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;N&lt;/span&gt;&lt;span style=&quot; font-size:11pt; vertical-align:super;&quot;&gt;o &lt;/span&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;magazzino:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;N&lt;/span&gt;&lt;span style=&quot; font-size:11pt; vertical-align:super;&quot;&gt;o &lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;magazzino:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -601,7 +601,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>121</x>
-      <y>164</y>
+      <y>168</y>
       <width>58</width>
       <height>22</height>
      </rect>
@@ -825,7 +825,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>121</x>
-      <y>286</y>
+      <y>288</y>
       <width>91</width>
       <height>22</height>
      </rect>

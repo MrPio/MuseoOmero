@@ -12,7 +12,7 @@ from frontend.controller.controller import Controller
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
 
 
-class ControllerAcquistoBiglietto(Controller):
+class ControllerAcquistoBiglietto(Controller, Subscriber):
 
     def __gotoPrevious(self) -> None:
         pass
@@ -36,13 +36,12 @@ class ControllerAcquistoBiglietto(Controller):
         pass
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getCercaGuidaButton().clicked.connect(self.__gotoVistaTurniGuide)
+        self.view.getVerificaAbbonamentoButton().clicked.connect(self.__gotoVistaVerificaAbbonamento)
+        self.view.getConfermaButton().clicked.connect(self.__gotoVistaInserisciDatiCliente)
+        self.view.getTariffaComboBox().currentTextChanged.connect(self.__onTariffaBoxChanged)
+        self.view.getTipoBigliettoComboBox().currentTextChanged.connect(self.__onTipoBigliettoChanged)
 
-    def __subscribeView(self) -> None:
-        pass
-
-    def getModel(self) -> Biglietto:
-        pass
-
-    def updatetime(self) -> None:
-        pass
+    def update(self) -> None:
+        self.view.getCostoLabel()#TODO

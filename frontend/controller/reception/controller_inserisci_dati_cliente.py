@@ -17,8 +17,8 @@ class ControllerInserisciDatiCliente(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaInserisciDatiCliente, previous : Controller, model : Visitatore):
-        pass
+    def __init__(self, view: VistaInserisciDatiCliente, previous: Controller, model: Visitatore):
+        super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
         pass

@@ -7,27 +7,30 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QLabel, QPushButton
+
+from frontend.ui.location import UI_DIR
+from frontend.view.my_widget import MyWidget
 
 
-class WidgetPostoLavoro(QWidget):
-    def getNomeLabel(self) -> QLabel:
-        pass
+class WidgetPostoLavoro(MyWidget):
+    def __init__(self, parent):
+        super().__init__(UI_DIR + '/gestisciPostoWidget.ui', parent)
 
     def getIcon(self) -> QLabel:
-        pass
-
-    def getPostiDisponibiliLabel(self) -> QLabel:
-        pass
+        return self.iconLabel
 
     def getPostiLiberiLabel(self) -> QLabel:
-        pass
+        return self.postiLiberiLabel
 
     def getAssegnaPostoButton(self) -> QPushButton:
-        pass
+        return self.assegnaButton
 
     def getRimuoviButton(self) -> QPushButton:
-        pass
+        return self.rimuoviButton
 
     def getModificaButton(self) -> QPushButton:
-        pass
+        return self.modificaButton
+
+    def getNomeLabel(self) -> QLabel:
+        return self.titoloLabel

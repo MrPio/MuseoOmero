@@ -1,10 +1,8 @@
 import ctypes
 import sys
 
-import winotify
 from PyQt5.QtWidgets import QApplication
 
-from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
 from frontend.controller.controller_home import ControllerHome
 from frontend.ui.location import UI_DIR
@@ -24,8 +22,8 @@ def startApp():
     app = QApplication(sys.argv)
 
     # MVC
-    vista_home = VistaGestioneDipendenti()
-    controller_home = ControllerGestioneDipendenti(vista_home,None,Museo.getInstance())
+    vista_home = VistaHome()
+    controller_home = ControllerHome(vista_home)
     controller_home.connettiEventi()
     controller_home.showView()
 

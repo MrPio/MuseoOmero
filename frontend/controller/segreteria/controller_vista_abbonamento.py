@@ -12,7 +12,6 @@ from frontend.controller.controller import Controller
 from frontend.view import VistaAbbonamento
 
 class ControllerVistaAbbonamento(Controller):
-    m_VistaAbbonamento= VistaAbbonamento()
 
     def __gotoPrevious(self) -> None:
         pass

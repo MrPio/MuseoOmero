@@ -20,13 +20,13 @@ from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding
 
 class Documento(abc.ABC):
 
-    def __init__(self,pagamento:Pagamento,dataRilascio : datetime = None):
-        self.pagamento=pagamento
-        self.data_rilascio=dataRilascio
-        self.pagato=False
-        self.qr_code=QRCode(QRCodeEncoding())
-        self.date_convalida:list[datetime]=[]
-        self.subscribers:list[Subscriber]=[]
+    def __init__(self, pagamento: Pagamento, dataRilascio: datetime = None):
+        self.pagamento = pagamento
+        self.data_rilascio = dataRilascio
+        self.pagato = False
+        self.qr_code = QRCode(QRCodeEncoding())
+        self.date_convalida: list[datetime] = []
+        self.subscribers: list[Subscriber] = []
 
     @abc.abstractmethod
     def calcolaCosto(self) -> float:
@@ -40,14 +40,13 @@ class Documento(abc.ABC):
         pass
 
     def acquista(self) -> bool:
-        self.pagato= self.pagamento.paga(self.calcolaCosto())
+        self.pagato = self.pagamento.paga(self.calcolaCosto())
         return self.pagato
 
-
-    def subscribe(self,subscriber : Subscriber) -> None:
+    def subscribe(self, subscriber: Subscriber) -> None:
         self.subscribers.append(subscriber)
 
-    def unsubscribe(self,subscriber : Subscriber) -> None:
+    def unsubscribe(self, subscriber: Subscriber) -> None:
         self.subscribers.remove(subscriber)
 
     def notify(self) -> None:
