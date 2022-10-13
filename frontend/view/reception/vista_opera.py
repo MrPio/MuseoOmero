@@ -45,3 +45,4 @@ class VistaOpera(MyMainWindow):
 
     def getCostoLabel(self) -> QLabel:
         return self.costoLabel
+

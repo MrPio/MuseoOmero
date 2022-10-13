@@ -15,3 +15,5 @@ class Ubicazione:
         self.numero_magazzino=numeroMagazzino
         self.scaffale=scaffale
         self.posizione=posizione
+
+

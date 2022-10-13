@@ -13,16 +13,20 @@ from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbica
 
 
 class ControllerInsericiUbicazione(Controller):
-    m_VistaInsericiUbicazione= VistaInsericiUbicazione()
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
-    def __init__(self,view : VistaInsericiUbicazione, previous : Controller, model : Ubicazione):
-        pass
+    def __init__(self,view : VistaInsericiUbicazione , previous : Controller, model : Ubicazione):
+        super().__init__(view)
+        self.view: VistaInsericiUbicazione = view
+        self.previous = previous
+        self.model = model
 
     def __onConfermaClicked(self) -> None:
         pass
+        #self.model.
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getConfermaButton().clicked(self.__onConfermaClicked)

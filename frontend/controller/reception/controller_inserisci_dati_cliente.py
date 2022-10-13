@@ -7,12 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Visitatore
+from backend.high_level.clientela.visitatore import Visitatore
 from frontend.controller.controller import Controller
-from frontend.view import VistaInserisciDatiCliente
+from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
+
 
 class ControllerInserisciDatiCliente(Controller):
-    m_VistaInserisciDatiCliente= VistaInserisciDatiCliente()
 
     def __gotoPrevious(self) -> None:
         pass

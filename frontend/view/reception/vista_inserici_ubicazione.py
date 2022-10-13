@@ -7,7 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QLineEdit, QSpinBox
+
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
@@ -22,8 +24,8 @@ class VistaInsericiUbicazione(MyMainWindow):
     def getScaffaleLineEdit(self) -> QLineEdit:
         pass
 
-    def getPosizioneLineEdit(self) -> QLineEdit:
-        pass
+    def getPosizioneSpinBox(self) -> QSpinBox:
+        return self.posizioneSpinBox
 
     def getConfermaButton(self) -> QPushButton:
         pass

@@ -17,12 +17,18 @@ from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
 class ControllerAggiungiOpera(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaAggiungiOpera, previous: Controller, strategy: StrategyAggiungiOpera):
         super().__init__(view)
+        self.view: VistaAggiungiOpera = view
+        self.previous = previous
+        self.strategy: StrategyAggiungiOpera = strategy
+
 
     def __onAggiungiUbicaioneClicked(self) -> None:
+        #TODO UBICAIONE E' DA CAMBIARE (IL REFRACTOR NON E' IMPLEMENTATO :(  )
         pass
 
     def __onDropZoneDropped(self) -> None:
@@ -32,6 +38,7 @@ class ControllerAggiungiOpera(Controller):
         pass
 
     def __onConfermaClicked(self) -> None:
+        #self.strategy.onConfermaClicked()
         pass
 
     def connettiEventi(self) -> None:

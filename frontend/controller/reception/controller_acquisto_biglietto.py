@@ -8,32 +8,62 @@
 # 
 #######################################################
 from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.clientela.enum.tariffa import Tariffa
+from backend.high_level.clientela.subscriber import Subscriber
+from backend.high_level.clientela.visitatore import Visitatore
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
 from frontend.controller.controller import Controller
+from frontend.controller.reception.controller_inserisci_dati_cliente import ControllerInserisciDatiCliente
+from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
+from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
+from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
+from frontend.view.reception.vista_turni_guide import VistaTurniGuide
 
 
 class ControllerAcquistoBiglietto(Controller, Subscriber):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaAcquistoBiglietto, previous: Controller, model: Biglietto):
         super().__init__(view)
+        self.view: VistaAcquistoBiglietto = view
+        self.previous = previous
+        self.model = model
+        self.model.subscribe(self)
 
     def __gotoVistaTurniGuide(self) -> None:
-        pass
+        self.next = ControllerTurniGuide(
+            view=VistaTurniGuide(),
+            previous=self,
+            home=self.home,
+            strategy=StrategyTurniGuide(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def __gotoVistaVerificaAbbonamento(self) -> None:
-        pass
+        pass #TODO
 
     def __gotoVistaInserisciDatiCliente(self) -> None:
-        pass
+        self.next = ControllerInserisciDatiCliente(
+            view=VistaInserisciDatiCliente(),
+            previous=self,
+            model=Visitatore(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def __onTariffaBoxChanged(self) -> None:
-        pass
+        self.model.set_tariffa(Tariffa[self.view.getTariffaComboBox().currentText().upper()])
 
     def __onTipoBigliettoChanged(self) -> None:
-        pass
+        self.model.set_reparto(
+            RepartoMuseo[self.view.getTipoBigliettoComboBox().currentText().upper().replace(' ', '_')])
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
