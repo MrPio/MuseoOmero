@@ -32,6 +32,15 @@ class ControllerVistaAbbonamento(Controller):
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
 
     def initializeUi(self) -> None:
-        self.view.getCodiceFiscaleLabel().setText()
-        self.view.getCognomeLabel().setText()
-        #TODO finire inizializeUi
+        for cliente in filter(lambda visitatore: isinstance(visitatore, Cliente), Museo.getInstance().visitatori):
+            if self.model in cliente.abbonamenti:
+                self.view.getNomeLabel().setText(cliente.nome)
+                self.view.getCognomeLabel().setText(cliente.cognome)
+                self.view.getCodiceFiscaleLabel().setText(cliente.codiceFiscale)
+                self.view.getScadenzaLabel() \
+                    .setText('{} ({} giorni '.format(
+                    (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days)).strftime('%d/%m/%Y'),
+                    abs(self.model.giorniAllaScadenza()))
+                             + 'rimasti)' if self.model.giorniAllaScadenza() > 0 else 'fa)')
+
+        # TODO inizializzare Qr-Code nella label

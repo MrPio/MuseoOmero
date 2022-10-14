@@ -17,16 +17,23 @@ from frontend.view.segreteria.vista_gestione_donazioni import VistaGestioneDonaz
 class ControllerGestioneDonazioni(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaGestioneDonazioni, previous: Controller, model: Museo):
         super().__init__(view)
+        self.view: VistaGestioneDonazioni = view
+        self.previous = previous
+        self.model = model
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        #TODO listView
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
         pass
 
     def initializeUi(self) -> None:
+        #TODO
         pass
