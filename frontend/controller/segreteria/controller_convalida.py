@@ -8,22 +8,38 @@
 # 
 #######################################################
 from frontend.controller.controller import Controller
+from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
+from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
+    StrategyConvalidaAbbonamento
 from frontend.view.segreteria.vista_convalida import VistaConvalida
 
 
 class ControllerConvalida(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaConvalida, previous: Controller, strategy: StrategyConvalida):
         super().__init__(view)
+        self.view : VistaConvalida = view
+        self.previous : Controller = previous
+        self.strategy : StrategyConvalida = strategy
 
     def __gotoVistaInserimentoManuale(self) -> None:
-        pass
+        self.next = ControllerInserimentoManuale(
+            view=VistaConvalida(),
+            previous=self,
+            strategy=StrategyConvalidaAbbonamento(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def __onScannerizzaClicked(self) -> None:
+        self.
         pass
 
     def connettiEventi(self) -> None:

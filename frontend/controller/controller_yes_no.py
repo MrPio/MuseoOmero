@@ -14,16 +14,22 @@ from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerYesNo(Controller):
-    m_VistaYesNo= VistaYesNo()
+    def __init__(self, view: VistaYesNo, previous: Controller, onConfermaCliked: function):
+        super().__init__(view)
+        self.view: VistaYesNo = view
+        self.previous: Controller = previous
+        self.onConfermaCliked = onConfermaCliked
 
-    def __onAnNoneaClicked(self) -> None:
-        pass
-
-    def __init__(self,view : VistaYesNo, previous : Controller):
-        pass
+    def __onAnnullaClicked(self) -> None:
+        self.closeView()
+        self.previous.enableView()
 
     def __onConfermaClicked(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
+        self.onConfermaCliked()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getConfermaButton().mouseReleaseEvent =  lambda _: self.__onConfermaClicked()
+        self.view.getAnnullaButton().mouseReleaseEvent = lambda _: self.__onAnnullaClicked()
+
