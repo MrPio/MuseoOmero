@@ -17,7 +17,7 @@ class ControllerRinnovoAbbonamento(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento|None=None):
+    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento | None = None):
         super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
@@ -33,10 +33,11 @@ class ControllerRinnovoAbbonamento(Controller):
         pass
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
+        self.view.getDurataComboBox().currentTextChanged.connect(self.__onDurataChanged)
 
-    def __subscribeView(self) -> None:
-        pass
-
-    def updatetime(self) -> None:
+    def initializeUi(self) -> None:
+        self.view.getQrCodeImage()
+        #TODO inizializzare Qr-Code nella label
         pass

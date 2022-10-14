@@ -35,5 +35,6 @@ class Abbonamento(Documento):
         return self.tipo.days - (datetime.now() - self.data_ultimo_rinnovo).days
 
     def rinnova(self, tipo: TipoAbbonamento) -> None:
+        self.data_ultimo_rinnovo=datetime.now()
         self.tipo = tipo
         self.acquista()

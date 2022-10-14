@@ -7,8 +7,11 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from builtins import function
+
 from frontend.controller.controller import Controller
-from frontend.view import VistaYesNo
+from frontend.view.vista_yes_no import VistaYesNo
+
 
 class ControllerYesNo(Controller):
     m_VistaYesNo= VistaYesNo()

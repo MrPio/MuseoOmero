@@ -7,15 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerTurniGuide
-import StrategyAggiungiAllaLista
+from PyQt5.QtGui import QPixmap
+
+from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
+    StrategyAggiungiAllaLista
+
 
 class AggiungiTurnoGuida(StrategyAggiungiAllaLista):
     def onClicked(self) -> None:
         pass
 
-    def __init__(self,c : ControllerTurniGuide):
-        pass
+    def __init__(self,c : 'ControllerTurniGuide'):
+        self.controller=c
 
-    def getIcon(self) -> QIcon:
-        pass
+    def getIcon(self) -> QPixmap:
+        return QPixmap(":/icons/add_circle_FILL1_wght600_GRAD200_opsz48_risultato.png")

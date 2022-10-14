@@ -15,8 +15,8 @@ from backend.high_level.clientela.enum.sesso import Sesso
 
 class Visitatore:
 
-    def __init__(self,prov : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, nasc : datetime = None):
-        self.provenienza=prov
+    def __init__(self,provenienza : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, dataNascita : datetime = None):
+        self.provenienza=provenienza
         self.sesso=sesso
         self.data_nascita=nasc
         self.biglietti:list[Biglietto]=[]

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>746</height>
+    <height>690</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -225,7 +225,7 @@ color: #1684FC;
 font: 14pt &quot;Lato&quot;;</string>
     </property>
     <property name="text">
-     <string>HomeSegreteria ➜ VistaAbbonamento</string>
+     <string>RinnovaAbbonamento ➜ VistaAbbonamento</string>
     </property>
    </widget>
    <widget class="QLabel" name="previousButton">
@@ -713,59 +713,6 @@ background-color: rgba(255, 255, 255,0);
      <string>titolo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="confermaButton">
-    <property name="geometry">
-     <rect>
-      <x>176</x>
-      <y>670</y>
-      <width>180</width>
-      <height>45</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Lato</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
- background-color:rgb(104, 194, 253);
- border-style: solid;
- border-radius:22px;
-color: rgb(255, 255, 255);
-font: 14pt &quot;Lato&quot;;
-}
-
-QPushButton::hover{
-
-
-	border-color : rgb(15, 138, 204);
-	color: white;
-border-width:0;
-}
-
-QPushButton::pressed{
-	border-color:rgb(104, 194, 253);
-	border-width:4;
-	background-color : white;
-	color:rgb(104, 194, 253);
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Conferma</string>
-    </property>
-   </widget>
    <zorder>label_3</zorder>
    <zorder>label</zorder>
    <zorder>reduceButton</zorder>
@@ -787,7 +734,6 @@ QPushButton::pressed{
    <zorder>label_8</zorder>
    <zorder>label_12</zorder>
    <zorder>scadenzaLabel</zorder>
-   <zorder>confermaButton</zorder>
   </widget>
  </widget>
  <resources>

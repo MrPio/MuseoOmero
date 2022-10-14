@@ -7,23 +7,28 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import StrategyAggiungiAllaLista
-import WidgetAggiungiAllaLista
+from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
+    StrategyAggiungiAllaLista
 from frontend.controller.controller import Controller
+from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
+
 
 class ControllerWidgetAggiungiAllaLista(Controller):
-    m_WidgetAggiungiAllaLista= WidgetAggiungiAllaLista()
 
-    m_StrategyAggiungiAllaLista= StrategyAggiungiAllaLista()
-
-    def __init__(self,view : WidgetAggiungiAllaLista, parent : Controller, strategy : StrategyAggiungiAllaLista, tipo : str =  ""):
-        pass
+    def __init__(self, view: WidgetAggiungiAllaLista, parent: Controller,
+                 strategy: StrategyAggiungiAllaLista, tipo: str = ""):
+        super().__init__(view)
+        self.view: WidgetAggiungiAllaLista = view
+        self.parent = parent
+        self.strategy = strategy
+        self.tipo = tipo
+        self.initializeUi()
 
     def __onClicked(self) -> None:
-        pass
+        self.strategy.onClicked()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getIcon().mouseReleaseEvent = lambda _: self.__onClicked()
 
-    def initializeUi():
-        pass
+    def initializeUi(self):
+        self.view.getIcon().setPixmap(self.strategy.getIcon())

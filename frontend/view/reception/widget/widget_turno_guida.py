@@ -9,8 +9,10 @@
 #######################################################
 from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
 
+from frontend.view.my_widget import MyWidget
 
-class WidgetTurnoGuida(QWidget):
+
+class WidgetTurnoGuida(MyWidget):
     def getIcon(self) -> QLabel:
         pass
 

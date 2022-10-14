@@ -80,3 +80,12 @@ class ControllerWidgetPostoLavoro(Controller):
             None: QPixmap(":/icons/person_FILL1_wght600_GRAD200_opsz48_risultato"),
         }
         self.view.getIcon().setPixmap(pixmaps[type(self.model)])
+
+        #Impedisco la rimozione di un posto lavoro se ce ne è solo uno di quel tipo
+
+        self.view.getRimuoviButton().setEnabled(False)
+        self.view.getRimuoviButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
+        for posto_lavoro in self.parent.model.posti_lavoro:
+            if type(posto_lavoro)==type(self.model) and posto_lavoro!=self.model:
+                self.view.getRimuoviButton().setEnabled(True)
+                self.view.getRimuoviButton().setStyleSheet(open(UI_DIR + '/css/redButton.css', 'r').read())

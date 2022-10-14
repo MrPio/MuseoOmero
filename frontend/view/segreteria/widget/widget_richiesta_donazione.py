@@ -9,8 +9,10 @@
 #######################################################
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 
+from frontend.view.my_widget import MyWidget
 
-class WidgetRichiestaDonazione(QWidget):
+
+class WidgetRichiestaDonazione(MyWidget):
     def getIcon(self) -> QLabel:
         pass
 

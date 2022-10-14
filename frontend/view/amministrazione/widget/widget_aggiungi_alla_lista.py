@@ -7,19 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import StrategyAggiungiAllaLista
-import QWidget
-import StrategyTurniGuide
+from PyQt5.QtWidgets import QLabel
 
-class WidgetAggiungiAllaLista(QWidget):
-    m_StrategyTurniGuide= StrategyTurniGuide()
+from frontend.ui.location import UI_DIR
+from frontend.view.my_widget import MyWidget
 
-    def __init__(self,action : StrategyAggiungiAllaLista):
-        pass
 
-    def __onClicked(self) -> None:
-        pass
+class WidgetAggiungiAllaLista(MyWidget):
 
-class WidgetAggiungiAllaLista(QWidget):
+    def __init__(self,  parent):
+        super().__init__(UI_DIR + '/aggiungiAllaListaWidget.ui', parent)
+
     def getIcon(self) -> QLabel:
-        pass
+        return self.iconLabel

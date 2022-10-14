@@ -18,7 +18,7 @@ class ControllerModificaPostoLavoro(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
+    def     __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
         super().__init__(view)
         self.view: VistaModificaPostoLavoro = view
         self.previous = previous

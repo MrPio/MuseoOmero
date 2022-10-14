@@ -33,5 +33,26 @@ class ControllerRicercaOpera(Controller):
     def connettiEventi(self) -> None:
         pass
 
+    def __renderizzaOpere(self) -> list[ControllerWidgetOpera]:
+        tipo_ricerca = self.view.getTipoRicercaComboBox().currentText().lower()
+        parametro_ricerca = self.view.getParametroRicercaLineEdit().text()
+        matches = {
+            'autore': lambda opera: parametro_ricerca.lower() in opera.autore.lower(),
+            'nome': lambda opera: parametro_ricerca.lower() in opera.nome.lower(),
+            'periodo': lambda opera: parametro_ricerca.lower() in opera.periodo.name.lower(),
+            'tipo': lambda opera: parametro_ricerca.lower() in opera.composizione.tipo_opera.name.lower(),
+        }
+        opere_filtrate = filter(matches[tipo_ricerca], self.model.opere)
+        result = []
+
+        for opera in opere_filtrate:
+            new_widget = WidgetOpera(self.scrollAreaWidgetContents)
+            result.append(ControllerWidgetOpera(
+                view=new_widget,
+                model=opera,
+                parent=self,
+            ))
+        return result
+
     def initializeUi(self) -> None:
         pass

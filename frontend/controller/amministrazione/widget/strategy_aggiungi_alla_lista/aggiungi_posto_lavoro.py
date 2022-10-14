@@ -7,15 +7,39 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerGestionePostiLavoro
-import StrategyAggiungiAllaLista
+from PyQt5.QtGui import QPixmap
+
+from backend.high_level.museo import Museo
+from backend.high_level.personale.amministrazione import Amministrazione
+from backend.high_level.personale.reception import Reception
+from backend.high_level.personale.segreteria import Segreteria
+
+import frontend.controller.amministrazione.controller_modifica_posto_lavoro as controller_modifica_posto_lavoro
+from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
+
+from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
+    StrategyAggiungiAllaLista
+
 
 class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
+
+    def __init__(self, c: 'ControllerWidgetAggiungiAllaLista'):
+        self.controller = c
+
     def onClicked(self) -> None:
-        pass
+        matches = {
+            'reception': Reception('', 0, 0, 1),
+            'segreteria': Segreteria('', 0, 0, 1, ''),
+            'amministrazione': Amministrazione('', 0, 0)
+        }
+        Museo.getInstance().posti_lavoro.append(matches[self.controller.tipo])
+        controller = controller_modifica_posto_lavoro.ControllerModificaPostoLavoro(
+            view=VistaModificaPostoLavoro(),
+            previous=self.controller.parent,
+            model=matches[self.controller.tipo],
+        )
+        controller.showView()
+        self.controller.parent.disableView()
 
-    def __init__(self,c : ControllerGestionePostiLavoro):
-        pass
-
-    def getIcon(self) -> QIcon:
-        pass
+    def getIcon(self) -> QPixmap:
+        return QPixmap(":/icons/add_business_FILL1_wght600_GRAD200_opsz48_risultato.png")

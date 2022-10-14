@@ -162,7 +162,7 @@ margin:-3px -3px -3px -10px;
      <bool>false</bool>
     </property>
     <property name="currentText">
-     <string>Durata</string>
+     <string>Mensile</string>
     </property>
     <property name="iconSize">
      <size>
@@ -173,11 +173,6 @@ margin:-3px -3px -3px -10px;
     <property name="frame">
      <bool>true</bool>
     </property>
-    <item>
-     <property name="text">
-      <string>Durata</string>
-     </property>
-    </item>
     <item>
      <property name="text">
       <string>Mensile</string>

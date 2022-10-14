@@ -8,16 +8,16 @@
 # 
 #######################################################
 from frontend.controller.controller import Controller
-from frontend.view import VistaInserimentoManuale
+from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
+
 
 class ControllerInserimentoManuale(Controller):
-    m_VistaInserimentoManuale= VistaInserimentoManuale()
 
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaInserimentoManuale, previous : Controller):
-        pass
+    def __init__(self, view: VistaInserimentoManuale, previous: Controller):
+        super().__init__(view)
 
     def __onConfermaClicked(self) -> None:
         pass

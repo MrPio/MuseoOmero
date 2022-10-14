@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QLineEdit
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow

@@ -7,11 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtGui import QPixmap
+
+import abc
 
 
-class StrategyAggiungiAllaLista:
+class StrategyAggiungiAllaLista(abc.ABC):
+    @abc.abstractmethod
     def onClicked(self) -> None:
         pass
 
-    def getIcon(self) -> QIcon:
+    @abc.abstractmethod
+    def getIcon(self) -> QPixmap:
         pass

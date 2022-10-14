@@ -9,8 +9,10 @@
 #######################################################
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 
+from frontend.view.my_widget import MyWidget
 
-class WidgetBackup(QWidget):
+
+class WidgetBackup(MyWidget):
     def getDataLabel(self) -> QLabel:
         pass
 
