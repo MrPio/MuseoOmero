@@ -24,6 +24,7 @@ from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGesti
 from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
+
 class ControllerGestionePostiLavoro(Controller):
 
     def __gotoPrevious(self) -> None:
@@ -37,23 +38,29 @@ class ControllerGestionePostiLavoro(Controller):
         self.model = model
         self.initializeUi()
 
-    def gotoVistaModificaPostoLavoro(self) -> None:
+    #    TODO usare il widget aggiungi alla lista
+    """    def gotoVistaModificaPostoLavoro(self) -> None:
         controller = ControllerModificaPostoLavoro(
             view=VistaModificaPostoLavoro(),
             previous=self,
-            model=Museo.getInstance(),
+            model=self.model.posti_lavoro
         )
         controller.connettiEventi()
         controller.showView()
-        self.disableView()
+        self.disableView()"""
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
 
     def __renderizzaPostiLavoro(self) -> list[ControllerWidgetPostoLavoro]:
-        result=[]
+        result = []
         for posto_lavoro in self.model.posti_lavoro:
-            new_widget = WidgetPostoLavoro(self.view.scrollAreaWidgetContents)
+            matches = {
+                Reception: self.view.getReceptionsListView(),
+                Segreteria: self.view.getSegreterieListView(),
+                Amministrazione: self.view.getAmministrazioniListView(),
+            }
+            new_widget = WidgetPostoLavoro(matches[type(posto_lavoro)])
 
             result.append(ControllerWidgetPostoLavoro(
                 view=new_widget,
@@ -63,14 +70,16 @@ class ControllerGestionePostiLavoro(Controller):
             ))
         return result
 
-
-
     def initializeUi(self) -> None:
         self.posti_lavoro = self.__renderizzaPostiLavoro()
-        matches={
-            Reception:self.verticalLayout,
-            Segreteria:self.verticalLayout_2,
-            Amministrazione:self.verticalLayout_3,
+        matches = {
+            Reception: self.view.verticalLayout,
+            Segreteria: self.view.verticalLayout_2,
+            Amministrazione: self.view.verticalLayout_3,
         }
+        # rimuovo tutti i widget
+        for layout in [self.view.verticalLayout, self.view.verticalLayout_2, self.view.verticalLayout_3]:
+            for i in reversed(range(layout.count())):
+                layout.itemAt(i).widget().setParent(None)
         for controller in self.posti_lavoro:
-            matches[type(controller.model)].addWidget(controller.view.widget)
+            matches[type(controller.model)].addWidget(controller.view)

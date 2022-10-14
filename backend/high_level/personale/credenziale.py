@@ -22,7 +22,7 @@ class Credenziale:
     def __init__(self, username: str, password: str = '', hashing: Hashing = SHA256Hashing()):
         self.username = username
         self.hashing: Hashing = hashing
-        rand_pass = ''.join(random.choice(string.digits + string.ascii_letters) for _ in range(6))
+        rand_pass = ''.join(random.choice(string.digits) for _ in range(3))
         if password == '':
             winotify.Notification(
                 app_id='Museo Omero',

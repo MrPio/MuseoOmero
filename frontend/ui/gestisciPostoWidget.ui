@@ -96,7 +96,7 @@ QPushButton::pressed{
 	border-color:#e39797;
 	border-width:2;
 	background-color : white;
-	color:rgb(104, 194, 253);
+	color:#e3979
 }
 </string>
     </property>

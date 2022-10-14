@@ -15,16 +15,29 @@ from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModif
 class ControllerModificaPostoLavoro(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
         super().__init__(view)
+        self.view: VistaModificaPostoLavoro = view
+        self.previous = previous
+        self.model = model
+        self.connettiEventi()
+        self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        pass
+        self.model.nome=self.view.getNomeLineEdit().text()
+        self.model.piano=self.view.getPianoSpinBox().value()
+        self.model.numero_postazioni_totali=self.view.getCapienzaSpinBox().value()
+        self.previous.initializeUi()
+        self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
 
     def initializeUi(self) -> None:
-        pass
+        self.view.getNomeLineEdit().setText(self.model.nome)
+        self.view.getPianoSpinBox().setValue(self.model.piano)
+        self.view.getCapienzaSpinBox().setValue(self.model.numero_postazioni_totali)

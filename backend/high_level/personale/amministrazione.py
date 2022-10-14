@@ -16,8 +16,8 @@ from backend.high_level.personale.posto_lavoro import PostoLavoro
 
 class Amministrazione(PostoLavoro):
 
-    def __init__(self,nome:str, piano: int, numPostazioni: int, descrizione: str = ""):
-        super().__init__(nome,piano, numPostazioni, descrizione)
+    def __init__(self, nome: str, piano: int, numPostazioni: int, descrizione: str = ""):
+        super().__init__(nome, piano, numPostazioni, descrizione)
 
     def assumi(self, dipendente: Dipendente) -> bool:
         lavoro = Amministratore(
@@ -27,5 +27,9 @@ class Amministrazione(PostoLavoro):
             fondatore=False
         )
         if esito := dipendente.assumi(lavoro=lavoro):
+            dipendente.posto_lavoro = self
             self.lavori.append(lavoro)
         return esito
+
+    def promuovi(self, dipendente: Dipendente) -> bool:
+        return False

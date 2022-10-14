@@ -51,6 +51,7 @@ class ControllerGestioneDipendenti(Controller):
 
             result.append(ControllerWidgetDipendente(
                 view=new_widget,
+                parent=self,
                 model=dipendente,
             ))
         return result

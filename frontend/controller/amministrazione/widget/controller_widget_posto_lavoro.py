@@ -14,10 +14,12 @@ from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
+from frontend.controller.amministrazione.controller_modifica_posto_lavoro import ControllerModificaPostoLavoro
 from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
     StrategyWidgetPostoLavoro
 from frontend.controller.controller import Controller
 from frontend.ui.location import UI_DIR
+from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
 
@@ -47,10 +49,17 @@ class ControllerWidgetPostoLavoro(Controller):
         self.view.setEnabled(False)
 
     def __onRimuoviClicked(self) -> None:
-        pass
+        self.model.rimuovi(self.parent.model)
+        self.parent.initializeUi()
 
     def __gotoVistaModificaPostoLavoro(self) -> None:
-        pass
+        controller = ControllerModificaPostoLavoro(
+            view=VistaModificaPostoLavoro(),
+            previous=self.parent,
+            model=self.model
+        )
+        controller.showView()
+        self.parent.disableView()
 
     def connettiEventi(self) -> None:
         self.view.getAssegnaPostoButton().clicked.connect(self.__onAssegnaPostoClicked)

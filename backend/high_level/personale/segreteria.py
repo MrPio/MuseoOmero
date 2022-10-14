@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
+from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
@@ -28,5 +30,15 @@ class Segreteria(PostoLavoro):
             sportelloAssegnato=len(self.lavori) + 1
         )
         if esito := dipendente.assumi(lavoro=lavoro):
+            dipendente.posto_lavoro = self
             self.lavori.append(lavoro)
         return esito
+
+    def promuovi(self, dipendente: Dipendente) -> bool:
+        for lavoro in Museo.getInstance().posti_lavoro:
+            if isinstance(lavoro,Amministrazione):
+                if len(lavoro.lavori)<lavoro.numero_postazioni_totali:
+                    self.licenzia(dipendente,'promosso ad amministratore')
+                    lavoro.assumi(dipendente)
+                    return True
+        return False

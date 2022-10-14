@@ -9,7 +9,6 @@
 #######################################################
 import abc
 
-from backend.high_level.personale.dipendente import Dipendente
 
 
 class PostoLavoro(abc.ABC):
@@ -21,13 +20,22 @@ class PostoLavoro(abc.ABC):
         self.lavori = []
 
     @abc.abstractmethod
-    def assumi(self, dipendente: Dipendente) -> bool:
+    def assumi(self, dipendente: 'Dipendente') -> bool:
         pass
 
-    def licenzia(self, dipendente: Dipendente, notaLicensiamento: str) -> bool:
+    def licenzia(self, dipendente: 'Dipendente', notaLicensiamento: str) -> bool:
         for lavoro in self.lavori:
             if lavoro is dipendente.lavoro:
                 self.lavori.remove(lavoro)
                 dipendente.licenzia(notaLicensiamento)
                 return True
         return False
+    @abc.abstractmethod
+    def promuovi(self, dipendente: 'Dipendente') -> bool:
+        pass
+
+    def rimuovi(self,museo:'Museo'):
+        for dipendente in museo.dipendenti:
+            if dipendente.posto_lavoro is self:
+                dipendente.posto_lavoro=None
+        museo.posti_lavoro.remove(self)

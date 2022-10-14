@@ -12,13 +12,15 @@ from datetime import datetime
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.personale.credenziale import Credenziale
 from backend.high_level.personale.lavoro import Lavoro
+from backend.high_level.personale.posto_lavoro import PostoLavoro
 
 
 class Dipendente():
 
     def __init__(self, nome: str, cognome: str, dataNascita: datetime, email: str,
                  sesso: Sesso = Sesso.NON_SPECIFICATO, curriculum: str = '',
-                 credenziale: Credenziale = None, lavoro: Lavoro | None = None, autogenerato:bool=False):
+                 credenziale: Credenziale = None, lavoro: Lavoro | None = None,
+                 postoLavoro: PostoLavoro | None = None, autogenerato: bool = False):
         self.nome = nome
         self.cognome = cognome
         self.data_nascita = dataNascita
@@ -27,9 +29,10 @@ class Dipendente():
         self.curriculum = curriculum
         self.credenziale = Credenziale(nome + cognome) if credenziale == None else credenziale
         self.lavoro = lavoro
-        self.autogenerato=autogenerato
+        self.posto_lavoro = postoLavoro
+        self.autogenerato = autogenerato
         self.lavori_passati: list[Lavoro] = []
-        self.data_registrazione=datetime.now()
+        self.data_registrazione = datetime.now()
 
     def assumi(self, lavoro: Lavoro) -> bool:
         if self.lavoro is None:

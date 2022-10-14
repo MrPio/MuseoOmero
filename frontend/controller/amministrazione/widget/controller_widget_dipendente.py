@@ -11,9 +11,11 @@ from types import NoneType
 
 from PyQt5.QtGui import QPixmap
 
+from backend.high_level.museo import Museo
 from backend.high_level.personale.amministratore import Amministratore
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segretario import Segretario
 from frontend.controller.controller import Controller
 from frontend.ui.location import UI_DIR
@@ -22,17 +24,25 @@ from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipende
 
 class ControllerWidgetDipendente(Controller):
 
-    def __init__(self, view: WidgetDipendente, model: Dipendente):
+    def __init__(self, view: WidgetDipendente, parent: Controller, model: Dipendente):
         super().__init__(view)
         self.view: WidgetDipendente = view
         self.model = model
+        self.parent = parent
         self.initializeUi()
+        self.connettiEventi()
 
     def __onLicenziaClicked(self) -> None:
-        pass  # TODO
+        self.model.licenzia('licenziamento per giusta causa')
+        self.parent.initializeUi()
 
     def __onPromuoviClicked(self) -> None:
-        pass  # TODO
+        if type(self.model.posto_lavoro) != NoneType:
+            self.model.posto_lavoro.promuovi(self.model)
+        else:
+            for posto_lavoro in Museo.getInstance().posti_lavoro:
+                if isinstance(posto_lavoro, Reception) and len(posto_lavoro.lavori)<posto_lavoro.numero_postazioni_totali:
+                    posto_lavoro.assumi(self.model)
 
     def connettiEventi(self) -> None:
         self.view.getLicenziaButton().clicked.connect(self.__onLicenziaClicked)
