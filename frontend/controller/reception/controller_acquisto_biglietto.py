@@ -16,9 +16,11 @@ from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_inserisci_dati_cliente import ControllerInserisciDatiCliente
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.controller.segreteria.controller_convalida import ControllerConvalida
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 from frontend.view.reception.vista_turni_guide import VistaTurniGuide
+from frontend.view.segreteria.vista_convalida import VistaConvalida
 
 
 class ControllerAcquistoBiglietto(Controller, Subscriber):
@@ -32,7 +34,7 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view: VistaAcquistoBiglietto = view
         self.previous = previous
         self.model = model
-        self.model.subscribe(self)
+        #self.model.subscribe(self)
 
     def __gotoVistaTurniGuide(self) -> None:
         self.next = ControllerTurniGuide(
@@ -45,8 +47,15 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.next.showView()
         self.disableView()
 
-    def __gotoVistaVerificaAbbonamento(self) -> None:
-        pass #TODO
+    def __gotoVistaConvalida(self) -> None:
+        self.next = ControllerConvalida(
+            view=VistaConvalida(),
+            previous=self,
+            model=Biglietto(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def __gotoVistaInserisciDatiCliente(self) -> None:
         self.next = ControllerInserisciDatiCliente(

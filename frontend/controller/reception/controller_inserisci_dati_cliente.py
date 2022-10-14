@@ -7,7 +7,11 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from datetime import datetime
+
+from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 
@@ -15,13 +19,35 @@ from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciD
 class ControllerInserisciDatiCliente(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaInserisciDatiCliente, previous: Controller, model: Visitatore):
         super().__init__(view)
+        self.view: VistaInserisciDatiCliente = view
+        self.previous = previous
+        self.model = model
 
     def __onConfermaClicked(self) -> None:
-        pass
+
+        try:
+            datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+
+        birth = datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
+
+        if len(self.view.getProvenienzaLineEdit().text()) > 0:
+            nuovo_visitatore = Visitatore(
+                dataNascita=birth,
+                sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ', '_')],
+                provenienza=self.view.getProvenienzaLineEdit().text(),
+            )
+
+            Museo.getInstance().visitatori.append(nuovo_visitatore)
+            self.closeView()
+            self.previous.enableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getConfermaButton().clicked(self.__onConfermaClicked)

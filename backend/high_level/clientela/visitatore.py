@@ -18,5 +18,5 @@ class Visitatore:
     def __init__(self,provenienza : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, dataNascita : datetime = None):
         self.provenienza=provenienza
         self.sesso=sesso
-        self.data_nascita=nasc
+        self.data_nascita = dataNascita
         self.biglietti:list[Biglietto]=[]

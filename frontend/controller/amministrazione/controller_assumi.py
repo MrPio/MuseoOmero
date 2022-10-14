@@ -49,7 +49,7 @@ class ControllerAssumi(Controller):
 
         if len(self.view.getNomeLineEdit().text()) > 0 and \
                 len(self.view.getCognomeLineEdit().text()) > 0 and \
-                (datetime.today() - birth).days > 365 * 10:
+                (datetime.today() - birth).days > 365 * 16:
 
             nuovo_dip = Dipendente(
                 nome=self.view.getNomeLineEdit().text(),

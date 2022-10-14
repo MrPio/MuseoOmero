@@ -10,19 +10,28 @@
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+from frontend.controller.reception.widget.contreller_widget_opera import ControllerWidgetOpera
 from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+from frontend.view.reception.widget.widget_opera import WidgetOpera
 
 
 class ControllerRicercaOpera(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaRicercaOpera, previous: Controller, model: Museo, strategy: StrategyRicercaOpera):
         super().__init__(view)
+        self.view: VistaRicercaOpera = view
+        self.previous = previous
+        self.model = model
+        self.strategy: StrategyRicercaOpera = strategy
 
     def __onRicercaClicked(self) -> None:
         pass
+        # for opera in self.model.opere:
+        # self.initializeUi()
 
     def __gotoVistaOpera(self) -> None:
         pass
@@ -55,4 +64,13 @@ class ControllerRicercaOpera(Controller):
         return result
 
     def initializeUi(self) -> None:
-        pass
+        self.opere_trovate = self.__renderizzaOpere()
+
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.risultatiGridLayout.count())):
+            self.view.risultatiGridLayout.itemAt(i).widget().setParent(None)
+
+        c = 0
+        for widget_opera in self.opere_trovate:
+            self.risultatiGridLayout.addWidget(widget_opera, c // 3, c % 3, 1, 1)
+            c += 1
