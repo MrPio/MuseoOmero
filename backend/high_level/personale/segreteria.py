@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import random
+
 from backend.high_level.museo import Museo
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.dipendente import Dipendente

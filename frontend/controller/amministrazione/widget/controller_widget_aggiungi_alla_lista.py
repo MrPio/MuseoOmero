@@ -21,8 +21,10 @@ class ControllerWidgetAggiungiAllaLista(Controller):
         self.view: WidgetAggiungiAllaLista = view
         self.parent = parent
         self.strategy = strategy
+        self.strategy.controller=self
         self.tipo = tipo
         self.initializeUi()
+        self.connettiEventi()
 
     def __onClicked(self) -> None:
         self.strategy.onClicked()

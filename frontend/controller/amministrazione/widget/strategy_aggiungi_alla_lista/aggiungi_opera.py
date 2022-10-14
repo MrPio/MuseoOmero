@@ -14,11 +14,11 @@ from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.str
 
 
 class AggiungiOpera(StrategyAggiungiAllaLista):
+    def __init__(self):
+        self.controller: 'ControllerWidgetAggiungiAllaLista' = None
+
     def onClicked(self) -> None:
         pass
-
-    def __init__(self,c : 'ControllerAllestisciMostra'):
-        self.controller=c
 
     def getIcon(self) -> QPixmap:
         return QPixmap(":/icons/add_photo_alternate_FILL1_wght600_GRAD200_opsz48_risultato.png")

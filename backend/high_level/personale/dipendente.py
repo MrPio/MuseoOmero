@@ -42,6 +42,7 @@ class Dipendente():
 
     def licenzia(self, notaLicenziamento: str) -> bool:
         if self.lavoro is not None:
+            self.posto_lavoro=None
             self.lavoro.licenzia(notaLicenziamento)
             self.lavori_passati.append(self.lavoro)
             self.lavoro = None

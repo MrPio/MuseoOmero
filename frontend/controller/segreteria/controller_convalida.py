@@ -39,7 +39,6 @@ class ControllerConvalida(Controller):
         self.disableView()
 
     def __onScannerizzaClicked(self) -> None:
-        self.
         pass
 
     def connettiEventi(self) -> None:

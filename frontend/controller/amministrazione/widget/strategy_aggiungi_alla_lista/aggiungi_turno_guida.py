@@ -14,11 +14,12 @@ from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.str
 
 
 class AggiungiTurnoGuida(StrategyAggiungiAllaLista):
+    def __init__(self):
+        self.controller:'ControllerWidgetAggiungiAllaLista' = None
+
     def onClicked(self) -> None:
         pass
 
-    def __init__(self,c : 'ControllerTurniGuide'):
-        self.controller=c
 
     def getIcon(self) -> QPixmap:
         return QPixmap(":/icons/add_circle_FILL1_wght600_GRAD200_opsz48_risultato.png")

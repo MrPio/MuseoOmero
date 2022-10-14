@@ -33,7 +33,14 @@ class ControllerWidgetDipendente(Controller):
         self.connettiEventi()
 
     def __onLicenziaClicked(self) -> None:
-        self.model.licenzia('licenziamento per giusta causa')
+        amministratori = list(filter(lambda dipendente: type(dipendente.lavoro) == Amministratore,
+                                     Museo.getInstance().dipendenti))
+        if type(self.model.lavoro) == Amministratore and len(amministratori) <= 1:
+            return
+        elif type(self.model.posto_lavoro)==NoneType:
+            pass
+            # TODO rimuovi il dipendete invece di licenziarlo, e assicurati che il pulsante cambi da 'licenzia' a 'rimuovi'
+        self.model.posto_lavoro.licenzia(self.model, 'licenziamento per giusta causa')
         self.parent.initializeUi()
 
     def __onPromuoviClicked(self) -> None:
@@ -41,8 +48,10 @@ class ControllerWidgetDipendente(Controller):
             self.model.posto_lavoro.promuovi(self.model)
         else:
             for posto_lavoro in Museo.getInstance().posti_lavoro:
-                if isinstance(posto_lavoro, Reception) and len(posto_lavoro.lavori)<posto_lavoro.numero_postazioni_totali:
+                if isinstance(posto_lavoro, Reception) and len(
+                        posto_lavoro.lavori) < posto_lavoro.numero_postazioni_totali:
                     posto_lavoro.assumi(self.model)
+        self.initializeUi()
 
     def connettiEventi(self) -> None:
         self.view.getLicenziaButton().clicked.connect(self.__onLicenziaClicked)

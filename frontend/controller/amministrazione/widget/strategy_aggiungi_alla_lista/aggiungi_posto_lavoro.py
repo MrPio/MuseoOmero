@@ -23,8 +23,8 @@ from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.str
 
 class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
 
-    def __init__(self, c: 'ControllerWidgetAggiungiAllaLista'):
-        self.controller = c
+    def __init__(self):
+        self.controller:'ControllerWidgetAggiungiAllaLista' = None
 
     def onClicked(self) -> None:
         matches = {

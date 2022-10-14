@@ -101,7 +101,7 @@ class ControllerGestionePostiLavoro(Controller):
             controller=ControllerWidgetAggiungiAllaLista(
                 view=new_widget,
                 parent=self,
-                strategy=AggiungiPostoLavoro(self),
+                strategy=AggiungiPostoLavoro(),
                 tipo=matches[layout][0].__name__.lower(),
             )
             layout.addWidget(controller.view)

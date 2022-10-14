@@ -40,10 +40,10 @@ class Reception(PostoLavoro):
         return esito
 
     def promuovi(self, dipendente: Dipendente) -> bool:
-        for lavoro in Museo.getInstance().posti_lavoro:
-            if isinstance(lavoro, Segreteria):
-                if len(lavoro.lavori) < lavoro.numero_postazioni_totali:
+        for posto_lavoro in Museo.getInstance().posti_lavoro:
+            if isinstance(posto_lavoro, Segreteria):
+                if len(posto_lavoro.lavori) < posto_lavoro.numero_postazioni_totali:
                     self.licenzia(dipendente, 'promosso a segretario')
-                    lavoro.assumi(dipendente)
+                    posto_lavoro.assumi(dipendente)
                     return True
         return False
