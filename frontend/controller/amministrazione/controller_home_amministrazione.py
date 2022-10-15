@@ -18,6 +18,8 @@ from frontend.controller.amministrazione.controller_gestione_mostre import Contr
 from frontend.controller.amministrazione.controller_gestione_posti_lavoro import ControllerGestionePostiLavoro
 from frontend.controller.amministrazione.controller_vista_report_incassi import ControllerVistaReportIncassi
 from frontend.controller.amministrazione.controller_vista_statistiche import ControllerVistaStatistiche
+from frontend.controller.amministrazione.strategy_dipendenti.StrategyGestisciDipendenti import \
+    StrategyGestisciDipendenti
 from frontend.controller.controller import Controller
 from frontend.controller.controller_account import ControllerAccount
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
@@ -79,8 +81,8 @@ class ControllerHomeAmministrazione(Controller):
             view=VistaGestioneDipendenti(),
             previous=self,
             model=Museo.getInstance(),
+            strategy=StrategyGestisciDipendenti()
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

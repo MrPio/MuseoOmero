@@ -10,6 +10,7 @@
 
 from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.controller_assumi import ControllerAssumi
+from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
 from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_assumi import VistaAssumi
@@ -23,11 +24,13 @@ class ControllerGestioneDipendenti(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: Museo):
+    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: Museo, strategy: StrategyDipendenti):
         super().__init__(view)
         self.view: VistaGestioneDipendenti = view
         self.previous = previous
         self.model = model
+        self.strategy = strategy
+        self.connettiEventi()
         self.initializeUi()
 
     def __gotoVistaAssumi(self) -> None:
@@ -53,11 +56,13 @@ class ControllerGestioneDipendenti(Controller):
                 view=new_widget,
                 parent=self,
                 model=dipendente,
+                strategy=self.strategy,
             ))
         return result
 
     def initializeUi(self) -> None:
         self.dipendenti = self.__renderizzaDipendenti()
+        self.strategy.initializeUi(self)
         # rimuovo tutti i widget
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)

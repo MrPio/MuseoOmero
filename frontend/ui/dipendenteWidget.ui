@@ -244,6 +244,90 @@ QPushButton::pressed{
      <string>Licenzia</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="selezionaButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>232</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:rgb(104, 194, 253);
+ border-style: solid;
+ border-radius:16px;
+color: rgb(255, 255, 255);
+	font: 15pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+
+
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:rgb(104, 194, 253);
+	border-width:2;
+	background-color : white;
+	color:rgb(104, 194, 253);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Seleziona</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="occupatoLabel">
+    <property name="geometry">
+     <rect>
+      <x>226</x>
+      <y>12</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>14</pointsize>
+      <weight>3</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 20px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+font: 25 italic 14pt &quot;Lato&quot;;	</string>
+    </property>
+    <property name="text">
+     <string>occupato</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>

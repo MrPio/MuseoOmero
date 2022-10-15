@@ -1248,7 +1248,7 @@ margin:-3px -3px -3px -10px;
      <bool>false</bool>
     </property>
     <property name="currentText">
-     <string>00</string>
+     <string>15</string>
     </property>
     <property name="iconSize">
      <size>
@@ -1259,11 +1259,6 @@ margin:-3px -3px -3px -10px;
     <property name="frame">
      <bool>true</bool>
     </property>
-    <item>
-     <property name="text">
-      <string>00</string>
-     </property>
-    </item>
     <item>
      <property name="text">
       <string>15</string>
@@ -1277,6 +1272,21 @@ margin:-3px -3px -3px -10px;
     <item>
      <property name="text">
       <string>45</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>60</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>75</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>90</string>
      </property>
     </item>
    </widget>

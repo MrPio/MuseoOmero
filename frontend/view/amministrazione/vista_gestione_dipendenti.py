@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QListView, QWidget
+from PyQt5.QtWidgets import QPushButton, QListView, QWidget, QLabel
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -26,3 +26,6 @@ class VistaGestioneDipendenti(MyMainWindow):
 
     def getAssumiButton(self) -> QPushButton:
         return self.assumiButton
+
+    def getHeaderLabel(self) -> QLabel:
+        return self.titoloLabel

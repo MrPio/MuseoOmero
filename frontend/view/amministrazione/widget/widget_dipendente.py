@@ -29,3 +29,9 @@ class WidgetDipendente(MyWidget):
 
     def getPromuoviButton(self) -> QPushButton:
         return self.promuoviButton
+
+    def getSelezionaButton(self) -> QPushButton:
+        return self.selezionaButton
+
+    def getOccupatoLabel(self)->QLabel:
+        return  self.occupatoLabel

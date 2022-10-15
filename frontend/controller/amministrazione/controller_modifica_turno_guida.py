@@ -12,6 +12,7 @@ import datetime
 from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
 from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
+from frontend.controller.amministrazione.strategy_dipendenti.StrategySelezionaGuida import StrategySelezionaGuida
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
 from frontend.view.reception.vista_modifica_turno_guida import VistaModificaTurnoGuida
@@ -35,28 +36,34 @@ class ControllerModificaTurnoGuida(Controller):
         self.view.getErrorLabel().setVisible(False)
 
     def __gotoGestisciDipendenti(self) -> None:
+        self.__setModelDataInizioDataFine()
+
         from backend.high_level.museo import Museo
-        self.next=ControllerGestioneDipendenti(
+        self.next = ControllerGestioneDipendenti(
             view=VistaGestioneDipendenti(),
             previous=self,
             model=Museo.getInstance(),
+            strategy=StrategySelezionaGuida(),
         )
         self.next.showView()
         self.disableView()
 
-    def __onConfermaClicked(self) -> None:
+    def __setModelDataInizioDataFine(self)->None:
         self.model.capienza = self.view.getCapienzaSpinBox().value()
         data_inizio = datetime.datetime(
             year=self.model.data_inizio.year,
             month=self.model.data_inizio.month,
             day=self.model.data_inizio.day,
-            hour=self.view.getOreComboBox().currentText(),
-            minute=self.view.getMinutiComboBox().currentText(),
+            hour=int(self.view.getOreComboBox().currentText()),
+            minute=int(self.view.getMinutiComboBox().currentText()),
         )
 
         self.model.data_inizio = data_inizio
         self.model.data_fine = data_inizio + datetime.timedelta(
             minutes=int(self.view.getDurataComboBox().currentText()))
+
+    def __onConfermaClicked(self) -> None:
+        self.__setModelDataInizioDataFine()
 
         if self.guida is not None:
             self.guida.assegna(self.model)
@@ -76,6 +83,8 @@ class ControllerModificaTurnoGuida(Controller):
 
     def initializeUi(self) -> None:
         self.view.getCapienzaSpinBox().setValue(self.model.capienza)
-        self.view.getOreComboBox().setCurrentText(str(self.model.data_inizio.hour))
-        self.view.getMinutiComboBox().setCurrentText(str(self.model.data_inizio.minute))
+        self.view.getOreComboBox().setCurrentText(str(datetime.datetime.now().hour))
+        self.view.getMinutiComboBox().setCurrentText(str((datetime.datetime.now().minute//15)*15))
         self.view.getDurataComboBox().setCurrentText(str(self.model.durata))
+
+        print('{}:{}'.format(self.model.data_inizio.hour,self.model.data_inizio.minute))

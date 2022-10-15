@@ -7,6 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import datetime
 
 from backend.high_level.personale.lavoro import Lavoro
 
@@ -18,10 +19,14 @@ class OperatoreAlPubblico(Lavoro):
         self.qualifica = qualificaGuida
         self.turni: list['TurnoGuida'] = []
 
-    def assegna(self,nuovo_turno: 'TurnoGuida') -> bool:
+    def assegna(self, nuovo_turno: 'TurnoGuida') -> bool:
+        if not (esito := self.isOccupato(nuovo_turno.data_inizio, nuovo_turno.data_fine)):
+            nuovo_turno.guida = self
+            self.turni.append(nuovo_turno)
+        return esito
+
+    def isOccupato(self, inizio: datetime.datetime, fine: datetime.datetime) -> bool:
         for turno in self.turni:
-            if (turno.data_inizio < nuovo_turno.data_fine) and (turno.data_fine > nuovo_turno.data_inizio):
-                return False
-        nuovo_turno.guida=self
-        self.turni.append(nuovo_turno)
-        return True
+            if (turno.data_inizio < fine) and (turno.data_fine > inizio):
+                return True
+        return False

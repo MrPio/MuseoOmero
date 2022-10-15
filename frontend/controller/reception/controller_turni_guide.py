@@ -28,30 +28,6 @@ class ControllerTurniGuide(Controller):
         self.aggiungi_alla_lista=None
         self.connettiEventi()
         self.initializeUi()
-        # self.model.turni_guida.append(
-        #     TurnoGuida(
-        #         dataInizio=datetime.strptime('15/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         dataFine=datetime.strptime('15/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         reparto=RepartoMuseo.MUSEO_APERTO,
-        #         capienza=1,
-        #     )
-        # )
-        # self.model.turni_guida.append(
-        #     TurnoGuida(
-        #         dataInizio=datetime.strptime('16/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         dataFine=datetime.strptime('16/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         reparto=RepartoMuseo.MUSEO_APERTO,
-        #         capienza=1,
-        #     )
-        # )
-        # self.model.turni_guida.append(
-        #     TurnoGuida(
-        #         dataInizio=datetime.strptime('17/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         dataFine=datetime.strptime('17/10/2022 10-30','%d/%m/%Y %H-%M'),
-        #         reparto=RepartoMuseo.MUSEO_APERTO,
-        #         capienza=1,
-        #     )
-        # )
 
     def __gotoPrevious(self) -> None:
         self.closeView()
