@@ -7,10 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-
-class StrategyTurniGuide:
-    def initializeUi(c : 'ControllerTurniGuide') -> None:
+import abc
+class StrategyTurniGuide(abc.ABC):
+    @abc.abstractmethod
+    def initializeUi(self,c : 'ControllerTurniGuide') -> None:
         pass
 
-    def initializeWidgetUi(c : 'ControllerWidgetTurnoGuida') -> None:
+    @abc.abstractmethod
+    def initializeWidgetUi(self,c : 'ControllerWidgetTurnoGuida') -> None:
         pass

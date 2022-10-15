@@ -7,9 +7,21 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from types import NoneType
+
+from PIL import Image
+from PIL.ImageQt import QPixmap
+from PyQt5.QtGui import QImage
+
 from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.gestione_interna.ubicazione import Ubicazione
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
+from frontend.controller.controller_yes_no import ControllerYesNo
+from frontend.controller.reception.controller_inserici_ubicazione import ControllerInsericiUbicazione
+from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
 from frontend.view.reception.vista_opera import VistaOpera
+from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerVistaOpera(Controller):
@@ -27,8 +39,26 @@ class ControllerVistaOpera(Controller):
         self.connettiEventi()
         self.initializeUi()
 
-    # def __onCambiaUbicazioneClicked(self) -> None:
-    #     pass
+    def __onCambiaUbicazioneClicked(self) -> None:
+        if self.model.ubicazione is None:
+            self.model.ubicazione = Ubicazione()
+        self.next = ControllerInsericiUbicazione(
+            view=VistaInsericiUbicazione(),
+            previous=self,
+            model=self.model.ubicazione,
+        )
+        self.next.showView()
+        self.disableView()
+
+    def __onEliminaClicked(self):
+        def elimina():
+            Museo.getInstance().opere.remove(self.model)
+            self.previous.initializeUi()
+            self.__gotoPrevious()
+
+        self.next = ControllerYesNo(VistaYesNo(), self, elimina)
+        self.next.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()

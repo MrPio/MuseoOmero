@@ -12,11 +12,14 @@ from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.clientela.subscriber import Subscriber
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_inserisci_dati_cliente import ControllerInserisciDatiCliente
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
 from frontend.controller.segreteria.controller_convalida import ControllerConvalida
+from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
+    StrategyConvalidaAbbonamento
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 from frontend.view.reception.vista_turni_guide import VistaTurniGuide
@@ -35,15 +38,15 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.previous = previous
         self.model = model
         #self.model.subscribe(self)
+        self.connettiEventi()
 
     def __gotoVistaTurniGuide(self) -> None:
         self.next = ControllerTurniGuide(
             view=VistaTurniGuide(),
             previous=self,
-            home=self.home,
+            model=Museo.getInstance(),
             strategy=StrategyTurniGuide(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 
@@ -51,7 +54,7 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.next = ControllerConvalida(
             view=VistaConvalida(),
             previous=self,
-            model=Biglietto(),
+            strategy=StrategyConvalidaAbbonamento(),
         )
         self.next.connettiEventi()
         self.next.showView()
@@ -65,7 +68,7 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         )
         self.next.connettiEventi()
         self.next.showView()
-        self.disableView()
+        self.closeView()
 
     def __onTariffaBoxChanged(self) -> None:
         self.model.set_tariffa(Tariffa[self.view.getTariffaComboBox().currentText().upper()])
@@ -77,7 +80,7 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getCercaGuidaButton().clicked.connect(self.__gotoVistaTurniGuide)
-        self.view.getVerificaAbbonamentoButton().clicked.connect(self.__gotoVistaVerificaAbbonamento)
+        self.view.getVerificaAbbonamentoButton().clicked.connect(self.__gotoVistaConvalida)
         self.view.getConfermaButton().clicked.connect(self.__gotoVistaInserisciDatiCliente)
         self.view.getTariffaComboBox().currentTextChanged.connect(self.__onTariffaBoxChanged)
         self.view.getTipoBigliettoComboBox().currentTextChanged.connect(self.__onTipoBigliettoChanged)

@@ -7,12 +7,25 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import frontend.controller.reception.widget.controller_widget_turno_guida as controller
+from frontend.controller.amministrazione.widget.controller_widget_aggiungi_alla_lista import \
+    ControllerWidgetAggiungiAllaLista
+from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.aggiungi_turno_guida import \
+    AggiungiTurnoGuida
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
 
 
 class StrategyGestisciTurniGuide(StrategyTurniGuide):
-    def initializeUi(c : 'ControllerTurniGuide') -> None:
-        pass
+    def initializeUi(self,c : 'ControllerTurniGuide') -> None:
+        c.view.getHeaderLabel().setText('HomeAmministrazione ➜ GestisciTurniGuide')
 
-    def initializeWidgetUi(c : 'ControllerWidgetTurnoGuida') -> None:
-        pass
+        c.aggiungi_alla_lista = ControllerWidgetAggiungiAllaLista(
+            view=WidgetAggiungiAllaLista(c.view.turniGuideListView),
+            parent=c,
+            strategy=AggiungiTurnoGuida(),
+        )
+        c.view.verticalLayout.addWidget(c.aggiungi_alla_lista.view)
+
+    def initializeWidgetUi(self,c : controller.ControllerWidgetTurnoGuida) -> None:
+        c.view.getSelezionaButton().setVisible(False)

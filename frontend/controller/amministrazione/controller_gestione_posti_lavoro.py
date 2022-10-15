@@ -20,7 +20,7 @@ from frontend.controller.amministrazione.widget.controller_widget_aggiungi_alla_
 from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro import ControllerWidgetPostoLavoro
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.aggiungi_posto_lavoro import \
     AggiungiPostoLavoro
-from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_gestisci_posto import \
+from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.strategy_widget_gestisci_posto import \
     StrategyWidgetGestisciPosto
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGestionePostiLavoro

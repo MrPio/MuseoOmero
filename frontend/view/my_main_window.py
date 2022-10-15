@@ -20,9 +20,10 @@ class MyMainWindow(QMainWindow):
         # a quanto pare questo trucchetto richiede la versione 5 di pyqt
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         self.setWindowIcon(QtGui.QIcon(UI_DIR + '/ico/museum_white.ico'))
-        self.exitButton.clicked.connect(self.save_and_exit)
-        self.maximizeButton.clicked.connect(self.maximize)
-        self.reduceButton.clicked.connect(self.showMinimized)
+        if hasattr(self,'exitButton' ):
+            self.exitButton.clicked.connect(self.save_and_exit)
+            self.maximizeButton.clicked.connect(self.maximize)
+            self.reduceButton.clicked.connect(self.showMinimized)
 
         self.maxHeight = self.height()
 

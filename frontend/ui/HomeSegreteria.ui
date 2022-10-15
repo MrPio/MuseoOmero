@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>437</width>
-    <height>653</height>
+    <width>478</width>
+    <height>616</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,7 +58,7 @@ border-width:5;
    <widget class="QPushButton" name="reduceButton">
     <property name="geometry">
      <rect>
-      <x>332</x>
+      <x>372</x>
       <y>15</y>
       <width>22</width>
       <height>22</height>
@@ -109,7 +109,7 @@ QPushButton::pressed{
    <widget class="QPushButton" name="exitButton">
     <property name="geometry">
      <rect>
-      <x>388</x>
+      <x>428</x>
       <y>15</y>
       <width>22</width>
       <height>22</height>
@@ -160,7 +160,7 @@ QPushButton::pressed{
    <widget class="QPushButton" name="maximizeButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>400</x>
       <y>15</y>
       <width>22</width>
       <height>22</height>
@@ -231,7 +231,7 @@ font: 14pt &quot;Lato&quot;;</string>
    <widget class="QLabel" name="accountButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>400</x>
       <y>60</y>
       <width>38</width>
       <height>38</height>
@@ -272,10 +272,10 @@ background-color: rgba(173, 237, 255, 0);
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>152</y>
+      <x>51</x>
+      <y>162</y>
       <width>378</width>
-      <height>228</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -302,7 +302,7 @@ border-radius: 30px
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>31</x>
       <y>100</y>
       <width>421</width>
       <height>51</height>
@@ -320,7 +320,7 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLabel" name="acquistaAbbonamentoBigButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>87</x>
       <y>182</y>
       <width>125</width>
       <height>125</height>
@@ -362,10 +362,10 @@ background-color: rgb(244, 233, 140);
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>402</y>
+      <x>51</x>
+      <y>391</y>
       <width>378</width>
-      <height>228</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -390,7 +390,7 @@ text-align: center;
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>266</x>
+      <x>271</x>
       <y>310</y>
       <width>111</width>
       <height>51</height>
@@ -424,7 +424,7 @@ font-size: 16px;
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>74</x>
+      <x>99</x>
       <y>310</y>
       <width>101</width>
       <height>51</height>
@@ -458,7 +458,7 @@ font-size: 16px;
    <widget class="QLabel" name="convalidaBigliettoBigButton">
     <property name="geometry">
      <rect>
-      <x>259</x>
+      <x>264</x>
       <y>182</y>
       <width>125</width>
       <height>125</height>
@@ -500,8 +500,8 @@ background-color: rgb(145, 234, 161);
    <widget class="QLabel" name="gestisciDonazioneBigButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>432</y>
+      <x>84</x>
+      <y>411</y>
       <width>125</width>
       <height>125</height>
      </rect>
@@ -542,8 +542,8 @@ background-color: rgb(170, 217, 249);
    <widget class="QLabel" name="rinnovoAbbonamentoBigButton">
     <property name="geometry">
      <rect>
-      <x>259</x>
-      <y>432</y>
+      <x>269</x>
+      <y>411</y>
       <width>125</width>
       <height>125</height>
      </rect>
@@ -584,8 +584,8 @@ background-color: rgb(190, 166, 244);
    <widget class="QLabel" name="label_16">
     <property name="geometry">
      <rect>
-      <x>79</x>
-      <y>561</y>
+      <x>101</x>
+      <y>540</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -618,8 +618,8 @@ font-size: 16px;
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>272</x>
-      <y>561</y>
+      <x>281</x>
+      <y>540</y>
       <width>101</width>
       <height>51</height>
      </rect>

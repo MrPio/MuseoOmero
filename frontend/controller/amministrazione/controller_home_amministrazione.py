@@ -101,7 +101,6 @@ class ControllerHomeAmministrazione(Controller):
             model=Museo.getInstance(),
             strategy=StrategyGestisciTurniGuide(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

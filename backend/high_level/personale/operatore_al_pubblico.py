@@ -7,9 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime
 
-from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.personale.lavoro import Lavoro
 
 
@@ -18,11 +16,12 @@ class OperatoreAlPubblico(Lavoro):
     def __init__(self, contratto: str, stipendio: float, qualificaGuida: str, numPostazione: int):
         super().__init__(stipendio, numPostazione, contratto)
         self.qualifica = qualificaGuida
-        self.turni: list[TurnoGuida] = []
+        self.turni: list['TurnoGuida'] = []
 
-    def assegna(self,nuovo_turno: TurnoGuida) -> bool:
+    def assegna(self,nuovo_turno: 'TurnoGuida') -> bool:
         for turno in self.turni:
             if (turno.data_inizio < nuovo_turno.data_fine) and (turno.data_fine > nuovo_turno.data_inizio):
                 return False
+        nuovo_turno.guida=self
         self.turni.append(nuovo_turno)
         return True

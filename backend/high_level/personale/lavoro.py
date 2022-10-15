@@ -9,6 +9,9 @@
 #######################################################
 from datetime import datetime
 
+from backend.high_level.personale.dipendente import Dipendente
+
+
 class Lavoro:
     def __init__(self, stipendio : float, numPostazione : int,contratto : str=''):
         self.stipendio=stipendio
@@ -18,6 +21,7 @@ class Lavoro:
         self.licenziato=False
         self.data_licenziamento=None
         self.nota_licenziamento=''
+        self.dipendente:Dipendente|None=None
 
     def licenzia(self,notaLicenziamento : str) -> None:
         if self.licenziato:

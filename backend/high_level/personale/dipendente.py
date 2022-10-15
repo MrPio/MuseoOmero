@@ -11,15 +11,14 @@ from datetime import datetime
 
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.personale.credenziale import Credenziale
-from backend.high_level.personale.lavoro import Lavoro
 from backend.high_level.personale.posto_lavoro import PostoLavoro
 
 
 class Dipendente():
 
-    def __init__(self, nome: str, cognome: str, dataNascita: datetime, email: str,
+    def __init__(self, nome: str, cognome: str, dataNascita: datetime, email: str = 'dipendente@museo.omero.it',
                  sesso: Sesso = Sesso.NON_SPECIFICATO, curriculum: str = '',
-                 credenziale: Credenziale = None, lavoro: Lavoro | None = None,
+                 credenziale: Credenziale = None, lavoro: 'Lavoro' = None,
                  postoLavoro: PostoLavoro | None = None, autogenerato: bool = False):
         self.nome = nome
         self.cognome = cognome
@@ -31,18 +30,19 @@ class Dipendente():
         self.lavoro = lavoro
         self.posto_lavoro = postoLavoro
         self.autogenerato = autogenerato
-        self.lavori_passati: list[Lavoro] = []
+        self.lavori_passati: list['Lavoro'] = []
         self.data_registrazione = datetime.now()
 
-    def assumi(self, lavoro: Lavoro) -> bool:
+    def assumi(self, lavoro: 'Lavoro') -> bool:
         if self.lavoro is None:
+            lavoro.dipendente=self
             self.lavoro = lavoro
             return True
         return False
 
     def licenzia(self, notaLicenziamento: str) -> bool:
         if self.lavoro is not None:
-            self.posto_lavoro=None
+            self.posto_lavoro = None
             self.lavoro.licenzia(notaLicenziamento)
             self.lavori_passati.append(self.lavoro)
             self.lavoro = None

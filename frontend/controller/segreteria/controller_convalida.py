@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import cv2
+
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
@@ -24,9 +26,10 @@ class ControllerConvalida(Controller):
 
     def __init__(self, view: VistaConvalida, previous: Controller, strategy: StrategyConvalida):
         super().__init__(view)
-        self.view : VistaConvalida = view
-        self.previous : Controller = previous
-        self.strategy : StrategyConvalida = strategy
+        self.view: VistaConvalida = view
+        self.previous: Controller = previous
+        self.strategy: StrategyConvalida = strategy
+        self.risultato:str = ''
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
@@ -39,13 +42,32 @@ class ControllerConvalida(Controller):
         self.disableView()
 
     def __onScannerizzaClicked(self) -> None:
-        pass
+        cap = cv2.VideoCapture(0)
+        # initialize the cv2 QRCode detector
+        detector = cv2.QRCodeDetector()
+        result = ''
+        while True:
+            _, img = cap.read()
+            data, bbox, _ = detector.detectAndDecode(img)
+            # check if there is a QRCode in the image
+            if data:
+                result = data
+                break
+            cv2.imshow("QRCODEscanner", img)
+            if cv2.waitKey(1) == ord("q"):
+                break
+        cap.release()
+        cv2.destroyAllWindows()
+
+        print(result)
+        # TODO use the result ID
 
     def connettiEventi(self) -> None:
         pass
 
     def initializeUi(self) -> None:
-        pass
+        self.strategy.initializeUi(self)
+        #TODO
 
-    def finalizza(id : str) -> None:
-        pass
+    def finalizza(self) -> None:
+        self.strategy.finalizza(self)

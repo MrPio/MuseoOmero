@@ -17,8 +17,13 @@ class ControllerMostra(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self,view : VistaMostra, previous : Controller, model : Mostra):
-        pass
+    def __init__(self, view: VistaMostra, previous: Controller, model: Mostra):
+        super().__init__(view)
+        self.view: VistaMostra = view
+        self.previous = previous
+        self.model = model
+        self.initializeUi()
+        self.connettiEventi()
 
     def __gotoVistaOpera(self) -> None:
         pass

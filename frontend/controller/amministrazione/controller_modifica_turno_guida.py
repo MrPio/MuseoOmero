@@ -7,24 +7,75 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import TurnoGuida
+import datetime
+
+from backend.high_level.gestione_interna.turno_guida import TurnoGuida
+from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
 from frontend.controller.controller import Controller
-from frontend.view import VistaModificaTurnoGuida
+from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
+from frontend.view.reception.vista_modifica_turno_guida import VistaModificaTurnoGuida
+
 
 class ControllerModificaTurnoGuida(Controller):
-    m_VistaModificaTurnoGuida= VistaModificaTurnoGuida()
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
-    def __init__(self,view : VistaModificaTurnoGuida, previous : Controller, model : TurnoGuida):
-        pass
+    def __init__(self, view: VistaModificaTurnoGuida, previous: Controller, model: TurnoGuida):
+        super().__init__(view)
+        self.view: VistaModificaTurnoGuida = view
+        self.previous = previous
+        self.model = model
+        self.guida: OperatoreAlPubblico | None = None
+        self.connettiEventi()
+        self.initializeUi()
+        self.view.getErrorLabel().setVisible(False)
 
     def __gotoGestisciDipendenti(self) -> None:
-        pass
+        from backend.high_level.museo import Museo
+        self.next=ControllerGestioneDipendenti(
+            view=VistaGestioneDipendenti(),
+            previous=self,
+            model=Museo.getInstance(),
+        )
+        self.next.showView()
+        self.disableView()
 
     def __onConfermaClicked(self) -> None:
-        pass
+        self.model.capienza = self.view.getCapienzaSpinBox().value()
+        data_inizio = datetime.datetime(
+            year=self.model.data_inizio.year,
+            month=self.model.data_inizio.month,
+            day=self.model.data_inizio.day,
+            hour=self.view.getOreComboBox().currentText(),
+            minute=self.view.getMinutiComboBox().currentText(),
+        )
+
+        self.model.data_inizio = data_inizio
+        self.model.data_fine = data_inizio + datetime.timedelta(
+            minutes=int(self.view.getDurataComboBox().currentText()))
+
+        if self.guida is not None:
+            self.guida.assegna(self.model)
+        else:
+            self.view.getErrorLabel().setVisible(True)
+            return
+
+        from backend.high_level.museo import Museo
+        Museo.getInstance().turni_guida.append(self.model)
+
+        self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
+        self.view.getCambiaButton().clicked.connect(self.__gotoGestisciDipendenti)
+
+    def initializeUi(self) -> None:
+        self.view.getCapienzaSpinBox().setValue(self.model.capienza)
+        self.view.getOreComboBox().setCurrentText(str(self.model.data_inizio.hour))
+        self.view.getMinutiComboBox().setCurrentText(str(self.model.data_inizio.minute))
+        self.view.getDurataComboBox().setCurrentText(str(self.model.durata))

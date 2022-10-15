@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
+from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.strategy_widget_posto_lavoro import \
     StrategyWidgetPostoLavoro
 
 

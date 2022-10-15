@@ -10,8 +10,8 @@
 
 
 class StrategyConvalida:
-    def initializeUi(c : 'ControllerConvalida') -> None:
+    def initializeUi(self,c : 'ControllerConvalida') -> None:
         pass
 
-    def finalizza(c: 'ControllerConvalida') -> None:
+    def finalizza(self,c: 'ControllerConvalida') -> None:
         pass

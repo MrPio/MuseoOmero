@@ -62,4 +62,4 @@ class ControllerGestioneDipendenti(Controller):
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
         for controller in self.dipendenti:
-            self.view.verticalLayout.addWidget(controller.view.widget)
+            self.view.verticalLayout.addWidget(controller.view)

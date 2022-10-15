@@ -13,6 +13,7 @@ from datetime import datetime
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.gestione_interna.mostra import Mostra
 from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.personale.amministratore import Amministratore
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.credenziale import Credenziale
@@ -51,6 +52,7 @@ class Museo:
         self.dipendenti: list[Dipendente] = []
         self.posti_lavoro: list[PostoLavoro] = []
         self.mostre: list[Mostra] = []
+        self.turni_guida: list[TurnoGuida] = []
         self.opere: list[Opera] = []
 
 

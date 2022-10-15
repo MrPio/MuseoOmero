@@ -6,6 +6,18 @@ Implementazione del progetto museo Omero per l'esame del corso ingegneria del so
 > *https://github.com/SbattellaMattia/SoftwareEngineering/*
 ----------------------------------------------------------------------------------------------------------------------------------------
 
+# How to use:
+### Interprete Python
+Assicurati di avere la versione [Python 3.10.6](https://www.python.org/ftp/python/3.10.6/)
+ di python con il seguente comando da linea di comando:
+>python --version
+
+### Ridimensionamento testo
+
+Per una migliore esperienza, utilizza un ridimensionamento del 100%.
+
+![img.png](img.png)
+
 # Diagramma delle classi (legacy) [FRONTEND]:
 ![Diagramma delle classi  PROGETTAZIONE  1-2](https://user-images.githubusercontent.com/22773005/194780274-53287331-ee43-48b0-aa4e-4dc326652181.png)
 

@@ -7,19 +7,37 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import datetime
+
 from PyQt5.QtGui import QPixmap
 
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.gestione_interna.turno_guida import TurnoGuida
+from frontend.controller.amministrazione.controller_modifica_turno_guida import ControllerModificaTurnoGuida
+from frontend.controller.amministrazione.widget.controller_widget_aggiungi_alla_lista import \
+    ControllerWidgetAggiungiAllaLista
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
     StrategyAggiungiAllaLista
+from frontend.view.reception.vista_modifica_turno_guida import VistaModificaTurnoGuida
 
 
 class AggiungiTurnoGuida(StrategyAggiungiAllaLista):
     def __init__(self):
-        self.controller:'ControllerWidgetAggiungiAllaLista' = None
+        self.controller: 'ControllerWidgetAggiungiAllaLista' = None
 
     def onClicked(self) -> None:
-        pass
-
+        self.controller.next = ControllerModificaTurnoGuida(
+            view=VistaModificaTurnoGuida(),
+            previous=self.controller.parent,
+            model=TurnoGuida(
+                dataInizio=self.controller.parent.date,
+                dataFine=self.controller.parent.date,
+                reparto=RepartoMuseo.MUSEO_APERTO,
+                capienza=1
+            ),
+        )
+        self.controller.next.showView()
+        self.controller.parent.disableView()
 
     def getIcon(self) -> QPixmap:
         return QPixmap(":/icons/add_circle_FILL1_wght600_GRAD200_opsz48_risultato.png")

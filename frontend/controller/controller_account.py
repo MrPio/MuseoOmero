@@ -9,12 +9,24 @@
 #######################################################
 from types import NoneType
 
+import winotify
+
+from backend.high_level.personale.credenziale import Credenziale
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.vista_account import VistaAccount
 
 
 class ControllerAccount(Controller):
+
+    def __init__(self, view: VistaAccount, previous: Controller, home: Controller, model: Dipendente):
+        super().__init__(view)
+        self.view: VistaAccount = view
+        self.previous = previous
+        self.home = home
+        self.model = model
+        self.initializeUi()
 
     def __gotoPrevious(self) -> None:
         self.closeView()
@@ -27,17 +39,22 @@ class ControllerAccount(Controller):
         self.home.enableView()
         self.home.showView()
 
-    def __init__(self, view: VistaAccount, previous: Controller, home: Controller, model: Dipendente):
-        super().__init__(view)
-        self.view: VistaAccount = view
-        self.previous = previous
-        self.home = home
-        self.model = model
-        self.initializeUi()
+    def __onCambiaPasswordClicked(self):
+        if len(self.view.getNuovaPasswordLineEdit().text()) >= 3:
+            self.model.credenziale = Credenziale(self.model.credenziale.username,
+                                                 self.view.getNuovaPasswordLineEdit().text())
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Nuova Password',
+                msg='Password cambiata con successo!',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getLogoutButton().clicked.connect(self.__gotoHome)
+        self.view.getCambiaPasswordButton().clicked.connect(self.__onCambiaPasswordClicked)
 
     def initializeUi(self) -> None:
         self.view.getNomeLabel().setText('{} {}'.format(self.model.nome, self.model.cognome))

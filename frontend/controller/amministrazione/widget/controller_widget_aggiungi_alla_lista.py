@@ -16,7 +16,7 @@ from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import Widg
 class ControllerWidgetAggiungiAllaLista(Controller):
 
     def __init__(self, view: WidgetAggiungiAllaLista, parent: Controller,
-                 strategy: StrategyAggiungiAllaLista, tipo: str = ""):
+                 strategy: StrategyAggiungiAllaLista, tipo: str = ''):
         super().__init__(view)
         self.view: WidgetAggiungiAllaLista = view
         self.parent = parent

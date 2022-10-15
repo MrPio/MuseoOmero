@@ -1153,6 +1153,16 @@ QSpinBox::down-arrow::pressed{
    <zorder>posizioneSpinBox</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>pianoSpinBox</tabstop>
+  <tabstop>numeroMagazzinoSpinBox</tabstop>
+  <tabstop>scaffaleSpinBox</tabstop>
+  <tabstop>posizioneSpinBox</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+  <tabstop>exitButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../AppData/Local/Temp/res.qrc"/>
   <include location="../../../AppData/Local/Temp/res/res.qrc"/>

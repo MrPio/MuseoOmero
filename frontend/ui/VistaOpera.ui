@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>487</width>
-    <height>775</height>
+    <height>852</height>
    </rect>
   </property>
   <property name="cursor">
@@ -378,10 +378,10 @@ QPushButton::pressed{
    <widget class="QLabel" name="immagineLabel">
     <property name="geometry">
      <rect>
-      <x>82</x>
-      <y>130</y>
-      <width>314</width>
-      <height>180</height>
+      <x>116</x>
+      <y>133</y>
+      <width>254</width>
+      <height>190</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -950,7 +950,7 @@ background-color: rgba(255, 255, 255,0);</string>
      <rect>
       <x>110</x>
       <y>648</y>
-      <width>311</width>
+      <width>241</width>
       <height>31</height>
      </rect>
     </property>
@@ -960,7 +960,7 @@ text-align: left;
 background-color: rgba(255, 255, 255,0);</string>
     </property>
     <property name="text">
-     <string>titolo</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="costoLabel">
@@ -1056,6 +1056,137 @@ background-color:rgba(255, 255, 255,0);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="titoloLabel_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>103</y>
+      <width>471</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>14</pointsize>
+      <weight>3</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+font: 25 italic 14pt &quot;Lato&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Trascina qui un'immagine per cambiarla</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eliminaButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>780</y>
+      <width>209</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:#e39797;
+ border-style: none;
+ border-radius:26px;
+color: rgb(255, 255, 255);
+	font: 15pt &quot;Lato&quot;;
+}
+
+QPushButton::pressed{
+ border-style: solid;
+
+	border-color:#e39797;
+	border-width:4;
+	background-color : white;
+	color:#e39797;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Elimina</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cambiaUbicazioneButton">
+    <property name="geometry">
+     <rect>
+      <x>346</x>
+      <y>648</y>
+      <width>101</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:rgb(104, 194, 253);
+ border-style: solid;
+ border-radius:18px;
+color: rgb(255, 255, 255);
+font: 12pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+
+
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:rgb(104, 194, 253);
+	border-width:2;
+	background-color : white;
+	color:rgb(104, 194, 253);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Cambia</string>
     </property>
    </widget>
   </widget>

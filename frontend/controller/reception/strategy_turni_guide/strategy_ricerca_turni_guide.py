@@ -7,13 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerTurniGuide
-from frontend.controller.controller import ControllerWidgetTurnoGuida
-import StrategyTurniGuide
+import frontend.controller.reception.widget.controller_widget_turno_guida as controller
+from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+
 
 class StrategyRicercaTurniGuide(StrategyTurniGuide):
-    def initializeUi(c : ControllerTurniGuide) -> None:
-        pass
+    def initializeUi(self,c : 'ControllerTurniGuide') -> None:
+        c.view.getHeaderLabel().setText('AcquistoBiglietto ➜ CercaGuida')
 
-    def initializeWidgetUi(c : ControllerWidgetTurnoGuida) -> None:
-        pass
+    def initializeWidgetUi(self,c : controller.ControllerWidgetTurnoGuida) -> None:
+        c.view.getRimuoviButton().setVisible(False)
+        c.view.getModificaButton().setVisible(False)

@@ -287,9 +287,9 @@ text-align: center;</string>
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>69</x>
       <y>260</y>
-      <width>511</width>
+      <width>420</width>
       <height>491</height>
      </rect>
     </property>
@@ -413,7 +413,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>511</width>
+       <width>420</width>
        <height>491</height>
       </rect>
      </property>
@@ -464,7 +464,7 @@ border-width:3;
 }</string>
     </property>
     <property name="inputMask">
-     <string>00/00/0000;0</string>
+     <string>00/00/0000;#</string>
     </property>
     <property name="text">
      <string>//</string>

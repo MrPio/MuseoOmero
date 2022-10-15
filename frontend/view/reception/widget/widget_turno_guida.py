@@ -9,27 +9,32 @@
 #######################################################
 from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
 
+from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget
 
 
 class WidgetTurnoGuida(MyWidget):
+
+    def __init__(self,  parent):
+        super().__init__(UI_DIR + '/GestisciTurnoGuidaWidget.ui', parent)
+
     def getIcon(self) -> QLabel:
-        pass
+        return self.iconLabel
 
     def getNomeLabel(self) -> QLabel:
-        pass
+        return self.nomeLabel
 
     def getOrarioLabel(self) -> QLabel:
-        pass
+        return self.orarioLabel
 
     def getPostiDisponibiliLabel(self) -> QLabel:
-        pass
+        return self.postiLiberiLabel
 
     def getSelezionaButton(self) -> QPushButton:
-        pass
+        return self.selezionaButton
 
     def getRimuoviButton(self) -> QPushButton:
-        pass
+        return self.rimuoviButton
 
     def getModificaButton(self) -> QPushButton:
-        pass
+        return self.modificaButton

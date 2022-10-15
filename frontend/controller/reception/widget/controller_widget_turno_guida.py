@@ -7,6 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+
 from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from frontend.controller.controller import Controller
@@ -16,20 +17,35 @@ from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
 
 class ControllerWidgetTurnoGuida(Controller):
 
-    def __init__(self, view: WidgetTurnoGuida, model: TurnoGuida, biglietto: Biglietto):
+    def __init__(self, view: WidgetTurnoGuida, model: TurnoGuida, parent: Controller, strategy: StrategyTurniGuide):
         super().__init__(view)
+        self.view: WidgetTurnoGuida = view
+        self.model = model
+        self.parent = parent
+        self.strategy = strategy
+        self.initializeUi()
 
     def __onSelezionaClicked(self) -> None:
-        pass
+        pass  # TODO
 
     def __onRimuoviButton(self) -> None:
-        pass
+        pass  # TODO
 
     def __onModificaButton(self) -> None:
-        pass
+        pass  # TODO
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getRimuoviButton().clicked.connect(self.__onRimuoviButton)
+        self.view.getModificaButton().clicked.connect(self.__onModificaButton)
+        self.view.getSelezionaButton().clicked.connect(self.__onSelezionaClicked)
 
-    def initializeUi(strategy : StrategyTurniGuide) -> None:
-        pass
+    def initializeUi(self) -> None:
+        self.strategy.initializeWidgetUi(self)
+        self.view.getNomeLabel().setText(self.model.guida.dipendente.nome + ' ' + self.model.guida.dipendente.cognome)
+        self.view.getOrarioLabel().setText('{}-{}'.format(
+            self.model.data_inizio.strftime('%H:%M'),
+            self.model.data_fine.strftime('%H:%M'),
+        ))
+        self.view.getPostiDisponibiliLabel().setText(
+            'posti liberi {}/{}'.format(self.model.numero_prenotati, self.model.capienza))
+

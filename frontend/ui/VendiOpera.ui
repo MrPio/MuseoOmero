@@ -716,7 +716,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 border-radius: 0px;
 background-color: rgba(255, 249, 190, 255);</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
       <item>
        <layout class="QGridLayout" name="risultatiGridLayout">
         <property name="leftMargin">

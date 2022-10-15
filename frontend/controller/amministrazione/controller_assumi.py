@@ -17,7 +17,7 @@ from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
 from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro import ControllerWidgetPostoLavoro
-from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_assegna_posto import \
+from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.strategy_widget_assegna_posto import \
     StrategyWidgetAssegnaPosto
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_assumi import VistaAssumi
@@ -40,12 +40,12 @@ class ControllerAssumi(Controller):
         self.posti_lavoro: list[ControllerWidgetPostoLavoro] = []
 
     def __onConfermaClicked(self) -> None:
+        birth=None
         try:
-            datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
+            birth =datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
         except Exception as e:
             print(e)
             return
-        birth = datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
 
         if len(self.view.getNomeLineEdit().text()) > 0 and \
                 len(self.view.getCognomeLineEdit().text()) > 0 and \
@@ -56,7 +56,6 @@ class ControllerAssumi(Controller):
                 cognome=self.view.getCognomeLineEdit().text(),
                 dataNascita=birth,
                 sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ','_')],
-                email='',
             )
             if self.lavoro_scelto is not None:
                 self.lavoro_scelto.assumi(nuovo_dip)

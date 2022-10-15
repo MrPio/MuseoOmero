@@ -27,6 +27,7 @@ class ControllerRicercaOpera(Controller):
         self.previous = previous
         self.model = model
         self.strategy: StrategyRicercaOpera = strategy
+        self.opere_trovate: list[ControllerWidgetOpera] = []
 
     def __onRicercaClicked(self) -> None:
         pass
@@ -55,7 +56,7 @@ class ControllerRicercaOpera(Controller):
         result = []
 
         for opera in opere_filtrate:
-            new_widget = WidgetOpera(self.scrollAreaWidgetContents)
+            new_widget = WidgetOpera(self.view.scrollAreaWidgetContents)
             result.append(ControllerWidgetOpera(
                 view=new_widget,
                 model=opera,
@@ -72,5 +73,5 @@ class ControllerRicercaOpera(Controller):
 
         c = 0
         for widget_opera in self.opere_trovate:
-            self.risultatiGridLayout.addWidget(widget_opera, c // 3, c % 3, 1, 1)
+            self.view.risultatiGridLayout.addWidget(widget_opera.view, c // 3, c % 3)
             c += 1

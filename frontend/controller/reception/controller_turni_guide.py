@@ -7,35 +7,116 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from datetime import datetime, timedelta
+
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
 from frontend.controller.reception.widget.controller_widget_turno_guida import ControllerWidgetTurnoGuida
 from frontend.view.reception.vista_turni_guide import VistaTurniGuide
+from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
 
 
 class ControllerTurniGuide(Controller):
 
-    def gotoPrevious(self) -> None:
-        pass
-
     def __init__(self, view: VistaTurniGuide, previous: Controller, model: Museo, strategy: StrategyTurniGuide):
         super().__init__(view)
+        self.view: VistaTurniGuide = view
+        self.previous = previous
+        self.model = model
+        self.strategy = strategy
+        self.aggiungi_alla_lista=None
+        self.connettiEventi()
+        self.initializeUi()
+        # self.model.turni_guida.append(
+        #     TurnoGuida(
+        #         dataInizio=datetime.strptime('15/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         dataFine=datetime.strptime('15/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         reparto=RepartoMuseo.MUSEO_APERTO,
+        #         capienza=1,
+        #     )
+        # )
+        # self.model.turni_guida.append(
+        #     TurnoGuida(
+        #         dataInizio=datetime.strptime('16/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         dataFine=datetime.strptime('16/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         reparto=RepartoMuseo.MUSEO_APERTO,
+        #         capienza=1,
+        #     )
+        # )
+        # self.model.turni_guida.append(
+        #     TurnoGuida(
+        #         dataInizio=datetime.strptime('17/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         dataFine=datetime.strptime('17/10/2022 10-30','%d/%m/%Y %H-%M'),
+        #         reparto=RepartoMuseo.MUSEO_APERTO,
+        #         capienza=1,
+        #     )
+        # )
 
-    def gotoVistaModificaTurnoGuida(self) -> None:
-        pass
+    def __gotoPrevious(self) -> None:
+        self.closeView()
+        self.previous.enableView()
+
+    # def __gotoVistaModificaTurnoGuida(self) -> None:
+    #     pass
+    def __onRicercaClicked(self,c) -> None:
+        self.initializeUi()
 
     def __onFrecciaSinistraClicked(self) -> None:
-        pass
+        date = None
+        try:
+            date = datetime.strptime(self.view.getDataLineEdit().text(), '%d/%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+        self.view.getDataLineEdit().setText((date - timedelta(days=1)).strftime('%d/%m/%Y'))
+        self.initializeUi()
 
     def __onFrecciaDestraClicked(self) -> None:
-        pass
+        date = None
+        try:
+            date = datetime.strptime(self.view.getDataLineEdit().text(), '%d/%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+        self.view.getDataLineEdit().setText((date + timedelta(days=1)).strftime('%d/%m/%Y'))
+        self.initializeUi()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getFrecciaSinistra().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
+        self.view.getFrecciaDestra().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
+        self.button_release=self.view.getRicercaButton().mouseReleaseEvent
+        self.view.getRicercaButton().clicked[bool].connect(self.__onRicercaClicked)
 
     def __renderizzaTurniGuida(self) -> list[ControllerWidgetTurnoGuida]:
-        pass
+        result = []
+        self.date = None
+        try:
+            self.date = datetime.strptime(self.view.getDataLineEdit().text(), '%d/%m/%Y')
+        except Exception as e:
+            self.date = datetime.today()
+            self.view.getDataLineEdit().setText(self.date.strftime('%d/%m/%Y'))
 
-    def initializeUi(strategy : StrategyTurniGuide) -> None:
-        pass
+        for turno_guida in self.model.turni_guida:
+            if (turno_guida.data_inizio.day, turno_guida.data_inizio.month, turno_guida.data_inizio.year) == \
+                    (self.date.day, self.date.month, self.date.year):
+                result.append(ControllerWidgetTurnoGuida(
+                    view=WidgetTurnoGuida(self.view.turniGuideListView),
+                    model=turno_guida,
+                    parent=self,
+                    strategy=self.strategy,
+                ))
+        return result
+
+    def initializeUi(self) -> None:
+        self.turni_guida = self.__renderizzaTurniGuida()
+        # rimuovo tutti i widget
+        self.aggiungi_alla_lista=None
+        for i in reversed(range(self.view.verticalLayout.count())):
+            self.view.verticalLayout.itemAt(i).widget().setParent(None)
+        for controller in self.turni_guida:
+            self.view.verticalLayout.addWidget(controller.view)
+
+        self.strategy.initializeUi(self)
+

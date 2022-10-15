@@ -840,6 +840,9 @@ QSpinBox::down-arrow::pressed{
     <property name="buttonSymbols">
      <enum>QAbstractSpinBox::UpDownArrows</enum>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
      <number>99</number>
     </property>

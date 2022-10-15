@@ -19,7 +19,7 @@ class VistaTurniGuide(MyMainWindow):
         super().__init__(UI_DIR + '/VistaCercaGuida(2in1).ui')
 
     def getHeaderLabel(self) -> QLabel:
-        return self.headerLabel
+        return self.titoloLabel
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton

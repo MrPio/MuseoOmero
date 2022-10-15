@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton, QLabel, QLineEdit
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -44,3 +44,9 @@ class VistaAccount(MyMainWindow):
 
     def getLogoutButton(self) -> QPushButton:
         return self.logoutButton
+
+    def getNuovaPasswordLineEdit(self) -> QLineEdit:
+        return self.nuovaPasswordLineEdit
+
+    def getCambiaPasswordButton(self)->QPushButton:
+        return self.cambiaPasswordButton

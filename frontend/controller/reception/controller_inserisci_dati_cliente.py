@@ -9,10 +9,13 @@
 #######################################################
 from datetime import datetime
 
+import winotify
+
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 
 
@@ -44,10 +47,19 @@ class ControllerInserisciDatiCliente(Controller):
                 sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ', '_')],
                 provenienza=self.view.getProvenienzaLineEdit().text(),
             )
-
+            nuovo_visitatore.biglietti.append(self.previous.model)
             Museo.getInstance().visitatori.append(nuovo_visitatore)
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Biglietto Creato',
+                msg='Biglietto creato con successo!',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
             self.closeView()
-            self.previous.enableView()
+            self.previous.previous.enableView()
+            self.previous.previous.showView()
 
     def connettiEventi(self) -> None:
-        self.view.getConfermaButton().clicked(self.__onConfermaClicked)
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)

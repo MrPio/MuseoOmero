@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>489</width>
-    <height>499</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -247,9 +247,9 @@ font: 14pt &quot;Lato&quot;;</string>
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>151</y>
+      <y>153</y>
       <width>442</width>
-      <height>239</height>
+      <height>243</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -270,7 +270,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>106</x>
-      <y>231</y>
+      <y>236</y>
       <width>81</width>
       <height>22</height>
      </rect>
@@ -303,7 +303,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>211</y>
+      <y>216</y>
       <width>442</width>
       <height>4</height>
      </rect>
@@ -341,7 +341,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>244</x>
-      <y>151</y>
+      <y>156</y>
       <width>4</width>
       <height>239</height>
      </rect>
@@ -379,7 +379,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>271</y>
+      <y>276</y>
       <width>442</width>
       <height>4</height>
      </rect>
@@ -417,7 +417,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>106</x>
-      <y>291</y>
+      <y>296</y>
       <width>91</width>
       <height>22</height>
      </rect>
@@ -450,7 +450,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>106</x>
-      <y>169</y>
+      <y>174</y>
       <width>58</width>
       <height>22</height>
      </rect>
@@ -467,7 +467,7 @@ text-align: center;
 font-size: 18px &quot;Lato light&quot;</string>
     </property>
     <property name="text">
-     <string>Guida:</string>
+     <string>Guida*:</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -483,7 +483,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>93</y>
       <width>471</width>
       <height>51</height>
      </rect>
@@ -502,7 +502,7 @@ background-color: rgba(255, 255, 255,0);
     <property name="geometry">
      <rect>
       <x>26</x>
-      <y>331</y>
+      <y>336</y>
       <width>442</width>
       <height>4</height>
      </rect>
@@ -540,7 +540,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>106</x>
-      <y>351</y>
+      <y>356</y>
       <width>111</width>
       <height>22</height>
      </rect>
@@ -573,7 +573,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>46</x>
-      <y>167</y>
+      <y>172</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -614,7 +614,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>46</x>
-      <y>227</y>
+      <y>232</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -655,7 +655,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>46</x>
-      <y>287</y>
+      <y>292</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -696,7 +696,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>46</x>
-      <y>347</y>
+      <y>352</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -737,7 +737,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>291</x>
-      <y>165</y>
+      <y>170</y>
       <width>133</width>
       <height>36</height>
      </rect>
@@ -790,7 +790,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>274</x>
-      <y>288</y>
+      <y>293</y>
       <width>71</width>
       <height>30</height>
      </rect>
@@ -1069,7 +1069,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
     <property name="geometry">
      <rect>
       <x>347</x>
-      <y>285</y>
+      <y>290</y>
       <width>20</width>
       <height>31</height>
      </rect>
@@ -1095,7 +1095,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>369</x>
-      <y>288</y>
+      <y>293</y>
       <width>71</width>
       <height>30</height>
      </rect>
@@ -1190,7 +1190,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>323</x>
-      <y>347</y>
+      <y>352</y>
       <width>71</width>
       <height>30</height>
      </rect>
@@ -1284,7 +1284,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>307</x>
-      <y>228</y>
+      <y>233</y>
       <width>100</width>
       <height>30</height>
      </rect>
@@ -1359,6 +1359,9 @@ QSpinBox::down-arrow::pressed{
     <property name="buttonSymbols">
      <enum>QAbstractSpinBox::UpDownArrows</enum>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
      <number>99</number>
     </property>
@@ -1367,7 +1370,7 @@ QSpinBox::down-arrow::pressed{
     <property name="geometry">
      <rect>
       <x>143</x>
-      <y>422</y>
+      <y>429</y>
       <width>209</width>
       <height>52</height>
      </rect>
@@ -1414,8 +1417,48 @@ QPushButton::pressed{
      <string>Conferma</string>
     </property>
    </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>71</x>
+      <y>133</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+text-align: left;
+ background-color:#e39797;
+color: #FFFFFF;
+font: 14pt &quot;Lato&quot;;
+border-radius: 15;
+}</string>
+    </property>
+    <property name="text">
+     <string>Seleziona una guida</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cambiaButton</tabstop>
+  <tabstop>capienzaSpinBox</tabstop>
+  <tabstop>oreComboBox</tabstop>
+  <tabstop>minutiComboBox</tabstop>
+  <tabstop>durataComboBox</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../AppData/Local/Temp/res.qrc"/>
   <include location="../../../AppData/Local/Temp/res/res.qrc"/>

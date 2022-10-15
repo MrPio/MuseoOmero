@@ -11,8 +11,9 @@ from frontend.controller.segreteria.strategy_convalida.strategy_convalida import
 
 
 class StrategyConvalidaBiglietto(StrategyConvalida):
-    def initializeUi(c : 'ControllerConvalida') -> None:
-        pass
+    def initializeUi(self,c : 'ControllerConvalida') -> None:
+        c.view.getHeaderLabel().setText('HomeReception ➜ ConvalidaBiglietto')
 
-    def finalizza(c : 'ControllerConvalida') -> None:
+    def finalizza(self,c : 'ControllerConvalida') -> None:
+        # TODO
         pass

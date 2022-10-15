@@ -26,9 +26,7 @@ class ControllerAggiungiOpera(Controller):
         self.previous = previous
         self.strategy: StrategyAggiungiOpera = strategy
 
-
-    def __onAggiungiUbicaioneClicked(self) -> None:
-        #TODO UBICAIONE E' DA CAMBIARE (IL REFRACTOR NON E' IMPLEMENTATO :(  )
+    def __onAggiungiUbicazioneClicked(self) -> None:
         pass
 
     def __onDropZoneDropped(self) -> None:
@@ -38,7 +36,7 @@ class ControllerAggiungiOpera(Controller):
         pass
 
     def __onConfermaClicked(self) -> None:
-        #self.strategy.onConfermaClicked()
+        # self.strategy.onConfermaClicked()
         pass
 
     def connettiEventi(self) -> None:

@@ -7,18 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from builtins import function
 
 from frontend.controller.controller import Controller
 from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerYesNo(Controller):
-    def __init__(self, view: VistaYesNo, previous: Controller, onConfermaCliked: function):
+    def __init__(self, view: VistaYesNo, previous: Controller, onConfermaCliked: 'function'):
         super().__init__(view)
         self.view: VistaYesNo = view
         self.previous: Controller = previous
         self.onConfermaCliked = onConfermaCliked
+        self.connettiEventi()
 
     def __onAnnullaClicked(self) -> None:
         self.closeView()

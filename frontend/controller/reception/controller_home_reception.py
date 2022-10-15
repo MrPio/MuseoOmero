@@ -8,6 +8,11 @@
 # 
 #######################################################
 from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.gestione_interna.composizione import Composizione
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
+from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
@@ -34,12 +39,18 @@ class ControllerHomeReception(Controller):
         self.home = home
         self.dipendente = dipendente
 
+        # for i in range(10):
+        #     Museo.getInstance().opere.append(
+        #         Opera('Picasso', 'titolo', 'descr', None, PeriodoStorico.BAROCCO, RepartoMuseo.MOSTRA,
+        #               composizione=Composizione(0, 0, 0, 0, TipoOpera.TELA))
+        #     )
+
     def __gotoVistaAccount(self) -> None:
         self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
-            dipendente=self.dipendente,
+            model=self.dipendente,
         )
         self.next.connettiEventi()
         self.next.showView()

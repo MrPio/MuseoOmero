@@ -15,7 +15,7 @@ from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
 from frontend.controller.amministrazione.controller_modifica_posto_lavoro import ControllerModificaPostoLavoro
-from frontend.controller.amministrazione.widget.strategy_widget_dipendente.strategy_widget_posto_lavoro import \
+from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.strategy_widget_posto_lavoro import \
     StrategyWidgetPostoLavoro
 from frontend.controller.controller import Controller
 from frontend.ui.location import UI_DIR
@@ -68,7 +68,6 @@ class ControllerWidgetPostoLavoro(Controller):
 
     def initializeUi(self):
         self.strategy.initializeUi(self)
-        print(self.model.nome)
         self.view.getNomeLabel().setText('{} (piano {})'.format(self.model.nome, self.model.piano))
         self.view.getPostiLiberiLabel().setText('posti liberi {}/{}'.format(
             len(self.model.lavori), self.model.numero_postazioni_totali))

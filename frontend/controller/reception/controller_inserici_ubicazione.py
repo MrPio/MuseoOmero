@@ -18,15 +18,27 @@ class ControllerInsericiUbicazione(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self,view : VistaInsericiUbicazione , previous : Controller, model : Ubicazione):
+    def __init__(self, view: VistaInsericiUbicazione, previous: Controller, model: Ubicazione):
         super().__init__(view)
         self.view: VistaInsericiUbicazione = view
         self.previous = previous
         self.model = model
+        self.connettiEventi()
+        self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        pass
-        #self.model.
+        self.model.piano = self.view.getPianoSpinBox().value()
+        self.model.numero_magazzino = self.view.getNumeroMagazzinoSpinBox().value()
+        self.model.scaffale = self.view.getScaffaleSpinBox().value()
+        self.model.posizione = self.view.getPosizioneSpinBox().value()
+        self.previous.initializeUi()
+        self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
-        self.view.getConfermaButton().clicked(self.__onConfermaClicked)
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
+
+    def initializeUi(self) -> None:
+        self.view.getPianoSpinBox().setValue(self.model.piano)
+        self.view.getNumeroMagazzinoSpinBox().setValue(self.model.numero_magazzino)
+        self.view.getScaffaleSpinBox().setValue(self.model.scaffale)
+        self.view.getPosizioneSpinBox().setValue(self.model.posizione)

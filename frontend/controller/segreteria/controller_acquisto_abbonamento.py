@@ -12,7 +12,7 @@ from frontend.controller.controller import Controller
 from frontend.view.segreteria.vista_acquisto_abbonamento import VistaAcquistoAbbonamento
 
 
-class ControllerAcquistoAbbonamento(Controller):
+class ControllerAcquistoAbbonamento(Controller,Subscriber):
 
     def __gotoPrevious(self) -> None:
         pass
@@ -30,7 +30,7 @@ class ControllerAcquistoAbbonamento(Controller):
         pass
 
     def __subscribeView(self) -> None:
-        pass
+        self.model.subscribe(self)
 
-    def updatetime(self) -> None:
-        pass
+    def update(self) -> None:
+        self.view.getCostoLabel().setText('€ {}'.format(self.model.calcolaCosto()))

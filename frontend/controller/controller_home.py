@@ -22,6 +22,7 @@ class ControllerHome(Controller):
     def __init__(self, view: VistaHome):
         super().__init__(view)
         self.view: VistaHome = view
+        self.connettiEventi()
 
 
     def __gotoLogin(self, reparto) -> None:

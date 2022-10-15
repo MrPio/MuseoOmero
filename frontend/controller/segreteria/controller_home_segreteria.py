@@ -39,7 +39,7 @@ class ControllerHomeSegreteria(Controller):
             view=VistaAccount(),
             previous=self,
             home=self.home,
-            dipendente=self.dipendente,
+            model=self.dipendente,
         )
         self.next.connettiEventi()
         self.next.showView()

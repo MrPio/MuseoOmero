@@ -11,6 +11,7 @@ from datetime import datetime
 
 from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
 from backend.high_level.gestione_interna.evento import Evento
+from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
 
 
 class TurnoGuida(Evento):
@@ -18,10 +19,11 @@ class TurnoGuida(Evento):
     def __init__(self, dataInizio: datetime, dataFine: datetime, reparto: RepartoMuseo, capienza: int,
                  numeroPrenotati: int = 0):
         super().__init__(dataInizio, dataFine)
-        self.durata = dataFine - dataInizio
+        self.durata = (dataFine - dataInizio).seconds/60
         self.reparto: RepartoMuseo = reparto
         self.capienza = capienza
         self.numero_prenotati = numeroPrenotati
+        self.guida: OperatoreAlPubblico|None = None
 
     def isPieno(self) -> bool:
         return self.numero_prenotati >= self.capienza
