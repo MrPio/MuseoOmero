@@ -63,7 +63,10 @@ class ControllerConvalida(Controller):
         # TODO use the result ID
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaInserimentoManuale())
+        self.view.getScannerizzaButton().clicked.connect(self.__onScannerizzaClicked)
+
 
     def initializeUi(self) -> None:
         self.strategy.initializeUi(self)
