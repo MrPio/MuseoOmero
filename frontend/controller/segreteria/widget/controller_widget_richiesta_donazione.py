@@ -20,13 +20,15 @@ class ControllerWidgetRichiestaDonazione(Controller):
         self.next = ControllerVistaOpera(
             view=VistaOpera(),
             previous=self,
-            model=self.model.opera,
+            model=self.model.opera, #TODO controllare correttezza
         )
 
     def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):
         super().__init__(view)
         self.view: WidgetRichiestaDonazione = view
         self.model = model
+        self.connettiEventi()
+        self.initializeUi()
 
     def __onRifiutaClicked(self) -> None:
         self.model.rifiuta()

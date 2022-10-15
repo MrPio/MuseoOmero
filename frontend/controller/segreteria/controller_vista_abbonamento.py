@@ -27,6 +27,8 @@ class ControllerVistaAbbonamento(Controller):
         self.view: VistaAbbonamento = view
         self.previous = previous
         self.model = model
+        self.initializeUi()
+        self.connettiEventi()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
@@ -43,4 +45,4 @@ class ControllerVistaAbbonamento(Controller):
                     abs(self.model.giorniAllaScadenza()))
                              + 'rimasti)' if self.model.giorniAllaScadenza() > 0 else 'fa)')
 
-        # TODO inizializzare Qr-Code nella label
+        #TODO inizializzare Qr-Code nella label

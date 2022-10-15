@@ -22,16 +22,38 @@ from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
 class ControllerAcquistoOpere(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
-    def __init__(self,view : VistaGestioneMostre, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaAcquistoOpere, previous: Controller, model: Museo):
+        super().__init__(view)
+        self.view: VistaAcquistoOpere = view
+        self.previous = previous
+        self.model = model
+        self.connettiEventi()
 
     def __gotoVistaAggiungiOpera(self) -> None:
-        pass
+        self.next = ControllerAggiungiOpera(
+            view=VistaAggiungiOpera(),
+            previous=self,
+            strategy=StrategyAggiungiOpera(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
-        pass
+        self.next = ControllerRicercaOpera(
+            view=VistaRicercaOpera(),
+            previous=self,
+            strategy=StrategyRicercaOpera(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaAggiungiOpera())
+        self.view.getRicercaSulWebButton().clicked.connect(self.__gotoVistaRicercaOpera())

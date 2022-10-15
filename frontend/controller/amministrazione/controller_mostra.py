@@ -7,15 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Mostra
+from backend.high_level.gestione_interna.mostra import Mostra
+from backend.high_level.gestione_interna.opera import Opera
 from frontend.controller.controller import Controller
-from frontend.view import VistaMostra
+from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
+from frontend.view.amministrazione.vista_mostra import VistaMostra
+from frontend.view.reception.vista_opera import VistaOpera
+
 
 class ControllerMostra(Controller):
-    m_VistaMostra= VistaMostra()
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaMostra, previous: Controller, model: Mostra):
         super().__init__(view)
@@ -26,7 +31,19 @@ class ControllerMostra(Controller):
         self.connettiEventi()
 
     def __gotoVistaOpera(self) -> None:
-        pass
+        self.next = ControllerVistaOpera(
+            view=VistaOpera(),
+            previous=self,
+            model=Opera()
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+
+    def initializeUi(self) -> None:
+        self.view.getPeriodoStoricoLabel().setText(self.model.tema.name)
+        self.view.getTitoloLabel().setText(self.model.titolo)
+        #TODO getListaOpere

@@ -8,6 +8,8 @@
 # 
 #######################################################
 from backend.high_level.clientela.abbonamento import Abbonamento
+from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
+from backend.high_level.clientela.subscriber import Subscriber
 from frontend.controller.controller import Controller
 from frontend.view.segreteria.vista_acquisto_abbonamento import VistaAcquistoAbbonamento
 
@@ -15,19 +17,30 @@ from frontend.view.segreteria.vista_acquisto_abbonamento import VistaAcquistoAbb
 class ControllerAcquistoAbbonamento(Controller,Subscriber):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaAcquistoAbbonamento, previous: Controller, model: Abbonamento):
         super().__init__(view)
+        self.view: VistaAcquistoAbbonamento = view
+        self.previous = previous
+        self.model = model
+        self.connettiEventi()
 
     def __onConfermaClicked(self) -> None:
-        pass
+        self.model.acquista()
+        self.closeView()
+        self.previous.enableView()
 
     def __onDurataChanged(self) -> None:
-        pass
+        self.view.getCostoLabel().setText(
+            str(TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()].cost))
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked())
+        self.view.getDurataComboBox().currentTextChanged.connect(self.__onDurataChanged)
 
     def __subscribeView(self) -> None:
         self.model.subscribe(self)

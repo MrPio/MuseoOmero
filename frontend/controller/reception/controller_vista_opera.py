@@ -62,14 +62,47 @@ class ControllerVistaOpera(Controller):
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        #TODO cambiaUbicazioneClicked
+        self.view.getImmagineLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getImmagineLabel().dropEvent = lambda e: self.__onDropFile(e)
+        self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
+        self.view.getCambiaUbicazioneButton().clicked.connect(self.__onCambiaUbicazioneClicked)
+        # TODO cambiaUbicazioneClicked non c'è più
 
     def initializeUi(self) -> None:
-        self.view.getAutoreLabel().setText()
-        self.view.getCostoLabel().setText()
-        self.view.getDimensioniLabel().setText()
-        self.view.getImmagineLabel().setText()
-        self.view.getPeriodoLabel().setText()
-        self.view.getTitoloLabel().setText()
-        self.view.getUbicazioneLabel().setText()
-        #TODO cambiaUbicazioneButton
+        self.view.getTitoloLabel().setText(self.model.titolo)
+        self.view.getAutoreLabel().setText(self.model.autore)
+
+        self.view.getDimensioniLabel() \
+            .setText('{} cm x {} cm '.format(
+            self.model.composizione.altezza_cm, self.model.composizione.larghezza_cm)
+                     + ' x {} cm'.format(self.model.composizione.profondita_cm )
+                             if self.model.composizione.profondita_cm > 0 else ''
+                     )
+        # TODO quella sulle dimensioni è una prova
+        self.view.getPeriodoLabel().setText(self.model.periodo.name.lower())
+        if type(self.model.ubicazione) is not NoneType:
+            self.view.getUbicazioneLabel().setText('piano {}/n.mag {}/scf {}/pos {}'.format(
+                self.model.ubicazione.piano, self.model.ubicazione.numero_magazzino,
+                self.model.ubicazione.scaffale, self.model.ubicazione.posizione))
+        else:
+            self.view.getUbicazioneLabel().setText('Non specificato')
+
+        if type(self.model.immagine) is not NoneType:
+            try:
+                image = QImage(self.model.immagine.tobytes('raw', 'RGBA'), self.model.immagine.size[0],
+                               self.model.immagine.size[1], QImage.Format_RGBA8888)
+                self.view.getImmagineLabel().setPixmap(QPixmap.fromImage(image))
+                self.view.getImmagineLabel().setMargin(10)
+            except Exception as e:
+                print(e)
+
+        self.view.getCostoLabel().setText(str(self.model.costo))
+        self.view.getImmagineLabel().setAcceptDrops(True)
+
+    def __onDropFile(self, event):
+        if len(event.mimeData().urls()) > 0:
+            path = event.mimeData().urls()[0].toLocalFile()
+            if any(extension in path.lower() for extension in ['.ico', '.png', '.jpg', '.bmp']):
+                self.model.immagine = Image.open(path).convert("RGBA")
+                self.previous.initializeUi()
+                self.initializeUi()

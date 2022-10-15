@@ -26,14 +26,11 @@ class ControllerGestioneDonazioni(Controller):
         self.view: VistaGestioneDonazioni = view
         self.previous = previous
         self.model = model
+        self.connettiEventi()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         #TODO listView
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
-        pass
-
-    def initializeUi(self) -> None:
-        #TODO
-        pass
+        pass #TODO

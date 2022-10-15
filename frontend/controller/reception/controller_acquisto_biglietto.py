@@ -86,4 +86,4 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view.getTipoBigliettoComboBox().currentTextChanged.connect(self.__onTipoBigliettoChanged)
 
     def update(self) -> None:
-        self.view.getCostoLabel()#TODO
+        self.view.getCostoLabel() #TODO

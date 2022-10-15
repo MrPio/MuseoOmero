@@ -16,25 +16,33 @@ from frontend.view.amministrazione.vista_statistiche import VistaStatistiche
 class ControllerVistaStatistiche(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaStatistiche, previous: Controller):
         super().__init__(view)
+        self.view: VistaStatistiche = view
+        self.previous = previous
+        self.connettiEventi()
 
     def __onVisualizzaClicked(self) -> None:
-        pass
+        pass #TODO
 
     def __onLeftArrowClicked(self) -> None:
-        pass
+        pass #TODO
 
     def __onRightArrowClicked(self) -> None:
-        pass
+        pass #TODO
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked())
+        self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onLeftArrowClicked()
+        self.view.getRightArrowIcon().mouseReleaseEvent = lambda _: self.__onRightArrowClicked()
 
     def addGrafico(chart : QChartView) -> None:
-        pass
+        pass #TODO
 
     def mostraStatistiche(clientiTotali : int, mediaGiornaliera : float, devStdGiornaliera : float) -> None:
-        pass
+        pass #TODO

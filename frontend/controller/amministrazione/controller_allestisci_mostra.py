@@ -7,27 +7,61 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Mostra
+import datetime
+
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.mostra import Mostra
 from frontend.controller.controller import Controller
-from frontend.controller.controller import ControllerWidgetAggiungiAllaLista
-from frontend.view import VistaAllestisciMostra
+from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
+from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
+from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+from frontend.view.amministrazione.vista_allestisci_mostra import VistaAllestisciMostra
+from frontend.view.reception.vista_opera import VistaOpera
+from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+
 
 class ControllerAllestisciMostra(Controller):
-    m_ControllerWidgetAggiungiAllaLista= ControllerWidgetAggiungiAllaLista()
-
-    m_VistaAllestisciMostra= VistaAllestisciMostra()
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self,view : VistaAllestisciMostra, previous : Controller, model : Mostra):
-        pass
+        super().__init__(view)
+        self.view: VistaAllestisciMostra = view
+        self.previous = previous
+        self.model = model
+        self.connettiEventi()
 
-    def __gotoVistaOpera(self) -> None:
-        pass
+    # def __gotoVistaOpera(self) -> None:
+    #     self.next = ControllerVistaOpera(
+    #         view=VistaOpera(),
+    #         previous=self,
+    #         #TODO
+    #     )
+    #     self.next.connettiEventi()
+    #     self.next.showView()
+    #     self.disableView()
 
-    def __gotoVistaRicercaOpera(self) -> None:
-        pass
+    # def __gotoVistaRicercaOpera(self) -> None:
+    #     self.next = ControllerRicercaOpera(
+    #         view=VistaRicercaOpera(),
+    #         previous=self,
+    #         #TODO model
+    #         strategy=StrategyRicercaOpera(),
+    #     )
+    #     self.next.connettiEventi()
+    #     self.next.showView()
+    #     self.disableView()
+    def __onConfermaClicked(self)->None:
+        self.model.titolo = self.view.getTitoloLineEdit().text()
+        self.model.tema = PeriodoStorico[self.view.getPeriodoStoricoComboBox().currentText().upper()]
+        self.model.data_inizio = datetime.datetime.today()
+        self.model.data_fine = self.model.data_inizio + datetime.timedelta(
+            days=self.view.getDurataSpinBox().value())
+        #TODO ListView
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        #TODO manca getConfermaButton
