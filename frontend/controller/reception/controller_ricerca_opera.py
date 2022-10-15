@@ -9,8 +9,10 @@
 #######################################################
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
+from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
 from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
-from frontend.controller.reception.widget.contreller_widget_opera import ControllerWidgetOpera
+from frontend.controller.reception.widget.controller_widget_opera import ControllerWidgetOpera
+from frontend.view.reception.vista_opera import VistaOpera
 from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
 from frontend.view.reception.widget.widget_opera import WidgetOpera
 
@@ -30,18 +32,20 @@ class ControllerRicercaOpera(Controller):
         self.opere_trovate: list[ControllerWidgetOpera] = []
 
     def __onRicercaClicked(self) -> None:
-        pass
-        # for opera in self.model.opere:
-        # self.initializeUi()
+        self.initializeUi()
 
-    def __gotoVistaOpera(self) -> None:
-        pass
+    # def __gotoVistaOpera(self) -> None:
+    #     self.next = ControllerVistaOpera(
+    #         view=VistaOpera(),
+    #         previous=self,
+    #         model=Museo.getInstance(),
+    #     )
+    #     self.next.connettiEventi()
+    #     self.next.showView()
+    #     self.closeView()
 
-    def __onOperaClicked(self) -> None:
-        pass
-
-    def connettiEventi(self) -> None:
-        pass
+    # def __onOperaClicked(self) -> None:
+    #     self.__gotoVistaOpera()
 
     def __renderizzaOpere(self) -> list[ControllerWidgetOpera]:
         tipo_ricerca = self.view.getTipoRicercaComboBox().currentText().lower()
@@ -75,3 +79,7 @@ class ControllerRicercaOpera(Controller):
         for widget_opera in self.opere_trovate:
             self.view.risultatiGridLayout.addWidget(widget_opera.view, c // 3, c % 3)
             c += 1
+
+    def connettiEventi(self) -> None:
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getRicercaButton().clicked.connect(self.__onRicercaClicked)

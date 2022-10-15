@@ -32,7 +32,6 @@ class ControllerInserisciDatiCliente(Controller):
         self.model = model
 
     def __onConfermaClicked(self) -> None:
-
         try:
             datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
         except Exception as e:
