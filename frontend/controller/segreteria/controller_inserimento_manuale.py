@@ -7,20 +7,48 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import winotify
+
+from backend.high_level.clientela import cliente
+from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.museo import Museo
+from backend.low_level.sicurezza.hashing import Hashing
+from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
 
 
 class ControllerInserimentoManuale(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo):
         super().__init__(view)
+        self.view: VistaInserimentoManuale = view
+        self.previous: Controller = previous
+        self.model = model
 
     def __onConfermaClicked(self) -> None:
-        pass
+        id = self.view.getIdLineEdit().text()
+        # TODO come accedo agli abbonamenti?
+        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
+            for abbonamento in cliente.abbonamenti:
+                if id == abbonamento.qr_code.id:
+                    self.previous.finalizza(abbonamento)
+                    self.closeView()
+                    self.previous.enableView()
+                    return
+        winotify.Notification(
+            app_id='Museo Omero',
+            title='Abbonamento non trovato',
+            msg='Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito.',
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        ).show()
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
