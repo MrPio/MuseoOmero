@@ -12,14 +12,19 @@ from PIL.Image import Image
 
 from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
 from backend.high_level.gestione_interna.evento import Evento
+from backend.high_level.gestione_interna.opera import Opera
 
 
 class Mostra(Evento):
 
     def __init__(self, dataInizio: datetime, dataFine: datetime, titolo: str, descrizione: str, tema: PeriodoStorico,
-                 pamphlet: Image = None):
+                 pamphlet: Image = None, opere:list[Opera]|None=None):
         super().__init__(dataInizio, dataFine)
         self.titolo = titolo
         self.descrizione = descrizione
         self.tema = tema
         self.pamphlet = pamphlet
+        self.opere: list[Opera] = opere if opere is not None else []
+
+    def isInCorso(self):
+        return datetime.now() > self.data_inizio and datetime.now() < self.data_fine

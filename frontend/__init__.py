@@ -2,6 +2,7 @@ import ctypes
 import datetime
 import sys
 
+import winotify
 from PyQt5.QtWidgets import QApplication
 
 from frontend.controller.amministrazione.controller_gestione_dipendenti import ControllerGestioneDipendenti
@@ -34,14 +35,19 @@ def startApp():
     vista_home = VistaHome()
     controller_home = ControllerHome(vista_home)
     from backend.high_level.personale.dipendente import Dipendente
-    controller_home=ControllerHomeAmministrazione(VistaHomeAmministrazione(),None,Dipendente('a','b',datetime.datetime.now()))
+    controller_home = ControllerHomeAmministrazione(VistaHomeAmministrazione(), None,
+                                                    Dipendente('a', 'b', datetime.datetime.now()))
+
     controller_home.connettiEventi()
     controller_home.showView()
 
     sys.exit(app.exec())
 
+    # TODO
+    # turno widget
+    # duplicazione
+
 
 if __name__ == '__main__':
     # TODO fare vista inserisciUbicazione
-
     startApp()

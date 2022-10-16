@@ -8,11 +8,13 @@
 # 
 #######################################################
 from backend.high_level.gestione_interna.mostra import Mostra
-from backend.high_level.gestione_interna.opera import Opera
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
+from frontend.controller.controller_yes_no import ControllerYesNo
+from frontend.controller.reception.widget.controller_widget_opera import ControllerWidgetOpera
 from frontend.view.amministrazione.vista_mostra import VistaMostra
-from frontend.view.reception.vista_opera import VistaOpera
+from frontend.view.reception.widget.widget_opera import WidgetOpera
+from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerMostra(Controller):
@@ -30,20 +32,42 @@ class ControllerMostra(Controller):
         self.initializeUi()
         self.connettiEventi()
 
-    def __gotoVistaOpera(self) -> None:
-        self.next = ControllerVistaOpera(
-            view=VistaOpera(),
-            previous=self,
-            model=Opera()
-        )
-        self.next.connettiEventi()
+    def __onEliminaClicked(self) -> None:
+        def elimina():
+            Museo.getInstance().mostre.remove(self.model)
+            self.previous.initializeUi()
+            self.__gotoPrevious()
+
+        self.next = ControllerYesNo(VistaYesNo(), self, elimina)
         self.next.showView()
         self.disableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
+
+    def __renderizzaOpere(self) -> list[ControllerWidgetOpera]:
+        result = []
+        for opera in self.model.opere:
+            result.append(
+                ControllerWidgetOpera(
+                    view=WidgetOpera(self.view.scrollAreaWidgetContents),
+                    parent=self,
+                    model=opera,
+                )
+            )
+        return result
 
     def initializeUi(self) -> None:
         self.view.getPeriodoStoricoLabel().setText(self.model.tema.name)
         self.view.getTitoloLabel().setText(self.model.titolo)
-        #TODO getListaOpere
+        self.opere_trovate = self.__renderizzaOpere()
+
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.listaOpereGridLayout.count())):
+            self.view.listaOpereGridLayout.itemAt(i).widget().setParent(None)
+
+        c = 0
+        for widget_opera in self.opere_trovate:
+            self.view.listaOpereGridLayout.addWidget(widget_opera.view, c // 3, c % 3)
+            c += 1

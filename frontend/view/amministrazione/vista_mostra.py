@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLabel
+from PyQt5.QtWidgets import QPushButton, QLabel, QGridLayout
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -29,3 +29,6 @@ class VistaMostra(MyMainWindow):
 
     def getListaOpereGridLayout(self) -> QGridLayout:
         return self.listaOpereGridLayout
+
+    def getEliminaButton(self) -> QPushButton:
+        return self.eliminaButton

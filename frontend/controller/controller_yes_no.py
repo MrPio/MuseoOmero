@@ -13,20 +13,23 @@ from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerYesNo(Controller):
-    def __init__(self, view: VistaYesNo, previous: Controller, onConfermaCliked: 'function'):
+    def __init__(self, view: VistaYesNo, previous: Controller|None, onConfermaCliked: 'function', message:str='Sicuro di voler procedere?'):
         super().__init__(view)
         self.view: VistaYesNo = view
         self.previous: Controller = previous
         self.onConfermaCliked = onConfermaCliked
+        self.view.getMessaggioLabel().setText(message)
         self.connettiEventi()
 
     def __onAnnullaClicked(self) -> None:
         self.closeView()
-        self.previous.enableView()
+        if self.previous is not None:
+            self.previous.enableView()
 
     def __onConfermaClicked(self) -> None:
         self.closeView()
-        self.previous.enableView()
+        if self.previous is not None:
+            self.previous.enableView()
         self.onConfermaCliked()
 
     def connettiEventi(self) -> None:

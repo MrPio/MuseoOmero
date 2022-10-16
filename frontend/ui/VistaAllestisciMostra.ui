@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>504</width>
-    <height>809</height>
+    <height>826</height>
    </rect>
   </property>
   <property name="cursor">
@@ -458,41 +458,6 @@ background-color: rgba(255, 249, 190, 255);</string>
         <property name="verticalSpacing">
          <number>12</number>
         </property>
-        <item row="0" column="0">
-         <widget class="QLabel" name="immagineLabel_10">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>80</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border-radius: 16px;
-background-color: rgba(255, 255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="margin">
-           <number>10</number>
-          </property>
-          <property name="indent">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
      </layout>
@@ -521,7 +486,7 @@ background-color: rgba(255, 255, 255,0);
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-style:italic;&quot;&gt;Fai click sulle immagini per vedere tutti i dettagli&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-style:italic;&quot;&gt;Tieni premuto sulle immagini per vedere tutti i dettagli&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -704,59 +669,6 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="confermaButton">
-    <property name="geometry">
-     <rect>
-      <x>159</x>
-      <y>740</y>
-      <width>183</width>
-      <height>44</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Lato</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
- background-color:rgb(104, 194, 253);
- border-style: solid;
- border-radius:22px;
-color: rgb(255, 255, 255);
-font: 14pt &quot;Lato&quot;;
-}
-
-QPushButton::hover{
-
-
-	border-color : rgb(15, 138, 204);
-	color: white;
-border-width:0;
-}
-
-QPushButton::pressed{
-	border-color:rgb(104, 194, 253);
-	border-width:4;
-	background-color : white;
-	color:rgb(104, 194, 253);
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Conferma</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
@@ -894,9 +806,9 @@ border-width:3;
    <widget class="QComboBox" name="periodoStoricoComboBox">
     <property name="geometry">
      <rect>
-      <x>292</x>
+      <x>276</x>
       <y>228</y>
-      <width>150</width>
+      <width>180</width>
       <height>30</height>
      </rect>
     </property>
@@ -1090,10 +1002,65 @@ QSpinBox::down-arrow::pressed{
     <property name="buttonSymbols">
      <enum>QAbstractSpinBox::UpDownArrows</enum>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
-     <number>25</number>
+     <number>365</number>
     </property>
    </widget>
+   <widget class="QPushButton" name="confermaButton">
+    <property name="geometry">
+     <rect>
+      <x>149</x>
+      <y>749</y>
+      <width>209</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+ background-color:rgb(104, 194, 253);
+ border-style: solid;
+ border-radius:26px;
+color: rgb(255, 255, 255);
+	font: 15pt &quot;Lato&quot;;
+}
+
+QPushButton::hover{
+	border-color : rgb(15, 138, 204);
+	color: white;
+border-width:0;
+}
+
+QPushButton::pressed{
+	border-color:rgb(104, 194, 253);
+	border-width:4;
+	background-color : white;
+	color:rgb(104, 194, 253);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Conferma</string>
+    </property>
+   </widget>
+   <zorder>confermaButton</zorder>
    <zorder>immagineLabel</zorder>
    <zorder>label</zorder>
    <zorder>reduceButton</zorder>
@@ -1112,7 +1079,6 @@ QSpinBox::down-arrow::pressed{
    <zorder>label_5</zorder>
    <zorder>titoloLabel_5</zorder>
    <zorder>label_15</zorder>
-   <zorder>confermaButton</zorder>
    <zorder>label_7</zorder>
    <zorder>label_8</zorder>
    <zorder>label_9</zorder>

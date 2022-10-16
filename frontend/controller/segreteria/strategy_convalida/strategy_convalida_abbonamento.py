@@ -11,9 +11,14 @@ from frontend.controller.segreteria.strategy_convalida.strategy_convalida import
 
 
 class StrategyConvalidaAbbonamento(StrategyConvalida):
-    def initializeUi(self,c : 'ControllerConvalida') -> None:
+
+    def __init__(self) -> None:
+        self.abbonamento: 'Abbonamento' | None = None
+
+    def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('CompraBiglietto ➜ ConvalidaAbbonamento')
 
-    def finalizza(self,c : 'ControllerConvalida') -> None:
-        # TODO
-        pass
+    def finalizza(self, c: 'ControllerConvalida') -> None:
+        # c.previous = ControllerAcquistoBiglietto
+        # c.next = ControllerInserimentoManuale
+        c.previous.model.abbonamento = self.abbonamento

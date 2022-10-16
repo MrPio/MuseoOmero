@@ -19,18 +19,20 @@ from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segretario import Segretario
 from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
 from frontend.controller.controller import Controller
+from frontend.controller.controller_yes_no import ControllerYesNo
 from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipendente
+from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerWidgetDipendente(Controller):
 
-    def __init__(self, view: WidgetDipendente, parent: Controller, model: Dipendente,strategy:StrategyDipendenti):
+    def __init__(self, view: WidgetDipendente, parent: Controller, model: Dipendente, strategy: StrategyDipendenti):
         super().__init__(view)
         self.view: WidgetDipendente = view
         self.parent = parent
         self.model = model
-        self.strategy=strategy
+        self.strategy = strategy
         self.connettiEventi()
         self.initializeUi()
 
@@ -39,24 +41,37 @@ class ControllerWidgetDipendente(Controller):
                                      Museo.getInstance().dipendenti))
         if type(self.model.lavoro) == Amministratore and len(amministratori) <= 1:
             return
-        elif type(self.model.posto_lavoro)==NoneType:
-            pass
-            # TODO rimuovi il dipendete invece di licenziarlo, e assicurati che il pulsante cambi da 'licenzia' a 'rimuovi'
+        elif self.model.posto_lavoro is None:
+            def elimina():
+                Museo.getInstance().dipendenti.remove(self.model)
+                self.parent.initializeUi()
+
+            self.next = ControllerYesNo(VistaYesNo(), self.parent, elimina)
+            self.next.showView()
+            self.parent.disableView()
+            return
+        # rimuovo tutti turni guida del dipendente licenziato
+        Museo.getInstance().turni_guida = \
+            [t for t in Museo.getInstance().turni_guida if t.guida is not self.model.lavoro]
+
         self.model.posto_lavoro.licenzia(self.model, 'licenziamento per giusta causa')
         self.parent.initializeUi()
 
+
     def __onPromuoviClicked(self) -> None:
-        if type(self.model.posto_lavoro) != NoneType:
+        if self.model.posto_lavoro is not None:
             self.model.posto_lavoro.promuovi(self.model)
         else:
+            self.view.getLicenziaButton().setText('Licenzia')
+            self.view.getPromuoviButton().setText('Promuovi')
             for posto_lavoro in Museo.getInstance().posti_lavoro:
                 if isinstance(posto_lavoro, Reception) and len(
                         posto_lavoro.lavori) < posto_lavoro.numero_postazioni_totali:
                     posto_lavoro.assumi(self.model)
         self.initializeUi()
-        
+
     def __onSelezionaClicked(self) -> None:
-        self.parent.previous.guida=self.model.lavoro
+        self.parent.previous.guida = self.model.lavoro
         self.parent.closeView()
         self.parent.previous.enableView()
 
@@ -83,3 +98,7 @@ class ControllerWidgetDipendente(Controller):
             self.view.getLicenziaButton().setEnabled(False)
         else:
             self.view.getLicenziaButton().setStyleSheet(open(UI_DIR + '/css/redButton.css', 'r').read())
+
+        if self.model.posto_lavoro is None:
+            self.view.getLicenziaButton().setText('Rimuovi')
+            self.view.getPromuoviButton().setText('Assumi')

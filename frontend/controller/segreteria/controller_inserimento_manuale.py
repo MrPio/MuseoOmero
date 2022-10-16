@@ -16,7 +16,7 @@ class ControllerInserimentoManuale(Controller):
     def __gotoPrevious(self) -> None:
         pass
 
-    def __init__(self, view: VistaInserimentoManuale, previous: Controller):
+    def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo):
         super().__init__(view)
 
     def __onConfermaClicked(self) -> None:

@@ -48,7 +48,7 @@ class ControllerModificaTurnoGuida(Controller):
         self.next.showView()
         self.disableView()
 
-    def __setModelDataInizioDataFine(self)->None:
+    def __setModelDataInizioDataFine(self) -> None:
         self.model.capienza = self.view.getCapienzaSpinBox().value()
         data_inizio = datetime.datetime(
             year=self.model.data_inizio.year,
@@ -72,7 +72,8 @@ class ControllerModificaTurnoGuida(Controller):
             return
 
         from backend.high_level.museo import Museo
-        Museo.getInstance().turni_guida.append(self.model)
+        if self.model not in Museo.getInstance().turni_guida:
+            Museo.getInstance().turni_guida.append(self.model)
 
         self.__gotoPrevious()
 
@@ -83,8 +84,6 @@ class ControllerModificaTurnoGuida(Controller):
 
     def initializeUi(self) -> None:
         self.view.getCapienzaSpinBox().setValue(self.model.capienza)
-        self.view.getOreComboBox().setCurrentText(str(datetime.datetime.now().hour))
-        self.view.getMinutiComboBox().setCurrentText(str((datetime.datetime.now().minute//15)*15))
+        self.view.getOreComboBox().setCurrentText(str(self.model.data_inizio.hour))
+        self.view.getMinutiComboBox().setCurrentText(str((self.model.data_inizio.minute // 15) * 15))
         self.view.getDurataComboBox().setCurrentText(str(self.model.durata))
-
-        print('{}:{}'.format(self.model.data_inizio.hour,self.model.data_inizio.minute))

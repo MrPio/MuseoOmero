@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="aggiungiAllaListaWidget" native="true">
    <property name="geometry">
     <rect>
@@ -47,11 +50,7 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 22px;
-background-color:#ffffff;
-border-width:14px;
-border-color:#b6e9ff;
-border-style: dotted;</string>
+    <string notr="true"/>
    </property>
    <widget class="QLabel" name="iconLabel">
     <property name="geometry">
@@ -85,7 +84,7 @@ border-style: dotted;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 16px;
-background-color: rgba(255, 255, 255, 255);
+background-color: rgba(255, 255, 255, 0);
 border-width:0px;</string>
     </property>
     <property name="text">

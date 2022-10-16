@@ -7,15 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.controller import ControllerRicercaOpera
-import StrategyRicercaOpera
+from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
+from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+
 
 class StrategyAggiungiOperaAMostra(StrategyRicercaOpera):
-    def initializeUi(c : ControllerRicercaOpera) -> None:
-        pass
+    def initializeUi(self,c : ControllerRicercaOpera) -> None:
+        c.view.getHeaderLabel().setText('AllestisciMostra ➜ RicercaOpera')
 
-    def onOperaClicked(c : ControllerRicercaOpera) -> None:
-        pass
+    def onOperaClicked(self,c : 'ControllerWidgetOpera') -> None:
+        # c.parent.previous --> ControllerAllestisciMostra
+        c.parent.previous.model.opere.append(c.model)
+        c.parent.previous.initializeUi()
+        c.parent.previous.enableView()
+        c.parent.closeView()
 
-    def initializeUi(c : ControllerRicercaOpera) -> None:
-        pass

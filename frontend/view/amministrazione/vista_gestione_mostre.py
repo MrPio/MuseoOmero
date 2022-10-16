@@ -22,7 +22,7 @@ class VistaGestioneMostre(MyMainWindow):
         return self.previousButton
 
     def getVisualizzaMostraAttualeButton(self) -> QPushButton:
-        return self.visualizzaMostraAttualeButton
+        return self.visualizzaMostraAttualeBigButton
 
     def getAllestisciNuovaMostraButton(self) -> QPushButton:
-        return self.allestisciNuovaMostraButton
+        return self.allestisciNuovaMostraBigButton

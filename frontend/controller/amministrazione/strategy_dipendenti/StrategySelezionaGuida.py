@@ -29,6 +29,7 @@ class StrategySelezionaGuida(StrategyDipendenti):
         c.view.getOccupatoLabel().setVisible(False)
         if isinstance(c.model.lavoro, OperatoreAlPubblico) and \
                 c.model.lavoro.isOccupato(c.parent.previous.model.data_inizio, c.parent.previous.model.data_fine):
-            c.view.getOccupatoLabel().setVisible(True)
+            if c.parent.previous.model not in c.model.lavoro.turni:
+                c.view.getOccupatoLabel().setVisible(True)
             c.view.getSelezionaButton().setEnabled(False)
             c.view.getSelezionaButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())

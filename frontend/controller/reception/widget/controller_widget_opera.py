@@ -21,11 +21,12 @@ from frontend.view.reception.widget.widget_opera import WidgetOpera
 
 class ControllerWidgetOpera(Controller):
 
-    def __init__(self, view: WidgetOpera, parent: Controller, model: Opera):
+    def __init__(self, view: WidgetOpera, parent: Controller, model: Opera, onOperaClicked: 'function' = lambda _: ''):
         super().__init__(view)
         self.view: WidgetOpera = view
         self.parent = parent
         self.model = model
+        self.onOperaClicked = onOperaClicked
         self.hold_start = None
         self.initializeUi()
         self.connettiEventi()
@@ -33,9 +34,11 @@ class ControllerWidgetOpera(Controller):
     def __startTimer(self):
         self.hold_start = time.time_ns()
 
-    def __onOperaClicked(self) -> None:
+    def __onOperaReleased(self) -> None:
         if time.time_ns() - self.hold_start > 200 * 1000000:
             self.__gotoVistaOpera()
+        else:
+            self.onOperaClicked(self)
 
     def __gotoVistaOpera(self):
         self.next = ControllerVistaOpera(
@@ -48,7 +51,7 @@ class ControllerWidgetOpera(Controller):
 
     def connettiEventi(self) -> None:
         self.view.getOperaLabel().mousePressEvent = lambda _: self.__startTimer()
-        self.view.getOperaLabel().mouseReleaseEvent = lambda _: self.__onOperaClicked()
+        self.view.getOperaLabel().mouseReleaseEvent = lambda _: self.__onOperaReleased()
 
     def initializeUi(self) -> None:
         if type(self.model.immagine) is not NoneType:

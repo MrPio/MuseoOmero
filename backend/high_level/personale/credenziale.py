@@ -30,7 +30,7 @@ class Credenziale:
                 msg='• Username --> {} \r\n• Password --> {} \r\nPuoi cambiarla in un qualunque '
                     'momento nella vista del tuo account.'.format(self.username, rand_pass),
                 icon=UI_DIR + '/ico/museum_white.ico',
-                duration='long',
+                duration='short',
             ).show()
         self.enc_password = self.hashing.hash(password if password != '' else rand_pass)
 

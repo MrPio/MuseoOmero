@@ -8,12 +8,15 @@
 # 
 #######################################################
 import cv2
+import winotify
 
+from backend.high_level.clientela.cliente import Cliente
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
     StrategyConvalidaAbbonamento
+from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_convalida import VistaConvalida
 
 
@@ -45,7 +48,7 @@ class ControllerConvalida(Controller):
         cap = cv2.VideoCapture(0)
         # initialize the cv2 QRCode detector
         detector = cv2.QRCodeDetector()
-        result = ''
+        id = ''
         while True:
             _, img = cap.read()
             data, bbox, _ = detector.detectAndDecode(img)
@@ -59,8 +62,19 @@ class ControllerConvalida(Controller):
         cap.release()
         cv2.destroyAllWindows()
 
-        print(result)
-        # TODO use the result ID
+        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
+            for abbonamento in cliente.abbonamenti:
+                if id == abbonamento.qr_code.id:
+                    self.finalizza(abbonamento)
+                    return
+        winotify.Notification(
+            app_id='Museo Omero',
+            title='Abbonamento non trovato',
+            msg='Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito. '
+                'Prova a ripetere la scannerizzazione',
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        ).show()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
@@ -72,5 +86,8 @@ class ControllerConvalida(Controller):
         self.strategy.initializeUi(self)
         #TODO
 
-    def finalizza(self) -> None:
+    def finalizza(self,abbonamento:'Abbonamento') -> None:
+        self.strategy.abbonamento=abbonamento
         self.strategy.finalizza(self)
+        self.closeView()
+        self.previous.enableView()

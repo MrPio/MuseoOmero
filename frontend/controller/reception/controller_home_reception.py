@@ -39,12 +39,6 @@ class ControllerHomeReception(Controller):
         self.home = home
         self.dipendente = dipendente
 
-        # for i in range(10):
-        #     Museo.getInstance().opere.append(
-        #         Opera('Picasso', 'titolo', 'descr', None, PeriodoStorico.BAROCCO, RepartoMuseo.MOSTRA,
-        #               composizione=Composizione(0, 0, 0, 0, TipoOpera.TELA))
-        #     )
-
     def __gotoVistaAccount(self) -> None:
         self.next = ControllerAccount(
             view=VistaAccount(),
@@ -83,7 +77,6 @@ class ControllerHomeReception(Controller):
             model=Museo.getInstance(),
             strategy=StrategyVendiOpera(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

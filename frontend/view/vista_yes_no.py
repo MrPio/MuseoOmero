@@ -23,3 +23,6 @@ class VistaYesNo(MyMainWindow):
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton
+
+    def getMessaggioLabel(self) -> QPushButton:
+        return self.messaggioLabel

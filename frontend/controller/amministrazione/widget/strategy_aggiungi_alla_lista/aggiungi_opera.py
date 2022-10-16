@@ -9,8 +9,14 @@
 #######################################################
 from PyQt5.QtGui import QPixmap
 
+from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
     StrategyAggiungiAllaLista
+from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
+from frontend.controller.reception.strategy_ricerca_opera.strategy_aggiungi_opera_a_mostra import \
+    StrategyAggiungiOperaAMostra
+from frontend.ui.location import UI_DIR
+from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
 
 
 class AggiungiOpera(StrategyAggiungiAllaLista):
@@ -18,7 +24,32 @@ class AggiungiOpera(StrategyAggiungiAllaLista):
         self.controller: 'ControllerWidgetAggiungiAllaLista' = None
 
     def onClicked(self) -> None:
-        pass
+        #nuova_opera=Opera('','','',None,PeriodoStorico.CONTEMPORANEO,RepartoMuseo.MOSTRA)
+        #Museo.getInstance().opere.append(nuova_opera)
+        self.controller.parent.next = ControllerRicercaOpera(
+            view=VistaRicercaOpera(),
+            previous=self.controller.parent,
+            model=Museo.getInstance(),
+            strategy=StrategyAggiungiOperaAMostra()
+        )
+        self.controller.parent.next.showView()
+        self.controller.parent.disableView()
 
     def getIcon(self) -> QPixmap:
         return QPixmap(":/icons/add_photo_alternate_FILL1_wght600_GRAD200_opsz48_risultato.png")
+
+    def initializeUi(self) -> None:
+        self.controller.view.aggiungiAllaListaWidget.setStyleSheet(open(UI_DIR + '/css/dottedBorderThin.css', 'r').read())
+
+        self.controller.view.setMinimumHeight(80)
+        self.controller.view.setMinimumWidth(115)
+        self.controller.view.setMaximumHeight(80)
+        self.controller.view.setMaximumWidth(115)
+        self.controller.view.aggiungiAllaListaWidget.setMinimumHeight(80)
+        self.controller.view.aggiungiAllaListaWidget.setMinimumWidth(115)
+        self.controller.view.aggiungiAllaListaWidget.setMaximumHeight(80)
+        self.controller.view.aggiungiAllaListaWidget.setMaximumWidth(115)
+        self.controller.view.iconLabel.setGeometry(15,0,80,80)
+        self.controller.view.iconLabel.setMinimumHeight(80)
+        self.controller.view.iconLabel.setMinimumWidth(80)
+        self.controller.view.iconLabel.setMargin(20)

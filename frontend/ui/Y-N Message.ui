@@ -189,12 +189,12 @@ QPushButton::pressed{
      <string>Conferma</string>
     </property>
    </widget>
-   <widget class="QLabel" name="titoloLabel">
+   <widget class="QLabel" name="messaggioLabel">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>96</x>
       <y>70</y>
-      <width>261</width>
+      <width>271</width>
       <height>51</height>
      </rect>
     </property>
@@ -211,16 +211,19 @@ text-align: center;
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Sicuro di voler procedere?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>Sicuro di voler procedere?</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>38</x>
+      <x>39</x>
       <y>70</y>
       <width>48</width>
       <height>48</height>

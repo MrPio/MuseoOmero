@@ -17,8 +17,3 @@ class StrategyAcquistaOpera(StrategyAggiungiOpera):
     def onConfermaClicked(c : ControllerAggiungiOpera) -> None:
         pass
 
-    def initializeUi(c : ControllerAggiungiOpera) -> None:
-        pass
-
-    def onConfermaClicked(c : ControllerAggiungiOpera) -> None:
-        pass

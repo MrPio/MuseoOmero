@@ -49,7 +49,6 @@ class ControllerAcquistoOpere(Controller):
             previous=self,
             strategy=StrategyRicercaOpera(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

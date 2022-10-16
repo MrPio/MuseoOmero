@@ -15,6 +15,7 @@ from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
 
 import frontend.controller.amministrazione.controller_modifica_posto_lavoro as controller_modifica_posto_lavoro
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
 
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
@@ -43,3 +44,7 @@ class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
 
     def getIcon(self) -> QPixmap:
         return QPixmap(":/icons/add_business_FILL1_wght600_GRAD200_opsz48_risultato.png")
+
+    def initializeUi(self) -> None:
+        self.controller.view.aggiungiAllaListaWidget.setStyleSheet(
+            open(UI_DIR + '/css/dottedBorderThick.css', 'r').read())

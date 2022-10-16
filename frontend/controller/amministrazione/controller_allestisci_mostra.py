@@ -11,13 +11,15 @@ import datetime
 
 from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
 from backend.high_level.gestione_interna.mostra import Mostra
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.widget.controller_widget_aggiungi_alla_lista import \
+    ControllerWidgetAggiungiAllaLista
+from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.aggiungi_opera import AggiungiOpera
 from frontend.controller.controller import Controller
-from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
-from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
-from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+from frontend.controller.reception.widget.controller_widget_opera import ControllerWidgetOpera
 from frontend.view.amministrazione.vista_allestisci_mostra import VistaAllestisciMostra
-from frontend.view.reception.vista_opera import VistaOpera
-from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
+from frontend.view.reception.widget.widget_opera import WidgetOpera
 
 
 class ControllerAllestisciMostra(Controller):
@@ -27,11 +29,13 @@ class ControllerAllestisciMostra(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
-    def __init__(self,view : VistaAllestisciMostra, previous : Controller, model : Mostra):
+    def __init__(self, view: VistaAllestisciMostra, previous: Controller, model: Mostra):
         super().__init__(view)
         self.view: VistaAllestisciMostra = view
         self.previous = previous
         self.model = model
+        self.next = None
+        self.initializeUi()
         self.connettiEventi()
 
     # def __gotoVistaOpera(self) -> None:
@@ -54,14 +58,49 @@ class ControllerAllestisciMostra(Controller):
     #     self.next.connettiEventi()
     #     self.next.showView()
     #     self.disableView()
-    def __onConfermaClicked(self)->None:
+    def __onConfermaClicked(self) -> None:
         self.model.titolo = self.view.getTitoloLineEdit().text()
         self.model.tema = PeriodoStorico[self.view.getPeriodoStoricoComboBox().currentText().upper()]
         self.model.data_inizio = datetime.datetime.today()
         self.model.data_fine = self.model.data_inizio + datetime.timedelta(
             days=self.view.getDurataSpinBox().value())
-        #TODO ListView
+        # for controller in self.opere_trovate:
+        #     self.model.opere.append(controller.model)
+
+        Museo.getInstance().mostre.append(self.model)
+        self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        #TODO manca getConfermaButton
+        self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
+
+    def __renderizzaOpere(self) -> list[ControllerWidgetOpera]:
+        result = []
+        for opera in self.model.opere:
+            result.append(
+                ControllerWidgetOpera(
+                    view=WidgetOpera(self.view.scrollAreaWidgetContents),
+                    parent=self,
+                    model=opera,
+                )
+            )
+        return result
+
+    def initializeUi(self) -> None:
+        self.opere_trovate = self.__renderizzaOpere()
+
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.gridLayout.count())):
+            self.view.gridLayout.itemAt(i).widget().setParent(None)
+
+        c = 0
+        for widget_opera in self.opere_trovate:
+            self.view.gridLayout.addWidget(widget_opera.view, c // 3, c % 3)
+            c += 1
+
+        self.aggiungi_alla_lista = ControllerWidgetAggiungiAllaLista(
+            view=WidgetAggiungiAllaLista(self.view.scrollAreaWidgetContents),
+            parent=self,
+            strategy=AggiungiOpera(),
+        )
+        self.view.gridLayout.addWidget(self.aggiungi_alla_lista.view, c // 3, c % 3)

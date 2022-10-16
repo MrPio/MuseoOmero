@@ -7,8 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-
-from backend.high_level.museo import Museo
+import backend.high_level.museo as museo
 from frontend.controller.amministrazione.controller_assumi import ControllerAssumi
 from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
 from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
@@ -24,7 +23,7 @@ class ControllerGestioneDipendenti(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: Museo, strategy: StrategyDipendenti):
+    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: museo.Museo, strategy: StrategyDipendenti):
         super().__init__(view)
         self.view: VistaGestioneDipendenti = view
         self.previous = previous
@@ -37,7 +36,7 @@ class ControllerGestioneDipendenti(Controller):
         controller = ControllerAssumi(
             view=VistaAssumi(),
             previous=self,
-            model=Museo.getInstance(),
+            model=museo.Museo.getInstance(),
         )
         controller.connettiEventi()
         controller.showView()

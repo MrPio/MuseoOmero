@@ -20,10 +20,11 @@ class ControllerAggiungiOpera(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaAggiungiOpera, previous: Controller, strategy: StrategyAggiungiOpera):
+    def __init__(self, view: VistaAggiungiOpera, previous: Controller,model:Opera, strategy: StrategyAggiungiOpera):
         super().__init__(view)
         self.view: VistaAggiungiOpera = view
         self.previous = previous
+        self.model = model
         self.strategy: StrategyAggiungiOpera = strategy
 
     def __onAggiungiUbicazioneClicked(self) -> None:

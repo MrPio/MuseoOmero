@@ -8,10 +8,12 @@
 # 
 #######################################################
 
-
-class StrategyAggiungiOpera:
+import abc
+class StrategyAggiungiOpera(abc.ABC):
+    @abc.abstractmethod
     def initializeUi(c : 'ControllerAggiungiOpera') -> None:
         pass
 
+    @abc.abstractmethod
     def onConfermaClicked(c : 'ControllerAggiungiOpera') -> None:
         pass

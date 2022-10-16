@@ -7,12 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.gestione_interna.composizione import Composizione
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
+from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
+from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
 from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
 from frontend.controller.reception.widget.controller_widget_opera import ControllerWidgetOpera
-from frontend.view.reception.vista_opera import VistaOpera
 from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
 from frontend.view.reception.widget.widget_opera import WidgetOpera
 
@@ -30,6 +33,14 @@ class ControllerRicercaOpera(Controller):
         self.model = model
         self.strategy: StrategyRicercaOpera = strategy
         self.opere_trovate: list[ControllerWidgetOpera] = []
+        self.connettiEventi()
+        self.initializeUi()
+        # for i in range(4):
+        #     Museo.getInstance().opere.append(
+        #         Opera('Picasso', 'titolo', 'descr', None, PeriodoStorico.BAROCCO, RepartoMuseo.MOSTRA,
+        #               composizione=Composizione(0, 0, 0, 0, TipoOpera.TELA))
+        #     )
+
 
     def __onRicercaClicked(self) -> None:
         self.initializeUi()
@@ -63,8 +74,9 @@ class ControllerRicercaOpera(Controller):
             new_widget = WidgetOpera(self.view.scrollAreaWidgetContents)
             result.append(ControllerWidgetOpera(
                 view=new_widget,
-                model=opera,
                 parent=self,
+                model=opera,
+                onOperaClicked=self.strategy.onOperaClicked
             ))
         return result
 

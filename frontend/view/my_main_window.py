@@ -92,12 +92,20 @@ class MyMainWindow(QMainWindow):
             self.start = self.end
 
     def save_and_exit(self):
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Backup in corso',
-            msg='Attendi, sto effettuando il backup del museo locale...',
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
-        Museo.getInstance().make_backup()
-        os._exit(1)
+        def perform():
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Backup in corso',
+                msg='Attendi, sto effettuando il backup del museo locale...',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
+            Museo.getInstance().make_backup()
+            os._exit(1)
+
+        from frontend.controller.controller_yes_no import ControllerYesNo
+        from frontend.view.vista_yes_no import VistaYesNo
+        self.next = ControllerYesNo(VistaYesNo(), None, perform,'Sicuro di voler uscire?\r\n(I progressi verranno salvati)')
+        self.next.showView()
+
+

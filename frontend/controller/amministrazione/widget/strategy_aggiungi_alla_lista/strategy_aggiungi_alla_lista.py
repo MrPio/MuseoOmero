@@ -20,3 +20,7 @@ class StrategyAggiungiAllaLista(abc.ABC):
     @abc.abstractmethod
     def getIcon(self) -> QPixmap:
         pass
+
+    @abc.abstractmethod
+    def initializeUi(self) -> None:
+        pass

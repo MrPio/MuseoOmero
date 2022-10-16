@@ -7,10 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-
-class StrategyRicercaOpera:
-    def initializeUi(c : 'ControllerRicercaOpera') -> None:
+import abc
+class StrategyRicercaOpera(abc.ABC):
+    @abc.abstractmethod
+    def initializeUi(self,c : 'ControllerRicercaOpera') -> None:
         pass
 
-    def onOperaClicked(c : 'ControllerRicercaOpera') -> None:
+    @abc.abstractmethod
+    def onOperaClicked(self,c : 'ControllerWidgetOpera') -> None:
         pass

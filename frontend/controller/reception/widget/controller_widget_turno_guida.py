@@ -10,8 +10,11 @@
 
 from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.gestione_interna.turno_guida import TurnoGuida
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.controller_modifica_turno_guida import ControllerModificaTurnoGuida
 from frontend.controller.controller import Controller
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.view.reception.vista_modifica_turno_guida import VistaModificaTurnoGuida
 from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
 
 
@@ -24,16 +27,26 @@ class ControllerWidgetTurnoGuida(Controller):
         self.parent = parent
         self.strategy = strategy
         self.initializeUi()
+        self.connettiEventi()
 
     def __onSelezionaClicked(self) -> None:
         pass  # TODO
 
     def __onRimuoviButton(self) -> None:
-        pass  # TODO
-
+        # rimuovo il turno alla guida
+        self.model.guida.turni.remove(self.model)
+        # rimuovo il turno dal museo (db)
+        Museo.getInstance().turni_guida.remove(self.model)
+        self.parent.initializeUi()
     def __onModificaButton(self) -> None:
-        pass  # TODO
-
+        self.next=ControllerModificaTurnoGuida(
+            view=VistaModificaTurnoGuida(),
+            previous=self.parent,
+            model=self.model,
+        )
+        self.next.guida=self.model.guida
+        self.next.showView()
+        self.parent.disableView()
     def connettiEventi(self) -> None:
         self.view.getRimuoviButton().clicked.connect(self.__onRimuoviButton)
         self.view.getModificaButton().clicked.connect(self.__onModificaButton)

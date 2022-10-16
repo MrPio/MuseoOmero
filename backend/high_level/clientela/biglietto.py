@@ -9,6 +9,7 @@
 #######################################################
 from datetime import datetime
 
+from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.documento import Documento
 from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
@@ -24,6 +25,7 @@ class Biglietto(Documento):
         self.reparto_museo = reparto
         self.tariffa = tariffa
         self.guida = turno
+        self.abbonamento:Abbonamento|None=None
 
     def calcolaCosto(self) -> float:
         if self.reparto_museo == RepartoMuseo.MUSEO_APERTO:

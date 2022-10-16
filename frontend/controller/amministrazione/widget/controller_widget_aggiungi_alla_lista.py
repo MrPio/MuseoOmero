@@ -10,6 +10,7 @@
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
     StrategyAggiungiAllaLista
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
 
 
@@ -33,4 +34,5 @@ class ControllerWidgetAggiungiAllaLista(Controller):
         self.view.getIcon().mouseReleaseEvent = lambda _: self.__onClicked()
 
     def initializeUi(self):
+        self.strategy.initializeUi()
         self.view.getIcon().setPixmap(self.strategy.getIcon())
