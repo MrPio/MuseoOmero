@@ -26,6 +26,7 @@ class ControllerAggiungiOpera(Controller):
         self.previous = previous
         self.model = model
         self.strategy: StrategyAggiungiOpera = strategy
+        self.connettiEventi()
 
     def __onAggiungiUbicazioneClicked(self) -> None:
         pass

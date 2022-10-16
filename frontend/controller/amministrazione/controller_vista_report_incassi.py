@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import datetime
+
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
@@ -15,16 +17,33 @@ from frontend.view.amministrazione.vista_report_incassi import VistaReportIncass
 class ControllerVistaReportIncassi(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
     def __init__(self, view: VistaReportIncassi, previous: Controller, model: Museo):
         super().__init__(view)
+        self.view: VistaReportIncassi = view
+        self.previous = previous
+        self.model = model
+        self.initializeUi()
+        self.connettiEventi()
 
     def __onVisualizzaClicked(self) -> None:
-        pass
+        pass #TODO
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked())
 
     def __generaGrafico(self) -> None:
-        pass
+        pass #TODO
+
+    def initializeUi(self) -> None:
+        self.view.getAcquistoOpereLabel().setText()
+        self.view.getVenditaOpereLabel().setText()
+        self.view.getAbbonamentiLabel().setText()
+        self.view.getBigliettiLabel().setText()
+        self.view.getMeseLineEdit().setText(datetime.datetime.today().strftime("%m/%Y"))
+        #TODO controllare riga sopra
+        pass #TODO settare tutti i testi
