@@ -18,6 +18,7 @@ from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbona
     StrategyConvalidaAbbonamento
 from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_convalida import VistaConvalida
+from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
 
 
 class ControllerConvalida(Controller):
@@ -36,7 +37,7 @@ class ControllerConvalida(Controller):
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
-            view=VistaConvalida(),
+            view=VistaInserimentoManuale,
             previous=self,
             strategy=StrategyConvalidaAbbonamento(),
         )

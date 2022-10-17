@@ -12,6 +12,7 @@ import StrategyAggiungiOpera
 
 class StrategyAcquistaOpera(StrategyAggiungiOpera):
     def initializeUi(c : ControllerAggiungiOpera) -> None:
+
         pass
 
     def onConfermaClicked(c : ControllerAggiungiOpera) -> None:

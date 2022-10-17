@@ -11,7 +11,7 @@ from backend.high_level.gestione_interna.ubicazione import Ubicazione
 from frontend.controller.controller import Controller
 from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
 
-
+#TODO nome controller inserisci ubicazione sbagliato
 class ControllerInsericiUbicazione(Controller):
 
     def __gotoPrevious(self) -> None:
