@@ -33,7 +33,6 @@ class ControllerInserimentoManuale(Controller):
 
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()
-        # TODO come accedo agli abbonamenti?
         for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
             for abbonamento in cliente.abbonamenti:
                 if id == abbonamento.qr_code.id:
