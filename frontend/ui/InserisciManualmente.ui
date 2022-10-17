@@ -414,7 +414,7 @@ border: 2px solid rgba(255, 255, 255);</string>
      <string>&gt;AAAAA-AAAAA;#</string>
     </property>
     <property name="text">
-     <string>AAAAA-AAAAA</string>
+     <string>-</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

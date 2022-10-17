@@ -26,7 +26,7 @@ class VistaConvalida(MyMainWindow):
         return self.previousButton
 
     def getInserisciManualmenteButton(self) -> QPushButton:
-        return self.inserisciManualmenteButton
+        return self.inserisciManualmenteBigButton
 
     def getScannerizzaButton(self) -> QPushButton:
-        return self.scannerizzaButton
+        return self.scannerizzaBigButton

@@ -11,6 +11,7 @@ import cv2
 import winotify
 
 from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
@@ -37,7 +38,8 @@ class ControllerConvalida(Controller):
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
-            view=VistaInserimentoManuale,
+            view=VistaInserimentoManuale(),
+            model= Museo.getInstance(),
             previous=self,
             strategy=StrategyConvalidaAbbonamento(),
         )
@@ -55,33 +57,24 @@ class ControllerConvalida(Controller):
             data, bbox, _ = detector.detectAndDecode(img)
             # check if there is a QRCode in the image
             if data:
-                result = data
+                id = data
                 break
             cv2.imshow("QRCODEscanner", img)
             if cv2.waitKey(1) == ord("q"):
                 break
         cap.release()
         cv2.destroyAllWindows()
-
-        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
-            for abbonamento in cliente.abbonamenti:
-                if id == abbonamento.qr_code.id:
-                    self.finalizza(abbonamento)
-                    return
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Abbonamento non trovato',
-            msg='Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito. '
-                'Prova a ripetere la scannerizzazione',
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
+        print(id)
+        self.strategy.onRicercaClicked(c=self.strategy, id=id)
+        self.closeView()
+        self.previous.enableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaInserimentoManuale())
-        self.view.getScannerizzaButton().clicked.connect(self.__onScannerizzaClicked)
-
+        #self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaInserimentoManuale())
+        #self.view.getScannerizzaButton().clicked.connect(self.__onScannerizzaClicked)
+        self.view.getInserisciManualmenteButton().mouseReleaseEvent = lambda _: self.__gotoVistaInserimentoManuale()
+        self.view.getScannerizzaButton().mouseReleaseEvent = lambda _: self.__onScannerizzaClicked()
 
     def initializeUi(self) -> None:
         self.strategy.initializeUi(self)

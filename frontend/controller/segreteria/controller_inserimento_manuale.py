@@ -7,14 +7,17 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from datetime import datetime
+
 import winotify
 
-from backend.high_level.clientela import cliente
+from backend.high_level.clientela import cliente, qr_code
+from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.clientela.documento import Documento
 from backend.high_level.museo import Museo
-from backend.low_level.sicurezza.hashing import Hashing
-from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 from frontend.controller.controller import Controller
+from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
 from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
 
@@ -25,28 +28,34 @@ class ControllerInserimentoManuale(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo):
+    def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo, strategy: StrategyConvalida ):
         super().__init__(view)
         self.view: VistaInserimentoManuale = view
         self.previous: Controller = previous
         self.model = model
+        self.strategy = strategy
+
+        #Parte relativa al test, da togliere nel programma terminato
+        cliente= Cliente(
+                nome='Pippo',
+                cognome='Solo',
+                codFis = "codFis",
+                email = "email",
+                tel = "3355",
+                #data_registrazione = datetime.now(),
+        )
+
+        documento= Abbonamento(dataRilascio= datetime(2022, 9, 17))
+        documento.qr_code.id='AAAAA-AAAAA'
+        cliente.abbonamenti.append(documento)
+        self.model.visitatori.append(cliente)
+#============================================================================
 
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()
-        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
-            for abbonamento in cliente.abbonamenti:
-                if id == abbonamento.qr_code.id:
-                    self.previous.finalizza(abbonamento)
-                    self.closeView()
-                    self.previous.enableView()
-                    return
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Abbonamento non trovato',
-            msg='Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito.',
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
+        self.strategy.onRicercaClicked(c= self.strategy,id=id)
+        self.closeView()
+        self.previous.enableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
