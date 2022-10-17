@@ -7,11 +7,14 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PIL import Image
+
 from backend.high_level.gestione_interna.opera import Opera
-from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from frontend.controller.controller import Controller
+from frontend.controller.reception.controller_inserici_ubicazione import ControllerInsericiUbicazione
 from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
 from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
+from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
 
 
 class ControllerAggiungiOpera(Controller):
@@ -20,7 +23,7 @@ class ControllerAggiungiOpera(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaAggiungiOpera, previous: Controller,model:Opera, strategy: StrategyAggiungiOpera):
+    def __init__(self, view: VistaAggiungiOpera, previous: Controller, model: Opera, strategy: StrategyAggiungiOpera):
         super().__init__(view)
         self.view: VistaAggiungiOpera = view
         self.previous = previous
@@ -29,12 +32,25 @@ class ControllerAggiungiOpera(Controller):
         self.connettiEventi()
 
     def __onAggiungiUbicazioneClicked(self) -> None:
-        pass
+        self.next = ControllerInsericiUbicazione(
+            view=VistaInsericiUbicazione,
+            previous=self,
+            model=self.model.ubicazione,
+        )
+        self.next.connettiEventi()
+        self.next.showView()
+        self.disableView()
 
-    def __onDropZoneDropped(self) -> None:
-        pass
+    def __onDropZoneDropped(self, event) -> None:
+        if len(event.mimeData().urls()) > 0:
+            path = event.mimeData().urls()[0].toLocalFile()
+            if any(extension in path.lower() for extension in ['.ico', '.png', '.jpg', '.bmp']):
+                self.model.immagine = Image.open(path).convert("RGBA")
+                self.previous.initializeUi()
+                self.initializeUi()
 
     def __onDropZoneClicked(self) -> None:
+        #TODO seleziona file
         pass
 
     def __onConfermaClicked(self) -> None:
@@ -42,10 +58,7 @@ class ControllerAggiungiOpera(Controller):
         pass
 
     def connettiEventi(self) -> None:
-        pass
-
-    def getRichiestaDonazione(self) -> RichiestaDonazione:
-        pass
-
-    def getOpera(self) -> Opera:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getDropZoneLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getDropZoneLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
+        self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
