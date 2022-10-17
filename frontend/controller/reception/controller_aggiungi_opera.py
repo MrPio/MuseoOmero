@@ -7,8 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PIL import Image
+
 from backend.high_level.gestione_interna.opera import Opera
-from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from frontend.controller.controller import Controller
 from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
 from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
@@ -42,10 +43,7 @@ class ControllerAggiungiOpera(Controller):
         pass
 
     def connettiEventi(self) -> None:
-        pass
-
-    def getRichiestaDonazione(self) -> RichiestaDonazione:
-        pass
-
-    def getOpera(self) -> Opera:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getDropZoneLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getDropZoneLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
+        self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()

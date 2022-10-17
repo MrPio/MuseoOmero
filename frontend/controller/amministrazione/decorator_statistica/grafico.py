@@ -7,12 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Statistica
-from frontend.controller.controller import ControllerVistaStatistiche
+from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
+
 
 class Grafico(Statistica):
-    def __init__(self,controller : ControllerVistaStatistiche, statistica : Grafico):
-        pass
+    def __init__(self, controller: 'ControllerVistaStatistiche', statistica: 'Statistica'):
+        self.controller = controller
+        self.statistica = statistica
 
     def calcola(self) -> None:
         pass
