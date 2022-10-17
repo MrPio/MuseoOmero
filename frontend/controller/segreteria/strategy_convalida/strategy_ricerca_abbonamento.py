@@ -15,5 +15,5 @@ class StrategyRicercaAbbonamento(StrategyConvalida):
         c.view.getHeaderLabel().setText('HomeSegreteria ➜ RicercaAbbonamento')
 
     def finalizza(self, c: 'ControllerConvalida') -> None:
-        # TODO
+        #         c.strategy.abbonamento = self.abbonamento
         pass
