@@ -7,11 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime, timedelta
+from datetime import datetime
 
-from PyQt5.QtChart import QChartView
-from dateutil.relativedelta import relativedelta
+from PyQt5 import sip
 
+from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.clientela.enum.sesso import Sesso
+from backend.high_level.clientela.visitatore import Visitatore
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.decorator_statistica.grafico_su_eta import GraficoSuEta
+from frontend.controller.amministrazione.decorator_statistica.grafico_su_provenienza import GraficoSuProvenienza
+from frontend.controller.amministrazione.decorator_statistica.grafico_su_sesso import GraficoSuSesso
+from frontend.controller.amministrazione.decorator_statistica.statistica_clienti import StatisticaClienti
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_statistiche import VistaStatistiche
 
@@ -23,47 +31,114 @@ class ControllerVistaStatistiche(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
+    def popolaMuseo(self):
+        museo=Museo.getInstance()
+        biglietti=[Biglietto() for _ in range(10)]
+        [biglietto.date_convalida.append(datetime.now()) for biglietto in biglietti]
+
+        museo.visitatori.extend(
+            [
+                Visitatore(
+                    provenienza='ITA',
+                    dataNascita=datetime.strptime('10/02/1980','%d/%m/%Y'),
+                    sesso=Sesso.MASCHIO,
+                    biglietti=[biglietti[0]],
+                ),
+                Visitatore(
+                    provenienza='FRA',
+                    dataNascita=datetime.strptime('10/02/2010', '%d/%m/%Y'),
+                    sesso=Sesso.FEMMINA,
+                    biglietti=[biglietti[1]],
+                ),
+                Visitatore(
+                    provenienza='germania',
+                    dataNascita=datetime.strptime('10/02/1952', '%d/%m/%Y'),
+                    sesso=Sesso.NON_SPECIFICATO,
+                    biglietti=[biglietti[2]],
+                ),
+                Cliente(
+                    nome='pippo',
+                    cognome='baudo',
+                    codFis='',
+                    prov='italia',
+                    nasc=datetime.strptime('10/02/2001', '%d/%m/%Y'),
+                    sesso=Sesso.MASCHIO,
+                    biglietti=[biglietti[3]],
+                )
+            ]
+        )
+
     def __init__(self, view: VistaStatistiche, previous: Controller):
         super().__init__(view)
         self.view: VistaStatistiche = view
         self.previous = previous
+        self.current_index = 0
+        self.mese_selezionato = None
+        self.charts_layout = []
         self.connettiEventi()
         self.initializeUi()
-        self.current_index=0
-        # self.grafici
+        self.view.getMeseLineEdit().setText(datetime.today().strftime("%m/%Y"))
 
     def __onVisualizzaClicked(self) -> None:
-        self.initializeUi()
-    def __onFrecciaSinistraClicked(self) -> None:
-        date = None
         try:
-            date = datetime.strptime(self.view.getDataLineEdit().text(), '%d/%m/%Y')
+            self.mese_selezionato = datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
         except Exception as e:
             print(e)
             return
-        self.view.getDataLineEdit().setText((date - relativedelta(months=1)).strftime('%d/%m/%Y'))
+
+        self.__svuotaGrafici()
+        self.current_index=0
+
+        # Component base
+        self.statistica_decorator = StatisticaClienti(self)
+
+        # Decorators aggiuntivi
+        if self.view.provenienzaCheckBoxStatus:
+            self.statistica_decorator = GraficoSuProvenienza(self, self.statistica_decorator)
+        if self.view.etaCheckBoxStatus:
+            self.statistica_decorator = GraficoSuEta(self, self.statistica_decorator)
+        if self.view.sessoCheckBoxStatus:
+            self.statistica_decorator = GraficoSuSesso(self, self.statistica_decorator)
+
+        self.statistica_decorator.calcola()
+        self.initializeUi()
+
+    def __onFrecciaSinistraClicked(self) -> None:
+        self.current_index-=1 if self.current_index>0 else 0
         self.initializeUi()
 
     def __onFrecciaDestraClicked(self) -> None:
-        date = None
-        try:
-            date = datetime.strptime(self.view.getDataLineEdit().text(), '%d/%m/%Y')
-        except Exception as e:
-            print(e)
-            return
-        self.view.getMeseLineEdit().setText((date + relativedelta(months=1)).strftime('%d/%m/%Y'))
+        self.current_index+=1 if self.current_index < len(self.charts_layout)-1 else 0
         self.initializeUi()
+
+    def __setVisibilitaFrecce(self)->None:
+        self.view.getLeftArrowIcon().setVisible(self.current_index > 0)
+        self.view.getRightArrowIcon().setVisible(self.current_index < len(self.charts_layout)-1)
+
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked())
+        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked)
         self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
         self.view.getRightArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
 
-    def addGrafico(chart : QChartView) -> None:
-        pass #TODO
-
-    def mostraStatistiche(clientiTotali : int, mediaGiornaliera : float, devStdGiornaliera : float) -> None:
-        pass #TODO
-
     def initializeUi(self) -> None:
+        if len(self.charts_layout)>0:
+            self.__svuotaGrafici()
+            self.statistica_decorator.calcola()
+            self.view.getVisualizzaStatisticheFrame().setLayout(self.charts_layout[self.current_index])
+        self.__setVisibilitaFrecce()
 
+    def __svuotaGrafici(self):
+        def __deleteLayout( layout):
+            if layout is not None:
+                while layout.count():
+                    item = layout.takeAt(0)
+                    widget = item.widget()
+                    if widget is not None:
+                        widget.deleteLater()
+                    else:
+                        __deleteLayout(item.layout())
+                sip.delete(layout)
+        for layout in self.charts_layout:
+            __deleteLayout(layout)
+        self.charts_layout=[]

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>484</width>
-    <height>779</height>
+    <height>864</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -459,7 +459,7 @@ text-align: center;</string>
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>80</x>
       <y>226</y>
       <width>151</width>
       <height>31</height>
@@ -609,7 +609,7 @@ QPushButton::pressed{
 </string>
     </property>
     <property name="text">
-     <string>Visualizza</string>
+     <string>Calcola</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_13">
@@ -693,8 +693,8 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLabel" name="rightArrowIcon">
     <property name="geometry">
      <rect>
-      <x>421</x>
-      <y>580</y>
+      <x>410</x>
+      <y>600</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -759,14 +759,15 @@ border-color: rgb(255,255, 255);
    <widget class="QFrame" name="visualizzaStatisticheFrame">
     <property name="geometry">
      <rect>
-      <x>62</x>
-      <y>460</y>
-      <width>360</width>
-      <height>300</height>
+      <x>30</x>
+      <y>470</y>
+      <width>420</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-width: 0px;</string>
+     <string notr="true">border-width: 0px;
+background-color: rgba(255, 255, 255,0);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -886,7 +887,7 @@ border-width:3;
 }</string>
     </property>
     <property name="inputMask">
-     <string>00/0000;0</string>
+     <string>00/0000;#</string>
     </property>
     <property name="text">
      <string>/</string>
@@ -987,8 +988,8 @@ text-align: center;</string>
    <widget class="QLabel" name="leftArrowIcon">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>580</y>
+      <x>10</x>
+      <y>600</y>
       <width>64</width>
       <height>64</height>
      </rect>
@@ -1078,6 +1079,50 @@ background-color: rgba(255, 255, 255,0);
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="numeroVisitatoriLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>773</y>
+      <width>461</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 20px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+</string>
+    </property>
+    <property name="text">
+     <string>Numero visitatori:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="percentualeAbbonatiLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>803</y>
+      <width>461</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 20px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+</string>
+    </property>
+    <property name="text">
+     <string>Percentuale abbonati:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>label_12</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>pushButton_2</zorder>
@@ -1096,7 +1141,6 @@ background-color: rgba(255, 255, 255,0);
    <zorder>label_13</zorder>
    <zorder>label_8</zorder>
    <zorder>label_17</zorder>
-   <zorder>rightArrowIcon</zorder>
    <zorder>sessoCheckBox</zorder>
    <zorder>visualizzaStatisticheFrame</zorder>
    <zorder>etaCheckBox</zorder>
@@ -1106,10 +1150,13 @@ background-color: rgba(255, 255, 255,0);
    <zorder>meseLineEdit</zorder>
    <zorder>titoloLabel_4</zorder>
    <zorder>autoreLabel</zorder>
-   <zorder>leftArrowIcon</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>label_10</zorder>
+   <zorder>numeroVisitatoriLabel</zorder>
+   <zorder>percentualeAbbonatiLabel</zorder>
+   <zorder>rightArrowIcon</zorder>
+   <zorder>leftArrowIcon</zorder>
   </widget>
  </widget>
  <resources>

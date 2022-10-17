@@ -55,7 +55,5 @@ class Dipendente():
         return False
 
     def calcolaEta(self) -> int:
-        today = datetime.today()
-        # int(True) is 1 and int(False) is 0:
-        return today.year - self.data_nascita.year - \
-               ((today.month, today.day) < (self.data_nascita.month, self.data_nascita.day))
+        return datetime.today().year - self.data_nascita.year - \
+               ((datetime.today().month, datetime.today().day) < (self.data_nascita.month, self.data_nascita.day))

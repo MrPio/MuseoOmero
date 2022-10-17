@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QCheckBox, QFrame
+from PyQt5.QtWidgets import QLineEdit, QLabel, QPushButton, QFrame
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -24,13 +24,13 @@ class VistaStatistiche(MyMainWindow):
     def getMeseLineEdit(self) -> QLineEdit:
         return self.meseLineEdit
 
-    def getProvenienzaCheckBox(self) -> QCheckBox:
+    def getProvenienzaCheckBox(self) -> QPushButton:
         return self.provenienzaCheckBox
 
-    def getEtaCheckBox(self) -> QCheckBox:
+    def getEtaCheckBox(self) -> QPushButton:
         return self.etaCheckBox
 
-    def getSessoCheckBox(self) -> QCheckBox:
+    def getSessoCheckBox(self) -> QPushButton:
         return self.sessoCheckBox
 
     def getVisualizzaButton(self) -> QPushButton:
@@ -44,3 +44,9 @@ class VistaStatistiche(MyMainWindow):
 
     def getLeftArrowIcon(self) -> QLabel:
         return self.leftArrowIcon
+
+    def getNumeroVisitatoriLabel(self) -> QLabel:
+        return self.numeroVisitatoriLabel
+
+    def getPercentualeAbbonatiLabel(self) -> QLabel:
+        return self.percentualeAbbonatiLabel

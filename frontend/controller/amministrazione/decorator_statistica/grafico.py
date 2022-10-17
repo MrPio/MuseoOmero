@@ -9,11 +9,13 @@
 #######################################################
 from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
 
+import abc
 
-class Grafico(Statistica):
-    def __init__(self, controller: 'ControllerVistaStatistiche', statistica: 'Statistica'):
+
+class Grafico( Statistica, metaclass=abc.ABCMeta):
+    def __init__(self, controller: 'ControllerVistaStatistiche', wrappee: Statistica):
         self.controller = controller
-        self.statistica = statistica
+        self.wrappee = wrappee
 
     def calcola(self) -> None:
-        pass
+        self.wrappee.calcola()

@@ -10,14 +10,15 @@
 from datetime import datetime
 
 from backend.high_level.clientela.abbonamento import Abbonamento
+from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
 
 
 class Cliente(Visitatore):
     def __init__(self, nome: str, cognome: str, codFis: str, prov: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
-                 nasc: datetime = None, email: str = "", tel: str = ''):
-        super().__init__(prov, sesso, nasc)
+                 nasc: datetime = None, email: str = "", tel: str = '',biglietti:list[Biglietto]=None):
+        super().__init__(prov, sesso, nasc,biglietti)
         self.nome=nome
         self.cognome=cognome
         self.codice_fiscale=codFis

@@ -18,11 +18,11 @@ class Abbonamento(Documento):
 
     def __init__(self, tipo: TipoAbbonamento=TipoAbbonamento.MENSILE, dataRilascio: datetime = None):
         super().__init__(NexiApi(), dataRilascio)
-        self.data_ultimo_rinnovo = dataRilascio
-        self.tipo = tipo
+        self.date_rinnovo = {}
+        self.date_rinnovo[self.data_rilascio]=tipo
 
     def calcolaCosto(self) -> float:
-        return self.tipo.cost
+        return list(self.date_rinnovo.items())[-1][1].cost
 
     def convalida(self) -> bool:
         self.date_convalida.append(datetime.now())
@@ -32,9 +32,8 @@ class Abbonamento(Documento):
         return self.giorniAllaScadenza() > 0
 
     def giorniAllaScadenza(self) -> int:
-        return self.tipo.days - (datetime.now() - self.data_ultimo_rinnovo).days
+        return list(self.date_rinnovo.items())[-1][1].days - (datetime.now() - list(self.date_rinnovo.keys())[-1]).days
 
     def rinnova(self, tipo: TipoAbbonamento) -> None:
-        self.data_ultimo_rinnovo=datetime.now()
-        self.tipo = tipo
+        self.date_rinnovo[datetime.now()]=tipo
         self.acquista()

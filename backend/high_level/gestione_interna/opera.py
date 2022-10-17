@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import datetime
+
 from PIL.Image import Image
 
 from backend.high_level.gestione_interna.composizione import Composizione
@@ -31,12 +33,21 @@ class Opera:
         self.costo = costo
         self.composizione = composizione
         self.ubicazione = ubicazione
-        self.venduta=False
+        self.data_inserimento=datetime.datetime.now()
+        self.data_vendita=None
+        self.data_acquisto=None
 
     def vendi(self, pagamento: Pagamento) -> bool:
         if not self.isVendibile():
             return False
+        self.data_vendita=datetime.datetime.now()
         return pagamento.paga(costo=self.costo)
 
     def isVendibile(self):
-        return self.reparto == RepartoMuseo.MOSTRA
+        return self.reparto == RepartoMuseo.MOSTRA and not self.isVenduta()
+
+    def isVenduta(self)->bool:
+        return self.data_vendita is not None
+
+    def isAcquistata(self)->bool:
+            return self.data_acquisto is not None

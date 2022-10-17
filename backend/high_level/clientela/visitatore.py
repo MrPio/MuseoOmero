@@ -15,8 +15,14 @@ from backend.high_level.clientela.enum.sesso import Sesso
 
 class Visitatore:
 
-    def __init__(self,provenienza : str = "", sesso : Sesso = Sesso.NON_SPECIFICATO, dataNascita : datetime = None):
-        self.provenienza=provenienza
-        self.sesso=sesso
+    def __init__(self, provenienza: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
+                 dataNascita: datetime = None, biglietti: list[Biglietto] = None):
+        self.provenienza = provenienza
+        self.sesso = sesso
         self.data_nascita = dataNascita
-        self.biglietti:list[Biglietto]=[]
+        self.biglietti: list[Biglietto] = biglietti if biglietti is not None else []
+        self.data_inserimento = datetime.now()
+
+    def calcolaEta(self) -> int:
+        return datetime.today().year - self.data_nascita.year - \
+               ((datetime.today().month, datetime.today().day) < (self.data_nascita.month, self.data_nascita.day))

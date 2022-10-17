@@ -9,6 +9,7 @@
 #######################################################
 import datetime
 
+from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
@@ -28,22 +29,51 @@ class ControllerVistaReportIncassi(Controller):
         self.model = model
         self.initializeUi()
         self.connettiEventi()
+        self.view.getMeseLineEdit().setText(datetime.datetime.today().strftime("%m/%Y"))
 
     def __onVisualizzaClicked(self) -> None:
-        pass #TODO
+        self.initializeUi()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked())
 
     def __generaGrafico(self) -> None:
-        pass #TODO
+        pass  # TODO
 
     def initializeUi(self) -> None:
-        self.view.getAcquistoOpereLabel().setText()
-        self.view.getVenditaOpereLabel().setText()
-        self.view.getAbbonamentiLabel().setText()
-        self.view.getBigliettiLabel().setText()
-        self.view.getMeseLineEdit().setText(datetime.datetime.today().strftime("%m/%Y"))
-        #TODO controllare riga sopra
-        pass #TODO settare tutti i testi
+        self.mese_selezionato = datetime.datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
+        data_ricerca = self.mese_selezionato
+        if data_ricerca is None:
+            return
+
+        # opere
+        costo_acquisti_opere = 0
+        ricavi_vendita_opere = 0
+        for opera in self.model.opere:
+            if opera.isAcquistata():
+                if opera.data_acquisto.year == data_ricerca.year and opera.data_acquisto.month == data_ricerca.month:
+                    costo_acquisti_opere += opera.costo
+            elif opera.isVenduta():
+                if opera.data_vendita.year == data_ricerca.year and opera.data_vendita.month == data_ricerca.month:
+                    ricavi_vendita_opere += opera.costo
+
+        ricavi_vendita_abbonamenti = 0
+        for visitatore in self.model.visitatori:
+            if isinstance(visitatore, Cliente):
+                for abbonamento in visitatore.abbonamenti:
+                    for data_rinnovo, tipo_rinnovo in abbonamento.date_rinnovo.items():
+                        if data_rinnovo.year == data_ricerca and data_rinnovo.month == data_ricerca:
+                            ricavi_vendita_abbonamenti += tipo_rinnovo.cost
+
+        ricavi_vendita_biglietti = 0
+        for visitatore in self.model.visitatori:
+            for biglietto in visitatore.biglietti:
+                if biglietto.data_rilascio == data_ricerca and biglietto.data_rilascio == data_ricerca:
+                    ricavi_vendita_biglietti += biglietto.calcolaCosto()
+
+        self.view.getAcquistoOpereLabel().setText('- €{}'.format(str(round(costo_acquisti_opere, 2))))
+        self.view.getVenditaOpereLabel().setText('+ €{}'.format(str(round(ricavi_vendita_opere, 2))))
+        self.view.getAbbonamentiLabel().setText('+ €{}'.format(str(round(ricavi_vendita_abbonamenti, 2))))
+        self.view.getBigliettiLabel().setText('+ €{}'.format(str(round(ricavi_vendita_biglietti, 2))))
+        #TODO settare tutti i testi

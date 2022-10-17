@@ -7,12 +7,95 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Grafico
-from frontend.controller.controller import ControllerVistaStatistiche
+from PyQt5.QtChart import QChartView, QChart, QValueAxis, QBarCategoryAxis, QBarSeries, QBarSet
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPainter, QFont
+from PyQt5.QtWidgets import QVBoxLayout
+
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.decorator_statistica.grafico import Grafico
+from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
+
 
 class GraficoSuEta(Grafico):
-    def __init__(self,controller : ControllerVistaStatistiche, statistica : Grafico):
-        pass
+    def __init__(self, controller: 'ControllerVistaStatistiche', wrappee: Statistica):
+        super().__init__(controller, wrappee)
 
     def calcola(self) -> None:
-        pass
+        super().calcola()
+
+        mese = self.controller.mese_selezionato
+        if mese is None:
+            return
+
+        etas = [6, 19, 41, 71, 9999]
+        days = [7, 14, 21, [-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][mese.month]]
+        sets = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+        for visitatore in Museo.getInstance().visitatori:
+            for biglietto in visitatore.biglietti:
+                for data in biglietto.date_convalida:
+                    if data.year == mese.year and data.month == mese.month:
+                        for i in range(len(etas)):
+                            if visitatore.calcolaEta() < etas[i]:
+                                for j in range(len(days)):
+                                    if data.day < days[j]:
+                                        sets[i][j] += 1
+                                        break
+
+        self.set_0 = QBarSet("0-5")
+        self.set_1 = QBarSet("6-18")
+        self.set_2 = QBarSet("19-40")
+        self.set_3 = QBarSet("41-70")
+        self.set_4 = QBarSet("71-100")
+
+        self.set_0.append(sets[0])
+        self.set_1.append(sets[1])
+        self.set_2.append(sets[2])
+        self.set_3.append(sets[3])
+        self.set_4.append(sets[4])
+
+        self.series = QBarSeries()
+        self.series.append(self.set_0)
+        self.series.append(self.set_1)
+        self.series.append(self.set_2)
+        self.series.append(self.set_3)
+        self.series.append(self.set_4)
+        self.series.setBarWidth(0.75)
+
+        self.chart = QChart()
+        self.chart.addSeries(self.series)
+        self.chart.setAnimationOptions(QChart.SeriesAnimations)
+
+        self.categories = ["1-7", "8-14", "15-21",
+                           "22-" + str([-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][mese.month])]
+        self.axis_x = QBarCategoryAxis()
+        self.axis_x.append(self.categories)
+        self.axis_x.setLabelsFont(QFont('Lato', 12, QFont.Light))
+        self.chart.addAxis(self.axis_x, Qt.AlignBottom)
+        self.series.attachAxis(self.axis_x)
+        self.chart.setTitle('Grafico su età')
+        self.chart.setTitleFont(QFont('Lato', 14, QFont.Light))
+
+        self.axis_y = QValueAxis()
+        self.axis_y.setRange(0, max([max(e) for e in sets]))
+        self.axis_y.setLabelsFont(QFont('Lato', 12, QFont.Light))
+        self.chart.addAxis(self.axis_y, Qt.AlignLeft)
+        self.series.attachAxis(self.axis_y)
+
+        self.chart.legend().setVisible(True)
+        self.chart.legend().setAlignment(Qt.AlignTop)
+        self.chart.legend().setFont(QFont('Lato', 16, QFont.Light))
+        self.chart.legend().detachFromChart()
+        self.chart.legend().setMinimumWidth(500)
+        self.chart.legend().setX(0)
+        self.chart.legend().setY(-16)
+        self.chart.legend().update()
+
+        # self.chart.setContentsMargins(-10, -10, -10, -10)
+        self._chart_view = QChartView(self.chart)
+        self._chart_view.setRenderHint(QPainter.Antialiasing)
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self._chart_view)
+
+        self.controller.charts_layout.append(self.layout)

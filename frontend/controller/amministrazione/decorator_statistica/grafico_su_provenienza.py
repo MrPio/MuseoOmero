@@ -7,12 +7,75 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import Grafico
-from frontend.controller.controller import ControllerVistaStatistiche
+from PyQt5 import QtChart
+from PyQt5.QtChart import QChartView, QChart, QPieSeries, QPieSlice
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont, QPainter
+from PyQt5.QtWidgets import QVBoxLayout
+
+from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.decorator_statistica.grafico import Grafico
+from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
+
 
 class GraficoSuProvenienza(Grafico):
-    def __init__(self,controller : ControllerVistaStatistiche, statistica : Grafico):
-        pass
+    def __init__(self, controller: 'ControllerVistaStatistiche', wrappee: Statistica):
+        super().__init__(controller, wrappee)
 
     def calcola(self) -> None:
-        pass
+        super().calcola()
+
+        mese = self.controller.mese_selezionato
+        if mese is None:
+            return
+        def __onSeriesClicked(slice: QPieSlice):
+            slice.setExploded(exploded=not slice.isExploded())
+            slice.setLabelVisible(visible=not slice.isLabelVisible())
+
+        conteggio = {}
+        for visitatore in Museo.getInstance().visitatori:
+            for biglietto in visitatore.biglietti:
+                for data in biglietto.date_convalida:
+                    if data.year == mese.year and data.month == mese.month:
+                        prov=visitatore.provenienza[0:3].upper() if len(visitatore.provenienza) > 2 else visitatore.provenienza.upper()
+                        if prov in conteggio.keys():
+                            conteggio[prov] += 1
+                        else:
+                            conteggio[prov] = 1
+
+
+        self.series = QPieSeries()
+
+        for provenienza, num in conteggio.items():
+            self.series.append(provenienza, num)
+
+        self.chart = QChart()
+        self.chart.addSeries(self.series)
+        self.chart.legend().setAlignment(Qt.AlignTop)
+        self.chart.setAnimationOptions(QChart.SeriesAnimations)
+        self.chart.setTheme(QChart.ChartThemeLight)
+        self.series.clicked.connect(__onSeriesClicked)
+        self.series.setLabelsPosition(QtChart.QPieSlice.LabelInsideHorizontal)
+        for slice in self.series.slices():
+            slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
+            slice.setLabelFont(QFont('Lato', 14, QFont.Light))
+
+        for i in range(len(conteggio.keys())):
+            prov = list(conteggio.items())[i][0]
+            self.chart.legend().markers(self.series)[i].setLabel(prov)
+        self.chart.legend().setFont(QFont('Lato', 18, QFont.Light))
+        self.chart.legend().detachFromChart()
+        self.chart.legend().setMinimumWidth(500)
+        self.chart.legend().setX(50)
+        self.chart.legend().setY(-20)
+        self.chart.legend().update()
+        self.chart.setTitle('Grafico su provenienza')
+        self.chart.setTitleFont(QFont('Lato', 14, QFont.Light))
+
+        self.chart.setContentsMargins(-50, -0, -50, -50)
+        self._chart_view = QChartView(self.chart)
+        self._chart_view.setRenderHint(QPainter.Antialiasing)
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self._chart_view)
+
+        self.controller.charts_layout.append(self.layout)

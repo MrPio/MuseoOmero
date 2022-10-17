@@ -22,7 +22,7 @@ class Documento(abc.ABC):
 
     def __init__(self, pagamento: Pagamento, dataRilascio: datetime = None):
         self.pagamento = pagamento
-        self.data_rilascio = dataRilascio
+        self.data_rilascio = datetime.now() if dataRilascio is None else dataRilascio
         self.pagato = False
         self.qr_code = QRCode(QRCodeEncoding())
         self.date_convalida: list[datetime] = []

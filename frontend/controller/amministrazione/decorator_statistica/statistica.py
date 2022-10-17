@@ -8,7 +8,9 @@
 # 
 #######################################################
 
+import abc
+class Statistica(abc.ABC):
 
-class Statistica:
+    @abc.abstractmethod
     def calcola(self) -> None:
         pass
