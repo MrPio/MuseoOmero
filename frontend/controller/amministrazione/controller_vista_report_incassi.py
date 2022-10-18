@@ -7,12 +7,20 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import datetime
+from datetime import datetime,timedelta
+
+import dateutil
+from PyQt5 import sip
+from PyQt5.QtChart import QBarSet, QStackedBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPainter, QFont
+from PyQt5.QtWidgets import QVBoxLayout
 
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
+from dateutil.relativedelta import relativedelta
 
 
 class ControllerVistaReportIncassi(Controller):
@@ -27,27 +35,98 @@ class ControllerVistaReportIncassi(Controller):
         self.view: VistaReportIncassi = view
         self.previous = previous
         self.model = model
+        self.view.getMeseLineEdit().setText(datetime.today().strftime("%m/%Y"))
+        self.mese_selezionato = None
         self.initializeUi()
         self.connettiEventi()
-        self.view.getMeseLineEdit().setText(datetime.datetime.today().strftime("%m/%Y"))
 
     def __onVisualizzaClicked(self) -> None:
         self.initializeUi()
 
+    def __onFrecciaSinistraClicked(self) -> None:
+        date = None
+        try:
+            date = datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+        self.view.getMeseLineEdit().setText((date - relativedelta(months=1)).strftime('%m/%Y'))
+        self.initializeUi()
+
+    def __onFrecciaDestraClicked(self) -> None:
+        date = None
+        try:
+            date = datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+        self.view.getMeseLineEdit().setText((date + relativedelta(months=1)).strftime('%m/%Y'))
+        self.initializeUi()
+
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked())
+        self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked)
+        self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
+        self.view.getRightArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
 
-    def __generaGrafico(self) -> None:
-        pass  # TODO
 
-    def initializeUi(self) -> None:
-        self.mese_selezionato = datetime.datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
-        data_ricerca = self.mese_selezionato
-        if data_ricerca is None:
-            return
+    def __generaGrafico(self,data) -> None:
+        month= relativedelta(months=1)
+        dates=[(data-month)-month,data-month,data,data+month,(data+month)+month]
+        conti=[self.calcolaContoEconomicoDelMese(data) for data in dates]
+        mesi=['-1','GEN','FEB','MAR','APR','MAG','GIU','LUG','AGO','SET','OTT','NOV','DIC']
+        labels=['Acq. op.','Vend. op.','Abb.','Bigl.']
+        sets=[]
+        for i in range(len(labels)):
+            set=QBarSet(labels[i])
+            for conto in conti:
+                set.append(conto[i])
+            sets.append(set)
 
-        # opere
+        series = QStackedBarSeries()
+        for set in sets:
+            series.append(set)
+
+        chart = QChart()
+        chart.addSeries(series)
+        # chart.setTitle("Report incassi")
+        chart.setTitleFont(QFont('Lato', 14, QFont.Light))
+
+        chart.setContentsMargins(-20, 6, -20, -20)
+
+        chart.setAnimationOptions(QChart.SeriesAnimations)
+
+        categories = [mesi[data.month] for data in dates]
+
+        axisX = QBarCategoryAxis()
+        axisX.append(categories)
+        axisX.setLabelsFont(QFont('Lato', 12, QFont.Light))
+        chart.addAxis(axisX, Qt.AlignBottom)
+        series.attachAxis(axisX)
+        axisY = QValueAxis()
+        axisY.setLabelsFont(QFont('Lato', 12, QFont.Light))
+
+        chart.addAxis(axisY, Qt.AlignLeft)
+        series.attachAxis(axisY)
+
+        chart.legend().setVisible(True)
+        chart.legend().setAlignment(Qt.AlignBottom)
+        chart.legend().setFont(QFont('Lato', 16, QFont.Light))
+        chart.legend().detachFromChart()
+        chart.legend().setMinimumWidth(500)
+        chart.legend().setX(42)
+        chart.legend().setY(-12)
+        chart.legend().update()
+
+        self.chartView = QChartView(chart)
+        self.chartView.setRenderHint(QPainter.Antialiasing)
+
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.chartView)
+
+        self.view.getGraficoFrame().setLayout(self.layout)
+
+    def calcolaContoEconomicoDelMese(self, data_ricerca: datetime) -> list[float, float, float, float]:
         costo_acquisti_opere = 0
         ricavi_vendita_opere = 0
         for opera in self.model.opere:
@@ -63,17 +142,44 @@ class ControllerVistaReportIncassi(Controller):
             if isinstance(visitatore, Cliente):
                 for abbonamento in visitatore.abbonamenti:
                     for data_rinnovo, tipo_rinnovo in abbonamento.date_rinnovo.items():
-                        if data_rinnovo.year == data_ricerca and data_rinnovo.month == data_ricerca:
+                        if data_rinnovo.year == data_ricerca.year and data_rinnovo.month == data_ricerca.month:
                             ricavi_vendita_abbonamenti += tipo_rinnovo.cost
 
         ricavi_vendita_biglietti = 0
         for visitatore in self.model.visitatori:
             for biglietto in visitatore.biglietti:
-                if biglietto.data_rilascio == data_ricerca and biglietto.data_rilascio == data_ricerca:
+                if biglietto.data_rilascio.year == data_ricerca.year and biglietto.data_rilascio.month == data_ricerca.month:
                     ricavi_vendita_biglietti += biglietto.calcolaCosto()
+        return [-costo_acquisti_opere, ricavi_vendita_opere, ricavi_vendita_abbonamenti, ricavi_vendita_biglietti]
 
-        self.view.getAcquistoOpereLabel().setText('- €{}'.format(str(round(costo_acquisti_opere, 2))))
-        self.view.getVenditaOpereLabel().setText('+ €{}'.format(str(round(ricavi_vendita_opere, 2))))
-        self.view.getAbbonamentiLabel().setText('+ €{}'.format(str(round(ricavi_vendita_abbonamenti, 2))))
-        self.view.getBigliettiLabel().setText('+ €{}'.format(str(round(ricavi_vendita_biglietti, 2))))
-        #TODO settare tutti i testi
+    def initializeUi(self) -> None:
+        try:
+            self.mese_selezionato = datetime.strptime(self.view.getMeseLineEdit().text(), '%m/%Y')
+        except Exception as e:
+            print(e)
+            return
+        data_ricerca = self.mese_selezionato
+        if data_ricerca is None:
+            return
+        conto_economico = self.calcolaContoEconomicoDelMese(data_ricerca)
+        risultato = sum(conto_economico)
+
+        self.view.getAcquistoOpereLabel().setText('- €{:,.2f}'.format(abs(conto_economico[0])))
+        self.view.getVenditaOpereLabel().setText('+ €{:,.2f}'.format(conto_economico[1]))
+        self.view.getAbbonamentiLabel().setText('+ €{:,.2f}'.format(conto_economico[2]))
+        self.view.getBigliettiLabel().setText('+ €{:,.2f}'.format(conto_economico[3]))
+        self.view.getRisultatoLabel().setText('€{:,.2f}'.format(risultato))
+
+        def __deleteLayout( layout):
+            if layout is not None:
+                while layout.count():
+                    item = layout.takeAt(0)
+                    widget = item.widget()
+                    if widget is not None:
+                        widget.deleteLater()
+                    else:
+                        __deleteLayout(item.layout())
+                sip.delete(layout)
+        __deleteLayout(self.view.getGraficoFrame().layout())
+
+        self.__generaGrafico(data_ricerca)

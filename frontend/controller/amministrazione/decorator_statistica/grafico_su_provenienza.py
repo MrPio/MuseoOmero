@@ -66,7 +66,7 @@ class GraficoSuProvenienza(Grafico):
         self.chart.legend().setFont(QFont('Lato', 18, QFont.Light))
         self.chart.legend().detachFromChart()
         self.chart.legend().setMinimumWidth(500)
-        self.chart.legend().setX(50)
+        self.chart.legend().setX(110-len(conteggio)*20)
         self.chart.legend().setY(-20)
         self.chart.legend().update()
         self.chart.setTitle('Grafico su provenienza')

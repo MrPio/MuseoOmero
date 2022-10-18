@@ -20,10 +20,10 @@ from backend.low_level.pagamenti.pagamento import Pagamento
 
 class Opera:
 
-    def __init__(self, autore: str, titolo: str,
-                 descrizione: str, immagine: Image, periodo: PeriodoStorico,
-                 reparto: RepartoMuseo, costo: float = 0, composizione: Composizione = None,
-                 ubicazione: Ubicazione = None):
+    def __init__(self, autore: str='', titolo: str='',
+                 descrizione: str='', immagine: Image|None=None, periodo: PeriodoStorico=PeriodoStorico.PREISTORIA,
+                 reparto: RepartoMuseo=RepartoMuseo.MOSTRA, costo: float = 0, composizione: Composizione = None,
+                 ubicazione: Ubicazione = Ubicazione()):
         self.autore = autore
         self.titolo = titolo
         self.descrizione = descrizione

@@ -35,4 +35,4 @@ class StatisticaClienti(Statistica):
         self.controller.view.getNumeroVisitatoriLabel().setText(
             'Numero visitatori: {}'.format(str(tot)))
         self.controller.view.getPercentualeAbbonatiLabel().setText(
-            'Percentuale abbonati: {}'.format(str(convalide_clienti/(tot)*100 if tot!=0 else 0)))
+            'Percentuale abbonati: {}%'.format(str(round(convalide_clienti/(tot)*100,2) if tot!=0 else 0)))

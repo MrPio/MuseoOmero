@@ -22,7 +22,7 @@ class VistaAcquistoOpere(MyMainWindow):
         return self.previousButton
 
     def getRicercaSulWebButton(self) -> QPushButton:
-        return self.ricercaSulWebButton
+        return self.ricercaSulWebBigButton
 
     def getInserisciManualmenteButton(self) -> QPushButton:
-        return self.inserisciManualmenteButton
+        return self.inserisciManualmenteBigButton

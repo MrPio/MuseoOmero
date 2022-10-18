@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import random
+import threading
 from datetime import datetime
 
 from PyQt5 import sip
@@ -31,42 +33,6 @@ class ControllerVistaStatistiche(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
-    def popolaMuseo(self):
-        museo=Museo.getInstance()
-        biglietti=[Biglietto() for _ in range(10)]
-        [biglietto.date_convalida.append(datetime.now()) for biglietto in biglietti]
-
-        museo.visitatori.extend(
-            [
-                Visitatore(
-                    provenienza='ITA',
-                    dataNascita=datetime.strptime('10/02/1980','%d/%m/%Y'),
-                    sesso=Sesso.MASCHIO,
-                    biglietti=[biglietti[0]],
-                ),
-                Visitatore(
-                    provenienza='FRA',
-                    dataNascita=datetime.strptime('10/02/2010', '%d/%m/%Y'),
-                    sesso=Sesso.FEMMINA,
-                    biglietti=[biglietti[1]],
-                ),
-                Visitatore(
-                    provenienza='germania',
-                    dataNascita=datetime.strptime('10/02/1952', '%d/%m/%Y'),
-                    sesso=Sesso.NON_SPECIFICATO,
-                    biglietti=[biglietti[2]],
-                ),
-                Cliente(
-                    nome='pippo',
-                    cognome='baudo',
-                    codFis='',
-                    prov='italia',
-                    nasc=datetime.strptime('10/02/2001', '%d/%m/%Y'),
-                    sesso=Sesso.MASCHIO,
-                    biglietti=[biglietti[3]],
-                )
-            ]
-        )
 
     def __init__(self, view: VistaStatistiche, previous: Controller):
         super().__init__(view)

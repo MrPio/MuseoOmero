@@ -39,6 +39,9 @@ class VistaAggiungiOpera(MyMainWindow):
     def getUbicazioneButton(self) -> QPushButton:
         return self.ubicazioneButton
 
+    def getCostoLineEdit(self) -> QLineEdit:
+        return self.costoLineEdit
+
     def getFotoLabel(self) -> QLabel:
         return self.fotoLabel
 

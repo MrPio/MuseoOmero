@@ -11,9 +11,9 @@ from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_ope
 
 
 class StrategyRiceviDonazione(StrategyAggiungiOpera):
-    def initializeUi(c : 'ControllerAggiungiOpera') -> None:
+    def initializeUi(self,c : 'ControllerAggiungiOpera') -> None:
 
         pass
 
-    def onConfermaClicked(c : 'ControllerAggiungiOpera') -> None:
+    def onConfermaClicked(self,c : 'ControllerAggiungiOpera') -> None:
         pass

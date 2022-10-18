@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>489</width>
-    <height>688</height>
+    <height>831</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -361,7 +361,7 @@ font-size: 18px &quot;Lato light&quot;</string>
       <x>243</x>
       <y>97</y>
       <width>4</width>
-      <height>360</height>
+      <height>420</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -509,9 +509,9 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>103</y>
+      <y>101</y>
       <width>444</width>
-      <height>484</height>
+      <height>631</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1155,10 +1155,10 @@ text-align: center;
 border: 2px solid rgba(255, 255, 255);</string>
     </property>
     <property name="inputMask">
-     <string>000 \x 000 \c\m;0</string>
+     <string>000 \x 000 \x 000 \c\m;#</string>
     </property>
     <property name="text">
-     <string> x  cm</string>
+     <string> x  x  cm</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -1344,10 +1344,16 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>46</x>
-      <y>498</y>
-      <width>398</width>
-      <height>78</height>
+      <y>534</y>
+      <width>401</width>
+      <height>181</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">left: 222px;
@@ -1361,51 +1367,24 @@ text-align: center;</string>
     <property name="text">
      <string/>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_25">
-    <property name="geometry">
-     <rect>
-      <x>43</x>
-      <y>468</y>
-      <width>171</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">left: 790px;
-top: 159px;
-width: 437px;
-height: 650px;
-line-height: 20px;
-border-radius: 22px;
-background-color: rgba(182, 233, 255, 255);
-text-align: center;
-font-size: 18px &quot;Lato light&quot;</string>
-    </property>
-    <property name="text">
-     <string>Aggiungi immagine:</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::AutoText</enum>
-    </property>
     <property name="scaledContents">
      <bool>true</bool>
-    </property>
-    <property name="margin">
-     <number>0</number>
     </property>
    </widget>
    <widget class="QLabel" name="fotoLabel">
     <property name="geometry">
      <rect>
-      <x>221</x>
-      <y>512</y>
+      <x>222</x>
+      <y>600</y>
       <width>48</width>
       <height>48</height>
      </rect>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">left: 222px;
@@ -1433,15 +1412,15 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>154</x>
-      <y>620</y>
+      <y>760</y>
       <width>183</width>
-      <height>44</height>
+      <height>52</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Lato</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
@@ -1457,9 +1436,9 @@ text-align: center;</string>
      <string notr="true">QPushButton{
  background-color:rgb(104, 194, 253);
  border-style: solid;
- border-radius:22px;
+ border-radius:26px;
 color: rgb(255, 255, 255);
-font: 14pt &quot;Lato&quot;;
+	font: 15pt &quot;Lato&quot;;
 }
 
 QPushButton::hover{
@@ -1480,6 +1459,155 @@ QPushButton::pressed{
     </property>
     <property name="text">
      <string>Conferma</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="costoLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>266</x>
+      <y>474</y>
+      <width>183</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">left: 122px;
+top: 304px;
+width: 182px;
+height: 30px;
+border-radius: 8px;
+background-color: rgba(255, 255, 255);
+color: rgba(96, 96, 96);
+text-align: center;
+
+border: 2px solid rgba(255, 255, 255);</string>
+    </property>
+    <property name="inputMask">
+     <string>\€ 0000000\,00 ;#</string>
+    </property>
+    <property name="text">
+     <string>€ , </string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>Sandro Botticelli</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>478</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">left: 790px;
+top: 159px;
+width: 437px;
+height: 650px;
+line-height: 20px;
+border-radius: 22px;
+background-color: rgba(182, 233, 255, 255);
+text-align: center;
+font-size: 18px &quot;Lato light&quot;</string>
+    </property>
+    <property name="text">
+     <string>Costo:</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>43</x>
+      <y>474</y>
+      <width>34</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato Light</family>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+left: 679px;
+top: 140px;
+width: 38px;
+height: 38px;
+border-radius: 33px;
+background-color: rgba(173, 237, 255, 0);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="res/res.qrc">:/icons/receipt_long_FILL1_wght600_GRAD200_opsz48_risultato.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_25">
+    <property name="geometry">
+     <rect>
+      <x>24</x>
+      <y>517</y>
+      <width>444</width>
+      <height>4</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">width: 314px;
+height: 180px;
+border-radius: 0;
+background-color: rgb(255, 255, 255);
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
+    </property>
+    <property name="indent">
+     <number>0</number>
     </property>
    </widget>
    <zorder>label_2</zorder>
@@ -1515,9 +1643,12 @@ QPushButton::pressed{
    <zorder>periodoStoricoComboBox</zorder>
    <zorder>ubicazioneButton</zorder>
    <zorder>dropZoneLabel</zorder>
-   <zorder>label_25</zorder>
    <zorder>fotoLabel</zorder>
    <zorder>confermaButton</zorder>
+   <zorder>costoLineEdit</zorder>
+   <zorder>label_16</zorder>
+   <zorder>label_18</zorder>
+   <zorder>label_25</zorder>
   </widget>
  </widget>
  <resources>

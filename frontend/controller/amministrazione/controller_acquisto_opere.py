@@ -7,16 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import winotify
+
+from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_aggiungi_opera import ControllerAggiungiOpera
-from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
-from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
-from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera import StrategyRicercaOpera
+from frontend.controller.reception.strategy_aggiungi_opera.strategy_acquista_opera import StrategyAcquistaOpera
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_acquisto_opere import VistaAcquistoOpere
-from frontend.view.amministrazione.vista_gestione_mostre import VistaGestioneMostre
 from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
-from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
 
 
 class ControllerAcquistoOpere(Controller):
@@ -37,22 +37,22 @@ class ControllerAcquistoOpere(Controller):
         self.next = ControllerAggiungiOpera(
             view=VistaAggiungiOpera(),
             previous=self,
-            strategy=StrategyAggiungiOpera(),
+            model=Opera(),
+            strategy=StrategyAcquistaOpera(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
-        self.next = ControllerRicercaOpera(
-            view=VistaRicercaOpera(),
-            previous=self,
-            strategy=StrategyRicercaOpera(),
-        )
-        self.next.showView()
-        self.disableView()
+        winotify.Notification(
+            app_id='Museo Omero',
+            title='Funzione non disponibile',
+            msg='Spiacenti, ma questa funzione non è ancora stata implementata.',
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        ).show()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaAggiungiOpera())
-        self.view.getRicercaSulWebButton().clicked.connect(self.__gotoVistaRicercaOpera())
+        self.view.getInserisciManualmenteButton().mouseReleaseEvent = lambda _: self.__gotoVistaAggiungiOpera()
+        self.view.getRicercaSulWebButton().mouseReleaseEvent = lambda _: self.__gotoVistaRicercaOpera()

@@ -11,9 +11,9 @@
 import abc
 class StrategyAggiungiOpera(abc.ABC):
     @abc.abstractmethod
-    def initializeUi(c : 'ControllerAggiungiOpera') -> None:
+    def initializeUi(self,c : 'ControllerAggiungiOpera') -> None:
         pass
 
     @abc.abstractmethod
-    def onConfermaClicked(c : 'ControllerAggiungiOpera') -> None:
+    def onConfermaClicked(self,c : 'ControllerAggiungiOpera') -> None:
         pass
