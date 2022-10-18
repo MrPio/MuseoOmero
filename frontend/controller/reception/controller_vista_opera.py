@@ -7,11 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
+import tempfile
+from tkinter import filedialog
 from types import NoneType
 
 from PIL import Image
 from PIL.ImageQt import QPixmap
 from PyQt5.QtGui import QImage
+from tkinterDnD import tk
 
 from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.gestione_interna.ubicazione import Ubicazione
@@ -64,9 +68,9 @@ class ControllerVistaOpera(Controller):
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getImmagineLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
         self.view.getImmagineLabel().dropEvent = lambda e: self.__onDropFile(e)
+        self.view.getImmagineLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
         self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
         self.view.getCambiaUbicazioneButton().clicked.connect(self.__onCambiaUbicazioneClicked)
-        # TODO cambiaUbicazioneClicked non c'è più
 
     def initializeUi(self) -> None:
         self.view.getTitoloLabel().setText(self.model.titolo)
@@ -93,6 +97,11 @@ class ControllerVistaOpera(Controller):
                                self.model.immagine.size[1], QImage.Format_RGBA8888)
                 self.view.getImmagineLabel().setPixmap(QPixmap.fromImage(image))
                 self.view.getImmagineLabel().setMargin(10)
+                new_width=image.width()/image.height()*180
+                self.view.getImmagineLabel().setMaximumWidth(int(new_width))
+                self.view.getImmagineLabel().setMinimumWidth(int(new_width))
+                self.view.getImmagineLabel().setGeometry(int(245-new_width/2),534,int(new_width),181)
+
             except Exception as e:
                 print(e)
 
@@ -106,3 +115,17 @@ class ControllerVistaOpera(Controller):
                 self.model.immagine = Image.open(path).convert("RGBA")
                 self.previous.initializeUi()
                 self.initializeUi()
+
+    def __onDropZoneClicked(self) -> None:
+        if self.model.immagine is not None:
+            path=tempfile.gettempdir()+'/photo.jpg'
+            self.model.immagine.convert('RGB').save(path)
+            os.startfile(path)
+        else:
+            root = tk.Tk()
+            root.withdraw()
+            path=filedialog.askopenfilename()
+            if any(extension in path.lower() for extension in ['.ico', '.png', '.jpg', '.bmp']):
+                self.model.immagine = Image.open(path).convert("RGBA")
+                self.initializeUi()
+
