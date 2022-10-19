@@ -34,7 +34,7 @@ class VistaAcquistoBiglietto(MyMainWindow):
     def getVerificaAbbonamentoButton(self) -> QPushButton:
         return self.verificaAbbonamentoButton
 
-    def getCostoLabel(self) -> QLabel:
+    def getImportoTotaleLabel(self) -> QLabel:
         return self.costoLabel
 
     def getConfermaButton(self) -> QPushButton:

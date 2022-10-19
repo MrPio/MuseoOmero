@@ -14,9 +14,9 @@ class StrategyConvalida(abc.ABC):
     def initializeUi(self,c : 'ControllerConvalida') -> None:
         pass
 
-    #@abc.abstractmethod
-    #def finalizza(self,c: 'ControllerConvalida') -> None:
-        #pass
+    @abc.abstractmethod
+    def finalizza(self,c: 'ControllerConvalida') -> None:
+        pass
 
     @abc.abstractmethod
     def onRicercaClicked(self, c: 'ControllerConvalida', id: str) -> None:

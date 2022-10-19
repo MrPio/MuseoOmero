@@ -29,12 +29,13 @@ class StrategyConvalidaAbbonamento(StrategyConvalida):
             for abbonamento in cliente.abbonamenti:
                 if id == abbonamento.qr_code.id:
                     #self..finalizza(abbonamento)
-                    abbonamento.convalida()
 
                     titolo="Abbonamento trovato!"
                     if abbonamento.giorniAllaScadenza()>0:
+                        abbonamento.convalida()
                         messaggio="L'abbonamento appartiene a "+cliente.nome+ " "+cliente.cognome+"\r\nTerminerà tra"+str(abbonamento.giorniAllaScadenza())+" giorni"
                     elif abbonamento.giorniAllaScadenza()==0:
+                        abbonamento.convalida()
                         messaggio="L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
                     elif abbonamento.giorniAllaScadenza() < 0:
                         titolo='Abbonamento scaduto!'

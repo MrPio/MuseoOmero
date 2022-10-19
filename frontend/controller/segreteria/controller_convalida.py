@@ -11,6 +11,7 @@ import cv2
 import winotify
 
 from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.clientela.documento import Documento
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
@@ -34,20 +35,19 @@ class ControllerConvalida(Controller):
         self.view: VistaConvalida = view
         self.previous: Controller = previous
         self.strategy: StrategyConvalida = strategy
-        self.risultato:str = ''
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
             view=VistaInserimentoManuale(),
             model= Museo.getInstance(),
             previous=self,
-            strategy=StrategyConvalidaAbbonamento(),
+            strategy=StrategyConvalida(),
         )
         self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 
-    def __onScannerizzaClicked(self) -> None:
+    def __onScannerizzaClicked(self) -> Documento:
         cap = cv2.VideoCapture(0)
         # initialize the cv2 QRCode detector
         detector = cv2.QRCodeDetector()
@@ -64,15 +64,15 @@ class ControllerConvalida(Controller):
                 break
         cap.release()
         cv2.destroyAllWindows()
-        print(id)
+
         self.strategy.onRicercaClicked(c=self.strategy, id=id)
+        documento = self.strategy.finalizza()
         self.closeView()
         self.previous.enableView()
+        return documento
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        #self.view.getInserisciManualmenteButton().clicked.connect(self.__gotoVistaInserimentoManuale())
-        #self.view.getScannerizzaButton().clicked.connect(self.__onScannerizzaClicked)
         self.view.getInserisciManualmenteButton().mouseReleaseEvent = lambda _: self.__gotoVistaInserimentoManuale()
         self.view.getScannerizzaButton().mouseReleaseEvent = lambda _: self.__onScannerizzaClicked()
 

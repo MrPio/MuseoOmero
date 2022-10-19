@@ -35,8 +35,9 @@ class ControllerInserimentoManuale(Controller):
         self.model = model
         self.strategy = strategy
 
-        #Parte relativa al test, da togliere nel programma terminato
-        cliente= Cliente(
+        # ============================================================================
+        # Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
+        '''cliente= Cliente(
                 nome='Pippo',
                 cognome='Solo',
                 codFis = "codFis",
@@ -48,8 +49,24 @@ class ControllerInserimentoManuale(Controller):
         documento= Abbonamento(dataRilascio= datetime(2022, 9, 17))
         documento.qr_code.id='AAAAA-AAAAA'
         cliente.abbonamenti.append(documento)
-        self.model.visitatori.append(cliente)
-#============================================================================
+        self.model.visitatori.append(cliente)'''
+        # ============================================================================
+        # Parte relativa al test BIGLIETTO, da togliere nel programma terminato
+        '''cliente= Cliente(
+                nome='Ciccio',
+                cognome='Bello',
+                codFis = "codFis",
+                email = "email",
+                tel = "3355",
+                #data_registrazione = datetime.now(),
+        )
+
+        biglietto= Biglietto(dataRilascio= datetime(2022, 9, 17))
+        biglietto.qr_code.id='AAAAA-AAAAA'
+        cliente.biglietti.append(biglietto)
+        self.model.visitatori.append(cliente)'''
+
+    # ============================================================================
 
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()

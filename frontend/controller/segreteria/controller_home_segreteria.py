@@ -18,6 +18,7 @@ from frontend.controller.segreteria.controller_gestione_donazioni import Control
 from frontend.controller.segreteria.controller_rinnovo_abbonamento import ControllerRinnovoAbbonamento
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
     StrategyConvalidaAbbonamento
+from frontend.controller.segreteria.strategy_convalida.strategy_ricerca_abbonamento import StrategyRicercaAbbonamento
 from frontend.view.segreteria.vista_acquisto_abbonamento import VistaAcquistoAbbonamento
 from frontend.view.segreteria.vista_convalida import VistaConvalida
 from frontend.view.segreteria.vista_gestione_donazioni import VistaGestioneDonazioni
@@ -76,13 +77,22 @@ class ControllerHomeSegreteria(Controller):
         self.disableView()
 
     def __gotoVistaRinnovoAbbonamento(self) -> None:
-        self.next = ControllerRinnovoAbbonamento(
+        '''self.next = ControllerRinnovoAbbonamento(
             view=VistaRinnovoAbbonamento(),
             previous=self,
         )
         self.next.connettiEventi()
         self.next.showView()
+        self.disableView()'''
+        self.next = ControllerConvalida(
+            view=VistaConvalida(),
+            previous=self,
+            strategy=StrategyRicercaAbbonamento(),
+        )
+        self.next.connettiEventi()
+        self.next.showView()
         self.disableView()
+
 
     def connettiEventi(self) -> None:
         self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()

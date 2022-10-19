@@ -7,13 +7,49 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import winotify
+
+from backend.high_level.clientela.abbonamento import Abbonamento
+from backend.high_level.clientela.cliente import Cliente
+from backend.high_level.museo import Museo
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
+from frontend.ui.location import UI_DIR
 
 
 class StrategyRicercaAbbonamento(StrategyConvalida):
+
+    def __init__(self) -> None:
+        self.abbonamento: 'Abbonamento' | None = None
+        self.model = Museo.getInstance()
+
     def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('HomeSegreteria ➜ RicercaAbbonamento')
 
-    def finalizza(self, c: 'ControllerConvalida') -> None:
-        #         c.strategy.abbonamento = self.abbonamento
-        pass
+    def finalizza(self, c: 'ControllerConvalida') -> Abbonamento:
+        return self.abbonamento
+
+    def onRicercaClicked(self, c: 'ControllerConvalida', id: str) -> None:
+        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
+            for abbonamento in cliente.abbonamenti:
+                if id == abbonamento.qr_code.id:
+
+                    titolo="Abbonamento trovato!"
+                    if abbonamento.giorniAllaScadenza():
+                        messaggio="L'abbonamento appartiene a "+cliente.nome+ " "+cliente.cognome+"\r\nTerminerà tra"+str(abbonamento.giorniAllaScadenza())+" giorni"
+                    elif abbonamento.giorniAllaScadenza()==0:
+                        messaggio="L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
+                    elif abbonamento.giorniAllaScadenza() < 0:
+                        titolo='Abbonamento scaduto!'
+                        messaggio="L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nSi prega di rinnovarlo"
+
+
+                    winotify.Notification(
+                        app_id='Museo Omero',
+                        title=titolo,
+                        msg=messaggio,
+                        icon=UI_DIR + '/ico/museum_white.ico',
+                        duration='short',
+                    ).show()
+
+                    self.abbonamento=abbonamento
+                    return
