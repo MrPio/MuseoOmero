@@ -6,6 +6,7 @@ Implementazione del progetto museo Omero per l'esame del corso ingegneria del so
 > *https://github.com/SbattellaMattia/SoftwareEngineering/*
 ----------------------------------------------------------------------------------------------------------------------------------------
 # Demos in action:
+####  in caso di problemi nella riproduzione: tasto destro -> apri video in nuova scheda.
 ### Statistiche e report incassi:
 https://user-images.githubusercontent.com/22773005/196517886-fd611e37-ab1d-441d-a654-432f99f84963.mp4
 
