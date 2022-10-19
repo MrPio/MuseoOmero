@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>489</width>
-    <height>831</height>
+    <height>912</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -247,7 +247,7 @@ font: 14pt &quot;Lato&quot;;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>217</y>
+      <y>249</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -285,7 +285,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>233</y>
+      <y>265</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -326,7 +326,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>237</y>
+      <y>269</y>
       <width>91</width>
       <height>22</height>
      </rect>
@@ -359,9 +359,9 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>243</x>
-      <y>97</y>
+      <y>122</y>
       <width>4</width>
-      <height>420</height>
+      <height>430</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -397,7 +397,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>297</y>
+      <y>329</y>
       <width>51</width>
       <height>22</height>
      </rect>
@@ -430,7 +430,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>277</y>
+      <y>309</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -468,7 +468,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>173</y>
+      <y>205</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -509,9 +509,9 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>101</y>
+      <y>123</y>
       <width>444</width>
-      <height>631</height>
+      <height>691</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -532,7 +532,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>293</y>
+      <y>325</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -573,7 +573,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>119</y>
+      <y>151</y>
       <width>101</width>
       <height>22</height>
      </rect>
@@ -606,7 +606,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>113</y>
+      <y>145</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -647,7 +647,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>177</y>
+      <y>209</y>
       <width>81</width>
       <height>22</height>
      </rect>
@@ -680,7 +680,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>157</y>
+      <y>189</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -718,7 +718,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>293</y>
+      <y>325</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -813,7 +813,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>337</y>
+      <y>369</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -851,7 +851,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>397</y>
+      <y>429</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -889,7 +889,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>457</y>
+      <y>489</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -927,7 +927,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>103</x>
-      <y>358</y>
+      <y>390</y>
       <width>131</width>
       <height>22</height>
      </rect>
@@ -960,7 +960,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>103</x>
-      <y>418</y>
+      <y>450</y>
       <width>111</width>
       <height>22</height>
      </rect>
@@ -993,7 +993,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>353</y>
+      <y>385</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1034,7 +1034,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>413</y>
+      <y>445</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1075,7 +1075,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>113</y>
+      <y>145</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -1106,7 +1106,7 @@ border: 2px solid rgba(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>173</y>
+      <y>205</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -1137,7 +1137,7 @@ border: 2px solid rgba(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>233</y>
+      <y>265</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -1171,7 +1171,7 @@ border: 2px solid rgba(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>353</y>
+      <y>385</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -1291,7 +1291,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>292</x>
-      <y>413</y>
+      <y>445</y>
       <width>133</width>
       <height>34</height>
      </rect>
@@ -1333,87 +1333,18 @@ QPushButton::pressed{
 	border-width:2;
 	background-color : white;
 	color:rgb(104, 194, 253);
-}
-</string>
+}</string>
     </property>
     <property name="text">
      <string>Cambia</string>
     </property>
    </widget>
-   <widget class="QLabel" name="dropZoneLabel">
-    <property name="geometry">
-     <rect>
-      <x>46</x>
-      <y>534</y>
-      <width>401</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">left: 222px;
-top: 511px;
-width: 398px;
-height: 78px;
-border-radius: 16px;
-background-color: rgba(255, 255, 255);
-text-align: center;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="fotoLabel">
-    <property name="geometry">
-     <rect>
-      <x>222</x>
-      <y>600</y>
-      <width>48</width>
-      <height>48</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">left: 222px;
-top: 511px;
-width: 398px;
-height: 78px;
-border-radius: 16px;
-background-color: rgba(255, 255, 255);
-text-align: center;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="res/res.qrc">:/icons/add_a_photo_FILL1_wght600_GRAD200_opsz48_risultato.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="margin">
-     <number>0</number>
-    </property>
-   </widget>
    <widget class="QPushButton" name="confermaButton">
     <property name="geometry">
      <rect>
-      <x>154</x>
-      <y>760</y>
-      <width>183</width>
+      <x>143</x>
+      <y>840</y>
+      <width>209</width>
       <height>52</height>
      </rect>
     </property>
@@ -1442,8 +1373,6 @@ color: rgb(255, 255, 255);
 }
 
 QPushButton::hover{
-
-
 	border-color : rgb(15, 138, 204);
 	color: white;
 border-width:0;
@@ -1465,7 +1394,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>266</x>
-      <y>474</y>
+      <y>506</y>
       <width>183</width>
       <height>30</height>
      </rect>
@@ -1502,7 +1431,7 @@ border: 2px solid rgba(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>478</y>
+      <y>510</y>
       <width>81</width>
       <height>22</height>
      </rect>
@@ -1535,7 +1464,7 @@ font-size: 18px &quot;Lato light&quot;</string>
     <property name="geometry">
      <rect>
       <x>43</x>
-      <y>474</y>
+      <y>506</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1576,7 +1505,7 @@ background-color: rgba(173, 237, 255, 0);
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>517</y>
+      <y>549</y>
       <width>444</width>
       <height>4</height>
      </rect>
@@ -1608,6 +1537,179 @@ text-align: center;</string>
     </property>
     <property name="indent">
      <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>102</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+text-align: left;
+ background-color:#e39797;
+color: #FFFFFF;
+font: 14pt &quot;Lato&quot;;
+border-radius: 15;
+}</string>
+    </property>
+    <property name="text">
+     <string>Compila tutti i campi!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>608</y>
+      <width>411</width>
+      <height>194</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="dropZoneLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>9999</width>
+         <height>192</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius: 16px;
+background-color: rgba(255, 255, 255,0);
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>607</y>
+      <width>411</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,0);
+color: rgba(255, 255, 255,0);
+border-color:rgba(255, 255, 255,0);
+border-radius: 16px;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="fotoLabel">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>48</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="acceptDrops">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">left: 222px;
+top: 511px;
+width: 398px;
+height: 78px;
+border-radius: 16px;
+background-color: rgba(255, 255, 255);
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="res/res.qrc">:/icons/add_a_photo_FILL1_wght600_GRAD200_opsz48_risultato.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="titoloLabel_4">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>553</y>
+      <width>431</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>14</pointsize>
+      <weight>3</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+font: 25 italic 14pt &quot;Lato&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Trascina qui o clicca per cambiare immagine                                                          Tieni premuto per ingrandire</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <zorder>label_2</zorder>
@@ -1642,17 +1744,33 @@ text-align: center;</string>
    <zorder>dimensioniLineEdit</zorder>
    <zorder>periodoStoricoComboBox</zorder>
    <zorder>ubicazioneButton</zorder>
-   <zorder>dropZoneLabel</zorder>
-   <zorder>fotoLabel</zorder>
    <zorder>confermaButton</zorder>
    <zorder>costoLineEdit</zorder>
    <zorder>label_16</zorder>
    <zorder>label_18</zorder>
    <zorder>label_25</zorder>
+   <zorder>errorLabel</zorder>
+   <zorder>horizontalLayoutWidget</zorder>
+   <zorder>frame</zorder>
+   <zorder>titoloLabel_4</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>titoloLineEdit</tabstop>
+  <tabstop>autoreLineEdit</tabstop>
+  <tabstop>dimensioniLineEdit</tabstop>
+  <tabstop>tipoComboBox</tabstop>
+  <tabstop>periodoStoricoComboBox</tabstop>
+  <tabstop>ubicazioneButton</tabstop>
+  <tabstop>costoLineEdit</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+ </tabstops>
  <resources>
   <include location="res/res.qrc"/>
+  <include location="../../Users/MrPio/PycharmProjects/MuseoOmero/frontend/ui/res/res.qrc"/>
  </resources>
  <connections/>
 </ui>

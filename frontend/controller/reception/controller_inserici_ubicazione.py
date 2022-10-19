@@ -35,6 +35,7 @@ class ControllerInsericiUbicazione(Controller):
         self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
+        self.view.getPreviousButton().mouseReleaseEvent=lambda _:self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
 
     def initializeUi(self) -> None:

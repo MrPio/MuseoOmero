@@ -9,19 +9,24 @@
 #######################################################
 import os
 import tempfile
+import time
 from tkinter import filedialog
 
 from PIL import Image
 from PyQt5.QtGui import QImage, QPixmap
 from tkinterDnD import tk
 
+from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
+from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
 from backend.high_level.gestione_interna.opera import Opera
 from frontend.controller.controller import Controller
+from frontend.controller.controller_yes_no import ControllerYesNo
 from frontend.controller.reception.controller_inserici_ubicazione import ControllerInsericiUbicazione
 from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
 from frontend.ui.location import UI_DIR
 from frontend.view.reception.vista_aggiungi_opera import VistaAggiungiOpera
 from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
+from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerAggiungiOpera(Controller):
@@ -38,6 +43,8 @@ class ControllerAggiungiOpera(Controller):
         self.strategy: StrategyAggiungiOpera = strategy
         self.connettiEventi()
         self.initializeUi()
+        self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/blueButton.css', 'r').read())
+        self.ubicazione_scelta = False
 
     def __onAggiungiUbicazioneClicked(self) -> None:
         self.next = ControllerInsericiUbicazione(
@@ -47,6 +54,8 @@ class ControllerAggiungiOpera(Controller):
         )
         self.next.showView()
         self.disableView()
+        self.ubicazione_scelta = True
+        self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
 
     def __onDropZoneDropped(self, event) -> None:
         if len(event.mimeData().urls()) > 0:
@@ -56,65 +65,98 @@ class ControllerAggiungiOpera(Controller):
                 self.initializeUi()
 
     def __onDropZoneClicked(self) -> None:
-        if self.model.immagine is not None:
-            path=tempfile.gettempdir()+'/photo.jpg'
+        if self.model.immagine is not None and time.time_ns() - self.hold_start > 200 * 1000000:
+            path = tempfile.gettempdir() + '/photo.jpg'
             self.model.immagine.convert('RGB').save(path)
             os.startfile(path)
         else:
             root = tk.Tk()
             root.withdraw()
-            path=filedialog.askopenfilename()
+            path = filedialog.askopenfilename()
             if any(extension in path.lower() for extension in ['.ico', '.png', '.jpg', '.bmp']):
                 self.model.immagine = Image.open(path).convert("RGBA")
                 self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        # self.strategy.onConfermaClicked()
-        pass
+        if self.view.getTitloloLineEdit().text() == '' or self.view.getAutoreLineEdit().text() == '' \
+                or len(self.view.getDimensioniLineEdit().text()) < 18 \
+                or len(self.view.getCostoLineEdit().text()) < 13:
+            self.view.getErrorLabel().setText('Compila tutti i campi!')
+            self.view.getErrorLabel().setVisible(True)
+            return
+        elif not self.ubicazione_scelta:
+            self.view.getErrorLabel().setText('Seleziona un\'ubicazione')
+            self.view.getErrorLabel().setVisible(True)
+            return
+        self.model.titolo = self.view.getTitloloLineEdit().text()
+        self.model.autore = self.view.getAutoreLineEdit().text()
+        dimensioni = [int(d.strip().replace('cm', '')) for d in self.view.getDimensioniLineEdit().text().split('x')]
+
+        self.model.composizione.larghezza_cm = dimensioni[0]
+        self.model.composizione.altezza_cm = dimensioni[1]
+        self.model.composizione.profondita_cm = dimensioni[2]
+
+        self.model.composizione.tipo_opera = TipoOpera[self.view.getTipoComboBox().currentText().upper()]
+        self.model.periodo = PeriodoStorico[self.view.getPeriodoStoricoComboBox().currentText().upper()]
+        self.model.costo = float(self.view.getCostoLineEdit().text().replace('€', '').replace(',', '.').strip())
+
+        def save_and_exit():
+            self.strategy.onConfermaClicked(self)
+            self.__gotoPrevious()
+
+        if self.model.immagine is None:
+            self.next = ControllerYesNo(VistaYesNo(), None, save_and_exit,
+                                        'Sicuro di non voler aggiungere una foto all\'opera?')
+            self.next.showView()
+        else:
+            save_and_exit()
+
+    def __startTimer(self):
+        self.hold_start = time.time_ns()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getDropZoneLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
-        self.view.getDropZoneLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
-        self.view.getFotoLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
-        self.view.getFotoLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
         self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
         self.view.getUbicazioneButton().clicked.connect(self.__onAggiungiUbicazioneClicked)
-        self.view.getDropZoneLabel().mouseReleaseEvent=lambda _:self.__onDropZoneClicked()
+
+        self.view.getDropZoneLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getDropZoneLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
+        self.view.getDropZoneLabel().mousePressEvent = lambda _: self.__startTimer()
+        self.view.getDropZoneLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
+
+        self.view.getFotoLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getFotoLabel().dropEvent = lambda e: self.__onDropZoneDropped(e)
+        self.view.getFotoLabel().mousePressEvent = lambda _: self.__startTimer()
         self.view.getFotoLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
 
+        self.view.getFrame().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getFrame().dropEvent = lambda e: self.__onDropZoneDropped(e)
+        self.view.getFrame().mousePressEvent = lambda _: self.__startTimer()
+        self.view.getFrame().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
 
     def initializeUi(self) -> None:
-        self.view.getTitloloLineEdit().setText(self.model.titolo)
-        self.view.getAutoreLineEdit().setText(self.model.autore)
+        # self.view.getTitloloLineEdit().setText(self.model.titolo)
+        # self.view.getAutoreLineEdit().setText(self.model.autore)
 
-        comp=self.model.composizione
-        if comp is not None:
-            self.view.getDimensioniLineEdit().setText(
-                '{:03} cm x {:03} cm  x {:03} cm'.format(comp.altezza_cm, comp.larghezza_cm,comp.profondita_cm))
-
-        self.view.getPeriodoStoricoComboBox().setCurrentIndex(self.model.periodo.value)
-        if self.model.ubicazione is not None:
-            self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/blueButton.css', 'r').read())
-        else:
-            self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
-
+        # comp=self.model.composizione
+        # if comp is not None:
+        #     self.view.getDimensioniLineEdit().setText(
+        #         '{:03} cm x {:03} cm  x {:03} cm'.format(comp.altezza_cm, comp.larghezza_cm,comp.profondita_cm))
+        #
+        # self.view.getPeriodoStoricoComboBox().setCurrentIndex(self.model.periodo.value)
+        self.view.getErrorLabel().setVisible(False)
         if self.model.immagine is not None:
             try:
                 image = QImage(self.model.immagine.tobytes('raw', 'RGBA'), self.model.immagine.size[0],
                                self.model.immagine.size[1], QImage.Format_RGBA8888)
                 self.view.getDropZoneLabel().setPixmap(QPixmap.fromImage(image))
                 self.view.getDropZoneLabel().setMargin(10)
-                new_width=image.width()/image.height()*180
+                new_width = image.width() / image.height() * self.view.getDropZoneLabel().maximumHeight()
                 self.view.getDropZoneLabel().setMaximumWidth(int(new_width))
-                self.view.getDropZoneLabel().setMinimumWidth(int(new_width))
-                self.view.getDropZoneLabel().setGeometry(int(245-new_width/2),534,int(new_width),181)
                 self.view.getFotoLabel().setVisible(False)
             except Exception as e:
                 print(e)
         else:
             self.view.getFotoLabel().setVisible(True)
 
-        self.view.getCostoLineEdit().setText('€ {:010.2f}'.format(0))
-
-
+        # self.view.getCostoLineEdit().setText('€ {:010.2f}'.format(0))

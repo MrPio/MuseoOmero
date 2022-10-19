@@ -50,3 +50,9 @@ class VistaAggiungiOpera(MyMainWindow):
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton
+
+    def getErrorLabel(self) -> QLabel:
+        return self.errorLabel
+
+    def getFrame(self) -> QLabel:
+        return self.frame

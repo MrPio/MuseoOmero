@@ -194,7 +194,7 @@ QPushButton::pressed{
      <rect>
       <x>96</x>
       <y>70</y>
-      <width>271</width>
+      <width>281</width>
       <height>51</height>
      </rect>
     </property>
@@ -205,7 +205,7 @@ top: 359px;
 width: 212px;
 height: 24px;
 color: rgba(16, 16, 16);
-font-size: 20px;
+font-size: 19px;
 text-align: center;
 
 </string>

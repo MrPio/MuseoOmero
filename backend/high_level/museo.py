@@ -10,6 +10,8 @@
 import os
 from datetime import datetime
 
+import winotify
+
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.gestione_interna.mostra import Mostra
 from backend.high_level.gestione_interna.opera import Opera
@@ -23,11 +25,12 @@ from backend.low_level.io.serializzatore import Serializzatore
 from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
 from backend.low_level.network.cloud_storage import CloudStorage
 from backend.low_level.network.drop_box_api import DropBoxAPI
+from frontend.ui.location import UI_DIR
 
 
 class Museo:
     MUSEO_DIR = os.path.dirname(os.path.abspath(__file__))
-    __backup_path = MUSEO_DIR+'/backups/'
+    __backup_path = MUSEO_DIR + '/backups/'
     __backup_folder = 'backups/'
     __key = object()
     __instance: 'Museo' = None
@@ -54,7 +57,6 @@ class Museo:
         self.mostre: list[Mostra] = []
         self.turni_guida: list[TurnoGuida] = []
         self.opere: list[Opera] = []
-
 
         self.dipendenti.append(
             Dipendente(
@@ -97,19 +99,19 @@ class Museo:
 
         if Museo.__instance == None:
             last_backup = Museo.__get_last_backup()
-            if last_backup == '':
-                Museo.__download_last_backups()
-                last_backup = Museo.__get_last_backup()
-                if last_backup != '':
-                    print('ho trovato un backup su cloud, download in corso...')
+            # if last_backup == '':
+            #     Museo.__download_last_backups()
+            #     last_backup = Museo.__get_last_backup()
+            #     if last_backup != '':
+            #         print('ho trovato un backup su cloud, download in corso...')
 
             if last_backup == '':
-                print('non ho trovato né un backup locale, né un backup su '
+                print(#'non ho trovato né un backup locale, né un backup su '
                       'cloud --> creo una nuova istanza di Museo.')
                 Museo.__instance = Museo(Museo.__key)
             else:
                 print('ho trovato il seguente backup --> {}'.format(last_backup))
-                Museo.__instance = Museo.__serializzatore.deserializza(Museo.__backup_path+last_backup)
+                Museo.__instance = Museo.__serializzatore.deserializza(Museo.__backup_path + last_backup)
         return Museo.__instance
 
     def login(self, username: str, password: str) -> Dipendente | None:
@@ -138,6 +140,54 @@ class Museo:
         newest = Museo.__newest_date([file.split('museo ')[1].split('.pickle')[0] for file in files])
         return 'museo ' + newest + '.pickle' if len(newest) > 0 else ''
 
+    def elimina_backup(self, data: str) -> None:
+        file = 'museo ' + data + '.pickle'
+        os.remove(Museo.__backup_path + file)
+        Museo.__cloud_storage.deleteFile(DropBoxAPI.cloud_root_dir + Museo.__backup_folder + file)
+
+    def list_backups_local(self) -> {str, str}:
+        def formatted_size(num, suffix="B") -> str:
+            for unit in ["", "K", "M", "G", "T", "P", "E", "Z"]:
+                if abs(num) < 1024.0:
+                    return f"{num:3.1f} {unit}{suffix}"
+                num /= 1024.0
+            return f"{num:.1f}Y{suffix}"
+
+        files = next(os.walk(Museo.__backup_path), (None, None, []))[2]
+        result = {}
+        for file in files:
+            result[file.split('museo ')[1].split('.pickle')[0]] = \
+                formatted_size(os.path.getsize(Museo.__backup_path + file))
+        return result
+
+    def download_backup(self, data: str) -> None:
+        file = 'museo ' + data + '.pickle'
+        result=Museo.__cloud_storage.download(
+            cloudPath=DropBoxAPI.cloud_root_dir + Museo.__backup_folder + file,
+            localPath=Museo.__backup_path + file
+        )
+        if result:
+            Museo.__instance = Museo.__serializzatore.deserializza(Museo.__backup_path + self.__get_last_backup())
+            winotify.Notification(
+                app_id='Museo Omero',
+                title='Backup ripristinato',
+                msg=f'Backup ripristinato correttamente! [{data}]',
+                icon=UI_DIR + '/ico/museum_white.ico',
+                duration='short',
+            ).show()
+
+    def upload_backup(self, data: str) -> None:
+        file = 'museo ' + data + '.pickle'
+        Museo.__cloud_storage.upload(
+            path=Museo.__backup_path,
+            filename=file,
+            cloudFolder=Museo.__backup_folder
+        )
+
+    def list_backups_cloud(self) -> list[str]:
+        files = Museo.__cloud_storage.listFile(DropBoxAPI.cloud_root_dir + Museo.__backup_folder)
+        return [file.split('museo ')[1].split('.pickle')[0] for file in files]
+
     @staticmethod
     def __download_last_backups() -> None:
         """
@@ -149,7 +199,7 @@ class Museo:
         if file_to_download == '' or file_to_download in next(os.walk(Museo.__backup_path), (None, None, []))[2]:
             return
         path = Museo.__backup_folder + file_to_download
-        Museo.__cloud_storage.download(DropBoxAPI.cloud_root_dir + path, Museo.__backup_path+file_to_download)
+        Museo.__cloud_storage.download(DropBoxAPI.cloud_root_dir + path, Museo.__backup_path + file_to_download)
 
     def make_backup(self) -> None:
         local_path = Museo.__backup_path

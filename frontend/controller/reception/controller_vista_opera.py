@@ -9,6 +9,7 @@
 #######################################################
 import os
 import tempfile
+import time
 from tkinter import filedialog
 from types import NoneType
 
@@ -32,6 +33,7 @@ class ControllerVistaOpera(Controller):
 
     def __gotoPrevious(self) -> None:
         self.closeView()
+        self.previous.initializeUi()
         self.previous.enableView()
 
     def __init__(self, view: VistaOpera, previous: Controller, model: Opera):
@@ -57,32 +59,35 @@ class ControllerVistaOpera(Controller):
     def __onEliminaClicked(self):
         def elimina():
             Museo.getInstance().opere.remove(self.model)
-            self.previous.initializeUi()
+            # self.previous.initializeUi()
             self.__gotoPrevious()
 
         self.next = ControllerYesNo(VistaYesNo(), self, elimina)
         self.next.showView()
         self.disableView()
 
+    def __startTimer(self):
+        self.hold_start = time.time_ns()
+
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        self.view.getImmagineLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
-        self.view.getImmagineLabel().dropEvent = lambda e: self.__onDropFile(e)
-        self.view.getImmagineLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
         self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
         self.view.getCambiaUbicazioneButton().clicked.connect(self.__onCambiaUbicazioneClicked)
+
+        self.view.getImmagineLabel().dragEnterEvent = lambda e: e.accept() if e.mimeData().hasUrls else e.ingore()
+        self.view.getImmagineLabel().dropEvent = lambda e: self.__onDropFile(e)
+        self.view.getImmagineLabel().mousePressEvent = lambda _: self.__startTimer()
+        self.view.getImmagineLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
+
 
     def initializeUi(self) -> None:
         self.view.getTitoloLabel().setText(self.model.titolo)
         self.view.getAutoreLabel().setText(self.model.autore)
 
-        self.view.getDimensioniLabel() \
-            .setText('{} cm x {} cm '.format(
-            self.model.composizione.altezza_cm, self.model.composizione.larghezza_cm)
-                     + ' x {} cm'.format(self.model.composizione.profondita_cm )
-                             if self.model.composizione.profondita_cm > 0 else ''
-                     )
-        # TODO quella sulle dimensioni è una prova
+        if self.model.composizione is not None:
+            self.view.getDimensioniLabel().setText('{} x {} x {} cm'.format(
+                self.model.composizione.altezza_cm, self.model.composizione.larghezza_cm,self.model.composizione.profondita_cm))
+
         self.view.getPeriodoLabel().setText(self.model.periodo.name.lower())
         if type(self.model.ubicazione) is not NoneType:
             self.view.getUbicazioneLabel().setText('piano {}/n.mag {}/scf {}/pos {}'.format(
@@ -97,9 +102,8 @@ class ControllerVistaOpera(Controller):
                                self.model.immagine.size[1], QImage.Format_RGBA8888)
                 self.view.getImmagineLabel().setPixmap(QPixmap.fromImage(image))
                 self.view.getImmagineLabel().setMargin(10)
-                new_width=image.width()/image.height()*180
+                new_width=image.width()/image.height()*self.view.getImmagineLabel().maximumHeight()
                 self.view.getImmagineLabel().setMaximumWidth(int(new_width))
-                self.view.getImmagineLabel().setMinimumWidth(int(new_width))
                 self.view.getImmagineLabel().setGeometry(int(245-new_width/2),534,int(new_width),181)
 
             except Exception as e:
@@ -117,7 +121,7 @@ class ControllerVistaOpera(Controller):
                 self.initializeUi()
 
     def __onDropZoneClicked(self) -> None:
-        if self.model.immagine is not None:
+        if self.model.immagine is not None and time.time_ns() - self.hold_start > 200 * 1000000:
             path=tempfile.gettempdir()+'/photo.jpg'
             self.model.immagine.convert('RGB').save(path)
             os.startfile(path)

@@ -100,12 +100,12 @@ class MyMainWindow(QMainWindow):
                 icon=UI_DIR + '/ico/museum_white.ico',
                 duration='short',
             ).show()
-            Museo.getInstance().make_backup()
+            # Museo.getInstance().make_backup()
             os._exit(1)
 
         from frontend.controller.controller_yes_no import ControllerYesNo
         from frontend.view.vista_yes_no import VistaYesNo
-        self.next = ControllerYesNo(VistaYesNo(), None, perform,'Sicuro di voler uscire?\r\n(I progressi verranno salvati)')
+        self.next = ControllerYesNo(VistaYesNo(), None, perform,'Sicuro di voler uscire?\r\n(I progressi NON verranno salvati)')
         self.next.showView()
 
 

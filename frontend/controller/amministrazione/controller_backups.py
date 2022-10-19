@@ -7,28 +7,78 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
+
+from PyQt5.QtCore import QTimer
+
 from backend.high_level.museo import Museo
-from frontend.controller.amministrazione.widget.controller_widget_backup import  ControllerWidgetBackup
+from frontend.controller.amministrazione.widget.controller_widget_backup import ControllerWidgetBackup
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_backups import VistaBackups
+from frontend.view.amministrazione.widget.widget_backup import WidgetBackup
 
 
 class ControllerBackups(Controller):
 
     def __gotoPrevious(self) -> None:
-        pass
+        self.closeView()
+        self.previous.initializeUi()
+        self.previous.enableView()
 
-    def __init__(self,view : VistaBackups, previous : Controller, model : Museo):
-        pass
+    def __init__(self, view: VistaBackups, previous: Controller, model: Museo):
+        super().__init__(view)
+        self.view: VistaBackups = view
+        self.previous = previous
+        self.model = model
+        self.timer = QTimer()
+        self.connettiEventi()
+        self.initializeUi()
 
     def __onBackupOraClicked(self) -> None:
-        pass
+        self.model.make_backup()
+        self.initializeUi()
 
     def connettiEventi(self) -> None:
-        pass
-
-    def initializeUi(self) -> None:
-        pass
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getBackupOraButton().clicked.connect(self.__onBackupOraClicked)
+        self.view.getRefreshLabel().mouseReleaseEvent = lambda _: self.__refresh()
 
     def __renderizzaBackups(self) -> list[ControllerWidgetBackup]:
-        pass
+
+        result = []
+        backups = {}
+        for data, size in self.model.list_backups_local().items():
+            backups[data] = [True, False, size]
+        for data in self.model.list_backups_cloud():
+            if data in backups.keys():
+                backups[data][1] = True
+            else:
+                backups[data] = [False, True, '']
+
+        for data, locazione in backups.items():
+            new_widget = WidgetBackup(self.view.backupsListView)
+
+            result.append(ControllerWidgetBackup(
+                view=new_widget,
+                parent=self,
+                date=data,
+                size=locazione[2],
+                is_local=locazione[0],
+                is_cloud=locazione[1],
+            ))
+        return result
+
+    def __refresh(self):
+        self.disableView()
+        self.timer.timeout.connect(self.initializeUi)
+        self.timer.start(200)
+
+    def initializeUi(self) -> None:
+        self.backups = self.__renderizzaBackups()
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.verticalLayout.count())):
+            self.view.verticalLayout.itemAt(i).widget().setParent(None)
+        for controller in reversed(self.backups):
+            self.view.verticalLayout.addWidget(controller.view)
+        self.enableView()
+        self.timer.stop()

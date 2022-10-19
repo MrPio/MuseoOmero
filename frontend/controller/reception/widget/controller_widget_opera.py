@@ -59,3 +59,6 @@ class ControllerWidgetOpera(Controller):
                            self.model.immagine.size[1], QImage.Format_RGBA8888)
             self.view.getOperaLabel().setPixmap(QPixmap.fromImage(image))
             self.view.getOperaLabel().setMargin(4)
+            new_width = image.width() / image.height() * self.view.getOperaLabel().maximumHeight()
+            self.view.getOperaLabel().setMaximumWidth(int(new_width))
+

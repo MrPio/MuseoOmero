@@ -155,3 +155,4 @@ if __name__ == '__main__':
     # TODO fare vista inserisciUbicazione
     # popolaMuseo()
     startApp()
+    # TODO finire di settare l-aspect ratio in widget opera e in vistaOpera

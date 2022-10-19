@@ -34,12 +34,6 @@ class ControllerRicercaOpera(Controller):
         self.strategy: StrategyRicercaOpera = strategy
         self.opere_trovate: list[ControllerWidgetOpera] = []
         self.connettiEventi()
-        self.initializeUi()
-        # for i in range(4):
-        #     Museo.getInstance().opere.append(
-        #         Opera('Picasso', 'titolo', 'descr', None, PeriodoStorico.BAROCCO, RepartoMuseo.MOSTRA,
-        #               composizione=Composizione(0, 0, 0, 0, TipoOpera.TELA))
-        #     )
 
 
     def __onRicercaClicked(self) -> None:

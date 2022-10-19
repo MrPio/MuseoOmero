@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>487</width>
-    <height>852</height>
+    <height>880</height>
    </rect>
   </property>
   <property name="cursor">
@@ -205,7 +205,7 @@ QPushButton::pressed{
       <x>23</x>
       <y>103</y>
       <width>440</width>
-      <height>651</height>
+      <height>681</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -375,49 +375,11 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="immagineLabel">
-    <property name="geometry">
-     <rect>
-      <x>116</x>
-      <y>133</y>
-      <width>254</width>
-      <height>190</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">width: 314px;
-height: 180px;
-border-radius: 16px;
-background-color: rgb(255, 255, 255);
-text-align: center;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="margin">
-     <number>10</number>
-    </property>
-    <property name="indent">
-     <number>10</number>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>333</y>
+      <y>360</y>
       <width>451</width>
       <height>4</height>
      </rect>
@@ -455,7 +417,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>393</y>
+      <y>420</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -493,7 +455,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>453</y>
+      <y>480</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -531,7 +493,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>513</y>
+      <y>540</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -569,7 +531,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>573</y>
+      <y>600</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -607,7 +569,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>633</y>
+      <y>660</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -645,7 +607,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>693</y>
+      <y>720</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -683,7 +645,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>348</y>
+      <y>375</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -708,7 +670,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>408</y>
+      <y>435</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -733,7 +695,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>468</y>
+      <y>495</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -758,7 +720,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>528</y>
+      <y>555</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -783,7 +745,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>588</y>
+      <y>615</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -808,7 +770,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>648</y>
+      <y>675</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -833,7 +795,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>708</y>
+      <y>735</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -858,7 +820,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>348</y>
+      <y>375</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -877,7 +839,7 @@ background-color: rgba(255, 255, 255,0);
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>408</y>
+      <y>435</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -895,7 +857,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>468</y>
+      <y>495</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -913,7 +875,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>528</y>
+      <y>555</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -931,7 +893,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>588</y>
+      <y>615</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -949,7 +911,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>648</y>
+      <y>675</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -967,7 +929,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>708</y>
+      <y>735</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -1061,10 +1023,10 @@ background-color:rgba(255, 255, 255,0);</string>
    <widget class="QLabel" name="titoloLabel_4">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>103</y>
+      <x>6</x>
+      <y>105</y>
       <width>471</width>
-      <height>31</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -1083,17 +1045,20 @@ background-color: rgba(255, 255, 255,0);
 font: 25 italic 14pt &quot;Lato&quot;;</string>
     </property>
     <property name="text">
-     <string>Trascina qui un'immagine per cambiarla</string>
+     <string>Trascina qui o clicca per cambiare immagine                                                          Tieni premuto per ingrandire</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="eliminaButton">
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>780</y>
+      <y>809</y>
       <width>209</width>
       <height>52</height>
      </rect>
@@ -1140,7 +1105,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>346</x>
-      <y>648</y>
+      <y>675</y>
       <width>101</width>
       <height>36</height>
      </rect>
@@ -1188,6 +1153,62 @@ QPushButton::pressed{
     <property name="text">
      <string>Cambia</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>37</x>
+      <y>157</y>
+      <width>411</width>
+      <height>194</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="immagineLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>360</width>
+         <height>190</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">width: 314px;
+height: 180px;
+border-radius: 16px;
+background-color: rgba(255, 255, 255,0);
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="margin">
+        <number>10</number>
+       </property>
+       <property name="indent">
+        <number>10</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

@@ -7,14 +7,16 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
 from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_opera import StrategyAggiungiOpera
 
 
 class StrategyAcquistaOpera(StrategyAggiungiOpera):
     def initializeUi(self,c : 'ControllerAggiungiOpera') -> None:
-
         pass
 
     def onConfermaClicked(self,c : 'ControllerAggiungiOpera') -> None:
-        pass
+        museo = Museo.getInstance()
+        if c.model not in museo.opere:
+            museo.opere.append(c.model)
 

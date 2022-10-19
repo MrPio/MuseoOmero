@@ -196,7 +196,7 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="previousButton">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -227,7 +227,7 @@ QPushButton::pressed{
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../AppData/Local/Temp/res/arrow_back_FILL1_wght700_GRAD200_opsz48_risultato.png</pixmap>
+     <pixmap resource="res/res.qrc">:/icons/arrow_back_FILL1_wght700_GRAD200_opsz48_risultato.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1131,7 +1131,7 @@ QSpinBox::down-arrow::pressed{
    <zorder>reduceButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>maximizeButton</zorder>
-   <zorder>label_18</zorder>
+   <zorder>previousButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>label_14</zorder>
    <zorder>label_6</zorder>
@@ -1165,6 +1165,7 @@ QSpinBox::down-arrow::pressed{
  </tabstops>
  <resources>
   <include location="../../../AppData/Local/Temp/res.qrc"/>
+  <include location="res/res.qrc"/>
   <include location="../../../AppData/Local/Temp/res/res.qrc"/>
  </resources>
  <connections/>

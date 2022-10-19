@@ -9,21 +9,33 @@
 #######################################################
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
 
+from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget
 
 
 class WidgetBackup(MyWidget):
+
+
+    def __init__(self, parent):
+        super().__init__(UI_DIR + '/BackupWidget.ui', parent)
+
     def getDataLabel(self) -> QLabel:
-        pass
+        return self.dataLabel
 
     def getUploadedIcon(self) -> QLabel:
-        pass
+        return self.cloudLabel
+
+    def getDownloadedIcon(self) -> QLabel:
+        return self.localLabel
 
     def getIcon(self) -> QLabel:
-        pass
+        return self.iconLabel
 
     def getEliminaButton(self) -> QPushButton:
-        pass
+        return self.eliminaButton
 
     def getDownUpButton(self) -> QPushButton:
-        pass
+        return self.downloadButton
+
+    def getSizeLabel(self)->QLabel:
+        return self.sizeLabel

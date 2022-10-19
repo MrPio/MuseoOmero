@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QListView
+from PyQt5.QtWidgets import QPushButton, QListView, QLabel
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -26,3 +26,6 @@ class VistaBackups(MyMainWindow):
 
     def getBackupOraButton(self) -> QPushButton:
         return self.backupOraButton
+
+    def getRefreshLabel(self) -> QLabel:
+        return self.refreshLabel

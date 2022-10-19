@@ -33,7 +33,7 @@ class ControllerRinnovoAbbonamento(Controller):
         self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        self.model.rinnova(self.model.tipo)
+        self.model.rinnova(TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()])
         self.closeView()
         self.previous.enableView()
 

@@ -7,24 +7,54 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from datetime import datetime
+
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_backup import WidgetBackup
 
 
 class ControllerWidgetBackup(Controller):
 
-    def __init__(self,view : WidgetBackup, model : Museo, parent : Controller):
-        pass
+    def __init__(self, view: WidgetBackup, date: str,size:str, is_local: bool, is_cloud: bool, parent: Controller):
+        super().__init__(view)
+        self.view: WidgetBackup = view
+        self.date = date
+        self.size=size
+        self.is_local = is_local
+        self.is_cloud = is_cloud
+        self.parent = parent
+        self.connettiEventi()
+        self.initializeUi()
 
     def __onDownUpButtonClicked(self) -> None:
-        pass
+        if self.is_cloud:
+            self.parent.model.download_backup(self.date)
+            self.is_local = True
+        else:
+            self.is_cloud = True
+            self.parent.model.upload_backup(self.date)
+        self.initializeUi()
 
     def __onEliminaClicked(self) -> None:
-        pass
+        self.parent.model.elimina_backup(self.date)
+        self.view.setVisible(False)
 
     def connettiEventi(self) -> None:
-        pass
+        self.view.getDownUpButton().clicked.connect(self.__onDownUpButtonClicked)
+        self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
 
     def initializeUi(self):
-        pass
+        self.view.getDataLabel().setText(
+            datetime.strptime(self.date, '%Y-%m-%d %H-%M-%S').strftime('%d/%m/%Y %H:%M:%S'))
+        self.view.getSizeLabel().setText(self.size)
+        self.view.getUploadedIcon().setVisible(self.is_cloud)
+        self.view.getDownloadedIcon().setVisible(self.is_local)
+        self.view.getDownUpButton().setText('Download' if self.is_cloud else 'Upload')
+        if self.is_cloud and self.is_local:
+            self.view.getDownUpButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
+            self.view.getDownUpButton().setEnabled(False)
+        else:
+            self.view.getDownUpButton().setStyleSheet(open(UI_DIR + '/css/blueButton.css', 'r').read())
+            self.view.getDownUpButton().setEnabled(True)

@@ -22,7 +22,7 @@ class Opera:
 
     def __init__(self, autore: str='', titolo: str='',
                  descrizione: str='', immagine: Image|None=None, periodo: PeriodoStorico=PeriodoStorico.PREISTORIA,
-                 reparto: RepartoMuseo=RepartoMuseo.MOSTRA, costo: float = 0, composizione: Composizione = None,
+                 reparto: RepartoMuseo=RepartoMuseo.MOSTRA, costo: float = 0, composizione: Composizione =  Composizione(),
                  ubicazione: Ubicazione = Ubicazione()):
         self.autore = autore
         self.titolo = titolo

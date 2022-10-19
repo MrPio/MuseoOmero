@@ -10,6 +10,18 @@
     <height>110</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>380</width>
+    <height>110</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>380</width>
+    <height>110</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -39,7 +51,7 @@
 background-color:#fff9be;
 border-width:0px;</string>
    </property>
-   <widget class="QLabel" name="immagineLabel_19">
+   <widget class="QLabel" name="iconLabel">
     <property name="geometry">
      <rect>
       <x>17</x>
@@ -89,17 +101,17 @@ background-color: rgba(255, 255, 255, 255);</string>
      <number>10</number>
     </property>
    </widget>
-   <widget class="QLabel" name="titoloLabel_8">
+   <widget class="QLabel" name="dataLabel">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>16</y>
+      <x>110</x>
+      <y>10</y>
       <width>251</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size: 20px;
+     <string notr="true">font-size: 18px;
 text-align: left;
 background-color: rgba(255, 255, 255,0);
 </string>
@@ -111,7 +123,7 @@ background-color: rgba(255, 255, 255,0);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="immagineLabel_20">
+   <widget class="QLabel" name="localLabel">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -121,7 +133,7 @@ background-color: rgba(255, 255, 255,0);
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
@@ -134,8 +146,8 @@ background-color: rgba(255, 255, 255,0);
     </property>
     <property name="maximumSize">
      <size>
-      <width>84</width>
-      <height>84</height>
+      <width>32</width>
+      <height>32</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -161,7 +173,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="immagineLabel_21">
+   <widget class="QLabel" name="cloudLabel">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -171,7 +183,7 @@ background-color: rgba(255, 255, 255, 0);</string>
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
@@ -184,8 +196,8 @@ background-color: rgba(255, 255, 255, 0);</string>
     </property>
     <property name="maximumSize">
      <size>
-      <width>84</width>
-      <height>84</height>
+      <width>32</width>
+      <height>32</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -211,11 +223,11 @@ background-color: rgba(255, 255, 255, 0);</string>
      <number>0</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="reduceButton">
+   <widget class="QPushButton" name="downloadButton">
     <property name="geometry">
      <rect>
       <x>248</x>
-      <y>60</y>
+      <y>62</y>
       <width>112</width>
       <height>32</height>
      </rect>
@@ -264,11 +276,11 @@ QPushButton::pressed{
      <string>Download</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="exitButton">
+   <widget class="QPushButton" name="eliminaButton">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>60</y>
+      <y>62</y>
       <width>112</width>
       <height>32</height>
      </rect>
@@ -309,12 +321,34 @@ QPushButton::pressed{
 	border-color:#e39797;
 	border-width:2;
 	background-color : white;
-	color:rgb(104, 194, 253);
+	color:#e39797;
 }
 </string>
     </property>
     <property name="text">
      <string>Elimina</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="sizeLabel">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>32</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 14px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+</string>
+    </property>
+    <property name="text">
+     <string>2.94 MB</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>

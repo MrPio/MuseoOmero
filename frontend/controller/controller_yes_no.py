@@ -13,7 +13,8 @@ from frontend.view.vista_yes_no import VistaYesNo
 
 
 class ControllerYesNo(Controller):
-    def __init__(self, view: VistaYesNo, previous: Controller|None, onConfermaCliked: 'function', message:str='Sicuro di voler procedere?'):
+    def __init__(self, view: VistaYesNo, previous: Controller | None, onConfermaCliked: 'function',
+                 message: str = 'Sicuro di voler procedere?') -> object:
         super().__init__(view)
         self.view: VistaYesNo = view
         self.previous: Controller = previous
