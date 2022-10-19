@@ -8,10 +8,12 @@
 # 
 #######################################################
 from backend.high_level.museo import Museo
+from backend.high_level.personale.segreteria import Segreteria
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.widget.controller_widget_richiesta_donazione import \
     ControllerWidgetRichiestaDonazione
 from frontend.view.segreteria.vista_gestione_donazioni import VistaGestioneDonazioni
+from frontend.view.segreteria.widget.widget_richiesta_donazione import WidgetRichiestaDonazione
 
 
 class ControllerGestioneDonazioni(Controller):
@@ -33,4 +35,14 @@ class ControllerGestioneDonazioni(Controller):
         #TODO listView
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
-        pass #TODO
+        result = []
+
+        for posto_lavoro in self.model.posti_lavoro:
+            if type(posto_lavoro) == Segreteria:
+                for richiesta_donazione in posto_lavoro.richiesta_donazione:
+                    new_widget = WidgetRichiestaDonazione(self.view.scrollAreaWidgetContents)
+                    result.append(ControllerWidgetRichiestaDonazione(
+                        view=new_widget,
+                        model=richiesta_donazione,
+                    ))
+                    return result
