@@ -9,13 +9,10 @@
 #######################################################
 from datetime import datetime
 
-import winotify
-
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
-from frontend.ui.location import UI_DIR
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 
 

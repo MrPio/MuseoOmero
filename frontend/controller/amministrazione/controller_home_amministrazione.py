@@ -7,8 +7,6 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import winotify
-
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.amministrazione.controller_acquisto_opere import ControllerAcquistoOpere
@@ -46,13 +44,8 @@ class ControllerHomeAmministrazione(Controller):
 
     def initializeUi(self) -> None:
         if self.dipendente.autogenerato:
-            winotify.Notification(
-                app_id='Museo Omero',
-                title='Primo Accesso',
-                msg='Benvenuto! Per favore, prima di iniziare l\'utilizzo del software registra i dipendenti',
-                icon=UI_DIR + '/ico/museum_white.ico',
-                duration='short',
-            ).show()
+            Controller.notifica('Primo Accesso',
+                                'Benvenuto! Per favore, prima di iniziare l\'utilizzo del software registra i dipendenti')
             for el in [
                 self.view.getGestisciBackupsButton(),
                 self.view.getAcquistaOpereButton(),

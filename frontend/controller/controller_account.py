@@ -7,14 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from types import NoneType
-
-import winotify
 
 from backend.high_level.personale.credenziale import Credenziale
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
-from frontend.ui.location import UI_DIR
 from frontend.view.vista_account import VistaAccount
 
 
@@ -46,13 +42,7 @@ class ControllerAccount(Controller):
         if len(self.view.getNuovaPasswordLineEdit().text()) >= 3:
             self.model.credenziale = Credenziale(self.model.credenziale.username,
                                                  self.view.getNuovaPasswordLineEdit().text())
-            winotify.Notification(
-                app_id='Museo Omero',
-                title='Nuova Password',
-                msg='Password cambiata con successo!',
-                icon=UI_DIR + '/ico/museum_white.ico',
-                duration='short',
-            ).show()
+            Controller.notifica('Nuova Password', 'Password cambiata con successo!')
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()

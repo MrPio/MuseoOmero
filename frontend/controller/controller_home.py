@@ -7,8 +7,6 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import winotify
-
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.controller_login import ControllerLogin
@@ -33,15 +31,9 @@ class ControllerHome(Controller):
         controller.showView()
         self.disableView()
 
-        if len(Museo.getInstance().dipendenti)==1 and Museo.getInstance().dipendenti[0].autogenerato:
-            winotify.Notification(
-                app_id='Museo Omero',
-                title='Primo Accesso',
-                msg='• Username --> {admin} \r\n• Password --> {admin} \r\nNon appena '
-                    'crei un account amministratore rimuoverò questo account temporaneo',
-                icon=UI_DIR + '/ico/museum_white.ico',
-                duration='short',
-            ).show()
+        if len(Museo.getInstance().dipendenti) == 1 and Museo.getInstance().dipendenti[0].autogenerato:
+            Controller.notifica('Primo Accesso', '• Username --> {admin} \r\n• Password --> {admin} \r\nNon appena '
+                                                 'crei un account amministratore rimuoverò questo account temporaneo')
 
     def __onReceptionClicked(self) -> None:
         self.__gotoLogin('reception')

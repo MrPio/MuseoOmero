@@ -36,13 +36,7 @@ class ControllerWidgetPostoLavoro(Controller):
 
     def __onAssegnaPostoClicked(self) -> None:
         self.parent.lavoro_scelto = self.model
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Posto Selezionato',
-            msg='Hai selezionato --> {}'.format(self.model.nome),
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
+        Controller.notifica('Posto Selezionato', f'Hai selezionato --> {self.model.nome}')
         for controller in self.parent.posti_lavoro:
             controller.view.setEnabled(True)
         self.view.setEnabled(False)

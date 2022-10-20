@@ -7,8 +7,6 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import winotify
-
 from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
