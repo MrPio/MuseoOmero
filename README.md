@@ -13,6 +13,8 @@ https://user-images.githubusercontent.com/22773005/196517886-fd611e37-ab1d-441d-
 ### Ripristino backup da cloud:
 https://user-images.githubusercontent.com/22773005/196804859-1bdc07a4-6fc7-45ff-b876-94742533bc71.mp4
 
+### Convalida di un abbonamento:
+https://user-images.githubusercontent.com/22773005/197066001-55bb7f74-f06a-4076-b4c5-93a83273019b.mp4
 
 
 # How to use:
