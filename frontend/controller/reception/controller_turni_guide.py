@@ -25,7 +25,7 @@ class ControllerTurniGuide(Controller):
         self.previous = previous
         self.model = model
         self.strategy = strategy
-        self.aggiungi_alla_lista=None
+        self.aggiungi_alla_lista = None
         self.connettiEventi()
         self.initializeUi()
 
@@ -35,7 +35,7 @@ class ControllerTurniGuide(Controller):
 
     # def __gotoVistaModificaTurnoGuida(self) -> None:
     #     pass
-    def __onRicercaClicked(self,c) -> None:
+    def __onRicercaClicked(self, c) -> None:
         self.initializeUi()
 
     def __onFrecciaSinistraClicked(self) -> None:
@@ -62,7 +62,7 @@ class ControllerTurniGuide(Controller):
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getFrecciaSinistra().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
         self.view.getFrecciaDestra().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
-        self.button_release=self.view.getRicercaButton().mouseReleaseEvent
+        self.button_release = self.view.getRicercaButton().mouseReleaseEvent
         self.view.getRicercaButton().clicked[bool].connect(self.__onRicercaClicked)
 
     def __renderizzaTurniGuida(self) -> list[ControllerWidgetTurnoGuida]:
@@ -88,11 +88,10 @@ class ControllerTurniGuide(Controller):
     def initializeUi(self) -> None:
         self.turni_guida = self.__renderizzaTurniGuida()
         # rimuovo tutti i widget
-        self.aggiungi_alla_lista=None
+        self.aggiungi_alla_lista = None
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
         for controller in self.turni_guida:
             self.view.verticalLayout.addWidget(controller.view)
 
         self.strategy.initializeUi(self)
-

@@ -34,7 +34,7 @@ class VistaAbbonamento(MyMainWindow):
         return self.scadenzaLabel
 
     def getQrCodeImage(self) -> QLabel:
-        return self.qrCodeImage
+        return self.qrCodeIcon
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton

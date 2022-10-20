@@ -35,7 +35,7 @@ class Dipendente():
 
     def assumi(self, lavoro: 'Lavoro') -> bool:
         if self.lavoro is None:
-            lavoro.dipendente=self
+            lavoro.dipendente = self
             self.lavoro = lavoro
             return True
         return False

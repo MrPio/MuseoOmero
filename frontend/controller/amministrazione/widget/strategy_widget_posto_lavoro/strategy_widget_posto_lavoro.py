@@ -9,7 +9,9 @@
 #######################################################
 
 import abc
+
+
 class StrategyWidgetPostoLavoro(abc.ABC):
     @abc.abstractmethod
-    def initializeUi(self, c : 'ControllerWidgetPostoLavoro') -> None:
+    def initializeUi(self, c: 'ControllerWidgetPostoLavoro') -> None:
         pass

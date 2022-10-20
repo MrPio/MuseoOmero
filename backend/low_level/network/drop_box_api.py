@@ -61,7 +61,7 @@ class DropBoxAPI(CloudStorage):
             return False
         return True
 
-    def upload(self, path: str, filename: str,cloudFolder:str) -> bool:
+    def upload(self, path: str, filename: str, cloudFolder: str) -> bool:
         """
         Esegue l'upload di un file sul cloud dropbox.
         :param path: La directory dove si trova il file
@@ -72,7 +72,7 @@ class DropBoxAPI(CloudStorage):
             with open(path + filename, 'rb') as f:
                 self.dropbox_client.files_upload(
                     f=f.read(),
-                    path=DropBoxAPI.cloud_root_dir +cloudFolder+ filename,
+                    path=DropBoxAPI.cloud_root_dir + cloudFolder + filename,
                 )
         except Exception as e:
             return False

@@ -48,13 +48,7 @@ class ControllerInserisciDatiCliente(Controller):
             )
             nuovo_visitatore.biglietti.append(self.previous.model)
             Museo.getInstance().visitatori.append(nuovo_visitatore)
-            winotify.Notification(
-                app_id='Museo Omero',
-                title='Biglietto Creato',
-                msg='Biglietto creato con successo!',
-                icon=UI_DIR + '/ico/museum_white.ico',
-                duration='short',
-            ).show()
+            Controller.notifica('Biglietto Creato', 'Biglietto creato con successo!')
             self.closeView()
             self.previous.previous.enableView()
             self.previous.previous.showView()

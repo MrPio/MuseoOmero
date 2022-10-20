@@ -19,9 +19,11 @@ from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segretario import Segretario
 from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
 from frontend.controller.controller import Controller
+from frontend.controller.controller_account import ControllerAccount
 from frontend.controller.controller_yes_no import ControllerYesNo
 from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipendente
+from frontend.view.vista_account import VistaAccount
 from frontend.view.vista_yes_no import VistaYesNo
 
 
@@ -57,6 +59,16 @@ class ControllerWidgetDipendente(Controller):
         self.model.posto_lavoro.licenzia(self.model, 'licenziamento per giusta causa')
         self.parent.initializeUi()
 
+    def __gotoVistaAccount(self) -> None:
+        self.next = ControllerAccount(
+            view=VistaAccount(),
+            previous=self.parent,
+            home=self.parent.previous.home,
+            model=self.model,
+            logout=False,
+        )
+        self.next.showView()
+        self.parent.disableView()
 
     def __onPromuoviClicked(self) -> None:
         if self.model.posto_lavoro is not None:
@@ -79,6 +91,7 @@ class ControllerWidgetDipendente(Controller):
         self.view.getLicenziaButton().clicked.connect(self.__onLicenziaClicked)
         self.view.getPromuoviButton().clicked.connect(self.__onPromuoviClicked)
         self.view.getSelezionaButton().clicked.connect(self.__onSelezionaClicked)
+        self.view.getIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
 
     def initializeUi(self):
         self.strategy.initializeWidgetUi(self)

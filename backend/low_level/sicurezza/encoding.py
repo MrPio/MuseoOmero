@@ -15,8 +15,9 @@ from PIL.Image import Image
 
 class Encoding(abc.ABC):
     @abc.abstractmethod
-    def encode(self,text : str) -> Image:
+    def encode(self, text: str) -> Image:
         pass
+
     @abc.abstractmethod
-    def decode(self,image : Image) -> str:
+    def decode(self, image: Image) -> str:
         pass

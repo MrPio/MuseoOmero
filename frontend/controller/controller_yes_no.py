@@ -34,6 +34,5 @@ class ControllerYesNo(Controller):
         self.onConfermaCliked()
 
     def connettiEventi(self) -> None:
-        self.view.getConfermaButton().mouseReleaseEvent =  lambda _: self.__onConfermaClicked()
+        self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
         self.view.getAnnullaButton().mouseReleaseEvent = lambda _: self.__onAnnullaClicked()
-

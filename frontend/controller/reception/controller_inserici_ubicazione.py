@@ -11,7 +11,8 @@ from backend.high_level.gestione_interna.ubicazione import Ubicazione
 from frontend.controller.controller import Controller
 from frontend.view.reception.vista_inserici_ubicazione import VistaInsericiUbicazione
 
-#TODO nome controller inserisci ubicazione sbagliato
+
+# TODO nome controller inserisci ubicazione sbagliato
 class ControllerInsericiUbicazione(Controller):
 
     def __gotoPrevious(self) -> None:
@@ -35,7 +36,7 @@ class ControllerInsericiUbicazione(Controller):
         self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
-        self.view.getPreviousButton().mouseReleaseEvent=lambda _:self.__gotoPrevious()
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
 
     def initializeUi(self) -> None:

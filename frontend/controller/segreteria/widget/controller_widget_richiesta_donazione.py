@@ -20,7 +20,7 @@ class ControllerWidgetRichiestaDonazione(Controller):
         self.next = ControllerVistaOpera(
             view=VistaOpera(),
             previous=self,
-            model=self.model.opera, #TODO controllare correttezza
+            model=self.model.opera,  # TODO controllare correttezza
         )
 
     def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):

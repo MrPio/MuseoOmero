@@ -7,17 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import random
-import threading
 from datetime import datetime
 
 from PyQt5 import sip
 
-from backend.high_level.clientela.biglietto import Biglietto
-from backend.high_level.clientela.cliente import Cliente
-from backend.high_level.clientela.enum.sesso import Sesso
-from backend.high_level.clientela.visitatore import Visitatore
-from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.decorator_statistica.grafico_su_eta import GraficoSuEta
 from frontend.controller.amministrazione.decorator_statistica.grafico_su_provenienza import GraficoSuProvenienza
 from frontend.controller.amministrazione.decorator_statistica.grafico_su_sesso import GraficoSuSesso
@@ -32,7 +25,6 @@ class ControllerVistaStatistiche(Controller):
         self.closeView()
         self.previous.initializeUi()
         self.previous.enableView()
-
 
     def __init__(self, view: VistaStatistiche, previous: Controller):
         super().__init__(view)
@@ -53,7 +45,7 @@ class ControllerVistaStatistiche(Controller):
             return
 
         self.__svuotaGrafici()
-        self.current_index=0
+        self.current_index = 0
 
         # Component base
         self.statistica_decorator = StatisticaClienti(self)
@@ -70,16 +62,16 @@ class ControllerVistaStatistiche(Controller):
         self.initializeUi()
 
     def __onFrecciaSinistraClicked(self) -> None:
-        self.current_index-=1 if self.current_index>0 else 0
+        self.current_index -= 1 if self.current_index > 0 else 0
         self.initializeUi()
 
     def __onFrecciaDestraClicked(self) -> None:
-        self.current_index+=1 if self.current_index < len(self.charts_layout)-1 else 0
+        self.current_index += 1 if self.current_index < len(self.charts_layout) - 1 else 0
         self.initializeUi()
 
-    def __setVisibilitaFrecce(self)->None:
+    def __setVisibilitaFrecce(self) -> None:
         self.view.getLeftArrowIcon().setVisible(self.current_index > 0)
-        self.view.getRightArrowIcon().setVisible(self.current_index < len(self.charts_layout)-1)
+        self.view.getRightArrowIcon().setVisible(self.current_index < len(self.charts_layout) - 1)
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
@@ -88,14 +80,14 @@ class ControllerVistaStatistiche(Controller):
         self.view.getRightArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
 
     def initializeUi(self) -> None:
-        if len(self.charts_layout)>0:
+        if len(self.charts_layout) > 0:
             self.__svuotaGrafici()
             self.statistica_decorator.calcola()
             self.view.getVisualizzaStatisticheFrame().setLayout(self.charts_layout[self.current_index])
         self.__setVisibilitaFrecce()
 
     def __svuotaGrafici(self):
-        def __deleteLayout( layout):
+        def __deleteLayout(layout):
             if layout is not None:
                 while layout.count():
                     item = layout.takeAt(0)
@@ -105,6 +97,7 @@ class ControllerVistaStatistiche(Controller):
                     else:
                         __deleteLayout(item.layout())
                 sip.delete(layout)
+
         for layout in self.charts_layout:
             __deleteLayout(layout)
-        self.charts_layout=[]
+        self.charts_layout = []

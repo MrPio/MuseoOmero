@@ -9,23 +9,21 @@
 #######################################################
 from PyQt5.QtGui import QPixmap
 
+import frontend.controller.amministrazione.controller_modifica_posto_lavoro as controller_modifica_posto_lavoro
 from backend.high_level.museo import Museo
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
-
-import frontend.controller.amministrazione.controller_modifica_posto_lavoro as controller_modifica_posto_lavoro
-from frontend.ui.location import UI_DIR
-from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
-
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
     StrategyAggiungiAllaLista
+from frontend.ui.location import UI_DIR
+from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
 
 
 class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
 
     def __init__(self):
-        self.controller:'ControllerWidgetAggiungiAllaLista' = None
+        self.controller: 'ControllerWidgetAggiungiAllaLista' = None
 
     def onClicked(self) -> None:
         matches = {

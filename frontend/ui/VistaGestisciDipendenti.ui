@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>570</width>
-    <height>778</height>
+    <height>775</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -304,7 +304,7 @@ text-align: center;
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>710</y>
+      <y>715</y>
       <width>180</width>
       <height>44</height>
      </rect>

@@ -7,12 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
-
 import abc
 
+from frontend.controller.amministrazione.decorator_statistica.statistica import Statistica
 
-class Grafico( Statistica, metaclass=abc.ABCMeta):
+
+class Grafico(Statistica, metaclass=abc.ABCMeta):
     def __init__(self, controller: 'ControllerVistaStatistiche', wrappee: Statistica):
         self.controller = controller
         self.wrappee = wrappee

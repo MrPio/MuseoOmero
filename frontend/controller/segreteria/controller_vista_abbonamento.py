@@ -8,6 +8,10 @@
 # 
 #######################################################
 import datetime
+import os
+import tempfile
+
+from PyQt5.QtGui import QImage, QPixmap
 
 from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.cliente import Cliente
@@ -32,17 +36,29 @@ class ControllerVistaAbbonamento(Controller):
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getQrCodeImage().mouseReleaseEvent = lambda _: self.__onQrCodeClicked()
+
+    def __onQrCodeClicked(self):
+        path = tempfile.gettempdir() + '/qrcode.jpg'
+        self.model.qr_code.getImage().convert('RGB').save(path)
+        os.startfile(path)
 
     def initializeUi(self) -> None:
-        for cliente in filter(lambda visitatore: isinstance(visitatore, Cliente), Museo.getInstance().visitatori):
-            if self.model in cliente.abbonamenti:
-                self.view.getNomeLabel().setText(cliente.nome)
-                self.view.getCognomeLabel().setText(cliente.cognome)
-                self.view.getCodiceFiscaleLabel().setText(cliente.codiceFiscale)
-                self.view.getScadenzaLabel() \
-                    .setText('{} ({} giorni '.format(
-                    (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days)).strftime('%d/%m/%Y'),
-                    abs(self.model.giorniAllaScadenza()))
-                             + 'rimasti)' if self.model.giorniAllaScadenza() > 0 else 'fa)')
+        for cliente in Museo.getInstance().visitatori:
+            if isinstance(cliente, Cliente):
+                if self.model in cliente.abbonamenti:
+                    self.view.getNomeLabel().setText(cliente.nome)
+                    self.view.getCognomeLabel().setText(cliente.cognome)
+                    self.view.getCodiceFiscaleLabel().setText(cliente.codice_fiscale)
+                    self.view.getScadenzaLabel() \
+                        .setText('{} ({} giorni '.format(
+                        (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days)).strftime('%d/%m/%Y'),
+                        abs(self.model.giorniAllaScadenza()))
+                                 + 'rimasti)' if self.model.giorniAllaScadenza() > 0 else 'fa)')
 
-        #TODO inizializzare Qr-Code nella label
+        i = self.model.qr_code.getImage()
+        i = i.convert("RGBA")
+        image = QImage(i.tobytes('raw', 'RGBA'), i.size[0],
+                       i.size[1], QImage.Format_RGBA8888)
+        self.view.getQrCodeImage().setPixmap(QPixmap.fromImage(image))
+        self.view.getQrCodeImage().setMargin(17)

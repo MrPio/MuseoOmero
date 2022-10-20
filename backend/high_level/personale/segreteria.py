@@ -18,12 +18,13 @@ from backend.high_level.personale.segretario import Segretario
 
 
 class Segreteria(PostoLavoro):
-    def __init__(self, nome:str,piano: int, numPostazioni: int, sportelli: int, telFisso:str, descr: str = ""):
-        super().__init__(nome,piano, numPostazioni)
-        self.sportelli=sportelli
-        self.telefono_fisso=telFisso
-        self.descrizione=descr
+    def __init__(self, nome: str, piano: int, numPostazioni: int, sportelli: int, telFisso: str, descr: str = ""):
+        super().__init__(nome, piano, numPostazioni)
+        self.sportelli = sportelli
+        self.telefono_fisso = telFisso
+        self.descrizione = descr
         self.richieste_donazione: list[RichiestaDonazione] = []
+
     def assumi(self, dipendente: Dipendente) -> bool:
         lavoro = Segretario(
             contratto='contratto a tempo indeterminato',
@@ -38,9 +39,9 @@ class Segreteria(PostoLavoro):
 
     def promuovi(self, dipendente: Dipendente) -> bool:
         for lavoro in Museo.getInstance().posti_lavoro:
-            if isinstance(lavoro,Amministrazione):
-                if len(lavoro.lavori)<lavoro.numero_postazioni_totali:
-                    self.licenzia(dipendente,'promosso ad amministratore')
+            if isinstance(lavoro, Amministrazione):
+                if len(lavoro.lavori) < lavoro.numero_postazioni_totali:
+                    self.licenzia(dipendente, 'promosso ad amministratore')
                     lavoro.assumi(dipendente)
                     return True
         return False

@@ -14,7 +14,6 @@ from backend.high_level.clientela.documento import Documento
 from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
 from backend.high_level.gestione_interna.turno_guida import TurnoGuida
-from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
 from backend.low_level.pagamenti.nexi_api import NexiApi
 
 
@@ -25,7 +24,19 @@ class Biglietto(Documento):
         self.reparto_museo = reparto
         self.tariffa = tariffa
         self.guida = turno
-        self.abbonamento:Abbonamento|None=None
+        self.abbonamento: Abbonamento | None = None
+
+    @property
+    def abbonamento(self):
+        return self.abbonamento
+
+    @abbonamento.setter
+    def abbonamento(self, value: Abbonamento):
+        if value is not None:
+            self.abbonamento = value
+            if not value.isScaduto():
+                self.tariffa = Tariffa.GRATIS
+            self.notify()
 
     def calcolaCosto(self) -> float:
         if self.reparto_museo == RepartoMuseo.MUSEO_APERTO:
@@ -49,5 +60,12 @@ class Biglietto(Documento):
         self.date_convalida.append(datetime.now())
         return self.pagato and (datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24
 
+    def isScaduto(self) -> bool:
+        return (datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24
+
     def __hasGuida(self) -> bool:
         return self.guida is None
+
+    @abbonamento.setter
+    def abbonamento(self, value):
+        self._abbonamento = value

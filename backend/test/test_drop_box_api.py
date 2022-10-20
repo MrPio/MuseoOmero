@@ -39,11 +39,11 @@ class TestDropBoxAPI(TestCase):
         )
 
     def test_list_file2(self):
-        print(self.dropbox_api.listFile(DropBoxAPI.cloud_root_dir +'backups/'))
+        print(self.dropbox_api.listFile(DropBoxAPI.cloud_root_dir + 'backups/'))
 
     def test_delete_file(self):
         self.assertTrue(
             self.dropbox_api.deleteFile(
-                DropBoxAPI.cloud_root_dir+'backups/test',
+                DropBoxAPI.cloud_root_dir + 'backups/test',
             )
         )

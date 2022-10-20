@@ -10,11 +10,34 @@
 import random
 import string
 
+import cv2
+from PIL.Image import Image
+
 from backend.low_level.sicurezza.encoding import Encoding
 from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding
 
 
 class QRCode:
+    @staticmethod
+    def scannerizza_da_webcam() -> str:
+        cap = cv2.VideoCapture(0)
+        # initialize the cv2 QRCode detector
+        detector = cv2.QRCodeDetector()
+        id = ''
+        while True:
+            _, img = cap.read()
+            data, bbox, _ = detector.detectAndDecode(img)
+            # check if there is a QRCode in the image
+            if data:
+                id = data
+                break
+            cv2.imshow("QRCODEscanner", img)
+            if cv2.waitKey(1) in [ord('q'), 27]:
+                break
+        cap.release()
+        cv2.destroyAllWindows()
+        return id
+
     def __init__(self, encoding: Encoding = QRCodeEncoding()):
         self.id = self.__genara()
         self.encoding: Encoding = encoding
@@ -25,6 +48,5 @@ class QRCode:
     def rigenera(self) -> None:
         self.id = self.__genara()
 
-    def getImage(self) -> None:
+    def getImage(self) -> Image:
         return self.encoding.encode(self.id)
-

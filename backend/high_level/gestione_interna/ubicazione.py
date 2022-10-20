@@ -10,10 +10,8 @@
 
 
 class Ubicazione:
-    def __init__(self,piano : int=0, numeroMagazzino : int=0, scaffale : int=0, posizione : int=0):
-        self.piano=piano
-        self.numero_magazzino=numeroMagazzino
-        self.scaffale=scaffale
-        self.posizione=posizione
-
-
+    def __init__(self, piano: int = 0, numeroMagazzino: int = 0, scaffale: int = 0, posizione: int = 0):
+        self.piano = piano
+        self.numero_magazzino = numeroMagazzino
+        self.scaffale = scaffale
+        self.posizione = posizione

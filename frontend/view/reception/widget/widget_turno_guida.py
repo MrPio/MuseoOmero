@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
+from PyQt5.QtWidgets import QLabel, QPushButton
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget
@@ -15,7 +15,7 @@ from frontend.view.my_widget import MyWidget
 
 class WidgetTurnoGuida(MyWidget):
 
-    def __init__(self,  parent):
+    def __init__(self, parent):
         super().__init__(UI_DIR + '/GestisciTurnoGuidaWidget.ui', parent)
 
     def getIcon(self) -> QLabel:

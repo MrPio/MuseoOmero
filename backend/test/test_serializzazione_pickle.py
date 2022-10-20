@@ -16,8 +16,8 @@ class TestSerializzazionePickle(TestCase):
             reparto=RepartoMuseo.MOSTRA,
             tariffa=Tariffa.RIDOTTO,
         )
-        self.path='junk/TestSerializzazionePickle/'
-        self.filename='biglietto123.pickle'
+        self.path = 'junk/TestSerializzazionePickle/'
+        self.filename = 'biglietto123.pickle'
 
     def test_serializza(self):
         self.assertTrue(
@@ -32,6 +32,6 @@ class TestSerializzazionePickle(TestCase):
         self.assertEqual(
             first=self.biglietto_test.tariffa,
             second=self.serializzatore_pickle.deserializza(
-                path=self.path+self.filename,
+                path=self.path + self.filename,
             ).tariffa,
         )

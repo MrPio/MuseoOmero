@@ -16,7 +16,7 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaHome(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR+'/MainPage.ui')
+        super().__init__(UI_DIR + '/MainPage.ui')
 
     def getReceptionButton(self) -> QPushButton:
         return self.receptionBigButton

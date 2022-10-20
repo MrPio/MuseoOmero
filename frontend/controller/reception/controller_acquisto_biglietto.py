@@ -37,7 +37,7 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view: VistaAcquistoBiglietto = view
         self.previous = previous
         self.model = model
-        #self.model.subscribe(self)
+        # self.model.subscribe(self)
         self.connettiEventi()
 
     def __gotoVistaTurniGuide(self) -> None:
@@ -86,4 +86,4 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view.getTipoBigliettoComboBox().currentTextChanged.connect(self.__onTipoBigliettoChanged)
 
     def update(self) -> None:
-        self.view.getCostoLabel() #TODO
+        self.view.getCostoLabel()  # TODO

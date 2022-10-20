@@ -7,56 +7,36 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import winotify
 
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
+from frontend.controller.segreteria.controller_vista_abbonamento import ControllerVistaAbbonamento
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
-from frontend.ui.location import UI_DIR
+from frontend.view.segreteria.vista_abbonamento import VistaAbbonamento
 
 
 class StrategyConvalidaAbbonamento(StrategyConvalida):
 
     def __init__(self) -> None:
         self.abbonamento: 'Abbonamento' | None = None
-        self.model= Museo.getInstance()
+        self.model = Museo.getInstance()
 
     def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('CompraBiglietto ➜ ConvalidaAbbonamento')
 
-    def onRicercaClicked(self, c: 'ControllerConvalida', id: str) -> None:
+    def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
         for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
             for abbonamento in cliente.abbonamenti:
                 if id == abbonamento.qr_code.id:
-                    #self..finalizza(abbonamento)
+                    c.next = ControllerVistaAbbonamento(
+                        view=VistaAbbonamento(),
+                        previous=c,
+                        model=abbonamento,
+                    )
+                    c.next.showView()
+                    c.disableView()
+                    return True
 
-                    titolo="Abbonamento trovato!"
-                    if abbonamento.giorniAllaScadenza()>0:
-                        abbonamento.convalida()
-                        messaggio="L'abbonamento appartiene a "+cliente.nome+ " "+cliente.cognome+"\r\nTerminerà tra"+str(abbonamento.giorniAllaScadenza())+" giorni"
-                    elif abbonamento.giorniAllaScadenza()==0:
-                        abbonamento.convalida()
-                        messaggio="L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
-                    elif abbonamento.giorniAllaScadenza() < 0:
-                        titolo='Abbonamento scaduto!'
-                        messaggio="L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nSi prega di rinnovarlo"
-
-
-                    winotify.Notification(
-                        app_id='Museo Omero',
-                        title=titolo,
-                        msg=messaggio,
-                        icon=UI_DIR + '/ico/museum_white.ico',
-                        duration='short',
-                    ).show()
-
-                    return
-
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Abbonamento non trovato',
-            msg='Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito.',
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
-        return
+        c.notifica('Abbonamento non trovato',
+                   'Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito.')
+        return False

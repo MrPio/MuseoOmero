@@ -7,18 +7,12 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import cv2
-import winotify
 
-from backend.high_level.clientela.cliente import Cliente
-from backend.high_level.clientela.documento import Documento
+from backend.high_level.clientela.qr_code import QRCode
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.controller_inserimento_manuale import ControllerInserimentoManuale
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
-from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
-    StrategyConvalidaAbbonamento
-from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_convalida import VistaConvalida
 from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
 
@@ -35,41 +29,26 @@ class ControllerConvalida(Controller):
         self.view: VistaConvalida = view
         self.previous: Controller = previous
         self.strategy: StrategyConvalida = strategy
+        self.next = None
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
             view=VistaInserimentoManuale(),
-            model= Museo.getInstance(),
+            model=Museo.getInstance(),
             previous=self,
-            strategy=StrategyConvalida(),
+            strategy=self.strategy,
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 
-    def __onScannerizzaClicked(self) -> Documento:
-        cap = cv2.VideoCapture(0)
-        # initialize the cv2 QRCode detector
-        detector = cv2.QRCodeDetector()
-        id = ''
-        while True:
-            _, img = cap.read()
-            data, bbox, _ = detector.detectAndDecode(img)
-            # check if there is a QRCode in the image
-            if data:
-                id = data
-                break
-            cv2.imshow("QRCODEscanner", img)
-            if cv2.waitKey(1) == ord("q"):
-                break
-        cap.release()
-        cv2.destroyAllWindows()
+    def __onScannerizzaClicked(self) -> None:
+        id = QRCode.scannerizza_da_webcam()
 
-        self.strategy.onRicercaClicked(c=self.strategy, id=id)
-        documento = self.strategy.finalizza()
-        self.closeView()
-        self.previous.enableView()
-        return documento
+        if id == '':
+            self.notifica('Operazione Annullata', 'Hai annullato il processo di scannerizzazione del qr-code')
+            return
+
+        self.strategy.finalizza(self, id)
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
@@ -78,10 +57,10 @@ class ControllerConvalida(Controller):
 
     def initializeUi(self) -> None:
         self.strategy.initializeUi(self)
-        #TODO
+        # TODO
 
-    def finalizza(self,abbonamento:'Abbonamento') -> None:
-        self.strategy.abbonamento=abbonamento
-        self.strategy.finalizza(self)
-        self.closeView()
-        self.previous.enableView()
+    # def finalizza(self, abbonamento: 'Abbonamento') -> None:
+    #     self.strategy.abbonamento = abbonamento
+    #     self.strategy.finalizza(self)
+    #     self.closeView()
+    #     self.previous.enableView()

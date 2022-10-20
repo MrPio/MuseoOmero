@@ -39,9 +39,9 @@ border-width:5;
     <property name="geometry">
      <rect>
       <x>-10</x>
-      <y>40</y>
+      <y>44</y>
       <width>811</width>
-      <height>6</height>
+      <height>5</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -55,7 +55,7 @@ border-width:5;
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>55</y>
+      <y>60</y>
       <width>511</width>
       <height>31</height>
      </rect>
@@ -126,13 +126,13 @@ background-color: rgba(255, 255, 255,0);
 }</string>
     </property>
     <property name="text">
-     <string>Codice fiscale:</string>
+     <string>Codice fiscale*:</string>
     </property>
    </widget>
    <widget class="QLabel" name="NomeIcona">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>155</y>
       <width>35</width>
       <height>35</height>
@@ -156,7 +156,7 @@ background-color: rgba(255, 85, 85,0);
    <widget class="QLabel" name="CognomeIcona">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>213</y>
       <width>35</width>
       <height>35</height>
@@ -180,7 +180,7 @@ background-color: rgba(255, 85, 85,0);
    <widget class="QLabel" name="CodiceFiscaleIcona">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>267</y>
       <width>35</width>
       <height>35</height>
@@ -342,7 +342,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>97</y>
+      <y>100</y>
       <width>461</width>
       <height>41</height>
      </rect>
@@ -363,9 +363,9 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLineEdit" name="nomeLineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>287</x>
       <y>157</y>
-      <width>150</width>
+      <width>181</width>
       <height>30</height>
      </rect>
     </property>
@@ -404,9 +404,9 @@ border-width:3;
    <widget class="QLineEdit" name="cognomeLineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>287</x>
       <y>215</y>
-      <width>150</width>
+      <width>181</width>
       <height>30</height>
      </rect>
     </property>
@@ -445,20 +445,20 @@ border-width:3;
    <widget class="QLineEdit" name="codiceFiscaleLineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>287</x>
       <y>273</y>
-      <width>150</width>
+      <width>181</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Lato Light</family>
-      <pointsize>11</pointsize>
+      <pointsize>-1</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
+font-size: 16px;
 background:rgb(255, 255, 255);
 border-radius:8px;
 border-color:rgb(104, 194, 253);
@@ -474,7 +474,7 @@ border-width:3;
 }</string>
     </property>
     <property name="inputMask">
-     <string/>
+     <string>&gt;AAAAAA00A00A000A;#</string>
     </property>
     <property name="text">
      <string/>
@@ -483,13 +483,13 @@ border-width:3;
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Codice Fiscale</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="NomeIcona_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>383</y>
       <width>35</width>
       <height>35</height>
@@ -593,7 +593,7 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLabel" name="CognomeIcona_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>441</y>
       <width>35</width>
       <height>35</height>
@@ -617,7 +617,7 @@ background-color: rgba(255, 85, 85,0);
    <widget class="QLabel" name="CodiceFiscaleIcona_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>63</x>
       <y>495</y>
       <width>35</width>
       <height>35</height>
@@ -698,9 +698,9 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLineEdit" name="dataNascitaLineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>287</x>
       <y>443</y>
-      <width>150</width>
+      <width>181</width>
       <height>30</height>
      </rect>
     </property>
@@ -727,7 +727,7 @@ border-width:3;
 }</string>
     </property>
     <property name="inputMask">
-     <string>00/00/0000;0</string>
+     <string>00/00/0000;#</string>
     </property>
     <property name="text">
      <string>//</string>
@@ -799,9 +799,9 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLineEdit" name="provenienzaLineEdit">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>287</x>
       <y>385</y>
-      <width>150</width>
+      <width>181</width>
       <height>30</height>
      </rect>
     </property>
@@ -827,6 +827,9 @@ border-style: solid;
 border-width:3;
 }</string>
     </property>
+    <property name="inputMask">
+     <string>&gt;AAA;#</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -834,7 +837,7 @@ border-width:3;
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Provenienza</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="datiPerStatisticheLabel">
@@ -1217,13 +1220,13 @@ text-align: center;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size: 16px;
+     <string notr="true">font-size: 20px;
 text-align: left;
 background-color: rgba(255, 255, 255,0);
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; font-style:italic;&quot;&gt;importo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>€ 9.99</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1251,7 +1254,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>55</y>
+      <y>60</y>
       <width>38</width>
       <height>38</height>
      </rect>
@@ -1535,6 +1538,19 @@ QPushButton::pressed{
    <zorder>reduceButton</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>nomeLineEdit</tabstop>
+  <tabstop>cognomeLineEdit</tabstop>
+  <tabstop>codiceFiscaleLineEdit</tabstop>
+  <tabstop>provenienzaLineEdit</tabstop>
+  <tabstop>dataNascitaLineEdit</tabstop>
+  <tabstop>sessoComboBox</tabstop>
+  <tabstop>durataComboBox</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+  <tabstop>exitButton</tabstop>
+ </tabstops>
  <resources>
   <include location="11/res/res.qrc"/>
   <include location="res/res.qrc"/>

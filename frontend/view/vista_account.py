@@ -48,5 +48,5 @@ class VistaAccount(MyMainWindow):
     def getNuovaPasswordLineEdit(self) -> QLineEdit:
         return self.nuovaPasswordLineEdit
 
-    def getCambiaPasswordButton(self)->QPushButton:
+    def getCambiaPasswordButton(self) -> QPushButton:
         return self.cambiaPasswordButton

@@ -61,4 +61,3 @@ class ControllerWidgetOpera(Controller):
             self.view.getOperaLabel().setMargin(4)
             new_width = image.width() / image.height() * self.view.getOperaLabel().maximumHeight()
             self.view.getOperaLabel().setMaximumWidth(int(new_width))
-

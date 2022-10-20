@@ -12,13 +12,12 @@ from frontend.controller.reception.strategy_ricerca_opera.strategy_ricerca_opera
 
 
 class StrategyAggiungiOperaAMostra(StrategyRicercaOpera):
-    def initializeUi(self,c : ControllerRicercaOpera) -> None:
+    def initializeUi(self, c: ControllerRicercaOpera) -> None:
         c.view.getHeaderLabel().setText('AllestisciMostra ➜ RicercaOpera')
 
-    def onOperaClicked(self,c : 'ControllerWidgetOpera') -> None:
+    def onOperaClicked(self, c: 'ControllerWidgetOpera') -> None:
         # c.parent.previous --> ControllerAllestisciMostra
         c.parent.previous.model.opere.append(c.model)
         c.parent.previous.initializeUi()
         c.parent.previous.enableView()
         c.parent.closeView()
-

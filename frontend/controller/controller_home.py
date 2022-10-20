@@ -10,10 +10,8 @@
 import winotify
 
 from backend.high_level.museo import Museo
-from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 from frontend.controller.controller import Controller
 from frontend.controller.controller_login import ControllerLogin
-from frontend.ui.location import UI_DIR
 from frontend.view.vista_home import VistaHome
 from frontend.view.vista_login import VistaLogin
 
@@ -23,7 +21,6 @@ class ControllerHome(Controller):
         super().__init__(view)
         self.view: VistaHome = view
         self.connettiEventi()
-
 
     def __gotoLogin(self, reparto) -> None:
         controller = ControllerLogin(

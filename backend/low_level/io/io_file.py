@@ -12,7 +12,7 @@ import abc
 
 class IOFile(abc.ABC):
     @abc.abstractmethod
-    def salvaFile(self, content: bytes, path: str, filename:str) -> None:
+    def salvaFile(self, content: bytes, path: str, filename: str) -> None:
         pass
 
     @abc.abstractmethod

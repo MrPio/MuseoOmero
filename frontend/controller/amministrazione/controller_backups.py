@@ -7,7 +7,6 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import os
 
 from PyQt5.QtCore import QTimer
 

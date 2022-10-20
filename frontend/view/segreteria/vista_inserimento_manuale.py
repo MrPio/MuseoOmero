@@ -16,7 +16,7 @@ from frontend.view.my_main_window import MyMainWindow
 class VistaInserimentoManuale(MyMainWindow):
 
     def __init__(self):
-        super().__init__(UI_DIR+'/InserisciManualmente.ui')
+        super().__init__(UI_DIR + '/InserisciManualmente.ui')
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton

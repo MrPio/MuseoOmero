@@ -23,7 +23,8 @@ class ControllerGestioneDipendenti(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: museo.Museo, strategy: StrategyDipendenti):
+    def __init__(self, view: VistaGestioneDipendenti, previous: Controller, model: museo.Museo,
+                 strategy: StrategyDipendenti):
         super().__init__(view)
         self.view: VistaGestioneDipendenti = view
         self.previous = previous

@@ -40,9 +40,9 @@ class ControllerAssumi(Controller):
         self.posti_lavoro: list[ControllerWidgetPostoLavoro] = []
 
     def __onConfermaClicked(self) -> None:
-        birth=None
+        birth = None
         try:
-            birth =datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
+            birth = datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
         except Exception as e:
             print(e)
             return
@@ -55,7 +55,7 @@ class ControllerAssumi(Controller):
                 nome=self.view.getNomeLineEdit().text(),
                 cognome=self.view.getCognomeLineEdit().text(),
                 dataNascita=birth,
-                sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ','_')],
+                sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ', '_')],
             )
             if self.lavoro_scelto is not None:
                 self.lavoro_scelto.assumi(nuovo_dip)

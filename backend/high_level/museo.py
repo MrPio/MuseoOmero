@@ -106,8 +106,8 @@ class Museo:
             #         print('ho trovato un backup su cloud, download in corso...')
 
             if last_backup == '':
-                print(#'non ho trovato né un backup locale, né un backup su '
-                      'cloud --> creo una nuova istanza di Museo.')
+                print(  # 'non ho trovato né un backup locale, né un backup su '
+                    'cloud --> creo una nuova istanza di Museo.')
                 Museo.__instance = Museo(Museo.__key)
             else:
                 print('ho trovato il seguente backup --> {}'.format(last_backup))
@@ -162,7 +162,7 @@ class Museo:
 
     def download_backup(self, data: str) -> None:
         file = 'museo ' + data + '.pickle'
-        result=Museo.__cloud_storage.download(
+        result = Museo.__cloud_storage.download(
             cloudPath=DropBoxAPI.cloud_root_dir + Museo.__backup_folder + file,
             localPath=Museo.__backup_path + file
         )

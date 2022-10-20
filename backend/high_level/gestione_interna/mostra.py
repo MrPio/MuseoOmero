@@ -8,6 +8,7 @@
 # 
 #######################################################
 from datetime import datetime
+
 from PIL.Image import Image
 
 from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
@@ -18,7 +19,7 @@ from backend.high_level.gestione_interna.opera import Opera
 class Mostra(Evento):
 
     def __init__(self, dataInizio: datetime, dataFine: datetime, titolo: str, descrizione: str, tema: PeriodoStorico,
-                 pamphlet: Image = None, opere:list[Opera]|None=None):
+                 pamphlet: Image = None, opere: list[Opera] | None = None):
         super().__init__(dataInizio, dataFine)
         self.titolo = titolo
         self.descrizione = descrizione

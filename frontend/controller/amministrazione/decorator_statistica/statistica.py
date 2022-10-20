@@ -9,6 +9,8 @@
 #######################################################
 
 import abc
+
+
 class Statistica(abc.ABC):
 
     @abc.abstractmethod

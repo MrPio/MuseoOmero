@@ -8,13 +8,10 @@
 # 
 #######################################################
 
-from PyQt5.QtGui import QPixmap
-
 from backend.high_level.museo import Museo
 from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segreteria import Segreteria
-from frontend.controller.amministrazione.controller_modifica_posto_lavoro import ControllerModificaPostoLavoro
 from frontend.controller.amministrazione.widget.controller_widget_aggiungi_alla_lista import \
     ControllerWidgetAggiungiAllaLista
 from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro import ControllerWidgetPostoLavoro
@@ -25,7 +22,6 @@ from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.str
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_gestione_posti_lavoro import VistaGestionePostiLavoro
 
-from frontend.view.amministrazione.vista_modifica_posto_lavoro import VistaModificaPostoLavoro
 from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
@@ -98,7 +94,7 @@ class ControllerGestionePostiLavoro(Controller):
             }
             new_widget = WidgetAggiungiAllaLista(matches[layout][1])
 
-            controller=ControllerWidgetAggiungiAllaLista(
+            controller = ControllerWidgetAggiungiAllaLista(
                 view=new_widget,
                 parent=self,
                 strategy=AggiungiPostoLavoro(),

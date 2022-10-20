@@ -1,15 +1,13 @@
 import os
-import sys
 
 import winotify
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-
-from backend.high_level.museo import Museo
-from frontend.ui.location import UI_DIR
 from frontend import myres
+
+from frontend.ui.location import UI_DIR
 
 
 class MyMainWindow(QMainWindow):
@@ -20,7 +18,7 @@ class MyMainWindow(QMainWindow):
         # a quanto pare questo trucchetto richiede la versione 5 di pyqt
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         self.setWindowIcon(QtGui.QIcon(UI_DIR + '/ico/museum_white.ico'))
-        if hasattr(self,'exitButton' ):
+        if hasattr(self, 'exitButton'):
             self.exitButton.clicked.connect(self.save_and_exit)
             self.maximizeButton.clicked.connect(self.maximize)
             self.reduceButton.clicked.connect(self.showMinimized)
@@ -105,7 +103,6 @@ class MyMainWindow(QMainWindow):
 
         from frontend.controller.controller_yes_no import ControllerYesNo
         from frontend.view.vista_yes_no import VistaYesNo
-        self.next = ControllerYesNo(VistaYesNo(), None, perform,'Sicuro di voler uscire?\r\n(I progressi NON verranno salvati)')
+        self.next = ControllerYesNo(VistaYesNo(), None, perform,
+                                    'Sicuro di voler uscire?\r\n(I progressi NON verranno salvati)')
         self.next.showView()
-
-

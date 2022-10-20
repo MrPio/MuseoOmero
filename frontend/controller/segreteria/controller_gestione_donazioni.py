@@ -32,7 +32,7 @@ class ControllerGestioneDonazioni(Controller):
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        #TODO listView
+        # TODO listView
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
         result = []

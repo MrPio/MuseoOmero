@@ -7,7 +7,6 @@
 # Original author: Valerio Morelli
 # 
 #######################################################
-import winotify
 from PyQt5.QtGui import QPixmap
 
 from backend.high_level.personale.amministrazione import Amministrazione

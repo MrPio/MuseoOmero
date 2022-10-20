@@ -9,14 +9,16 @@
 #######################################################
 import abc
 
+import winotify
 from PyQt5.QtWidgets import QWidget
 
+from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
 
 
 class Controller(abc.ABC):
 
-    def __init__(self, view: MyMainWindow|QWidget) -> None:
+    def __init__(self, view: MyMainWindow | QWidget) -> None:
         self.view = view
 
     def initializeUi(self) -> None:
@@ -47,3 +49,12 @@ class Controller(abc.ABC):
     def enableView(self) -> 'Controller':
         self.view.setEnabled(True)
         return self
+
+    def notifica(self, titolo: str, contenuto: str, durata='short') -> None:
+        winotify.Notification(
+            app_id='Museo Omero',
+            title=titolo,
+            msg=contenuto,
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration=durata,
+        ).show()

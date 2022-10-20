@@ -11,11 +11,9 @@
 # from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.museo import Museo
 from backend.high_level.personale.amministratore import Amministratore
-from backend.high_level.personale.amministrazione import Amministrazione
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
 from backend.high_level.personale.segretario import Segretario
-from backend.low_level.sicurezza.hashing import Hashing
 from frontend.controller.amministrazione.controller_home_amministrazione import ControllerHomeAmministrazione
 from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_home_reception import ControllerHomeReception
@@ -27,6 +25,15 @@ from frontend.view.vista_login import VistaLogin
 
 
 class ControllerLogin(Controller):
+    def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str):
+        super().__init__(view)
+        self.view: VistaLogin = view
+        self.__model = model
+        self.__home = home
+        self.__repartoScelto = repartoScelto
+        self.view.getErrorLabel().setVisible(False)
+        self.__home.enableView()
+
     def __login(self, username: str, password: str) -> Dipendente:
         return self.__model.login(
             username=username,
@@ -43,7 +50,12 @@ class ControllerLogin(Controller):
         )
         if dipendente is None:
             self.view.getErrorLabel().setText(
-                'Compila correttamente i campi' if len(username) < 1 or len(password) < 1 else 'Username o password errati!')
+                'Compila correttamente i campi' if len(username) < 1 or len(
+                    password) < 1 else 'Username o password errati!')
+            self.view.getErrorLabel().setVisible(True)
+            return
+        if dipendente.lavoro is None:
+            self.view.getErrorLabel().setText(f'{dipendente.nome} non ha un lavoro.')
             self.view.getErrorLabel().setVisible(True)
             return
 
@@ -65,13 +77,3 @@ class ControllerLogin(Controller):
 
     def gotoHome(self) -> None:
         self.closeView()
-        self.__home.enableView()
-
-    def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str):
-        super().__init__(view)
-        self.view: VistaLogin = view
-        self.__model = model
-        self.__home = home
-        self.__repartoScelto = repartoScelto
-        self.view.getErrorLabel().setVisible(False)
-

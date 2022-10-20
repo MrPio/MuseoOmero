@@ -93,6 +93,9 @@ border-width:5;
       <height>84</height>
      </size>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 16px;
 background-color: rgba(255, 255, 255, 255);</string>

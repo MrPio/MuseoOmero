@@ -13,11 +13,10 @@ from frontend.ui.location import UI_DIR
 
 
 class StrategyWidgetAssegnaPosto(StrategyWidgetPostoLavoro):
-    def initializeUi(self,c : 'ControllerWidgetPostoLavoro') -> None:
+    def initializeUi(self, c: 'ControllerWidgetPostoLavoro') -> None:
         c.view.getAssegnaPostoButton().setVisible(True)
         c.view.getModificaButton().setVisible(False)
         c.view.getRimuoviButton().setVisible(False)
         if len(c.model.lavori) >= c.model.numero_postazioni_totali:
             c.view.getAssegnaPostoButton().setEnabled(False)
             c.view.getAssegnaPostoButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
-

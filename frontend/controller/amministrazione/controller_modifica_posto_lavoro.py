@@ -18,7 +18,7 @@ class ControllerModificaPostoLavoro(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def     __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
+    def __init__(self, view: VistaModificaPostoLavoro, previous: Controller, model: PostoLavoro):
         super().__init__(view)
         self.view: VistaModificaPostoLavoro = view
         self.previous = previous
@@ -27,9 +27,9 @@ class ControllerModificaPostoLavoro(Controller):
         self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        self.model.nome=self.view.getNomeLineEdit().text()
-        self.model.piano=self.view.getPianoSpinBox().value()
-        self.model.numero_postazioni_totali=self.view.getCapienzaSpinBox().value()
+        self.model.nome = self.view.getNomeLineEdit().text()
+        self.model.piano = self.view.getPianoSpinBox().value()
+        self.model.numero_postazioni_totali = self.view.getCapienzaSpinBox().value()
         self.previous.initializeUi()
         self.__gotoPrevious()
 

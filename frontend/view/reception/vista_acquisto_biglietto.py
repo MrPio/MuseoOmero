@@ -18,7 +18,6 @@ class VistaAcquistoBiglietto(MyMainWindow):
     def __init__(self):
         super().__init__(UI_DIR + '/VistaCompraBiglietto.ui')
 
-
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
@@ -39,4 +38,3 @@ class VistaAcquistoBiglietto(MyMainWindow):
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton
-

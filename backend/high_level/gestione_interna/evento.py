@@ -11,8 +11,7 @@ from datetime import datetime
 
 
 class Evento:
-    def __init__(self,dataInizio : datetime, dataFine : datetime) -> None:
+    def __init__(self, dataInizio: datetime, dataFine: datetime) -> None:
         self.data_inizio = dataInizio
         self.data_fine = dataFine
-        self.data_pianificazione=datetime.now()
-
+        self.data_pianificazione = datetime.now()

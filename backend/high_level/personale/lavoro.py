@@ -13,19 +13,19 @@ from backend.high_level.personale.dipendente import Dipendente
 
 
 class Lavoro:
-    def __init__(self, stipendio : float, numPostazione : int,contratto : str=''):
-        self.stipendio=stipendio
-        self.numero_postazione=numPostazione
-        self.contratto=contratto
-        self.data_assunzione=datetime.now()
-        self.licenziato=False
-        self.data_licenziamento=None
-        self.nota_licenziamento=''
-        self.dipendente:Dipendente|None=None
+    def __init__(self, stipendio: float, numPostazione: int, contratto: str = ''):
+        self.stipendio = stipendio
+        self.numero_postazione = numPostazione
+        self.contratto = contratto
+        self.data_assunzione = datetime.now()
+        self.licenziato = False
+        self.data_licenziamento = None
+        self.nota_licenziamento = ''
+        self.dipendente: Dipendente | None = None
 
-    def licenzia(self,notaLicenziamento : str) -> None:
+    def licenzia(self, notaLicenziamento: str) -> None:
         if self.licenziato:
             return
-        self.nota_licenziamento=notaLicenziamento
-        self.data_licenziamento=datetime.now()
-        self.licenziato=True
+        self.nota_licenziamento = notaLicenziamento
+        self.data_licenziamento = datetime.now()
+        self.licenziato = True

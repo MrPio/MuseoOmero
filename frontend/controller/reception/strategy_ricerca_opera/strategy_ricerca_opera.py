@@ -8,11 +8,13 @@
 # 
 #######################################################
 import abc
+
+
 class StrategyRicercaOpera(abc.ABC):
     @abc.abstractmethod
-    def initializeUi(self,c : 'ControllerRicercaOpera') -> None:
+    def initializeUi(self, c: 'ControllerRicercaOpera') -> None:
         pass
 
     @abc.abstractmethod
-    def onOperaClicked(self,c : 'ControllerWidgetOpera') -> None:
+    def onOperaClicked(self, c: 'ControllerWidgetOpera') -> None:
         pass

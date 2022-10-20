@@ -8,11 +8,6 @@
 # 
 #######################################################
 from backend.high_level.clientela.biglietto import Biglietto
-from backend.high_level.gestione_interna.composizione import Composizione
-from backend.high_level.gestione_interna.enum.periodo_storico import PeriodoStorico
-from backend.high_level.gestione_interna.enum.reparto_museo import RepartoMuseo
-from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
-from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
@@ -46,7 +41,6 @@ class ControllerHomeReception(Controller):
             home=self.home,
             model=self.dipendente,
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

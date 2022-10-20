@@ -53,7 +53,6 @@ class ControllerRinnovoAbbonamento(Controller):
             previous=self,
             model=Abbonamento(),
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 
@@ -68,5 +67,5 @@ class ControllerRinnovoAbbonamento(Controller):
 
     def initializeUi(self) -> None:
         self.view.getQrCodeImage()
-        #TODO inizializzare Qr-Code nella label
+        # TODO inizializzare Qr-Code nella label
         pass

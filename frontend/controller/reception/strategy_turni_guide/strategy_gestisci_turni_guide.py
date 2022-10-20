@@ -17,7 +17,7 @@ from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import Widg
 
 
 class StrategyGestisciTurniGuide(StrategyTurniGuide):
-    def initializeUi(self,c : 'ControllerTurniGuide') -> None:
+    def initializeUi(self, c: 'ControllerTurniGuide') -> None:
         c.view.getHeaderLabel().setText('HomeAmministrazione ➜ GestisciTurniGuide')
 
         c.aggiungi_alla_lista = ControllerWidgetAggiungiAllaLista(
@@ -27,5 +27,5 @@ class StrategyGestisciTurniGuide(StrategyTurniGuide):
         )
         c.view.verticalLayout.addWidget(c.aggiungi_alla_lista.view)
 
-    def initializeWidgetUi(self,c : controller.ControllerWidgetTurnoGuida) -> None:
+    def initializeWidgetUi(self, c: controller.ControllerWidgetTurnoGuida) -> None:
         c.view.getSelezionaButton().setVisible(False)

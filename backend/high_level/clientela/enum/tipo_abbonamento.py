@@ -13,12 +13,12 @@ from enum import Enum
 
 
 class TipoAbbonamento(Enum):
-    MENSILE=30,9.99
-    TRIMESTRALE=90,24.99
-    SEMESTRALE=180,49.99
-    ANNUALE=365,99.99
+    MENSILE = 30, 9.99
+    TRIMESTRALE = 90, 24.99
+    SEMESTRALE = 180, 49.99
+    ANNUALE = 365, 99.99
 
-    def __new__(cls, days:int, cost:float):
+    def __new__(cls, days: int, cost: float):
         member = object.__new__(cls)
         member.days = days
         member.cost = cost

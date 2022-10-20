@@ -7,18 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime
 
-import winotify
-
-from backend.high_level.clientela import cliente, qr_code
-from backend.high_level.clientela.abbonamento import Abbonamento
-from backend.high_level.clientela.cliente import Cliente
-from backend.high_level.clientela.documento import Documento
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
-from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_inserimento_manuale import VistaInserimentoManuale
 
 
@@ -28,12 +20,13 @@ class ControllerInserimentoManuale(Controller):
         self.closeView()
         self.previous.enableView()
 
-    def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo, strategy: StrategyConvalida ):
+    def __init__(self, view: VistaInserimentoManuale, previous: Controller, model: Museo, strategy: StrategyConvalida):
         super().__init__(view)
         self.view: VistaInserimentoManuale = view
         self.previous: Controller = previous
         self.model = model
         self.strategy = strategy
+        self.connettiEventi()
 
         # ============================================================================
         # Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
@@ -70,9 +63,10 @@ class ControllerInserimentoManuale(Controller):
 
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()
-        self.strategy.onRicercaClicked(c= self.strategy,id=id)
-        self.closeView()
-        self.previous.enableView()
+        if len(id) == 11:
+            if self.strategy.finalizza(self.previous, id.replace('-', '')):
+                self.closeView()
+                self.previous.enableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()

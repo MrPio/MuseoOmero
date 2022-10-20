@@ -20,12 +20,15 @@ from frontend.view.vista_account import VistaAccount
 
 class ControllerAccount(Controller):
 
-    def __init__(self, view: VistaAccount, previous: Controller, home: Controller, model: Dipendente):
+    def __init__(self, view: VistaAccount, previous: Controller, home: Controller, model: Dipendente,
+                 logout: bool = True):
         super().__init__(view)
         self.view: VistaAccount = view
         self.previous = previous
         self.home = home
         self.model = model
+        self.logout = logout
+        self.connettiEventi()
         self.initializeUi()
 
     def __gotoPrevious(self) -> None:
@@ -62,6 +65,9 @@ class ControllerAccount(Controller):
         self.view.getSessoLabel().setText(self.model.sesso.name)
         self.view.getDataAssunzioneLabel().setText(self.model.data_registrazione.strftime('%d/%m/%Y'))
         self.view.getEmailLabel().setText(self.model.email)
-        if type(self.model.lavoro) is NoneType:
+        if not self.logout:
+            self.view.getLogoutButton().setVisible(False)
+            self.view.setMaximumHeight(self.view.height() - 60)
+        if self.model.lavoro is not None:
             self.view.getDataAssegnazioneLavoroLabel().setText(self.model.lavoro.data_assunzione.strftime('%d/%m/%Y'))
             self.view.getOccupazioneLabel().setText(self.model.lavoro.__class__.__name__)

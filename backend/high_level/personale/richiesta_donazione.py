@@ -14,18 +14,18 @@ from backend.low_level.network.notification import Notification
 
 
 class RichiestaDonazione:
-    def __init__(self, opera: Opera, ubicazioneProvvisoria: Ubicazione,notification: Notification,
+    def __init__(self, opera: Opera, ubicazioneProvvisoria: Ubicazione, notification: Notification,
                  email: str = "", tel: str = ''):
         self.opera = opera
         self.ubicazione = ubicazioneProvvisoria
         self.email_donante = email
         self.telefono_donante = tel
         self.accettata = False
-        self.presa_in_carico=False
-        self.notification:Notification =notification
+        self.presa_in_carico = False
+        self.notification: Notification = notification
 
     def accetta(self, nuovaUbicazione: Ubicazione) -> None:
-        self.presa_in_carico=True
+        self.presa_in_carico = True
         self.accettata = True
         self.opera.ubicazione = nuovaUbicazione
         Museo.getInstance().opere.append(self.opera)
@@ -34,12 +34,12 @@ class RichiestaDonazione:
                       ' nostro museo. La ringraziamo del suo supporto!')
 
     def rifiuta(self) -> None:
-        self.presa_in_carico=True
+        self.presa_in_carico = True
         self.accettata = False
         self.notifica('Siamo spiacenti di comunicarle che la sua donazione'
                       ' è stata rifiutata perché non conforme agli standard '
                       'del nostro museo, può venire a ritirarla in un '
                       'qualunque momento. La ringraziamo del suo supporto!')
 
-    def notifica(self, msg:str) -> None:
-        self.notification.send('Esito richiesta donazione [Museo Omero]',msg)
+    def notifica(self, msg: str) -> None:
+        self.notification.send('Esito richiesta donazione [Museo Omero]', msg)

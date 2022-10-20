@@ -7,12 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import abc
 from datetime import datetime
 
 from backend.high_level.clientela.qr_code import QRCode
-
-import abc
-
 from backend.high_level.clientela.subscriber import Subscriber
 from backend.low_level.pagamenti.pagamento import Pagamento
 from backend.low_level.sicurezza.qr_code_encoding import QRCodeEncoding

@@ -13,4 +13,4 @@ from enum import Enum
 
 
 class Sesso(Enum):
-    MASCHIO,FEMMINA,NON_SPECIFICATO,*_= range(100)
+    MASCHIO, FEMMINA, NON_SPECIFICATO, *_ = range(100)

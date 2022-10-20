@@ -15,7 +15,7 @@ from frontend.view.my_widget import MyWidget
 
 class WidgetAggiungiAllaLista(MyWidget):
 
-    def __init__(self,  parent):
+    def __init__(self, parent):
         super().__init__(UI_DIR + '/aggiungiAllaListaWidget.ui', parent)
 
     def getIcon(self) -> QLabel:

@@ -19,11 +19,11 @@ class TurnoGuida(Evento):
     def __init__(self, dataInizio: datetime, dataFine: datetime, reparto: RepartoMuseo, capienza: int,
                  numeroPrenotati: int = 0):
         super().__init__(dataInizio, dataFine)
-        self.durata = (dataFine - dataInizio).seconds/60
+        self.durata = (dataFine - dataInizio).seconds / 60
         self.reparto: RepartoMuseo = reparto
         self.capienza = capienza
         self.numero_prenotati = numeroPrenotati
-        self.guida: OperatoreAlPubblico|None = None
+        self.guida: OperatoreAlPubblico | None = None
 
     def isPieno(self) -> bool:
         return self.numero_prenotati >= self.capienza

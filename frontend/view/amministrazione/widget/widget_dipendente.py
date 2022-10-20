@@ -7,16 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QLabel, QPushButton
 
 from frontend.ui.location import UI_DIR
-from frontend.view.my_main_window import MyMainWindow
 from frontend.view.my_widget import MyWidget
 
 
 class WidgetDipendente(MyWidget):
-    def __init__(self,parent):
-        super().__init__(UI_DIR + '/dipendenteWidget.ui',parent)
+    def __init__(self, parent):
+        super().__init__(UI_DIR + '/dipendenteWidget.ui', parent)
 
     def getNomeLabel(self) -> QLabel:
         return self.nomeLabel
@@ -33,5 +32,5 @@ class WidgetDipendente(MyWidget):
     def getSelezionaButton(self) -> QPushButton:
         return self.selezionaButton
 
-    def getOccupatoLabel(self)->QLabel:
-        return  self.occupatoLabel
+    def getOccupatoLabel(self) -> QLabel:
+        return self.occupatoLabel

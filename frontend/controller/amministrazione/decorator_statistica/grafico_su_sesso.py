@@ -57,8 +57,8 @@ class GraficoSuSesso(Grafico):
         self.chart.setTheme(QChart.ChartThemeLight)
         self.series.clicked.connect(__onSeriesClicked)
         self.series.setLabelsPosition(QtChart.QPieSlice.LabelInsideHorizontal)
-        colors=['#fee84c','#ff5965','#39618d']
-        for slice,color in zip(self.series.slices(),colors):
+        colors = ['#fee84c', '#ff5965', '#39618d']
+        for slice, color in zip(self.series.slices(), colors):
             slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
             slice.setLabelFont(QFont('Lato', 14, QFont.Light))
             slice.setBrush(QColor(color))

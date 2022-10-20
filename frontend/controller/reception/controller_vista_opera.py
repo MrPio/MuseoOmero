@@ -79,14 +79,14 @@ class ControllerVistaOpera(Controller):
         self.view.getImmagineLabel().mousePressEvent = lambda _: self.__startTimer()
         self.view.getImmagineLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
 
-
     def initializeUi(self) -> None:
         self.view.getTitoloLabel().setText(self.model.titolo)
         self.view.getAutoreLabel().setText(self.model.autore)
 
         if self.model.composizione is not None:
             self.view.getDimensioniLabel().setText('{} x {} x {} cm'.format(
-                self.model.composizione.altezza_cm, self.model.composizione.larghezza_cm,self.model.composizione.profondita_cm))
+                self.model.composizione.altezza_cm, self.model.composizione.larghezza_cm,
+                self.model.composizione.profondita_cm))
 
         self.view.getPeriodoLabel().setText(self.model.periodo.name.lower())
         if type(self.model.ubicazione) is not NoneType:
@@ -102,9 +102,9 @@ class ControllerVistaOpera(Controller):
                                self.model.immagine.size[1], QImage.Format_RGBA8888)
                 self.view.getImmagineLabel().setPixmap(QPixmap.fromImage(image))
                 self.view.getImmagineLabel().setMargin(10)
-                new_width=image.width()/image.height()*self.view.getImmagineLabel().maximumHeight()
+                new_width = image.width() / image.height() * self.view.getImmagineLabel().maximumHeight()
                 self.view.getImmagineLabel().setMaximumWidth(int(new_width))
-                self.view.getImmagineLabel().setGeometry(int(245-new_width/2),534,int(new_width),181)
+                self.view.getImmagineLabel().setGeometry(int(245 - new_width / 2), 534, int(new_width), 181)
 
             except Exception as e:
                 print(e)
@@ -122,14 +122,13 @@ class ControllerVistaOpera(Controller):
 
     def __onDropZoneClicked(self) -> None:
         if self.model.immagine is not None and time.time_ns() - self.hold_start > 200 * 1000000:
-            path=tempfile.gettempdir()+'/photo.jpg'
+            path = tempfile.gettempdir() + '/photo.jpg'
             self.model.immagine.convert('RGB').save(path)
             os.startfile(path)
         else:
             root = tk.Tk()
             root.withdraw()
-            path=filedialog.askopenfilename()
+            path = filedialog.askopenfilename()
             if any(extension in path.lower() for extension in ['.ico', '.png', '.jpg', '.bmp']):
                 self.model.immagine = Image.open(path).convert("RGBA")
                 self.initializeUi()
-

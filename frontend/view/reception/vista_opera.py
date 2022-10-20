@@ -1,4 +1,3 @@
-
 #######################################################
 # 
 # VistaOpera.py
@@ -43,12 +42,11 @@ class VistaOpera(MyMainWindow):
     def getUbicazioneLabel(self) -> QLabel:
         return self.ubicazioneLabel
 
-    def getCambiaUbicazioneButton(self)->QPushButton:
+    def getCambiaUbicazioneButton(self) -> QPushButton:
         return self.cambiaUbicazioneButton
-
 
     def getCostoLabel(self) -> QLabel:
         return self.costoLabel
 
-    def getEliminaButton(self)->QPushButton:
+    def getEliminaButton(self) -> QPushButton:
         return self.eliminaButton

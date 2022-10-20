@@ -12,7 +12,7 @@ from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.str
 
 
 class StrategyWidgetGestisciPosto(StrategyWidgetPostoLavoro):
-    def initializeUi(self, c : 'ControllerWidgetPostoLavoro') -> None:
+    def initializeUi(self, c: 'ControllerWidgetPostoLavoro') -> None:
         c.view.getAssegnaPostoButton().setVisible(False)
         c.view.getModificaButton().setVisible(True)
         c.view.getRimuoviButton().setVisible(True)

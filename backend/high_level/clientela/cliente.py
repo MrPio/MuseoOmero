@@ -17,13 +17,13 @@ from backend.high_level.clientela.visitatore import Visitatore
 
 class Cliente(Visitatore):
     def __init__(self, nome: str, cognome: str, codFis: str, prov: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
-                 nasc: datetime = None, email: str = "", tel: str = '',biglietti:list[Biglietto]=None,
-                 abbonamenti:list[Abbonamento]=None):
-        super().__init__(prov, sesso, nasc,biglietti)
-        self.nome=nome
-        self.cognome=cognome
-        self.codice_fiscale=codFis
-        self.email=email
-        self.telefono=tel
-        self.abbonamenti:list[Abbonamento]=abbonamenti if abbonamenti is not None else []
-        self.data_registrazione=datetime.now()
+                 nasc: datetime = None, email: str = "", tel: str = '', biglietti: list[Biglietto] = None,
+                 abbonamenti: list[Abbonamento] = None):
+        super().__init__(prov, sesso, nasc, biglietti)
+        self.nome = nome
+        self.cognome = cognome
+        self.codice_fiscale = codFis
+        self.email = email
+        self.telefono = tel
+        self.abbonamenti: list[Abbonamento] = abbonamenti if abbonamenti is not None else []
+        self.data_registrazione = datetime.now()

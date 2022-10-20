@@ -16,10 +16,19 @@ from backend.low_level.pagamenti.nexi_api import NexiApi
 
 class Abbonamento(Documento):
 
-    def __init__(self, tipo: TipoAbbonamento=TipoAbbonamento.MENSILE, dataRilascio: datetime = None):
+    def __init__(self, tipo: TipoAbbonamento = TipoAbbonamento.MENSILE, dataRilascio: datetime = None):
         super().__init__(NexiApi(), dataRilascio)
         self.date_rinnovo = {}
-        self.date_rinnovo[self.data_rilascio]=tipo
+        self.date_rinnovo[self.data_rilascio] = tipo
+
+    @property
+    def tipo(self):
+        return list(self.date_rinnovo.values())[-1]
+
+    @tipo.setter
+    def tipo(self, value):
+        self.date_rinnovo[list(self.date_rinnovo.keys())[-1]] = value
+        self.notify()
 
     def calcolaCosto(self) -> float:
         return list(self.date_rinnovo.items())[-1][1].cost
@@ -35,5 +44,5 @@ class Abbonamento(Documento):
         return list(self.date_rinnovo.items())[-1][1].days - (datetime.now() - list(self.date_rinnovo.keys())[-1]).days
 
     def rinnova(self, tipo: TipoAbbonamento) -> None:
-        self.date_rinnovo[datetime.now()]=tipo
+        self.date_rinnovo[datetime.now()] = tipo
         self.acquista()

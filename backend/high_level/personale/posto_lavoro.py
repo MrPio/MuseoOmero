@@ -10,10 +10,9 @@
 import abc
 
 
-
 class PostoLavoro(abc.ABC):
-    def __init__(self, nome:str , piano: int, numPostazioni: int, descrizione: str = ''):
-        self.nome=nome
+    def __init__(self, nome: str, piano: int, numPostazioni: int, descrizione: str = ''):
+        self.nome = nome
         self.piano = piano
         self.numero_postazioni_totali = numPostazioni
         self.descrizione = descrizione
@@ -30,12 +29,13 @@ class PostoLavoro(abc.ABC):
                 dipendente.licenzia(notaLicensiamento)
                 return True
         return False
+
     @abc.abstractmethod
     def promuovi(self, dipendente: 'Dipendente') -> bool:
         pass
 
-    def rimuovi(self,museo:'Museo'):
+    def rimuovi(self, museo: 'Museo'):
         for dipendente in museo.dipendenti:
             if dipendente.posto_lavoro is self:
-                dipendente.posto_lavoro=None
+                dipendente.posto_lavoro = None
         museo.posti_lavoro.remove(self)

@@ -8,7 +8,6 @@
 # 
 #######################################################
 
-from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.controller_modifica_turno_guida import ControllerModificaTurnoGuida
@@ -38,15 +37,17 @@ class ControllerWidgetTurnoGuida(Controller):
         # rimuovo il turno dal museo (db)
         Museo.getInstance().turni_guida.remove(self.model)
         self.parent.initializeUi()
+
     def __onModificaButton(self) -> None:
-        self.next=ControllerModificaTurnoGuida(
+        self.next = ControllerModificaTurnoGuida(
             view=VistaModificaTurnoGuida(),
             previous=self.parent,
             model=self.model,
         )
-        self.next.guida=self.model.guida
+        self.next.guida = self.model.guida
         self.next.showView()
         self.parent.disableView()
+
     def connettiEventi(self) -> None:
         self.view.getRimuoviButton().clicked.connect(self.__onRimuoviButton)
         self.view.getModificaButton().clicked.connect(self.__onModificaButton)
@@ -61,4 +62,3 @@ class ControllerWidgetTurnoGuida(Controller):
         ))
         self.view.getPostiDisponibiliLabel().setText(
             'posti liberi {}/{}'.format(self.model.numero_prenotati, self.model.capienza))
-

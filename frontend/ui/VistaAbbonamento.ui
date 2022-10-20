@@ -246,6 +246,9 @@ font: 14pt &quot;Lato&quot;;</string>
       <bold>false</bold>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLabel{
 left: 679px;
@@ -269,7 +272,7 @@ background-color: rgba(173, 237, 255, 0);
      <number>0</number>
     </property>
    </widget>
-   <widget class="QLabel" name="qrCodeImage">
+   <widget class="QLabel" name="qrCodeIcon">
     <property name="geometry">
      <rect>
       <x>175</x>
@@ -277,6 +280,9 @@ background-color: rgba(173, 237, 255, 0);
       <width>180</width>
       <height>180</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QLabel{
@@ -720,7 +726,7 @@ background-color: rgba(255, 255, 255,0);
    <zorder>maximizeButton</zorder>
    <zorder>titoloLabel</zorder>
    <zorder>previousButton</zorder>
-   <zorder>qrCodeImage</zorder>
+   <zorder>qrCodeIcon</zorder>
    <zorder>label_5</zorder>
    <zorder>label_4</zorder>
    <zorder>label_6</zorder>

@@ -7,12 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-import winotify
-from datetime import datetime
+from datetime import timedelta
 
 from backend.high_level.museo import Museo
 from frontend.controller.segreteria.strategy_convalida.strategy_convalida import StrategyConvalida
-from frontend.ui.location import UI_DIR
 
 
 class StrategyConvalidaBiglietto(StrategyConvalida):
@@ -20,47 +18,23 @@ class StrategyConvalidaBiglietto(StrategyConvalida):
         self.biglietto: 'Biglietto' | None = None
         self.model = Museo.getInstance()
 
-    def initializeUi(self,c : 'ControllerConvalida') -> None:
+    def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('HomeReception ➜ ConvalidaBiglietto')
 
-    def finalizza(self,c : 'ControllerConvalida') -> None:
-        c.strategy.biglietto = self.biglietto
-
-    def onRicercaClicked(self, c: 'ControllerConvalida', id: str) -> None:
-        for visitatore in  self.model.visitatori:
+    def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
+        for visitatore in self.model.visitatori:
             for biglietto in visitatore.biglietti:
                 if id == biglietto.qr_code.id:
-                    #self..finalizza(abbonamento)
+                    esito = biglietto.convalida()
+                    c.notifica(
+                        titolo='Successo' if esito else 'Attenzione!',
+                        contenuto='Convalida avvenuta con successo' if esito
+                        else f'Biglietto scaduto il '
+                             f'{(biglietto.data_rilascio + timedelta(days=1)).strftime("%Y/%m/%d %H:%M")}' if biglietto.isScaduto()
+                        else 'Biglietto non pagato!'
+                    )
+                    return True
 
-
-
-                    if (biglietto.date_convalida)==0:
-                        titolo = "Errore!"
-                        messaggio="Il biglietto è già stato convalidato in data "+str(biglietto.date_convalida[0])+"."
-                    elif(((datetime.now() - biglietto.data_rilascio).days)==0):
-                        biglietto.convalida()
-                        titolo = "Biglietto trovato!"
-                        messaggio="Biglietto convalidato con successo."
-                    else:
-                        titolo='Biglietto scaduto!'
-                        messaggio="Il biglietto è scaduto il giorno "+str(biglietto.data_rilascio.date())+"."
-
-
-                    winotify.Notification(
-                        app_id='Museo Omero',
-                        title=titolo,
-                        msg=messaggio,
-                        icon=UI_DIR + '/ico/museum_white.ico',
-                        duration='short',
-                    ).show()
-
-                    return
-
-        winotify.Notification(
-            app_id='Museo Omero',
-            title='Biglietto non trovato',
-            msg='Spiacenti, non è stato trovato alcun biglietto relativo al codice inserito.',
-            icon=UI_DIR + '/ico/museum_white.ico',
-            duration='short',
-        ).show()
-        return
+        c.notifica('Biglietto non trovato',
+                   'Spiacenti, non è stato trovato alcun biglietto relativo al codice inserito.')
+        return False

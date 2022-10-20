@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 #
 #######################################################
-from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
+from PyQt5.QtWidgets import QLabel
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget

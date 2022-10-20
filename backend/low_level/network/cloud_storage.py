@@ -16,7 +16,7 @@ class CloudStorage(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def upload(self, path: str, filename: str,cloudFolder:str) -> bool:
+    def upload(self, path: str, filename: str, cloudFolder: str) -> bool:
         pass
 
     @abc.abstractmethod
@@ -26,4 +26,3 @@ class CloudStorage(abc.ABC):
     @abc.abstractmethod
     def deleteFile(self, cloudPath: str) -> bool:
         pass
-

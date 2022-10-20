@@ -7,9 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtGui import QPixmap
-
 import abc
+
+from PyQt5.QtGui import QPixmap
 
 
 class StrategyAggiungiAllaLista(abc.ABC):

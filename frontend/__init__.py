@@ -15,12 +15,14 @@ from frontend.controller.controller_home import ControllerHome
 from frontend.controller.reception.controller_acquisto_biglietto import ControllerAcquistoBiglietto
 from frontend.controller.reception.controller_home_reception import ControllerHomeReception
 from frontend.controller.reception.controller_ricerca_opera import ControllerRicercaOpera
+from frontend.controller.segreteria.controller_home_segreteria import ControllerHomeSegreteria
 from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
 from frontend.view.amministrazione.vista_home_amministrazione import VistaHomeAmministrazione
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
 from frontend.view.reception.vista_home_reception import VistaHomeReception
 from frontend.view.reception.vista_ricerca_opera import VistaRicercaOpera
+from frontend.view.segreteria.vista_home_segreteria import VistaHomeSegreteria
 from frontend.view.vista_home import VistaHome
 
 
@@ -136,10 +138,10 @@ def startApp():
 
     # MVC
     vista_home = VistaHome()
-    controller_home = ControllerHome(vista_home)
+    # controller_home = ControllerHome(vista_home)
     from backend.high_level.personale.dipendente import Dipendente
-    controller_home = ControllerHomeAmministrazione(VistaHomeAmministrazione(), None,
-                                                    Dipendente('a', 'b', datetime.datetime.now()))
+    controller_home = ControllerHomeSegreteria(VistaHomeSegreteria(), None,
+                                               Dipendente('a', 'b', datetime.datetime.now()))
 
     controller_home.connettiEventi()
     controller_home.showView()

@@ -20,9 +20,11 @@ from backend.low_level.pagamenti.pagamento import Pagamento
 
 class Opera:
 
-    def __init__(self, autore: str='', titolo: str='',
-                 descrizione: str='', immagine: Image|None=None, periodo: PeriodoStorico=PeriodoStorico.PREISTORIA,
-                 reparto: RepartoMuseo=RepartoMuseo.MOSTRA, costo: float = 0, composizione: Composizione =  Composizione(),
+    def __init__(self, autore: str = '', titolo: str = '',
+                 descrizione: str = '', immagine: Image | None = None,
+                 periodo: PeriodoStorico = PeriodoStorico.PREISTORIA,
+                 reparto: RepartoMuseo = RepartoMuseo.MOSTRA, costo: float = 0,
+                 composizione: Composizione = Composizione(),
                  ubicazione: Ubicazione = Ubicazione()):
         self.autore = autore
         self.titolo = titolo
@@ -33,21 +35,21 @@ class Opera:
         self.costo = costo
         self.composizione = composizione
         self.ubicazione = ubicazione
-        self.data_inserimento=datetime.datetime.now()
-        self.data_vendita=None
-        self.data_acquisto=None
+        self.data_inserimento = datetime.datetime.now()
+        self.data_vendita = None
+        self.data_acquisto = None
 
     def vendi(self, pagamento: Pagamento) -> bool:
         if not self.isVendibile():
             return False
-        self.data_vendita=datetime.datetime.now()
+        self.data_vendita = datetime.datetime.now()
         return pagamento.paga(costo=self.costo)
 
     def isVendibile(self):
         return self.reparto == RepartoMuseo.MOSTRA and not self.isVenduta()
 
-    def isVenduta(self)->bool:
+    def isVenduta(self) -> bool:
         return self.data_vendita is not None
 
-    def isAcquistata(self)->bool:
-            return self.data_acquisto is not None
+    def isAcquistata(self) -> bool:
+        return self.data_acquisto is not None

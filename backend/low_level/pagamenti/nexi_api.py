@@ -13,6 +13,6 @@ from backend.low_level.pagamenti.pagamento import Pagamento
 
 
 class NexiApi(Pagamento):
-    def paga(self,costo : float) -> bool:
+    def paga(self, costo: float) -> bool:
         # simulazione embedded
         return random.choices([True, False], [3, 1])

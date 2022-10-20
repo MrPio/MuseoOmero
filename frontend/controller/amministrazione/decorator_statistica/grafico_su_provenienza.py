@@ -28,6 +28,7 @@ class GraficoSuProvenienza(Grafico):
         mese = self.controller.mese_selezionato
         if mese is None:
             return
+
         def __onSeriesClicked(slice: QPieSlice):
             slice.setExploded(exploded=not slice.isExploded())
             slice.setLabelVisible(visible=not slice.isLabelVisible())
@@ -37,12 +38,12 @@ class GraficoSuProvenienza(Grafico):
             for biglietto in visitatore.biglietti:
                 for data in biglietto.date_convalida:
                     if data.year == mese.year and data.month == mese.month:
-                        prov=visitatore.provenienza[0:3].upper() if len(visitatore.provenienza) > 2 else visitatore.provenienza.upper()
+                        prov = visitatore.provenienza[0:3].upper() if len(
+                            visitatore.provenienza) > 2 else visitatore.provenienza.upper()
                         if prov in conteggio.keys():
                             conteggio[prov] += 1
                         else:
                             conteggio[prov] = 1
-
 
         self.series = QPieSeries()
 
@@ -66,7 +67,7 @@ class GraficoSuProvenienza(Grafico):
         self.chart.legend().setFont(QFont('Lato', 18, QFont.Light))
         self.chart.legend().detachFromChart()
         self.chart.legend().setMinimumWidth(500)
-        self.chart.legend().setX(110-len(conteggio)*20)
+        self.chart.legend().setX(110 - len(conteggio) * 20)
         self.chart.legend().setY(-20)
         self.chart.legend().update()
         self.chart.setTitle('Grafico su provenienza')

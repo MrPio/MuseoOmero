@@ -12,9 +12,9 @@ from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide imp
 
 
 class StrategyRicercaTurniGuide(StrategyTurniGuide):
-    def initializeUi(self,c : 'ControllerTurniGuide') -> None:
+    def initializeUi(self, c: 'ControllerTurniGuide') -> None:
         c.view.getHeaderLabel().setText('AcquistoBiglietto ➜ CercaGuida')
 
-    def initializeWidgetUi(self,c : controller.ControllerWidgetTurnoGuida) -> None:
+    def initializeWidgetUi(self, c: controller.ControllerWidgetTurnoGuida) -> None:
         c.view.getRimuoviButton().setVisible(False)
         c.view.getModificaButton().setVisible(False)

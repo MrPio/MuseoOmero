@@ -7,8 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from backend.low_level.sicurezza.hashing import Hashing
 import hashlib
+
+from backend.low_level.sicurezza.hashing import Hashing
+
 
 class MD5Hashing(Hashing):
 

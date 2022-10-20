@@ -7,20 +7,19 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from datetime import datetime,timedelta
+from datetime import datetime
 
-import dateutil
 from PyQt5 import sip
 from PyQt5.QtChart import QBarSet, QStackedBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QFont
 from PyQt5.QtWidgets import QVBoxLayout
+from dateutil.relativedelta import relativedelta
 
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.view.amministrazione.vista_report_incassi import VistaReportIncassi
-from dateutil.relativedelta import relativedelta
 
 
 class ControllerVistaReportIncassi(Controller):
@@ -69,16 +68,15 @@ class ControllerVistaReportIncassi(Controller):
         self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
         self.view.getRightArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
 
-
-    def __generaGrafico(self,data) -> None:
-        month= relativedelta(months=1)
-        dates=[(data-month)-month,data-month,data,data+month,(data+month)+month]
-        conti=[self.calcolaContoEconomicoDelMese(data) for data in dates]
-        mesi=['-1','GEN','FEB','MAR','APR','MAG','GIU','LUG','AGO','SET','OTT','NOV','DIC']
-        labels=['Acq. op.','Vend. op.','Abb.','Bigl.']
-        sets=[]
+    def __generaGrafico(self, data) -> None:
+        month = relativedelta(months=1)
+        dates = [(data - month) - month, data - month, data, data + month, (data + month) + month]
+        conti = [self.calcolaContoEconomicoDelMese(data) for data in dates]
+        mesi = ['-1', 'GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU', 'LUG', 'AGO', 'SET', 'OTT', 'NOV', 'DIC']
+        labels = ['Acq. op.', 'Vend. op.', 'Abb.', 'Bigl.']
+        sets = []
         for i in range(len(labels)):
-            set=QBarSet(labels[i])
+            set = QBarSet(labels[i])
             for conto in conti:
                 set.append(conto[i])
             sets.append(set)
@@ -170,7 +168,7 @@ class ControllerVistaReportIncassi(Controller):
         self.view.getBigliettiLabel().setText('+ €{:,.2f}'.format(conto_economico[3]))
         self.view.getRisultatoLabel().setText('€{:,.2f}'.format(risultato))
 
-        def __deleteLayout( layout):
+        def __deleteLayout(layout):
             if layout is not None:
                 while layout.count():
                     item = layout.takeAt(0)
@@ -180,6 +178,7 @@ class ControllerVistaReportIncassi(Controller):
                     else:
                         __deleteLayout(item.layout())
                 sip.delete(layout)
+
         __deleteLayout(self.view.getGraficoFrame().layout())
 
         self.__generaGrafico(data_ricerca)

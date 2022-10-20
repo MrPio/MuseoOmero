@@ -12,11 +12,10 @@ from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_ope
 
 
 class StrategyAcquistaOpera(StrategyAggiungiOpera):
-    def initializeUi(self,c : 'ControllerAggiungiOpera') -> None:
+    def initializeUi(self, c: 'ControllerAggiungiOpera') -> None:
         pass
 
-    def onConfermaClicked(self,c : 'ControllerAggiungiOpera') -> None:
+    def onConfermaClicked(self, c: 'ControllerAggiungiOpera') -> None:
         museo = Museo.getInstance()
         if c.model not in museo.opere:
             museo.opere.append(c.model)
-

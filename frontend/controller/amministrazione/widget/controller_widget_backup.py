@@ -9,7 +9,6 @@
 #######################################################
 from datetime import datetime
 
-from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_backup import WidgetBackup
@@ -17,11 +16,11 @@ from frontend.view.amministrazione.widget.widget_backup import WidgetBackup
 
 class ControllerWidgetBackup(Controller):
 
-    def __init__(self, view: WidgetBackup, date: str,size:str, is_local: bool, is_cloud: bool, parent: Controller):
+    def __init__(self, view: WidgetBackup, date: str, size: str, is_local: bool, is_cloud: bool, parent: Controller):
         super().__init__(view)
         self.view: WidgetBackup = view
         self.date = date
-        self.size=size
+        self.size = size
         self.is_local = is_local
         self.is_cloud = is_cloud
         self.parent = parent

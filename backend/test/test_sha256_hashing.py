@@ -6,7 +6,7 @@ from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
 
 class TestSHA256Hashing(TestCase):
     def setUp(self) -> None:
-        self.hashing:Hashing = SHA256Hashing()
+        self.hashing: Hashing = SHA256Hashing()
         self.plain = 'password_super_segreta'
 
     def test_hash(self):

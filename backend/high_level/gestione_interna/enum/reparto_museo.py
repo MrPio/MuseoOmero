@@ -13,4 +13,4 @@ from enum import Enum
 
 
 class RepartoMuseo(Enum):
-    MUSEO_APERTO,MOSTRA,*_= range(100)
+    MUSEO_APERTO, MOSTRA, *_ = range(100)

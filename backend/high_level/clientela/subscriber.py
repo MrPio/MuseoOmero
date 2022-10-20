@@ -9,7 +9,9 @@
 #######################################################
 
 import abc
+
+
 class Subscriber(abc.ABC):
     @abc.abstractmethod
-    def update(self,) -> None:
+    def update(self, ) -> None:
         pass

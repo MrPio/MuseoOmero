@@ -7,14 +7,13 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QLabel, QPushButton
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget
 
 
 class WidgetBackup(MyWidget):
-
 
     def __init__(self, parent):
         super().__init__(UI_DIR + '/BackupWidget.ui', parent)
@@ -37,5 +36,5 @@ class WidgetBackup(MyWidget):
     def getDownUpButton(self) -> QPushButton:
         return self.downloadButton
 
-    def getSizeLabel(self)->QLabel:
+    def getSizeLabel(self) -> QLabel:
         return self.sizeLabel

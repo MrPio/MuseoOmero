@@ -16,7 +16,7 @@ from backend.low_level.sicurezza.encoding import Encoding
 
 class QRCodeEncoding(Encoding):
 
-    def encode(self, text: str) ->  PIL.Image:
+    def encode(self, text: str) -> PIL.Image:
         '''
         Conversione da testo a QrCode\n
         :param text
@@ -24,7 +24,7 @@ class QRCodeEncoding(Encoding):
         '''
         return qrcode.make(text)
 
-    def decode(self,image : PIL.Image) -> str:
+    def decode(self, image: PIL.Image) -> str:
         '''
         Conversione da QrCode a testo
 
@@ -32,6 +32,3 @@ class QRCodeEncoding(Encoding):
         :return: str
         '''
         return cv2.QRCodeDetector().detectAndDecode(image)[0]
-
-
-

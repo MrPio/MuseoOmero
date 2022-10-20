@@ -18,7 +18,6 @@ class VistaConvalida(MyMainWindow):
     def __init__(self):
         super().__init__(UI_DIR + '/Convalida.ui')
 
-
     def getHeaderLabel(self) -> QLabel:
         return self.headerLabel
 

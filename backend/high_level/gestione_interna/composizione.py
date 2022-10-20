@@ -11,8 +11,8 @@ from backend.high_level.gestione_interna.enum.tipo_opera import TipoOpera
 
 
 class Composizione:
-    def __init__(self, altezzaCm: float=0, larghezzaCm: float=0,
-                 profonditaCm: float=0, pesoGr: float=0, tipo: TipoOpera=TipoOpera.TELA):
+    def __init__(self, altezzaCm: float = 0, larghezzaCm: float = 0,
+                 profonditaCm: float = 0, pesoGr: float = 0, tipo: TipoOpera = TipoOpera.TELA):
         self.tipo_opera = tipo
         self.altezza_cm = altezzaCm
         self.larghezza_cm = larghezzaCm
@@ -32,5 +32,3 @@ class Composizione:
         :return: il valore <b2>float</b2> del volume.
         """
         return self.calcolaArea() * self.profondita_cm
-
-

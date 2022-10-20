@@ -31,8 +31,8 @@ class StatisticaClienti(Statistica):
                     elif type(visitatore) == Cliente:
                         convalide_clienti += 1 if data.year == mese.year and data.month == mese.month else 0
 
-        tot=convalide_visitatori+convalide_clienti
+        tot = convalide_visitatori + convalide_clienti
         self.controller.view.getNumeroVisitatoriLabel().setText(
             'Numero visitatori: {}'.format(str(tot)))
         self.controller.view.getPercentualeAbbonatiLabel().setText(
-            'Percentuale abbonati: {}%'.format(str(round(convalide_clienti/(tot)*100,2) if tot!=0 else 0)))
+            'Percentuale abbonati: {}%'.format(str(round(convalide_clienti / (tot) * 100, 2) if tot != 0 else 0)))

@@ -24,7 +24,6 @@ from frontend.controller.controller import Controller
 from frontend.controller.controller_account import ControllerAccount
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
 from frontend.controller.reception.strategy_turni_guide.strategy_gestisci_turni_guide import StrategyGestisciTurniGuide
-from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_acquisto_opere import VistaAcquistoOpere
 from frontend.view.amministrazione.vista_backups import VistaBackups
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
@@ -72,7 +71,6 @@ class ControllerHomeAmministrazione(Controller):
             home=self.home,
             model=self.dipendente,
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

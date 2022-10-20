@@ -10,7 +10,6 @@
 from frontend.controller.amministrazione.widget.strategy_aggiungi_alla_lista.strategy_aggiungi_alla_lista import \
     StrategyAggiungiAllaLista
 from frontend.controller.controller import Controller
-from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.widget.widget_aggiungi_alla_lista import WidgetAggiungiAllaLista
 
 
@@ -22,7 +21,7 @@ class ControllerWidgetAggiungiAllaLista(Controller):
         self.view: WidgetAggiungiAllaLista = view
         self.parent = parent
         self.strategy = strategy
-        self.strategy.controller=self
+        self.strategy.controller = self
         self.tipo = tipo
         self.initializeUi()
         self.connettiEventi()

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>478</width>
-    <height>616</height>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -246,6 +246,9 @@ font: 14pt &quot;Lato&quot;;</string>
       <bold>false</bold>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLabel{
 left: 679px;
@@ -365,7 +368,7 @@ background-color: rgb(244, 233, 140);
       <x>51</x>
       <y>391</y>
       <width>378</width>
-      <height>201</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
