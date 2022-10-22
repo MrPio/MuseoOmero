@@ -9,10 +9,14 @@
 #######################################################
 from datetime import datetime, timedelta
 
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel
+
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
 from frontend.controller.reception.widget.controller_widget_turno_guida import ControllerWidgetTurnoGuida
+from frontend.ui.location import UI_DIR
 from frontend.view.reception.vista_turni_guide import VistaTurniGuide
 from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
 
@@ -87,10 +91,17 @@ class ControllerTurniGuide(Controller):
 
     def initializeUi(self) -> None:
         self.turni_guida = self.__renderizzaTurniGuida()
+
         # rimuovo tutti i widget
         self.aggiungi_alla_lista = None
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
+
+        if len(self.turni_guida) == 0:
+            label = QLabel('Niente da mostrate qui.', self.view.turniGuideListView)
+            label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
+            label.setAlignment(Qt.AlignCenter)
+            self.view.turniGuideListView.addWidget(label)
         for controller in self.turni_guida:
             self.view.verticalLayout.addWidget(controller.view)
 

@@ -14,15 +14,15 @@ from frontend.controller.segreteria.strategy_convalida.strategy_convalida import
 
 
 class StrategyConvalidaBiglietto(StrategyConvalida):
-    def __init__(self) -> None:
-        self.biglietto: 'Biglietto' | None = None
-        self.model = Museo.getInstance()
+    # def __init__(self) -> None:
+    #     self.biglietto: 'Biglietto' | None = None
+    #     self.model = Museo.getInstance()
 
     def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('HomeReception ➜ ConvalidaBiglietto')
 
     def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
-        for visitatore in self.model.visitatori:
+        for visitatore in Museo.getInstance().visitatori:
             for biglietto in visitatore.biglietti:
                 if id == biglietto.qr_code.id:
                     esito = biglietto.convalida()

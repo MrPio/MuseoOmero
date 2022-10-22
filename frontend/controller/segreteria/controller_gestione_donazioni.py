@@ -7,11 +7,18 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel
+
+from backend.high_level.gestione_interna.ubicazione import Ubicazione
 from backend.high_level.museo import Museo
+from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from backend.high_level.personale.segreteria import Segreteria
+from backend.low_level.network.sms_message import SMSMessage
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.widget.controller_widget_richiesta_donazione import \
     ControllerWidgetRichiestaDonazione
+from frontend.ui.location import UI_DIR
 from frontend.view.segreteria.vista_gestione_donazioni import VistaGestioneDonazioni
 from frontend.view.segreteria.widget.widget_richiesta_donazione import WidgetRichiestaDonazione
 
@@ -28,21 +35,56 @@ class ControllerGestioneDonazioni(Controller):
         self.view: VistaGestioneDonazioni = view
         self.previous = previous
         self.model = model
+
+        Museo.getInstance().posti_lavoro.append(
+            Segreteria(
+                nome='test999',
+                piano=1,
+                numPostazioni=1,
+                sportelli=2,
+                telFisso='000+',
+                descr='',
+                richieste_donazione=[
+                    RichiestaDonazione(
+                        opera=Museo.getInstance().opere[-1],
+                        ubicazioneProvvisoria=Ubicazione(),
+                        notification=SMSMessage('999+'),
+                    )
+                ]
+            )
+        )
         self.connettiEventi()
+        self.initializeUi()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
-        # TODO listView
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
         result = []
 
         for posto_lavoro in self.model.posti_lavoro:
-            if type(posto_lavoro) == Segreteria:
-                for richiesta_donazione in posto_lavoro.richiesta_donazione:
-                    new_widget = WidgetRichiestaDonazione(self.view.scrollAreaWidgetContents)
+            if isinstance(posto_lavoro, Segreteria):
+                for richiesta_donazione in posto_lavoro.richieste_donazione:
+                    if richiesta_donazione.presa_in_carico:
+                        continue
                     result.append(ControllerWidgetRichiestaDonazione(
-                        view=new_widget,
+                        view=WidgetRichiestaDonazione(self.view.getDonazioniListView()),
+                        parent=self,
                         model=richiesta_donazione,
                     ))
-                    return result
+        return result
+
+    def initializeUi(self) -> None:
+        self.richieste_donazioni = self.__renderizzaRichiestaDonazioni()
+
+        # rimuovo tutti i widget
+        for i in reversed(range(self.view.getVerticalLayout().count())):
+            self.view.getVerticalLayout().itemAt(i).widget().setParent(None)
+
+        if len(self.richieste_donazioni)==0:
+            label=QLabel('Niente da mostrate qui.',self.view.getDonazioniListView())
+            label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
+            label.setAlignment(Qt.AlignCenter)
+            self.view.getVerticalLayout().addWidget(label)
+        for controller in self.richieste_donazioni:
+            self.view.getVerticalLayout().addWidget(controller.view)

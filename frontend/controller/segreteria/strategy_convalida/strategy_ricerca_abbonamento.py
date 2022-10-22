@@ -18,43 +18,45 @@ from frontend.controller.segreteria.strategy_convalida.strategy_convalida import
 
 class StrategyRicercaAbbonamento(StrategyConvalida):
 
-    def __init__(self) -> None:
-        self.abbonamento: 'Abbonamento' | None = None
-        self.model = Museo.getInstance()
+    # def __init__(self) -> None:
+    #     self.abbonamento: 'Abbonamento' = None
+    #     self.model = Museo.getInstance()
 
     def initializeUi(self, c: 'ControllerConvalida') -> None:
         from frontend.controller.segreteria.controller_rinnovo_abbonamento import ControllerRinnovoAbbonamento
         from frontend.controller.reception.controller_acquisto_biglietto import ControllerAcquistoBiglietto
         if isinstance(c.previous, ControllerRinnovoAbbonamento):
-            c.view.getHeaderLabel().setText('HomeSegreteria ➜ RHHHHo')
-        elif isinstance(c, ControllerAcquistoBiglietto):
-            c.view.getHeaderLabel().setText('HomeSegreteria ➜ RicercaAbbonamento')
+            c.view.getHeaderLabel().setText('HomeSegreteria ➜ RinnovoAbbonamento')
+        elif isinstance(c.previous, ControllerAcquistoBiglietto):
+            c.view.getHeaderLabel().setText('CompraBiglietto ➜ RicercaAbbonamento')
 
     def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
-        for cliente in self.model.visitatori:
+        for cliente in Museo.getInstance().visitatori:
             if isinstance(cliente, Cliente):
                 for abbonamento in cliente.abbonamenti:
                     if id == abbonamento.qr_code.id:
-                        titolo = "Abbonamento trovato!"
-                        messaggio = ''
-                        if abbonamento.giorniAllaScadenza()>0:
-                            messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà tra" + str(
-                                abbonamento.giorniAllaScadenza()) + " giorni"
-                        elif abbonamento.giorniAllaScadenza() == 0:
-                            messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
-                        elif abbonamento.giorniAllaScadenza() < 0:
-                            titolo = 'Abbonamento scaduto!'
-                            messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nSi prega di rinnovarlo"
-
-                        c.notifica(titolo, messaggio)
+                        # titolo = "Abbonamento trovato!"
+                        # messaggio = ''
+                        # if abbonamento.giorniAllaScadenza()>0:
+                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà tra" + str(
+                        #         abbonamento.giorniAllaScadenza()) + " giorni"
+                        # elif abbonamento.giorniAllaScadenza() == 0:
+                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
+                        # elif abbonamento.giorniAllaScadenza() < 0:
+                        #     titolo = 'Abbonamento scaduto!'
+                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nSi prega di rinnovarlo"
+                        #
+                        # c.notifica(titolo, messaggio)
                         from frontend.controller.segreteria.controller_rinnovo_abbonamento import \
                             ControllerRinnovoAbbonamento
                         from frontend.controller.reception.controller_acquisto_biglietto import \
                             ControllerAcquistoBiglietto
                         if isinstance(c.previous, ControllerRinnovoAbbonamento):
                             c.previous.model = abbonamento
+                            c.previous.showView()
                         elif isinstance(c.previous, ControllerAcquistoBiglietto):
                             c.previous.model.abbonamento = abbonamento
+                        c.previous.showView()
                         c.previous.enableView()
                         c.previous.initializeUi()
                         c.closeView()

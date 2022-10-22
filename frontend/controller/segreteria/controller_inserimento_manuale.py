@@ -68,10 +68,10 @@ class ControllerInserimentoManuale(Controller):
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()
         if len(id) == 11:
-            if self.strategy.finalizza(self.previous, id.replace('-', '')):
-                self.closeView()
-                self.previous.previous.showView()
-                self.previous.enableView()
+            self.strategy.finalizza(self.previous, id.replace('-', ''))
+                # self.closeView()
+                # self.previous.previous.showView()
+                # self.previous.enableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()

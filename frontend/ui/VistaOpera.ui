@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>487</width>
-    <height>880</height>
+    <height>888</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>487</width>
+    <height>888</height>
+   </size>
   </property>
   <property name="cursor">
    <cursorShape>ArrowCursor</cursorShape>
@@ -1058,7 +1064,7 @@ font: 25 italic 14pt &quot;Lato&quot;;</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>809</y>
+      <y>813</y>
       <width>209</width>
       <height>52</height>
      </rect>

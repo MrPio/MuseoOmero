@@ -36,11 +36,12 @@ class ControllerVistaOpera(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
-    def __init__(self, view: VistaOpera, previous: Controller, model: Opera):
+    def __init__(self, view: VistaOpera, previous: Controller, model: Opera,eliminabile:bool=True):
         super().__init__(view)
         self.view: VistaOpera = view
         self.previous = previous
         self.model = model
+        self.eliminabile=eliminabile
 
         self.connettiEventi()
         self.initializeUi()
@@ -80,6 +81,9 @@ class ControllerVistaOpera(Controller):
         self.view.getImmagineLabel().mouseReleaseEvent = lambda _: self.__onDropZoneClicked()
 
     def initializeUi(self) -> None:
+        if not self.eliminabile:
+            self.view.getEliminaButton().setVisible(False)
+            self.view.setMaximumHeight(self.view.height()-80)
         self.view.getTitoloLabel().setText(self.model.titolo)
         self.view.getAutoreLabel().setText(self.model.autore)
 

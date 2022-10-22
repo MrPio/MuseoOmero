@@ -33,13 +33,13 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="titoloLabel">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>57</y>
       <width>461</width>
-      <height>61</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -273,13 +273,13 @@ text-align: center;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size: 16px;
+     <string notr="true">font-size: 20px;
 text-align: left;
 background-color: rgba(255, 255, 255,0);
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; font-style:italic;&quot;&gt;importo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>€ 9.99</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -403,7 +403,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>477</x>
-      <y>63</y>
+      <y>60</y>
       <width>38</width>
       <height>38</height>
      </rect>
@@ -632,10 +632,39 @@ text-align: center;
      <number>-1</number>
     </property>
    </widget>
+   <widget class="QLabel" name="titoloLabel_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>103</y>
+      <width>531</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">left: 802px;
+top: 386px;
+width: 307px;
+height: 19px;
+color: rgba(16, 16, 16);
+background-color: rgba(255, 255, 255,0);
+
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-style:italic;&quot;&gt;Fai click sul codice QR per vedere tutti i dettagli dell'abbonamento&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>label_8</zorder>
    <zorder>label_6</zorder>
    <zorder>label</zorder>
-   <zorder>label_7</zorder>
+   <zorder>titoloLabel</zorder>
    <zorder>dettagliRinnovoLabel</zorder>
    <zorder>durataLabel</zorder>
    <zorder>durataComboBox</zorder>
@@ -650,6 +679,7 @@ text-align: center;
    <zorder>exitButton</zorder>
    <zorder>reduceButton</zorder>
    <zorder>qrCodeImage</zorder>
+   <zorder>titoloLabel_3</zorder>
   </widget>
  </widget>
  <resources/>

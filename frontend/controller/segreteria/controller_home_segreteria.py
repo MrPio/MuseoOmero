@@ -80,6 +80,7 @@ class ControllerHomeSegreteria(Controller):
             view=VistaRinnovoAbbonamento(),
             previous=self,
         )
+        self.showView()
         self.disableView()
 
     def connettiEventi(self) -> None:

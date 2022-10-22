@@ -19,7 +19,7 @@ class VistaRicercaOpera(MyMainWindow):
         super().__init__(UI_DIR + '/VendiOpera.ui')
 
     def getHeaderLabel(self) -> QLabel:
-        return self.headerLabel
+        return self.titoloLabel
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton

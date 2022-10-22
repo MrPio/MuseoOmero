@@ -50,15 +50,15 @@ class ControllerVistaAbbonamento(Controller):
                     self.view.getNomeLabel().setText(cliente.nome)
                     self.view.getCognomeLabel().setText(cliente.cognome)
                     self.view.getCodiceFiscaleLabel().setText(cliente.codice_fiscale)
-                    self.view.getScadenzaLabel() \
-                        .setText('{} ({} giorni '.format(
-                        (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days)).strftime('%d/%m/%Y'),
-                        abs(self.model.giorniAllaScadenza()))
-                                 + 'rimasti)' if self.model.giorniAllaScadenza() > 0 else 'fa)')
+                    data_scadenza = (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days))\
+                        .strftime('%d/%m/%Y')
+                    giorni_rimasti = self.model.giorniAllaScadenza()
+                    self.view.getScadenzaLabel().setText(
+                        f'{data_scadenza} ({abs(giorni_rimasti)} giorni ' + ('rimasti)' if giorni_rimasti > 0 else 'fa)'))
 
-        i = self.model.qr_code.getImage()
-        i = i.convert("RGBA")
-        image = QImage(i.tobytes('raw', 'RGBA'), i.size[0],
-                       i.size[1], QImage.Format_RGBA8888)
-        self.view.getQrCodeImage().setPixmap(QPixmap.fromImage(image))
-        self.view.getQrCodeImage().setMargin(17)
+                    i = self.model.qr_code.getImage()
+                    i = i.convert("RGBA")
+                    image = QImage(i.tobytes('raw', 'RGBA'), i.size[0],
+                    i.size[1], QImage.Format_RGBA8888)
+                    self.view.getQrCodeImage().setPixmap(QPixmap.fromImage(image))
+                    self.view.getQrCodeImage().setMargin(17)
