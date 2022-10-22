@@ -41,10 +41,12 @@ class ControllerAggiungiOpera(Controller):
         self.previous = previous
         self.model = model
         self.strategy: StrategyAggiungiOpera = strategy
-        self.connettiEventi()
-        self.initializeUi()
         self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/blueButton.css', 'r').read())
         self.ubicazione_scelta = False
+        self.previous.disableView()
+        self.connettiEventi()
+        self.showView()
+        self.initializeUi()
 
     def __onAggiungiUbicazioneClicked(self) -> None:
         self.next = ControllerInsericiUbicazione(
@@ -52,8 +54,7 @@ class ControllerAggiungiOpera(Controller):
             previous=self,
             model=self.model.ubicazione,
         )
-        self.next.showView()
-        self.disableView()
+
         self.ubicazione_scelta = True
         self.view.getUbicazioneButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
 
@@ -107,7 +108,7 @@ class ControllerAggiungiOpera(Controller):
         if self.model.immagine is None:
             self.next = ControllerYesNo(VistaYesNo(), None, save_and_exit,
                                         'Sicuro di non voler aggiungere una foto all\'opera?')
-            self.next.showView()
+
         else:
             save_and_exit()
 
@@ -115,6 +116,7 @@ class ControllerAggiungiOpera(Controller):
         self.hold_start = time.time_ns()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.gotoPrevious()
         self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
         self.view.getUbicazioneButton().clicked.connect(self.__onAggiungiUbicazioneClicked)

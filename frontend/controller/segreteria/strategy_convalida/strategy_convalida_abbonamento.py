@@ -22,20 +22,21 @@ class StrategyConvalidaAbbonamento(StrategyConvalida):
     #     self.model = Museo.getInstance()
 
     def initializeUi(self, c: 'ControllerConvalida') -> None:
-        c.view.getHeaderLabel().setText('CompraBiglietto ➜ ConvalidaAbbonamento')
+        c.view.getHeaderLabel().setText('HomeSegreteria ➜ ConvalidaAbbonamento')
 
     def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
-        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, Museo.getInstance().visitatori)):
-            for abbonamento in cliente.abbonamenti:
-                if id == abbonamento.qr_code.id:
-                    c.next = ControllerVistaAbbonamento(
-                        view=VistaAbbonamento(),
-                        previous=c,
-                        model=abbonamento,
-                    )
-                    c.next.showView()
-                    c.disableView()
-                    return True
+        for cliente in Museo.getInstance().visitatori:
+            if isinstance(cliente,Cliente):
+                for abbonamento in cliente.abbonamenti:
+                    if id == abbonamento.qr_code.id:
+                        c.next = ControllerVistaAbbonamento(
+                            view=VistaAbbonamento(),
+                            previous=c,
+                            model=abbonamento,
+                        )
+                        c.next.showView()
+                        c.disableView()
+                        return True
 
         c.notifica('Abbonamento non trovato',
                    'Spiacenti, non è stato trovato alcun abbonamento relativo al codice inserito.')

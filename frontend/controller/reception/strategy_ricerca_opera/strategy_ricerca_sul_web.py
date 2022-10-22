@@ -16,3 +16,5 @@ class StrategyRicercaSulWeb(StrategyRicercaOpera):
 
     def onOperaClicked(self, c: 'ControllerWidgetOpera') -> None:
         pass
+    def initializeWidgetUi(self, c: 'ControllerWidgetOpera'):
+        pass

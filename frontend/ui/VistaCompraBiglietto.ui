@@ -7,14 +7,32 @@
     <x>0</x>
     <y>0</y>
     <width>489</width>
-    <height>554</height>
+    <height>583</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QWidget{
+background:rgb(255, 255, 255);
+border-radius:26px;
+border-color:rgb(104, 194, 253);
+border-style: solid;
+border-width:7;
+}
+QLabel{
+border-width:0;
+font: 16pt &quot;Lato Light&quot;;
+}
+QAbstractItemView {
+    border: 3px solid  rgb(104, 194, 253);  
+border-radius:8px;
+  selection-background-color:  rgb(104, 194, 253);
+margin:-2px;
+text-align:center;
+border-width:5;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton_3">
@@ -190,7 +208,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>116</y>
+      <y>139</y>
       <width>440</width>
       <height>241</height>
      </rect>
@@ -368,7 +386,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>175</y>
+      <y>198</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -406,7 +424,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>24</x>
-      <y>235</y>
+      <y>258</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -444,7 +462,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>14</x>
-      <y>295</y>
+      <y>318</y>
       <width>450</width>
       <height>4</height>
      </rect>
@@ -482,7 +500,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>82</x>
-      <y>130</y>
+      <y>153</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -501,7 +519,7 @@ background-color: rgba(255, 255, 255,0);
     <property name="geometry">
      <rect>
       <x>82</x>
-      <y>190</y>
+      <y>213</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -519,7 +537,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>82</x>
-      <y>310</y>
+      <y>333</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -545,7 +563,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="font">
      <font>
       <family>Lato Light</family>
-      <pointsize>18</pointsize>
+      <pointsize>16</pointsize>
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
@@ -603,7 +621,7 @@ font: 14pt &quot;Lato&quot;;</string>
     <property name="geometry">
      <rect>
       <x>82</x>
-      <y>250</y>
+      <y>273</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -621,7 +639,7 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>242</x>
-      <y>112</y>
+      <y>135</y>
       <width>4</width>
       <height>250</height>
      </rect>
@@ -659,7 +677,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>94</x>
-      <y>394</y>
+      <y>417</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -681,7 +699,7 @@ text-align: center;</string>
     <property name="geometry">
      <rect>
       <x>142</x>
-      <y>376</y>
+      <y>399</y>
       <width>101</width>
       <height>71</height>
      </rect>
@@ -699,24 +717,28 @@ background-color: rgba(255, 255, 255,0);</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>390</y>
+      <y>413</y>
       <width>171</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Lato Light</family>
       <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size: 16px;
+     <string notr="true">font-size: 22px;
 text-align: left;
 background-color: rgba(255, 255, 255,0);
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; font-style:italic;&quot;&gt;importo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>importo</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -726,7 +748,7 @@ background-color: rgba(255, 255, 255,0);
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>480</y>
+      <y>505</y>
       <width>209</width>
       <height>52</height>
      </rect>
@@ -777,7 +799,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>371</y>
+      <y>394</y>
       <width>349</width>
       <height>78</height>
      </rect>
@@ -799,9 +821,9 @@ text-align: center;</string>
    <widget class="QPushButton" name="verificaAbbonamentoButton">
     <property name="geometry">
      <rect>
-      <x>264</x>
-      <y>310</y>
-      <width>178</width>
+      <x>284</x>
+      <y>333</y>
+      <width>150</width>
       <height>36</height>
      </rect>
     </property>
@@ -852,9 +874,9 @@ QPushButton::pressed{
    <widget class="QPushButton" name="cercaGuidaButton">
     <property name="geometry">
      <rect>
-      <x>264</x>
-      <y>250</y>
-      <width>178</width>
+      <x>284</x>
+      <y>273</y>
+      <width>150</width>
       <height>36</height>
      </rect>
     </property>
@@ -906,7 +928,7 @@ QPushButton::pressed{
     <property name="geometry">
      <rect>
       <x>284</x>
-      <y>130</y>
+      <y>153</y>
       <width>150</width>
       <height>30</height>
      </rect>
@@ -990,7 +1012,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>284</x>
-      <y>190</y>
+      <y>213</y>
       <width>150</width>
       <height>30</height>
      </rect>
@@ -1079,7 +1101,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>38</x>
-      <y>310</y>
+      <y>333</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1101,7 +1123,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>38</x>
-      <y>250</y>
+      <y>273</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1123,7 +1145,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>38</x>
-      <y>190</y>
+      <y>213</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1145,7 +1167,7 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>38</x>
-      <y>130</y>
+      <y>153</y>
       <width>34</width>
       <height>34</height>
      </rect>
@@ -1161,6 +1183,28 @@ margin:-3px -3px -3px -10px;
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>14</x>
+      <y>100</y>
+      <width>461</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 20px;
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+</string>
+    </property>
+    <property name="text">
+     <string>Dettagli biglietto</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <zorder>label_3</zorder>
@@ -1194,8 +1238,22 @@ margin:-3px -3px -3px -10px;
    <zorder>label_12</zorder>
    <zorder>label_16</zorder>
    <zorder>label_17</zorder>
+   <zorder>label_19</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tipoBigliettoComboBox</tabstop>
+  <tabstop>tariffaComboBox</tabstop>
+  <tabstop>cercaGuidaButton</tabstop>
+  <tabstop>verificaAbbonamentoButton</tabstop>
+  <tabstop>confermaButton</tabstop>
+  <tabstop>maximizeButton</tabstop>
+  <tabstop>exitButton</tabstop>
+  <tabstop>reduceButton</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_2</tabstop>
+ </tabstops>
  <resources>
   <include location="res.qrc"/>
   <include location="res/res.qrc"/>

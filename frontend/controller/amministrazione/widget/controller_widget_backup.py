@@ -24,6 +24,7 @@ class ControllerWidgetBackup(Controller):
         self.is_local = is_local
         self.is_cloud = is_cloud
         self.parent = parent
+        self.showView()
         self.connettiEventi()
         self.initializeUi()
 
@@ -41,6 +42,7 @@ class ControllerWidgetBackup(Controller):
         self.view.setVisible(False)
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getDownUpButton().clicked.connect(self.__onDownUpButtonClicked)
         self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
 

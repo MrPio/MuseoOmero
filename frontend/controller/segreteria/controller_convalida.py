@@ -31,8 +31,11 @@ class ControllerConvalida(Controller):
         self.previous: Controller = previous
         self.strategy: StrategyConvalida = strategy
         self.next = None
+
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
@@ -42,10 +45,9 @@ class ControllerConvalida(Controller):
             strategy=self.strategy,
         )
         self.next.initializeUi()
-        self.next.showView()
-        self.disableView()
 
     def __onScannerizzaClicked(self) -> None:
+        self.notifica('Attendi', 'Connessione alla webcam in corso...')
         id = QRCode.scannerizza_da_webcam()
 
         if id == '':
@@ -59,6 +61,7 @@ class ControllerConvalida(Controller):
         #     self.previous.enableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getInserisciManualmenteButton().mouseReleaseEvent = lambda _: self.__gotoVistaInserimentoManuale()
         self.view.getScannerizzaButton().mouseReleaseEvent = lambda _: self.__onScannerizzaClicked()
@@ -66,4 +69,3 @@ class ControllerConvalida(Controller):
     def initializeUi(self) -> None:
         self.strategy.initializeUi(self)
         # TODO
-

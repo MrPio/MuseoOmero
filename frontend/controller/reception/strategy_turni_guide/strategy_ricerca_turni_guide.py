@@ -9,6 +9,7 @@
 #######################################################
 import frontend.controller.reception.widget.controller_widget_turno_guida as controller
 from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.ui.location import UI_DIR
 
 
 class StrategyRicercaTurniGuide(StrategyTurniGuide):
@@ -18,3 +19,8 @@ class StrategyRicercaTurniGuide(StrategyTurniGuide):
     def initializeWidgetUi(self, c: controller.ControllerWidgetTurnoGuida) -> None:
         c.view.getRimuoviButton().setVisible(False)
         c.view.getModificaButton().setVisible(False)
+        if c.model.isTerminato():
+            c.view.setEnabled(False)
+            c.view.getSelezionaButton().setStyleSheet(open(UI_DIR + '/css/grayButton.css', 'r').read())
+
+

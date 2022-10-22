@@ -7,6 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import datetime
 
 from PyQt5.QtCore import QTimer
 
@@ -30,14 +31,18 @@ class ControllerBackups(Controller):
         self.previous = previous
         self.model = model
         self.timer = QTimer()
+
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __onBackupOraClicked(self) -> None:
         self.model.make_backup()
         self.initializeUi()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getBackupOraButton().clicked.connect(self.__onBackupOraClicked)
         self.view.getRefreshLabel().mouseReleaseEvent = lambda _: self.__refresh()
@@ -77,6 +82,11 @@ class ControllerBackups(Controller):
         # rimuovo tutti i widget
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
+
+        def sort_by_date(e:ControllerWidgetBackup):
+            return datetime.datetime.strptime(e.date,'%Y-%m-%d %H-%M-%S')
+
+        self.backups.sort(reverse=False, key=sort_by_date)
         for controller in reversed(self.backups):
             self.view.verticalLayout.addWidget(controller.view)
         self.enableView()

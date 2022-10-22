@@ -12,24 +12,32 @@ from backend.high_level.gestione_interna.turno_guida import TurnoGuida
 from backend.high_level.museo import Museo
 from frontend.controller.amministrazione.controller_modifica_turno_guida import ControllerModificaTurnoGuida
 from frontend.controller.controller import Controller
-from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
 from frontend.view.reception.vista_modifica_turno_guida import VistaModificaTurnoGuida
 from frontend.view.reception.widget.widget_turno_guida import WidgetTurnoGuida
 
 
 class ControllerWidgetTurnoGuida(Controller):
 
-    def __init__(self, view: WidgetTurnoGuida, model: TurnoGuida, parent: Controller, strategy: StrategyTurniGuide):
+    def __init__(self, view: WidgetTurnoGuida, model: TurnoGuida, parent: Controller):
         super().__init__(view)
         self.view: WidgetTurnoGuida = view
         self.model = model
         self.parent = parent
-        self.strategy = strategy
-        self.initializeUi()
+        self.selected=False
+
+        self.showView()
         self.connettiEventi()
+        self.initializeUi()
 
     def __onSelezionaClicked(self) -> None:
-        pass  # TODO
+        for controller in self.parent.turni_guida:
+            controller.view.setEnabled(True)
+            controller.selected=False
+            controller.initializeUi()
+        self.view.setEnabled(False)
+        self.selected=True
+        self.initializeUi()
+        self.parent.previous.model.guida=self.model
 
     def __onRimuoviButton(self) -> None:
         # rimuovo il turno alla guida
@@ -45,20 +53,21 @@ class ControllerWidgetTurnoGuida(Controller):
             model=self.model,
         )
         self.next.guida = self.model.guida
-        self.next.showView()
+
         self.parent.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getRimuoviButton().clicked.connect(self.__onRimuoviButton)
         self.view.getModificaButton().clicked.connect(self.__onModificaButton)
         self.view.getSelezionaButton().clicked.connect(self.__onSelezionaClicked)
 
     def initializeUi(self) -> None:
-        self.strategy.initializeWidgetUi(self)
+        self.parent.strategy.initializeWidgetUi(self)
         self.view.getNomeLabel().setText(self.model.guida.dipendente.nome + ' ' + self.model.guida.dipendente.cognome)
         self.view.getOrarioLabel().setText('{}-{}'.format(
             self.model.data_inizio.strftime('%H:%M'),
             self.model.data_fine.strftime('%H:%M'),
         ))
-        self.view.getPostiDisponibiliLabel().setText(
-            'posti liberi {}/{}'.format(self.model.numero_prenotati, self.model.capienza))
+        self.view.getPostiDisponibiliLabel().setText('posti liberi {}/{}'.format(
+            self.model.numero_prenotati+self.selected , self.model.capienza))

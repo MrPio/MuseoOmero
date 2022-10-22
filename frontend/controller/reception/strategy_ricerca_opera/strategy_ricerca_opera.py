@@ -18,3 +18,7 @@ class StrategyRicercaOpera(abc.ABC):
     @abc.abstractmethod
     def onOperaClicked(self, c: 'ControllerWidgetOpera') -> None:
         pass
+
+    @abc.abstractmethod
+    def initializeWidgetUi(self, c: 'ControllerWidgetOpera'):
+        pass

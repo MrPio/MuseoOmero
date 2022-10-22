@@ -36,15 +36,17 @@ class ControllerVistaOpera(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
-    def __init__(self, view: VistaOpera, previous: Controller, model: Opera,eliminabile:bool=True):
+    def __init__(self, view: VistaOpera, previous: Controller, model: Opera, eliminabile: bool = True):
         super().__init__(view)
         self.view: VistaOpera = view
         self.previous = previous
         self.model = model
-        self.eliminabile=eliminabile
+        self.eliminabile = eliminabile
 
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __onCambiaUbicazioneClicked(self) -> None:
         if self.model.ubicazione is None:
@@ -54,8 +56,6 @@ class ControllerVistaOpera(Controller):
             previous=self,
             model=self.model.ubicazione,
         )
-        self.next.showView()
-        self.disableView()
 
     def __onEliminaClicked(self):
         def elimina():
@@ -64,13 +64,12 @@ class ControllerVistaOpera(Controller):
             self.__gotoPrevious()
 
         self.next = ControllerYesNo(VistaYesNo(), self, elimina)
-        self.next.showView()
-        self.disableView()
 
     def __startTimer(self):
         self.hold_start = time.time_ns()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
         self.view.getCambiaUbicazioneButton().clicked.connect(self.__onCambiaUbicazioneClicked)
@@ -83,7 +82,7 @@ class ControllerVistaOpera(Controller):
     def initializeUi(self) -> None:
         if not self.eliminabile:
             self.view.getEliminaButton().setVisible(False)
-            self.view.setMaximumHeight(self.view.height()-80)
+            self.view.setMaximumHeight(self.view.height() - 80)
         self.view.getTitoloLabel().setText(self.model.titolo)
         self.view.getAutoreLabel().setText(self.model.autore)
 

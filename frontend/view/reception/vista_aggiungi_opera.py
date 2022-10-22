@@ -18,6 +18,8 @@ class VistaAggiungiOpera(MyMainWindow):
     def __init__(self):
         super().__init__(UI_DIR + '/RiceviDonazione.ui')
 
+    def getHeaderLabel(self) -> QLabel:
+        return self.titoloLabel
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 

@@ -9,6 +9,9 @@
 #######################################################
 from datetime import datetime
 
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel
+
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.museo import Museo
 from backend.high_level.personale.amministrazione import Amministrazione
@@ -20,6 +23,7 @@ from frontend.controller.amministrazione.widget.controller_widget_posto_lavoro i
 from frontend.controller.amministrazione.widget.strategy_widget_posto_lavoro.strategy_widget_assegna_posto import \
     StrategyWidgetAssegnaPosto
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_assumi import VistaAssumi
 from frontend.view.amministrazione.widget.widget_posto_lavoro import WidgetPostoLavoro
 
@@ -38,6 +42,11 @@ class ControllerAssumi(Controller):
         self.model = model
         self.lavoro_scelto: PostoLavoro | None = None
         self.posti_lavoro: list[ControllerWidgetPostoLavoro] = []
+
+        self.previous.disableView()
+        self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onConfermaClicked(self) -> None:
         birth = None
@@ -70,26 +79,12 @@ class ControllerAssumi(Controller):
             self.previous.initializeUi()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
         self.view.getImpiegoComboBox().currentTextChanged.connect(self.initializeUi)
 
     def __renderizzaPostiLavoro(self) -> list[ControllerWidgetPostoLavoro]:
-        result = []
-        for posto_lavoro in self.model.posti_lavoro:
-            new_widget = WidgetPostoLavoro(self.view.scrollAreaWidgetContents)
-
-            result.append(ControllerWidgetPostoLavoro(
-                view=new_widget,
-                model=posto_lavoro,
-                parent=self,
-                strategy=StrategyWidgetAssegnaPosto(),
-            ))
-        return result
-
-    def initializeUi(self) -> None:
-        if len(self.posti_lavoro) == 0:
-            self.posti_lavoro = self.__renderizzaPostiLavoro()
         selected = self.view.getImpiegoComboBox().currentText()
         matches = {
             'Operatore': Reception,
@@ -97,11 +92,31 @@ class ControllerAssumi(Controller):
             'Amministratore': Amministrazione,
         }
         if not selected in matches.keys():
-            raise 'ControllerAssumi -> chiave posto lavoro [{}] non trovata'.format(selected)
+            raise f'ControllerAssumi -> chiave posto lavoro [{selected}] non trovata'
+
+        result = []
+        for posto_lavoro in self.model.posti_lavoro:
+            if type(posto_lavoro) != matches[selected]:
+                continue
+            result.append(ControllerWidgetPostoLavoro(
+                view=WidgetPostoLavoro(self.view.scrollAreaWidgetContents),
+                model=posto_lavoro,
+                parent=self,
+                strategy=StrategyWidgetAssegnaPosto(),
+            ))
+        return result
+
+    def initializeUi(self) -> None:
+        self.posti_lavoro = self.__renderizzaPostiLavoro()
+
         # rimuovo tutti i widget
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
 
+        if len(self.posti_lavoro) == 0:
+            label = QLabel('Niente da mostrate qui.', self.view.scrollAreaWidgetContents)
+            label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
+            label.setAlignment(Qt.AlignCenter)
+            self.view.verticalLayout.addWidget(label)
         for controller in self.posti_lavoro:
-            if type(controller.model) == matches[selected]:
-                self.view.verticalLayout.addWidget(controller.view)
+            self.view.verticalLayout.addWidget(controller.view)

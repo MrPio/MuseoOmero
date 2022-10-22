@@ -10,11 +10,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel
 
-from backend.high_level.gestione_interna.ubicazione import Ubicazione
 from backend.high_level.museo import Museo
-from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from backend.high_level.personale.segreteria import Segreteria
-from backend.low_level.network.sms_message import SMSMessage
 from frontend.controller.controller import Controller
 from frontend.controller.segreteria.widget.controller_widget_richiesta_donazione import \
     ControllerWidgetRichiestaDonazione
@@ -36,27 +33,30 @@ class ControllerGestioneDonazioni(Controller):
         self.previous = previous
         self.model = model
 
-        Museo.getInstance().posti_lavoro.append(
-            Segreteria(
-                nome='test999',
-                piano=1,
-                numPostazioni=1,
-                sportelli=2,
-                telFisso='000+',
-                descr='',
-                richieste_donazione=[
-                    RichiestaDonazione(
-                        opera=Museo.getInstance().opere[-1],
-                        ubicazioneProvvisoria=Ubicazione(),
-                        notification=SMSMessage('999+'),
-                    )
-                ]
-            )
-        )
+        # Museo.getInstance().posti_lavoro.append(
+        #     Segreteria(
+        #         nome='test999',
+        #         piano=1,
+        #         numPostazioni=1,
+        #         sportelli=2,
+        #         telFisso='000+',
+        #         descr='',
+        #         richieste_donazione=[
+        #             RichiestaDonazione(
+        #                 opera=Museo.getInstance().opere[-1],
+        #                 ubicazioneProvvisoria=Ubicazione(),
+        #                 notification=SMSMessage('999+'),
+        #             )
+        #         ]
+        #     )
+        # )
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
 
     def __renderizzaRichiestaDonazioni(self) -> list[ControllerWidgetRichiestaDonazione]:
@@ -81,8 +81,8 @@ class ControllerGestioneDonazioni(Controller):
         for i in reversed(range(self.view.getVerticalLayout().count())):
             self.view.getVerticalLayout().itemAt(i).widget().setParent(None)
 
-        if len(self.richieste_donazioni)==0:
-            label=QLabel('Niente da mostrate qui.',self.view.getDonazioniListView())
+        if len(self.richieste_donazioni) == 0:
+            label = QLabel('Niente da mostrate qui.', self.view.getDonazioniListView())
             label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
             label.setAlignment(Qt.AlignCenter)
             self.view.getVerticalLayout().addWidget(label)

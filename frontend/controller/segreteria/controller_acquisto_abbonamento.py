@@ -32,7 +32,10 @@ class ControllerAcquistoAbbonamento(Controller, Subscriber):
         self.previous = previous
         self.model = model
         self.model.subscribe(self)
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onConfermaClicked(self) -> None:
         data_nascita = None
@@ -48,7 +51,7 @@ class ControllerAcquistoAbbonamento(Controller, Subscriber):
             if not self.model.acquista():
                 self.notifica('Attenzione', 'Si è verificato un errore nel pagamento, si prega di riprovare...')
                 return
-            self.notifica('Successo', f'Abbonamento acquistato con successo! \r\n ID --> {self.model.qr_code.id}')
+            self.notifica('Abbonamento acquistato', f'Abbonamento acquistato con successo! \r\n ID --> {self.model.qr_code.id}')
 
             # Registro il nuovo cliente con tanto di abbonamento nel sistema.
             nuovo_cliente = Cliente(
@@ -71,6 +74,7 @@ class ControllerAcquistoAbbonamento(Controller, Subscriber):
         self.model.tipo = TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()]
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
         self.view.getDurataComboBox().currentTextChanged.connect(self.__onDurataChanged)

@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtGui import QPixmap
+
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.amministrazione.controller_acquisto_opere import ControllerAcquistoOpere
@@ -40,12 +42,17 @@ class ControllerHomeAmministrazione(Controller):
         self.view: VistaHomeAmministrazione = view
         self.home = home
         self.dipendente = dipendente
+        if dipendente is None:
+            self.view.getAccountIcon().setPixmap(QPixmap(":/icons/arrow_back_FILL1_wght700_GRAD200_opsz48_risultato.png"))
+
+        self.connettiEventi()
         self.initializeUi()
+        self.showView()
+        self.home.disableView()
 
     def initializeUi(self) -> None:
-        if self.dipendente.autogenerato:
-            Controller.notifica('Primo Accesso',
-                                'Benvenuto! Per favore, prima di iniziare l\'utilizzo del software registra i dipendenti')
+        if self.dipendente is not None and self.dipendente.autogenerato:
+            self.notifica('Primo Accesso','Benvenuto! Per favore, prima di iniziare l\'utilizzo del software registra i dipendenti')
             for el in [
                 self.view.getGestisciBackupsButton(),
                 self.view.getAcquistaOpereButton(),
@@ -56,16 +63,19 @@ class ControllerHomeAmministrazione(Controller):
                 self.view.getVisualizzaStatisticheButton()
             ]:
                 el.setEnabled(False)
-
+    def __gotoPrevious(self) -> None:
+        self.closeView()
+        self.home.enableView()
     def __gotoVistaAccount(self) -> None:
+        if self.dipendente is None:
+            self.__gotoPrevious()
+            return
         self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             model=self.dipendente,
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaGestioneDipendenti(self) -> None:
         self.next = ControllerGestioneDipendenti(
@@ -74,8 +84,6 @@ class ControllerHomeAmministrazione(Controller):
             model=Museo.getInstance(),
             strategy=StrategyGestisciDipendenti()
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoGestionePostiLavoro(self) -> None:
         self.next = ControllerGestionePostiLavoro(
@@ -83,9 +91,6 @@ class ControllerHomeAmministrazione(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaGestioneTurniGuida(self) -> None:
         self.next = ControllerTurniGuide(
@@ -94,8 +99,6 @@ class ControllerHomeAmministrazione(Controller):
             model=Museo.getInstance(),
             strategy=StrategyGestisciTurniGuide(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaGestioneMostre(self) -> None:
         self.next = ControllerGestioneMostre(
@@ -103,18 +106,12 @@ class ControllerHomeAmministrazione(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaStatistiche(self) -> None:
         self.next = ControllerVistaStatistiche(
             view=VistaStatistiche(),
             previous=self,
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaReportIncassi(self) -> None:
         self.next = ControllerVistaReportIncassi(
@@ -122,9 +119,6 @@ class ControllerHomeAmministrazione(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaAcquistaOpere(self) -> None:
         self.next = ControllerAcquistoOpere(
@@ -132,9 +126,6 @@ class ControllerHomeAmministrazione(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaBackups(self) -> None:
         self.next = ControllerBackups(
@@ -142,11 +133,9 @@ class ControllerHomeAmministrazione(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
         self.view.getGestisciDipendentiButton().mouseReleaseEvent = lambda _: self.__gotoVistaGestioneDipendenti()
         self.view.getGestisciStruttureButton().mouseReleaseEvent = lambda _: self.__gotoGestionePostiLavoro()

@@ -7,8 +7,10 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
 import random
 import string
+import tempfile
 
 import cv2
 from PIL.Image import Image
@@ -50,3 +52,4 @@ class QRCode:
 
     def getImage(self) -> Image:
         return self.encoding.encode(self.id)
+

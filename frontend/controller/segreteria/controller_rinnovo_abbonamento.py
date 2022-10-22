@@ -27,20 +27,21 @@ class ControllerRinnovoAbbonamento(Controller):
         self.previous.initializeUi()
         self.previous.enableView()
 
-    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento | None ):
+    def __init__(self, view: VistaRinnovoAbbonamento, previous: Controller, model: Abbonamento | None):
         super().__init__(view)
         self.view: VistaRinnovoAbbonamento = view
         self.previous = previous
         self.model = model
         self.hideView()
         self.__gotoVistaConvalida()
-        # self.initializeUi()
         self.connettiEventi()
+        # self.showView()
+        # self.initializeUi()
 
     def __onConfermaClicked(self) -> None:
-        tipo=TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()]
+        tipo = TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()]
         self.model.rinnova(tipo)
-        self.notifica('Abbonamento Rinnovato',f'L\'abbonamento è ora valido per i prossimi {tipo.days} giorni')
+        self.notifica('Abbonamento Rinnovato', f'L\'abbonamento è ora valido per i prossimi {tipo.days} giorni')
         self.closeView()
         self.previous.enableView()
 
@@ -50,8 +51,6 @@ class ControllerRinnovoAbbonamento(Controller):
             previous=self,
             strategy=StrategyRicercaAbbonamento(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaAbbonamento(self) -> None:
         self.next = ControllerVistaAbbonamento(
@@ -59,8 +58,6 @@ class ControllerRinnovoAbbonamento(Controller):
             previous=self,
             model=self.model,
         )
-        self.next.showView()
-        self.disableView()
 
     def __onDurataChanged(self) -> None:
         """
@@ -68,13 +65,14 @@ class ControllerRinnovoAbbonamento(Controller):
         dell'attributo 'tipo' dell'abbonamento anche se poi l'operazione può essere annullata
         """
         self.view.getImportoTotaleLabel().setText(
-            '€ '+str(TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()].cost))
+            '€ ' + str(TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()].cost))
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
         self.view.getDurataComboBox().currentTextChanged.connect(self.__onDurataChanged)
-        self.view.getQrCodeImage().mouseReleaseEvent=lambda _:self.__gotoVistaAbbonamento()
+        self.view.getQrCodeImage().mouseReleaseEvent = lambda _: self.__gotoVistaAbbonamento()
 
     def initializeUi(self) -> None:
         if self.model is None:

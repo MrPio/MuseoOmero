@@ -31,10 +31,13 @@ class ControllerVistaAbbonamento(Controller):
         self.view: VistaAbbonamento = view
         self.previous = previous
         self.model = model
-        self.initializeUi()
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getQrCodeImage().mouseReleaseEvent = lambda _: self.__onQrCodeClicked()
 
@@ -50,15 +53,16 @@ class ControllerVistaAbbonamento(Controller):
                     self.view.getNomeLabel().setText(cliente.nome)
                     self.view.getCognomeLabel().setText(cliente.cognome)
                     self.view.getCodiceFiscaleLabel().setText(cliente.codice_fiscale)
-                    data_scadenza = (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days))\
+                    data_scadenza = (self.model.data_rilascio + datetime.timedelta(days=self.model.tipo.days)) \
                         .strftime('%d/%m/%Y')
                     giorni_rimasti = self.model.giorniAllaScadenza()
                     self.view.getScadenzaLabel().setText(
-                        f'{data_scadenza} ({abs(giorni_rimasti)} giorni ' + ('rimasti)' if giorni_rimasti > 0 else 'fa)'))
+                        f'{data_scadenza} ({abs(giorni_rimasti)} giorni ' + (
+                            'rimasti)' if giorni_rimasti > 0 else 'fa)'))
 
                     i = self.model.qr_code.getImage()
                     i = i.convert("RGBA")
                     image = QImage(i.tobytes('raw', 'RGBA'), i.size[0],
-                    i.size[1], QImage.Format_RGBA8888)
+                                   i.size[1], QImage.Format_RGBA8888)
                     self.view.getQrCodeImage().setPixmap(QPixmap.fromImage(image))
                     self.view.getQrCodeImage().setMargin(17)

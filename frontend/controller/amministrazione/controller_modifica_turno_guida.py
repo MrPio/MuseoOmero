@@ -31,8 +31,12 @@ class ControllerModificaTurnoGuida(Controller):
         self.previous = previous
         self.model = model
         self.guida: OperatoreAlPubblico | None = None
+
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
+
         self.view.getErrorLabel().setVisible(False)
 
     def __gotoGestisciDipendenti(self) -> None:
@@ -45,8 +49,6 @@ class ControllerModificaTurnoGuida(Controller):
             model=Museo.getInstance(),
             strategy=StrategySelezionaGuida(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __setModelDataInizioDataFine(self) -> None:
         self.model.capienza = self.view.getCapienzaSpinBox().value()
@@ -65,7 +67,7 @@ class ControllerModificaTurnoGuida(Controller):
     def __onConfermaClicked(self) -> None:
         self.__setModelDataInizioDataFine()
 
-        if self.guida is not None:
+        if self.guida is not None and not self.guida.isOccupato(self.model.data_inizio,self.model.data_fine):
             self.guida.assegna(self.model)
         else:
             self.view.getErrorLabel().setVisible(True)
@@ -78,6 +80,7 @@ class ControllerModificaTurnoGuida(Controller):
         self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
         self.view.getCambiaButton().clicked.connect(self.__gotoGestisciDipendenti)

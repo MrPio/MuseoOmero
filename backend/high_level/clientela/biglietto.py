@@ -21,40 +21,60 @@ class Biglietto(Documento):
     def __init__(self, dataRilascio: datetime = None, reparto: RepartoMuseo = RepartoMuseo.MUSEO_APERTO,
                  tariffa: Tariffa = Tariffa.INTERO, turno: TurnoGuida = None):
         super().__init__(NexiApi(), dataRilascio)
-        self.reparto_museo = reparto
-        self.tariffa = tariffa
-        self.guida = turno
-        self.abbonamento: Abbonamento | None = None
+        self._reparto_museo = reparto
+        self._tariffa = tariffa
+        self._guida = turno
+        self._abbonamento: Abbonamento | None = None
 
     @property
     def abbonamento(self):
-        return self.abbonamento
+        return self._abbonamento
 
     @abbonamento.setter
     def abbonamento(self, value: Abbonamento):
         if value is not None:
-            self.abbonamento = value
             if not value.isScaduto():
-                self.tariffa = Tariffa.GRATIS
+                self._abbonamento = value
+                self._tariffa = Tariffa.GRATIS
+            self.notify()
+
+    @property
+    def tariffa(self):
+        return self._tariffa
+
+    @tariffa.setter
+    def tariffa(self, value: Tariffa):
+        if value is not None and self._abbonamento is None:
+            self._tariffa = value
+            self.notify()
+
+    @property
+    def reparto(self):
+        return self._reparto_museo
+
+    @reparto.setter
+    def reparto(self, value: RepartoMuseo):
+        if value is not None:
+            self._reparto_museo = value
+            self.notify()
+
+    @property
+    def guida(self):
+        return self._guida
+
+    @guida.setter
+    def guida(self, value: TurnoGuida):
+        if value is not None:
+            self._guida = value
             self.notify()
 
     def calcolaCosto(self) -> float:
-        if self.reparto_museo == RepartoMuseo.MUSEO_APERTO:
+        if self._tariffa == Tariffa.GRATIS:
             return 0.00
+        elif self._reparto_museo == RepartoMuseo.MUSEO_APERTO:
+            return 5.00 if self.__hasGuida() else 0.00
         else:
             return self.tariffa.cost + (5.00 if self.__hasGuida() else 0.00)
-
-    def set_tariffa(self, newVal: Tariffa):
-        self.tariffa = newVal
-        self.notify()
-
-    def set_reparto(self, newVal: RepartoMuseo):
-        self.reparto_museo = newVal
-        self.notify()
-
-    def set_turno_guida(self, newVal: TurnoGuida):
-        self.guida = newVal
-        self.notify()
 
     def convalida(self) -> bool:
         self.date_convalida.append(datetime.now())
@@ -64,8 +84,4 @@ class Biglietto(Documento):
         return (datetime.now() - self.data_rilascio).total_seconds() < 3600 * 24
 
     def __hasGuida(self) -> bool:
-        return self.guida is None
-
-    @abbonamento.setter
-    def abbonamento(self, value):
-        self._abbonamento = value
+        return self.guida is not None

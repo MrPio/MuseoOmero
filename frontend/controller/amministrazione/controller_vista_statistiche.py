@@ -33,8 +33,10 @@ class ControllerVistaStatistiche(Controller):
         self.current_index = 0
         self.mese_selezionato = None
         self.charts_layout = []
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
         self.view.getMeseLineEdit().setText(datetime.today().strftime("%m/%Y"))
 
     def __onVisualizzaClicked(self) -> None:
@@ -74,6 +76,7 @@ class ControllerVistaStatistiche(Controller):
         self.view.getRightArrowIcon().setVisible(self.current_index < len(self.charts_layout) - 1)
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked)
         self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()

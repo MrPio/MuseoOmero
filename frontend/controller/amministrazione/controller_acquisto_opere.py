@@ -28,7 +28,10 @@ class ControllerAcquistoOpere(Controller):
         self.view: VistaAcquistoOpere = view
         self.previous = previous
         self.model = model
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __gotoVistaAggiungiOpera(self) -> None:
         self.next = ControllerAggiungiOpera(
@@ -37,14 +40,13 @@ class ControllerAcquistoOpere(Controller):
             model=Opera(),
             strategy=StrategyAcquistaOpera(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
-        Controller.notifica('Funzione non disponibile',
+        self.notifica('Funzione non disponibile',
                             'Spiacenti, ma questa funzione non è ancora stata implementata.')
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getInserisciManualmenteButton().mouseReleaseEvent = lambda _: self.__gotoVistaAggiungiOpera()
         self.view.getRicercaSulWebButton().mouseReleaseEvent = lambda _: self.__gotoVistaRicercaOpera()

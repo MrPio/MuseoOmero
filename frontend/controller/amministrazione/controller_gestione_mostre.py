@@ -32,7 +32,11 @@ class ControllerGestioneMostre(Controller):
         self.view: VistaGestioneMostre = view
         self.previous = previous
         self.model = model
+
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __gotoVistaMostra(self) -> None:
         mostra_attuale = None
@@ -40,15 +44,13 @@ class ControllerGestioneMostre(Controller):
             if mostra.isInCorso():
                 mostra_attuale = mostra
         if mostra_attuale is None:
-            Controller.notifica('Nessuna mostra in corso', 'Al momento non è in corso alcuna mostra!')
+            self.notifica('Nessuna mostra in corso', 'Al momento non è in corso alcuna mostra!')
         else:
             self.next = ControllerMostra(
                 view=VistaMostra(),
                 previous=self,
                 model=mostra_attuale,
             )
-            self.next.showView()
-            self.disableView()
 
     def __gotoVistaAllestisciMostra(self) -> None:
         mostra_attuale = None
@@ -67,13 +69,14 @@ class ControllerGestioneMostre(Controller):
                     tema=PeriodoStorico.PREISTORIA,
                 ),
             )
-            self.next.showView()
-            self.disableView()
+
+
         else:
-            Controller.notifica('Mostra in corso',
+            self.notifica('Mostra in corso',
                                 'Al momento è già in corso una mostra, aspetta che termini o rimuovila per allestirne un\'altra')
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getVisualizzaMostraAttualeButton().mouseReleaseEvent = lambda _: self.__gotoVistaMostra()
         self.view.getAllestisciNuovaMostraButton().mouseReleaseEvent = lambda _: self.__gotoVistaAllestisciMostra()

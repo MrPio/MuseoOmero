@@ -7,9 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from types import NoneType
 
-from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
 from frontend.controller.segreteria.controller_convalida import ControllerConvalida
@@ -31,26 +29,15 @@ class StrategyRicercaAbbonamento(StrategyConvalida):
             c.view.getHeaderLabel().setText('CompraBiglietto ➜ RicercaAbbonamento')
 
     def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
+        from frontend.controller.segreteria.controller_rinnovo_abbonamento import ControllerRinnovoAbbonamento
+        from frontend.controller.reception.controller_acquisto_biglietto import ControllerAcquistoBiglietto
+
         for cliente in Museo.getInstance().visitatori:
             if isinstance(cliente, Cliente):
                 for abbonamento in cliente.abbonamenti:
                     if id == abbonamento.qr_code.id:
-                        # titolo = "Abbonamento trovato!"
-                        # messaggio = ''
-                        # if abbonamento.giorniAllaScadenza()>0:
-                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà tra" + str(
-                        #         abbonamento.giorniAllaScadenza()) + " giorni"
-                        # elif abbonamento.giorniAllaScadenza() == 0:
-                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nTerminerà oggi"
-                        # elif abbonamento.giorniAllaScadenza() < 0:
-                        #     titolo = 'Abbonamento scaduto!'
-                        #     messaggio = "L'abbonamento appartiene a " + cliente.nome + " " + cliente.cognome + "\r\nSi prega di rinnovarlo"
-                        #
                         # c.notifica(titolo, messaggio)
-                        from frontend.controller.segreteria.controller_rinnovo_abbonamento import \
-                            ControllerRinnovoAbbonamento
-                        from frontend.controller.reception.controller_acquisto_biglietto import \
-                            ControllerAcquistoBiglietto
+
                         if isinstance(c.previous, ControllerRinnovoAbbonamento):
                             c.previous.model = abbonamento
                             c.previous.showView()

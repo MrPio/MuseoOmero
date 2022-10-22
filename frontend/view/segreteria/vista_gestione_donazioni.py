@@ -21,9 +21,8 @@ class VistaGestioneDonazioni(MyMainWindow):
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton
 
-
     def getDonazioniListView(self) -> QListView:
         return self.donazioniListView
 
-    def getVerticalLayout(self)->QVBoxLayout:
+    def getVerticalLayout(self) -> QVBoxLayout:
         return self.verticalLayout

@@ -34,30 +34,28 @@ class ControllerGestioneDipendenti(Controller):
         self.previous = previous
         self.model = model
         self.strategy = strategy
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __gotoVistaAssumi(self) -> None:
-        controller = ControllerAssumi(
+        self.next = ControllerAssumi(
             view=VistaAssumi(),
             previous=self,
             model=museo.Museo.getInstance(),
         )
-        controller.connettiEventi()
-        controller.showView()
-        self.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getAssumiButton().mouseReleaseEvent = lambda _: self.__gotoVistaAssumi()
 
     def __renderizzaDipendenti(self) -> list[ControllerWidgetDipendente]:
         result = []
         for dipendente in self.model.dipendenti:
-            new_widget = WidgetDipendente(self.view.scrollAreaWidgetContents)
-
             result.append(ControllerWidgetDipendente(
-                view=new_widget,
+                view=WidgetDipendente(self.view.scrollAreaWidgetContents),
                 parent=self,
                 model=dipendente,
                 strategy=self.strategy,
@@ -75,6 +73,6 @@ class ControllerGestioneDipendenti(Controller):
             label = QLabel('Niente da mostrate qui.', self.view.scrollAreaWidgetContents)
             label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
             label.setAlignment(Qt.AlignCenter)
-            self.view.scrollAreaWidgetContents.addWidget(label)
+            self.view.verticalLayout.addWidget(label)
         for controller in self.dipendenti:
             self.view.verticalLayout.addWidget(controller.view)

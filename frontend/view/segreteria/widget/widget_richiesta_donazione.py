@@ -15,7 +15,7 @@ from frontend.view.my_widget import MyWidget
 
 class WidgetRichiestaDonazione(MyWidget):
 
-    def __init__(self,  parent):
+    def __init__(self, parent):
         super().__init__(UI_DIR + '/richiestaDonazioneWidget.ui', parent)
 
     def getIcon(self) -> QLabel:

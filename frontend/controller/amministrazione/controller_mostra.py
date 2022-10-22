@@ -29,8 +29,10 @@ class ControllerMostra(Controller):
         self.view: VistaMostra = view
         self.previous = previous
         self.model = model
-        self.initializeUi()
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onEliminaClicked(self) -> None:
         def elimina():
@@ -39,10 +41,9 @@ class ControllerMostra(Controller):
             self.__gotoPrevious()
 
         self.next = ControllerYesNo(VistaYesNo(), self, elimina)
-        self.next.showView()
-        self.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getEliminaButton().clicked.connect(self.__onEliminaClicked)
 

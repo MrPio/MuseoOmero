@@ -36,8 +36,10 @@ class ControllerVistaReportIncassi(Controller):
         self.model = model
         self.view.getMeseLineEdit().setText(datetime.today().strftime("%m/%Y"))
         self.mese_selezionato = None
-        self.initializeUi()
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onVisualizzaClicked(self) -> None:
         self.initializeUi()
@@ -63,6 +65,7 @@ class ControllerVistaReportIncassi(Controller):
         self.initializeUi()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getVisualizzaButton().clicked.connect(self.__onVisualizzaClicked)
         self.view.getLeftArrowIcon().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()

@@ -18,16 +18,18 @@ from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_ope
 
 class StrategyRiceviDonazione(StrategyAggiungiOpera):
     def initializeUi(self, c: 'ControllerAggiungiOpera') -> None:
+        c.view.getHeaderLabel().setText('HomeReception ➜ RiceviDonazione')
+
         museo = Museo.getInstance()
         segreterie = list(filter(lambda s: isinstance(s, Segreteria), museo.posti_lavoro))
         if not segreterie:
             c.notifica('Attenzione!', 'Assicurati di avere almeno una segreteria registrata')
             c.gotoPrevious()
 
-
     def onConfermaClicked(self, c: 'ControllerAggiungiOpera') -> None:
         museo = Museo.getInstance()
-        richiesta_donazione= RichiestaDonazione(c.model, c.model.ubicazione, SMSMessage(0))
-        segreterie = list(filter(lambda s: isinstance(s,Segreteria), museo.posti_lavoro))
+        richiesta_donazione = RichiestaDonazione(c.model, c.model.ubicazione, SMSMessage(0))
+        segreterie = list(filter(lambda s: isinstance(s, Segreteria), museo.posti_lavoro))
         if segreterie:
             random.choice(segreterie).richieste_donazione.append(richiesta_donazione)
+            c.notifica('Richiesta inoltrata','Donazione registrata con successo!')

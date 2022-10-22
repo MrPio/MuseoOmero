@@ -13,11 +13,12 @@ from enum import Enum
 
 
 class Tariffa(Enum):
-    INTERO = 8.00
-    RIDOTTO = 5.00
-    GRATIS = 0.00
+    INTERO = 0, 8.00
+    RIDOTTO = 1, 5.00
+    GRATIS = 2, 0.00
 
-    def __new__(cls, cost: float):
+    def __new__(cls, index: int, cost: float):
         member = object.__new__(cls)
+        member.index = index
         member.cost = cost
         return member

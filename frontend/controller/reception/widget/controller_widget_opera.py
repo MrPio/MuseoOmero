@@ -28,8 +28,9 @@ class ControllerWidgetOpera(Controller):
         self.model = model
         self.onOperaClicked = onOperaClicked
         self.hold_start = None
-        self.initializeUi()
+        self.showView()
         self.connettiEventi()
+        self.initializeUi()
 
     def __startTimer(self):
         self.hold_start = time.time_ns()
@@ -47,13 +48,15 @@ class ControllerWidgetOpera(Controller):
             model=self.model,
         )
         self.parent.disableView()
-        self.next.showView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getOperaLabel().mousePressEvent = lambda _: self.__startTimer()
         self.view.getOperaLabel().mouseReleaseEvent = lambda _: self.__onOperaReleased()
 
     def initializeUi(self) -> None:
+        if hasattr(self.parent,'strategy'):
+            self.parent.strategy.initializeWidgetUi(self)
         if type(self.model.immagine) is not NoneType:
             image = QImage(self.model.immagine.tobytes('raw', 'RGBA'), self.model.immagine.size[0],
                            self.model.immagine.size[1], QImage.Format_RGBA8888)

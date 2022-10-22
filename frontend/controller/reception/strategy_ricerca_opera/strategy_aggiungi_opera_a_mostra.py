@@ -21,3 +21,6 @@ class StrategyAggiungiOperaAMostra(StrategyRicercaOpera):
         c.parent.previous.initializeUi()
         c.parent.previous.enableView()
         c.parent.closeView()
+
+    def initializeWidgetUi(self, c: 'ControllerWidgetOpera'):
+        pass

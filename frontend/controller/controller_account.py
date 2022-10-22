@@ -24,8 +24,15 @@ class ControllerAccount(Controller):
         self.home = home
         self.model = model
         self.logout = logout
+
+        if self.model is None:
+            self.notifica('Attenzione','Hai saltato la procedura di login.')
+            return
+
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __gotoPrevious(self) -> None:
         self.closeView()
@@ -42,9 +49,10 @@ class ControllerAccount(Controller):
         if len(self.view.getNuovaPasswordLineEdit().text()) >= 3:
             self.model.credenziale = Credenziale(self.model.credenziale.username,
                                                  self.view.getNuovaPasswordLineEdit().text())
-            Controller.notifica('Nuova Password', 'Password cambiata con successo!')
+            self.notifica('Nuova Password', 'Password cambiata con successo!')
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getLogoutButton().clicked.connect(self.__gotoHome)
         self.view.getCambiaPasswordButton().clicked.connect(self.__onCambiaPasswordClicked)

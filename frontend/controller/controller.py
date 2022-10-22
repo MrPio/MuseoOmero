@@ -10,6 +10,7 @@
 import abc
 
 import winotify
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
 
 from frontend.ui.location import UI_DIR
@@ -18,8 +19,10 @@ from frontend.view.my_main_window import MyMainWindow
 
 class Controller(abc.ABC):
 
-    def __init__(self, view: MyMainWindow | QWidget) -> None:
+    def __init__(self, view: MyMainWindow | QWidget,reactOnShift:bool=False) -> None:
         self.view = view
+        self.react_on_shift=reactOnShift
+        self.shift: bool = False
 
     def initializeUi(self) -> None:
         """
@@ -27,12 +30,12 @@ class Controller(abc.ABC):
         """
         pass
 
-    @abc.abstractmethod
     def connettiEventi(self) -> None:
         """
         Questo metodo assegna gli eventi di interazione dell'utente con i rispettivi metodi
         """
-        pass
+        self.view.keyPressEvent = self.keyPressEvent
+        self.view.keyReleaseEvent = self.keyReleaseEvent
 
     def showView(self) -> None:
         self.view.show()
@@ -58,3 +61,15 @@ class Controller(abc.ABC):
             icon=UI_DIR + '/ico/museum_white.ico',
             duration=durata,
         ).show()
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Shift:
+            self.shift = True
+            if self.react_on_shift:
+                self.view.go_debug_mode(True)
+
+    def keyReleaseEvent(self, e) -> None:
+        if e.key() == Qt.Key_Shift:
+            self.shift = False
+            if self.react_on_shift:
+                self.view.go_debug_mode(False)

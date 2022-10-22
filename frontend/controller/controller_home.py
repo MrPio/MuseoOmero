@@ -8,43 +8,68 @@
 # 
 #######################################################
 from backend.high_level.museo import Museo
+from frontend.controller.amministrazione.controller_home_amministrazione import ControllerHomeAmministrazione
 from frontend.controller.controller import Controller
 from frontend.controller.controller_login import ControllerLogin
+from frontend.controller.reception.controller_home_reception import ControllerHomeReception
+from frontend.controller.segreteria.controller_home_segreteria import ControllerHomeSegreteria
+from frontend.ui.location import UI_DIR
+from frontend.view.amministrazione.vista_home_amministrazione import VistaHomeAmministrazione
+from frontend.view.reception.vista_home_reception import VistaHomeReception
+from frontend.view.segreteria.vista_home_segreteria import VistaHomeSegreteria
 from frontend.view.vista_home import VistaHome
 from frontend.view.vista_login import VistaLogin
 
 
 class ControllerHome(Controller):
     def __init__(self, view: VistaHome):
-        super().__init__(view)
+        super().__init__(view,reactOnShift=True)
         self.view: VistaHome = view
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __gotoLogin(self, reparto) -> None:
-        controller = ControllerLogin(
+        self.next = ControllerLogin(
             view=VistaLogin(),
             model=Museo.getInstance(),
             home=self,
             repartoScelto=reparto,
         )
-        controller.connettiEventi()
-        controller.showView()
-        self.disableView()
 
         if len(Museo.getInstance().dipendenti) == 1 and Museo.getInstance().dipendenti[0].autogenerato:
-            Controller.notifica('Primo Accesso', '• Username --> {admin} \r\n• Password --> {admin} \r\nNon appena '
-                                                 'crei un account amministratore rimuoverò questo account temporaneo')
+            self.notifica('Primo Accesso', '• Username --> {admin} \r\n• Password --> {admin} \r\nNon appena '
+                                           'crei un account amministratore rimuoverò questo account temporaneo')
 
     def __onReceptionClicked(self) -> None:
-        self.__gotoLogin('reception')
+        if self.shift:
+            self.shift = False
+            self.view.go_debug_mode(False)
+
+            self.next = ControllerHomeReception(VistaHomeReception(), self, None)
+        else:
+            self.__gotoLogin('reception')
 
     def __onSegreteriaClicked(self) -> None:
-        self.__gotoLogin('segreteria')
+        if self.shift:
+            self.shift=False
+            self.view.go_debug_mode(False)
+
+            self.next = ControllerHomeSegreteria(VistaHomeSegreteria(), self, None)
+        else:
+            self.__gotoLogin('segreteria')
 
     def __onAmministrazioneClicked(self) -> None:
-        self.__gotoLogin('amministrazione')
+        if self.shift:
+            self.shift = False
+            self.view.go_debug_mode(False)
+
+            self.next = ControllerHomeAmministrazione(VistaHomeAmministrazione(), self, None)
+        else:
+            self.__gotoLogin('amministrazione')
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getReceptionButton().mouseReleaseEvent = lambda _: self.__onReceptionClicked()
         self.view.getSegreteriaButton().mouseReleaseEvent = lambda _: self.__onSegreteriaClicked()
         self.view.getAmministrazioneButton().mouseReleaseEvent = lambda _: self.__onAmministrazioneClicked()

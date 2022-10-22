@@ -59,8 +59,14 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-radius: 16px;
-background-color: rgba(255, 255, 255, 255);</string>
+       <string notr="true">QLabel{
+border-radius: 16px;
+background-color: rgba(255, 255, 255, 255);
+}
+
+QLabel::hover{
+background-color: rgba(255, 255, 255,140);
+}</string>
       </property>
       <property name="text">
        <string/>

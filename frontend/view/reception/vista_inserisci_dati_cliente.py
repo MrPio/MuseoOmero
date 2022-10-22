@@ -7,7 +7,7 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from PyQt5.QtWidgets import QPushButton, QLineEdit, QComboBox
+from PyQt5.QtWidgets import QPushButton, QLineEdit, QComboBox, QLabel
 
 from frontend.ui.location import UI_DIR
 from frontend.view.my_main_window import MyMainWindow
@@ -32,3 +32,6 @@ class VistaInserisciDatiCliente(MyMainWindow):
 
     def getConfermaButton(self) -> QPushButton:
         return self.confermaButton
+
+    def getErrorLabel(self) -> QLabel:
+        return self.errorLabel

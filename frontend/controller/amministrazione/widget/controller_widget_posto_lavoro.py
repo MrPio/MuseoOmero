@@ -31,14 +31,19 @@ class ControllerWidgetPostoLavoro(Controller):
         self.model = model
         self.parent = parent
         self.strategy = strategy
-        self.initializeUi()
+        self.selected=False
+        self.showView()
         self.connettiEventi()
+        self.initializeUi()
 
     def __onAssegnaPostoClicked(self) -> None:
         self.parent.lavoro_scelto = self.model
-        Controller.notifica('Posto Selezionato', f'Hai selezionato --> {self.model.nome}')
+        # self.notifica('Posto Selezionato', f'Hai selezionato --> {self.model.nome}')
         for controller in self.parent.posti_lavoro:
             controller.view.setEnabled(True)
+            controller.selected=False
+        self.selected=True
+        self.initializeUi()
         self.view.setEnabled(False)
 
     def __onRimuoviClicked(self) -> None:
@@ -46,15 +51,15 @@ class ControllerWidgetPostoLavoro(Controller):
         self.parent.initializeUi()
 
     def __gotoVistaModificaPostoLavoro(self) -> None:
-        controller = ControllerModificaPostoLavoro(
+        self.next = ControllerModificaPostoLavoro(
             view=VistaModificaPostoLavoro(),
             previous=self.parent,
             model=self.model
         )
-        controller.showView()
         self.parent.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getAssegnaPostoButton().clicked.connect(self.__onAssegnaPostoClicked)
         self.view.getRimuoviButton().clicked.connect(self.__onRimuoviClicked)
         self.view.getModificaButton().clicked.connect(self.__gotoVistaModificaPostoLavoro)
@@ -63,7 +68,7 @@ class ControllerWidgetPostoLavoro(Controller):
         self.strategy.initializeUi(self)
         self.view.getNomeLabel().setText('{} (piano {})'.format(self.model.nome, self.model.piano))
         self.view.getPostiLiberiLabel().setText('posti liberi {}/{}'.format(
-            len(self.model.lavori), self.model.numero_postazioni_totali))
+            len(self.model.lavori)+self.selected , self.model.numero_postazioni_totali))
 
         pixmaps = {
             Reception: QPixmap(":/icons/theater_comedy_FILL1_wght500_GRAD200_opsz48_risultato.png"),

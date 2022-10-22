@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
+import tempfile
 from datetime import datetime
 
 from backend.high_level.clientela.enum.sesso import Sesso
@@ -20,36 +22,54 @@ class ControllerInserisciDatiCliente(Controller):
 
     def __gotoPrevious(self) -> None:
         self.closeView()
-        self.previous.enableView()
+        self.previous.closeView()
+        self.previous.previous.enableView()
 
     def __init__(self, view: VistaInserisciDatiCliente, previous: Controller, model: Visitatore):
         super().__init__(view)
         self.view: VistaInserisciDatiCliente = view
         self.previous = previous
         self.model = model
+        self.previous.disableView()
+        self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onConfermaClicked(self) -> None:
         try:
             datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
         except Exception as e:
             print(e)
+            self.view.getErrorLabel().setVisible(True)
+            return
+        if len(self.view.getProvenienzaLineEdit().text())<3:
+            self.view.getErrorLabel().setVisible(True)
             return
 
         birth = datetime.strptime(self.view.getDataNascitaLineEdit().text(), '%d/%m/%Y')
 
         if len(self.view.getProvenienzaLineEdit().text()) > 0:
-            nuovo_visitatore = Visitatore(
-                dataNascita=birth,
-                sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ', '_')],
-                provenienza=self.view.getProvenienzaLineEdit().text(),
-            )
-            nuovo_visitatore.biglietti.append(self.previous.model)
-            Museo.getInstance().visitatori.append(nuovo_visitatore)
-            Controller.notifica('Biglietto Creato', 'Biglietto creato con successo!')
+            self.model.data_nascita=birth
+            self.model.sesso=Sesso[self.view.getSessoComboBox().currentText().upper().replace(' ', '_')]
+            self.model.provenienza=self.view.getProvenienzaLineEdit().text()
+            self.model.biglietti.append(self.previous.model)
+            Museo.getInstance().visitatori.append(self.model)
+            self.notifica('Biglietto Acquistato', f'Biglietto acquistato con successo! \r\n'
+                                                  f' ID --> {self.previous.model.qr_code.id}')
+
+            path = tempfile.gettempdir() + '/qrcode.jpg'
+            self.previous.model.qr_code.getImage().convert('RGB').save(path)
+            os.startfile(path)
+
             self.closeView()
             self.previous.previous.enableView()
             self.previous.previous.showView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
+
+    def initializeUi(self) -> None:
+        self.view.getErrorLabel().setVisible(False)
+

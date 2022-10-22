@@ -30,8 +30,10 @@ class ControllerTurniGuide(Controller):
         self.model = model
         self.strategy = strategy
         self.aggiungi_alla_lista = None
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __gotoPrevious(self) -> None:
         self.closeView()
@@ -63,6 +65,7 @@ class ControllerTurniGuide(Controller):
         self.initializeUi()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getFrecciaSinistra().mouseReleaseEvent = lambda _: self.__onFrecciaSinistraClicked()
         self.view.getFrecciaDestra().mouseReleaseEvent = lambda _: self.__onFrecciaDestraClicked()
@@ -85,7 +88,6 @@ class ControllerTurniGuide(Controller):
                     view=WidgetTurnoGuida(self.view.turniGuideListView),
                     model=turno_guida,
                     parent=self,
-                    strategy=self.strategy,
                 ))
         return result
 
@@ -101,7 +103,7 @@ class ControllerTurniGuide(Controller):
             label = QLabel('Niente da mostrate qui.', self.view.turniGuideListView)
             label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
             label.setAlignment(Qt.AlignCenter)
-            self.view.turniGuideListView.addWidget(label)
+            self.view.verticalLayout.addWidget(label)
         for controller in self.turni_guida:
             self.view.verticalLayout.addWidget(controller.view)
 

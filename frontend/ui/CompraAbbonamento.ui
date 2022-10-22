@@ -1220,7 +1220,7 @@ text-align: center;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-size: 20px;
+     <string notr="true">font-size: 22px;
 text-align: left;
 background-color: rgba(255, 255, 255,0);
 </string>

@@ -7,7 +7,6 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
-from backend.high_level.museo import Museo
 from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
 from backend.low_level.network.email_message import EmailMessage
 from frontend.controller.controller import Controller
@@ -25,31 +24,32 @@ class ControllerWidgetRichiestaDonazione(Controller):
             model=self.model.opera,
             eliminabile=False,
         )
-        self.next.showView()
+
         self.parent.disableView()
 
-    def __init__(self, view: WidgetRichiestaDonazione, parent:Controller,model: RichiestaDonazione):
+    def __init__(self, view: WidgetRichiestaDonazione, parent: Controller, model: RichiestaDonazione):
         super().__init__(view)
         self.view: WidgetRichiestaDonazione = view
-        self.parent=parent
+        self.parent = parent
         self.model = model
+        self.showView()
         self.connettiEventi()
         self.initializeUi()
 
     def __onRifiutaClicked(self) -> None:
         self.model.rifiuta()
         self.parent.initializeUi()
-        mezzo='email'if isinstance(self.model.notification,EmailMessage) else 'sms'
-        self.notifica('Donazione Rifiutata',f'Il donatore sarà notificato per {mezzo}')
-
+        mezzo = 'email' if isinstance(self.model.notification, EmailMessage) else 'sms'
+        self.notifica('Donazione Rifiutata', f'Il donatore sarà notificato per {mezzo}')
 
     def __onAccettaClicked(self) -> None:
         self.model.accetta(self.model.ubicazione)
         self.parent.initializeUi()
-        mezzo='email'if isinstance(self.model.notification,EmailMessage) else 'sms'
+        mezzo = 'email' if isinstance(self.model.notification, EmailMessage) else 'sms'
         self.notifica('Donazione Accettata', f'Il donatore sarà notificato per {mezzo}')
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getAccettaButton().clicked.connect(self.__onAccettaClicked)
         self.view.getRifiutaButton().clicked.connect(self.__onRifiutaClicked)
         self.view.getIcon().mouseReleaseEvent = lambda _: self.__gotoVistaOpera()

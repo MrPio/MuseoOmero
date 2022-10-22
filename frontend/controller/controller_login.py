@@ -28,14 +28,18 @@ class ControllerLogin(Controller):
     def __init__(self, view: VistaLogin, model: Museo, home: Controller, repartoScelto: str):
         super().__init__(view)
         self.view: VistaLogin = view
-        self.__model = model
-        self.__home = home
-        self.__repartoScelto = repartoScelto
+        self.model = model
+        self.home = home
+        self.repartoScelto = repartoScelto
         self.view.getErrorLabel().setVisible(False)
-        self.__home.enableView()
+
+        self.home.disableView()
+        self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __login(self, username: str, password: str) -> Dipendente:
-        return self.__model.login(
+        return self.model.login(
             username=username,
             password=password,
         )
@@ -59,21 +63,21 @@ class ControllerLogin(Controller):
             self.view.getErrorLabel().setVisible(True)
             return
 
-        map = {
-            OperatoreAlPubblico: ControllerHomeReception(VistaHomeReception(), self.__home, dipendente),
-            Segretario: ControllerHomeSegreteria(VistaHomeSegreteria(), self.__home, dipendente),
-            Amministratore: ControllerHomeAmministrazione(VistaHomeAmministrazione(), self.__home, dipendente),
-        }
-        controller: Controller = map[type(dipendente.lavoro)]
+        if isinstance(dipendente.lavoro, OperatoreAlPubblico):
+            self.next = ControllerHomeReception(VistaHomeReception(), self.home, dipendente)
+        elif isinstance(dipendente.lavoro, Segretario):
+            self.next = ControllerHomeSegreteria(VistaHomeSegreteria(), self.home, dipendente)
+        elif isinstance(dipendente.lavoro, Amministratore):
+            self.next = ControllerHomeAmministrazione(VistaHomeAmministrazione(), self.home, dipendente)
 
-        controller.connettiEventi()
-        controller.showView()
         self.closeView()
-        self.__home.enableView().closeView()
+        self.home.closeView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.gotoHome()
         self.view.getLoginButton().clicked.connect(self.__onLoginClicked)
 
     def gotoHome(self) -> None:
         self.closeView()
+        self.home.enableView()

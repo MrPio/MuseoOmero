@@ -42,8 +42,10 @@ class Opera:
     def vendi(self, pagamento: Pagamento) -> bool:
         if not self.isVendibile():
             return False
+        if not pagamento.paga(costo=self.costo):
+            return False
         self.data_vendita = datetime.datetime.now()
-        return pagamento.paga(costo=self.costo)
+        return True
 
     def isVendibile(self):
         return self.reparto == RepartoMuseo.MOSTRA and not self.isVenduta()

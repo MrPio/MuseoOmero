@@ -35,6 +35,7 @@ class ControllerWidgetDipendente(Controller):
         self.parent = parent
         self.model = model
         self.strategy = strategy
+        self.showView()
         self.connettiEventi()
         self.initializeUi()
 
@@ -49,7 +50,7 @@ class ControllerWidgetDipendente(Controller):
                 self.parent.initializeUi()
 
             self.next = ControllerYesNo(VistaYesNo(), self.parent, elimina)
-            self.next.showView()
+
             self.parent.disableView()
             return
         # rimuovo tutti turni guida del dipendente licenziato
@@ -67,7 +68,7 @@ class ControllerWidgetDipendente(Controller):
             model=self.model,
             logout=False,
         )
-        self.next.showView()
+
         self.parent.disableView()
 
     def __onPromuoviClicked(self) -> None:
@@ -88,6 +89,7 @@ class ControllerWidgetDipendente(Controller):
         self.parent.previous.enableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getLicenziaButton().clicked.connect(self.__onLicenziaClicked)
         self.view.getPromuoviButton().clicked.connect(self.__onPromuoviClicked)
         self.view.getSelezionaButton().clicked.connect(self.__onSelezionaClicked)

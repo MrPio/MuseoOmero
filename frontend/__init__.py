@@ -139,13 +139,10 @@ def startApp():
     # MVC
     vista_home = VistaHome()
     # controller_home = ControllerHome(vista_home)
-    from backend.high_level.personale.dipendente import Dipendente
-    controller_home = ControllerHomeSegreteria(VistaHomeSegreteria(), None,
-                                               Dipendente('a', 'b', datetime.datetime.now()))
-
-    controller_home.connettiEventi()
-    controller_home.showView()
-
+    # from backend.high_level.personale.dipendente import Dipendente
+    # controller_home = ControllerHomeReception(VistaHomeReception(), ControllerHome(vista_home),None)
+    #                                           Dipendente('a', 'b', datetime.datetime.now()))
+    controller_home=ControllerHome(vista_home)
     sys.exit(app.exec())
 
     # TODO
@@ -156,5 +153,9 @@ def startApp():
 if __name__ == '__main__':
     # TODO fare vista inserisciUbicazione
     # popolaMuseo()
+    # from backend.high_level.museo import Museo
+    # from backend.high_level.personale.segreteria import Segreteria
+    #
+    # Museo.getInstance().posti_lavoro = [s for s in Museo.getInstance().posti_lavoro if not isinstance(s ,Segreteria)]
     startApp()
-    # TODO finire di settare l-aspect ratio in widget opera e in vistaOpera
+    #Todo controllare se le heder label vengono sempre aggiornate

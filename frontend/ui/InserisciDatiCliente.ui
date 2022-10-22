@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>434</width>
-    <height>434</height>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -408,6 +408,9 @@ color: rgba(96, 96, 96);
 text-align: center;
 border: 2px solid rgba(255, 255, 255);</string>
     </property>
+    <property name="inputMask">
+     <string>&gt;AAA;#</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -415,7 +418,7 @@ border: 2px solid rgba(255, 255, 255);</string>
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Provenienza</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -782,15 +785,15 @@ margin:-3px -3px -3px -10px;
     <property name="geometry">
      <rect>
       <x>125</x>
-      <y>364</y>
+      <y>372</y>
       <width>183</width>
-      <height>44</height>
+      <height>52</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Lato</family>
-      <pointsize>14</pointsize>
+      <pointsize>15</pointsize>
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
@@ -806,14 +809,12 @@ margin:-3px -3px -3px -10px;
      <string notr="true">QPushButton{
  background-color:rgb(104, 194, 253);
  border-style: solid;
- border-radius:22px;
+ border-radius:26px;
 color: rgb(255, 255, 255);
-font: 14pt &quot;Lato&quot;;
+	font: 15pt &quot;Lato&quot;;
 }
 
 QPushButton::hover{
-
-
 	border-color : rgb(15, 138, 204);
 	color: white;
 border-width:0;
@@ -829,6 +830,35 @@ QPushButton::pressed{
     </property>
     <property name="text">
      <string>Conferma</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>66</x>
+      <y>108</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+text-align: left;
+ background-color:#e39797;
+color: #FFFFFF;
+font: 14pt &quot;Lato&quot;;
+border-radius: 15;
+}</string>
+    </property>
+    <property name="text">
+     <string>Compila tutti i campi!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <zorder>label_2</zorder>
@@ -851,6 +881,7 @@ QPushButton::pressed{
    <zorder>dataNascitaLineEdit</zorder>
    <zorder>sessoComboBox</zorder>
    <zorder>confermaButton</zorder>
+   <zorder>errorLabel</zorder>
   </widget>
  </widget>
  <resources>

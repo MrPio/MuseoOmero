@@ -142,7 +142,8 @@ class Museo:
 
     def elimina_backup(self, data: str) -> None:
         file = 'museo ' + data + '.pickle'
-        os.remove(Museo.__backup_path + file)
+        if os.path.exists(Museo.__backup_path + file):
+            os.remove(Museo.__backup_path + file)
         Museo.__cloud_storage.deleteFile(DropBoxAPI.cloud_root_dir + Museo.__backup_folder + file)
 
     def list_backups_local(self) -> {str, str}:

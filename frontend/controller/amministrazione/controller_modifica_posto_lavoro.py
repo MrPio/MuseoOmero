@@ -23,8 +23,10 @@ class ControllerModificaPostoLavoro(Controller):
         self.view: VistaModificaPostoLavoro = view
         self.previous = previous
         self.model = model
+        self.previous.disableView()
         self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     def __onConfermaClicked(self) -> None:
         self.model.nome = self.view.getNomeLineEdit().text()
@@ -34,6 +36,7 @@ class ControllerModificaPostoLavoro(Controller):
         self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
 

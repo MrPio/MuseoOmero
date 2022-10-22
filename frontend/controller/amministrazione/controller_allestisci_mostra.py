@@ -35,29 +35,11 @@ class ControllerAllestisciMostra(Controller):
         self.previous = previous
         self.model = model
         self.next = None
-        self.initializeUi()
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
-    # def __gotoVistaOpera(self) -> None:
-    #     self.next = ControllerVistaOpera(
-    #         view=VistaOpera(),
-    #         previous=self,
-    #         #TODO
-    #     )
-    #     self.next.connettiEventi()
-    #     self.next.showView()
-    #     self.disableView()
-
-    # def __gotoVistaRicercaOpera(self) -> None:
-    #     self.next = ControllerRicercaOpera(
-    #         view=VistaRicercaOpera(),
-    #         previous=self,
-    #         #TODO model
-    #         strategy=StrategyRicercaOpera(),
-    #     )
-    #     self.next.connettiEventi()
-    #     self.next.showView()
-    #     self.disableView()
     def __onConfermaClicked(self) -> None:
         self.model.titolo = self.view.getTitoloLineEdit().text()
         self.model.tema = PeriodoStorico[self.view.getPeriodoStoricoComboBox().currentText().upper()]
@@ -71,6 +53,7 @@ class ControllerAllestisciMostra(Controller):
         self.__gotoPrevious()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
 

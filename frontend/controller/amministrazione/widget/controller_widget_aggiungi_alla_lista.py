@@ -23,13 +23,15 @@ class ControllerWidgetAggiungiAllaLista(Controller):
         self.strategy = strategy
         self.strategy.controller = self
         self.tipo = tipo
-        self.initializeUi()
+        self.showView()
         self.connettiEventi()
+        self.initializeUi()
 
     def __onClicked(self) -> None:
         self.strategy.onClicked()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getIcon().mouseReleaseEvent = lambda _: self.__onClicked()
 
     def initializeUi(self):

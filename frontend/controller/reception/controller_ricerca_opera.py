@@ -28,30 +28,21 @@ class ControllerRicercaOpera(Controller):
         self.model = model
         self.strategy: StrategyRicercaOpera = strategy
         self.opere_trovate: list[ControllerWidgetOpera] = []
+        self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onRicercaClicked(self) -> None:
         self.initializeUi()
-
-    # def __gotoVistaOpera(self) -> None:
-    #     self.next = ControllerVistaOpera(
-    #         view=VistaOpera(),
-    #         previous=self,
-    #         model=Museo.getInstance(),
-    #     )
-    #     self.next.connettiEventi()
-    #     self.next.showView()
-    #     self.closeView()
-
-    # def __onOperaClicked(self) -> None:
-    #     self.__gotoVistaOpera()
-
     def __renderizzaOpere(self) -> list[ControllerWidgetOpera]:
         tipo_ricerca = self.view.getTipoRicercaComboBox().currentText().lower()
         parametro_ricerca = self.view.getParametroRicercaLineEdit().text()
+        if len(parametro_ricerca)<1:
+            return []
         matches = {
             'autore': lambda opera: parametro_ricerca.lower() in opera.autore.lower(),
-            'nome': lambda opera: parametro_ricerca.lower() in opera.nome.lower(),
+            'nome': lambda opera: parametro_ricerca.lower() in opera.titolo.lower(),
             'periodo': lambda opera: parametro_ricerca.lower() in opera.periodo.name.lower(),
             'tipo': lambda opera: parametro_ricerca.lower() in opera.composizione.tipo_opera.name.lower(),
         }
@@ -81,5 +72,6 @@ class ControllerRicercaOpera(Controller):
             c += 1
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getRicercaButton().clicked.connect(self.__onRicercaClicked)

@@ -32,12 +32,11 @@ class AggiungiPostoLavoro(StrategyAggiungiAllaLista):
             'amministrazione': Amministrazione('', 0, 0)
         }
         Museo.getInstance().posti_lavoro.append(matches[self.controller.tipo])
-        controller = controller_modifica_posto_lavoro.ControllerModificaPostoLavoro(
+        self.next = controller_modifica_posto_lavoro.ControllerModificaPostoLavoro(
             view=VistaModificaPostoLavoro(),
             previous=self.controller.parent,
             model=matches[self.controller.tipo],
         )
-        controller.showView()
         self.controller.parent.disableView()
 
     def getIcon(self) -> QPixmap:

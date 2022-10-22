@@ -5,10 +5,10 @@ from PyQt5 import QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from frontend import myres
 
 from frontend.ui.location import UI_DIR
 
+from frontend import my_res
 
 class MyMainWindow(QMainWindow):
     def __init__(self, uiFile):
@@ -43,6 +43,29 @@ class MyMainWindow(QMainWindow):
             setattr(self, checkBox + 'Status', False)
             getattr(self, checkBox).clicked.connect(self.checkBoxClicked)
 
+        # self.debugLabel = QLabel('Modalità di debug attivata', self)
+        # self.debugLabel.setStyleSheet(open(UI_DIR + '/css/debugLabel.css', 'r').read())
+        # self.debugLabel.setGeometry(30,10,380,31)
+        # self.debugLabel.setVisible(False)
+
+    def go_debug_mode(self,mode=True):
+        if mode:
+            self.titoloLabelBackup=self.titoloLabel.text()
+            self.titoloLabel.setText('Modalità di debug attivata')
+            self.setStyleSheet(open(UI_DIR + '/css/main_shift_on.css', 'r').read())
+            for element in self.__dict__.values():
+                if isinstance(element,QLabel):
+                    element.setStyleSheet(element.styleSheet().replace('rgb(104, 194, 253)','#fee84c')
+                                          .replace('#1684FC','#F5CA48'))
+        else:
+            self.titoloLabel.setText(self.titoloLabelBackup)
+            self.setStyleSheet(open(UI_DIR + '/css/main.css', 'r').read())
+            for element in self.__dict__.values():
+                if isinstance(element,QLabel):
+                    element.setStyleSheet(element.styleSheet().replace('#fee84c','rgb(104, 194, 253)')
+                                          .replace('#F5CA48','#1684FC'))
+
+
     def checkBoxClicked(self):
         objName = self.sender().objectName()
         if not getattr(self, objName + 'Status'):
@@ -64,9 +87,7 @@ class MyMainWindow(QMainWindow):
             self.titoloLabel.setGeometry(self.titoloLabel.geometry().x(), 57, self.geometry().width() - 60,
                                          self.titoloLabel.geometry().height())
 
-    def keyPressEvent(self, e):
-        if e.key() == Qt.Key_Escape:
-            self.close()
+
 
     def mousePressEvent(self, event):
         if event.pos().y() > 50:
@@ -91,13 +112,13 @@ class MyMainWindow(QMainWindow):
 
     def save_and_exit(self):
         def perform():
-            winotify.Notification(
-                app_id='Museo Omero',
-                title='Backup in corso',
-                msg='Attendi, sto effettuando il backup del museo locale...',
-                icon=UI_DIR + '/ico/museum_white.ico',
-                duration='short',
-            ).show()
+            # winotify.Notification(
+            #     app_id='Museo Omero',
+            #     title='Backup in corso',
+            #     msg='Attendi, sto effettuando il backup del museo locale...',
+            #     icon=UI_DIR + '/ico/museum_white.ico',
+            #     duration='short',
+            # ).show()
             # Museo.getInstance().make_backup()
             os._exit(1)
 

@@ -37,7 +37,10 @@ class ControllerGestionePostiLavoro(Controller):
         self.view: VistaGestionePostiLavoro = view
         self.previous = previous
         self.model = model
+        self.previous.disableView()
+        self.connettiEventi()
         self.initializeUi()
+        self.showView()
 
     #    TODO usare il widget aggiungi alla lista
     """    def gotoVistaModificaPostoLavoro(self) -> None:
@@ -45,12 +48,10 @@ class ControllerGestionePostiLavoro(Controller):
             view=VistaModificaPostoLavoro(),
             previous=self,
             model=self.model.posti_lavoro
-        )
-        controller.connettiEventi()
-        controller.showView()
-        self.disableView()"""
+        )"""
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
 
     def __renderizzaPostiLavoro(self) -> list[ControllerWidgetPostoLavoro]:

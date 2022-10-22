@@ -7,6 +7,8 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtGui import QPixmap
+
 from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
@@ -33,16 +35,28 @@ class ControllerHomeSegreteria(Controller):
         self.view: VistaHomeSegreteria = view
         self.home = home
         self.dipendente = dipendente
+        if dipendente is None:
+            self.view.getAccountIcon().setPixmap(QPixmap(":/icons/arrow_back_FILL1_wght700_GRAD200_opsz48_risultato.png"))
 
+
+        self.connettiEventi()
+        self.initializeUi()
+        self.showView()
+        self.home.disableView()
+
+    def __gotoPrevious(self) -> None:
+        self.closeView()
+        self.home.enableView()
     def __gotoVistaAccount(self) -> None:
+        if self.dipendente is None:
+            self.__gotoPrevious()
+            return
         self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             model=self.dipendente,
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaAcquistoAbbonamento(self) -> None:
         self.next = ControllerAcquistoAbbonamento(
@@ -50,9 +64,6 @@ class ControllerHomeSegreteria(Controller):
             previous=self,
             model=Abbonamento(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaConvalida(self) -> None:
         self.next = ControllerConvalida(
@@ -60,9 +71,6 @@ class ControllerHomeSegreteria(Controller):
             previous=self,
             strategy=StrategyConvalidaAbbonamento(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaGestioneDonazioni(self) -> None:
         self.next = ControllerGestioneDonazioni(
@@ -70,9 +78,6 @@ class ControllerHomeSegreteria(Controller):
             previous=self,
             model=Museo.getInstance(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaRinnovoAbbonamento(self) -> None:
         self.next = ControllerRinnovoAbbonamento(
@@ -80,10 +85,9 @@ class ControllerHomeSegreteria(Controller):
             view=VistaRinnovoAbbonamento(),
             previous=self,
         )
-        self.showView()
-        self.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
         self.view.getAcquistaAbbonamentoButton().mouseReleaseEvent = lambda _: self.__gotoVistaAcquistoAbbonamento()
         self.view.getConvalidaAbbonamentoButton().mouseReleaseEvent = lambda _: self.__gotoVistaConvalida()

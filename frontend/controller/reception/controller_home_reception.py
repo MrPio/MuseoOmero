@@ -7,6 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtGui import QPixmap
+from PyQt5.uic.properties import QtGui
+
 from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
@@ -35,15 +38,27 @@ class ControllerHomeReception(Controller):
         self.home = home
         self.dipendente = dipendente
 
+        if dipendente is None:
+            self.view.getAccountIcon().setPixmap(QPixmap(":/icons/arrow_back_FILL1_wght700_GRAD200_opsz48_risultato.png"))
+
+        self.connettiEventi()
+        self.initializeUi()
+        self.showView()
+        self.home.disableView()
+
+    def __gotoPrevious(self) -> None:
+        self.closeView()
+        self.home.enableView()
     def __gotoVistaAccount(self) -> None:
+        if self.dipendente is None:
+            self.__gotoPrevious()
+            return
         self.next = ControllerAccount(
             view=VistaAccount(),
             previous=self,
             home=self.home,
             model=self.dipendente,
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaAcquistoBiglietto(self) -> None:
         self.next = ControllerAcquistoBiglietto(
@@ -51,9 +66,6 @@ class ControllerHomeReception(Controller):
             previous=self,
             model=Biglietto(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaConvalidaBiglietto(self) -> None:
         self.next = ControllerConvalida(
@@ -61,9 +73,6 @@ class ControllerHomeReception(Controller):
             previous=self,
             strategy=StrategyConvalidaBiglietto(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaRicercaOpera(self) -> None:
         self.next = ControllerRicercaOpera(
@@ -72,8 +81,6 @@ class ControllerHomeReception(Controller):
             model=Museo.getInstance(),
             strategy=StrategyVendiOpera(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaEffettuaDonazione(self) -> None:
         self.next = ControllerAggiungiOpera(
@@ -82,10 +89,9 @@ class ControllerHomeReception(Controller):
             strategy=StrategyRiceviDonazione(),
             model=Opera()
         )
-        self.next.showView()
-        self.disableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getAccountIcon().mouseReleaseEvent = lambda _: self.__gotoVistaAccount()
         self.view.getAcquistoBigliettoButton().mouseReleaseEvent = lambda _: self.__gotoVistaAcquistoBiglietto()
         self.view.getConvalidaBigliettoButton().mouseReleaseEvent = lambda _: self.__gotoVistaConvalidaBiglietto()

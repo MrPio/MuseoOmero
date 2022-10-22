@@ -16,10 +16,9 @@ from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_inserisci_dati_cliente import ControllerInserisciDatiCliente
 from frontend.controller.reception.controller_turni_guide import ControllerTurniGuide
-from frontend.controller.reception.strategy_turni_guide.strategy_turni_guide import StrategyTurniGuide
+from frontend.controller.reception.strategy_turni_guide.strategy_ricerca_turni_guide import StrategyRicercaTurniGuide
 from frontend.controller.segreteria.controller_convalida import ControllerConvalida
-from frontend.controller.segreteria.strategy_convalida.strategy_convalida_abbonamento import \
-    StrategyConvalidaAbbonamento
+from frontend.controller.segreteria.strategy_convalida.strategy_ricerca_abbonamento import StrategyRicercaAbbonamento
 from frontend.view.reception.vista_acquisto_biglietto import VistaAcquistoBiglietto
 from frontend.view.reception.vista_inserisci_dati_cliente import VistaInserisciDatiCliente
 from frontend.view.reception.vista_turni_guide import VistaTurniGuide
@@ -37,47 +36,50 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view: VistaAcquistoBiglietto = view
         self.previous = previous
         self.model = model
-        # self.model.subscribe(self)
+        self.model.subscribe(self)
+        self.previous.disableView()
         self.connettiEventi()
+        self.showView()
+        self.initializeUi()
 
     def __gotoVistaTurniGuide(self) -> None:
         self.next = ControllerTurniGuide(
             view=VistaTurniGuide(),
             previous=self,
             model=Museo.getInstance(),
-            strategy=StrategyTurniGuide(),
+            strategy=StrategyRicercaTurniGuide(),
         )
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaConvalida(self) -> None:
         self.next = ControllerConvalida(
             view=VistaConvalida(),
             previous=self,
-            strategy=StrategyConvalidaAbbonamento(),
+            strategy=StrategyRicercaAbbonamento(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
-        self.disableView()
 
     def __gotoVistaInserisciDatiCliente(self) -> None:
+        if not self.model.acquista():
+            self.notifica('Attenzione', 'Si è verificato un errore nel pagamento, si prega di riprovare...')
+            return
+
         self.next = ControllerInserisciDatiCliente(
             view=VistaInserisciDatiCliente(),
             previous=self,
             model=Visitatore(),
         )
-        self.next.connettiEventi()
-        self.next.showView()
+
         self.closeView()
 
     def __onTariffaBoxChanged(self) -> None:
-        self.model.set_tariffa(Tariffa[self.view.getTariffaComboBox().currentText().upper()])
+        self.model.tariffa=Tariffa[self.view.getTariffaComboBox().currentText().upper()]
+        self.initializeUi()
 
     def __onTipoBigliettoChanged(self) -> None:
-        self.model.set_reparto(
-            RepartoMuseo[self.view.getTipoBigliettoComboBox().currentText().upper().replace(' ', '_')])
+        self.model.reparto=\
+            RepartoMuseo[self.view.getTipoBigliettoComboBox().currentText().upper().replace(' ', '_')]
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getCercaGuidaButton().clicked.connect(self.__gotoVistaTurniGuide)
         self.view.getVerificaAbbonamentoButton().clicked.connect(self.__gotoVistaConvalida)
@@ -85,5 +87,10 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         self.view.getTariffaComboBox().currentTextChanged.connect(self.__onTariffaBoxChanged)
         self.view.getTipoBigliettoComboBox().currentTextChanged.connect(self.__onTipoBigliettoChanged)
 
+    def initializeUi(self) -> None:
+        if self.model.tariffa is not None:
+            self.view.getTariffaComboBox().setCurrentIndex(self.model.tariffa.index)
+        self.update()
+
     def update(self) -> None:
-        self.view.getCostoLabel()  # TODO
+        self.view.getCostoLabel().setText(f'€ {self.model.calcolaCosto()}')

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>507</width>
-    <height>365</height>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -213,7 +213,7 @@ QPushButton::pressed{
      <rect>
       <x>30</x>
       <y>60</y>
-      <width>81</width>
+      <width>381</width>
       <height>31</height>
      </rect>
     </property>
@@ -250,8 +250,8 @@ background-color: rgba(255, 255, 255,0);
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>290</y>
+      <x>41</x>
+      <y>307</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -273,7 +273,7 @@ top: 414px;
 width: 119px;
 height: 19px;
 color: rgba(16, 16, 16,200);
-font-size: 16px;
+font-size: 18px;
 
 
 }</string>
@@ -292,7 +292,7 @@ font-size: 16px;
     <property name="geometry">
      <rect>
       <x>38</x>
-      <y>160</y>
+      <y>177</y>
       <width>125</width>
       <height>125</height>
      </rect>
@@ -334,7 +334,7 @@ background-color: rgb(244, 233, 140);
     <property name="geometry">
      <rect>
       <x>342</x>
-      <y>160</y>
+      <y>177</y>
       <width>125</width>
       <height>125</height>
      </rect>
@@ -375,10 +375,10 @@ background-color: rgb(170, 217, 249);
    <widget class="QLabel" name="label_16">
     <property name="geometry">
      <rect>
-      <x>212</x>
-      <y>290</y>
-      <width>81</width>
-      <height>21</height>
+      <x>193</x>
+      <y>306</y>
+      <width>121</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="font">
@@ -398,19 +398,23 @@ top: 414px;
 width: 119px;
 height: 19px;
 color: rgba(16, 16, 16,200);
-font-size: 16px;
+font-size: 18px;
+
 
 }</string>
     </property>
     <property name="text">
      <string>Segreteria</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="segreteriaBigButton">
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>160</y>
+      <y>177</y>
       <width>125</width>
       <height>125</height>
      </rect>
@@ -451,8 +455,8 @@ background-color: rgb(145, 234, 161);
    <widget class="QLabel" name="label_17">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>290</y>
+      <x>339</x>
+      <y>307</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -474,12 +478,47 @@ top: 414px;
 width: 119px;
 height: 19px;
 color: rgba(16, 16, 16,200);
-font-size: 16px;
+font-size: 18px;
+
 
 }</string>
     </property>
     <property name="text">
      <string>Amministrazione</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="titoloLabel_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>131</y>
+      <width>481</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lato</family>
+      <pointsize>14</pointsize>
+      <weight>3</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+text-align: left;
+background-color: rgba(255, 255, 255,0);
+font: 25 italic 14pt &quot;Lato&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Tieni premuto shift per saltare la schermata di login</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

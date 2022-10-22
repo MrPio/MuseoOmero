@@ -13,7 +13,7 @@ from frontend.controller.reception.strategy_aggiungi_opera.strategy_aggiungi_ope
 
 class StrategyAcquistaOpera(StrategyAggiungiOpera):
     def initializeUi(self, c: 'ControllerAggiungiOpera') -> None:
-        pass
+        c.view.getHeaderLabel().setText('HomeAmministrazione ➜ AcquistaOpera')
 
     def onConfermaClicked(self, c: 'ControllerAggiungiOpera') -> None:
         museo = Museo.getInstance()

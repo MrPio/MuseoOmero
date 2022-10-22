@@ -20,7 +20,11 @@ class ControllerYesNo(Controller):
         self.previous: Controller = previous
         self.onConfermaCliked = onConfermaCliked
         self.view.getMessaggioLabel().setText(message)
+        if self.previous is not None:
+            self.previous.disableView()
         self.connettiEventi()
+        self.initializeUi()
+        self.showView()
 
     def __onAnnullaClicked(self) -> None:
         self.closeView()
@@ -34,5 +38,6 @@ class ControllerYesNo(Controller):
         self.onConfermaCliked()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
         self.view.getAnnullaButton().mouseReleaseEvent = lambda _: self.__onAnnullaClicked()

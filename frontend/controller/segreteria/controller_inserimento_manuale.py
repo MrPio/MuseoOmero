@@ -30,21 +30,23 @@ class ControllerInserimentoManuale(Controller):
         self.model = model
         self.strategy = strategy
         self.strategy.initializeUi(self.previous)
+        self.previous.disableView()
         self.connettiEventi()
-
+        self.initializeUi()
+        self.showView()
         # ============================================================================
         # Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
-        cliente= Cliente(
-                nome='Pippo',
-                cognome='Solo',
-                codFis = "codFis",
-                email = "email",
-                tel = "3355",
-                #data_registrazione = datetime.now(),
+        cliente = Cliente(
+            nome='Pippo',
+            cognome='Solo',
+            codFis="codFis",
+            email="email",
+            tel="3355",
+            # data_registrazione = datetime.now(),
         )
 
-        documento= Abbonamento(dataRilascio= datetime(2022, 9, 17))
-        documento.qr_code.id='AAAAAAAAAA'
+        documento = Abbonamento(dataRilascio=datetime(2022, 9, 17))
+        documento.qr_code.id = 'AAAAAAAAAA'
         cliente.abbonamenti.append(documento)
         self.model.visitatori.append(cliente)
         # ============================================================================
@@ -68,11 +70,13 @@ class ControllerInserimentoManuale(Controller):
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()
         if len(id) == 11:
-            self.strategy.finalizza(self.previous, id.replace('-', ''))
-                # self.closeView()
-                # self.previous.previous.showView()
-                # self.previous.enableView()
+            if self.strategy.finalizza(self.previous, id.replace('-', '')):
+                self.closeView()
+            # self.closeView()
+            # self.previous.previous.showView()
+            # self.previous.enableView()
 
     def connettiEventi(self) -> None:
+        super().connettiEventi()
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
         self.view.getConfermaButton().clicked.connect(self.__onConfermaClicked)
