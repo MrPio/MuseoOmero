@@ -220,7 +220,7 @@ text-align: center;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>282</x>
+      <x>273</x>
       <y>410</y>
       <width>4</width>
       <height>70</height>
@@ -346,28 +346,6 @@ text-align: center;</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QFrame" name="qrCodeImage">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>94</x>
-      <y>121</y>
-      <width>360</width>
-      <height>222</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-width: 0px;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="confermaButton">
@@ -611,6 +589,49 @@ QPushButton::pressed{
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="qrCodeImage">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>140</y>
+      <width>180</width>
+      <height>180</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+left: 368px;
+top: 159px;
+width: 190px;
+height: 185px;
+line-height: 20px;
+border-radius: 22px;
+background-color: rgb(255, 249, 190);
+color: rgba(16, 16, 16, 100);
+font-size: 14px;
+text-align: center;
+
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>res/qr_code_2_FILL1_wght600_GRAD200_opsz48_risultato.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="margin">
+     <number>17</number>
+    </property>
+    <property name="indent">
+     <number>-1</number>
+    </property>
+   </widget>
    <zorder>label_8</zorder>
    <zorder>label_6</zorder>
    <zorder>label</zorder>
@@ -623,12 +644,12 @@ QPushButton::pressed{
    <zorder>importoTotaleLabel</zorder>
    <zorder>costoTotaleLabel</zorder>
    <zorder>label_10</zorder>
-   <zorder>qrCodeImage</zorder>
    <zorder>confermaButton</zorder>
    <zorder>previousButton</zorder>
    <zorder>maximizeButton</zorder>
    <zorder>exitButton</zorder>
    <zorder>reduceButton</zorder>
+   <zorder>qrCodeImage</zorder>
   </widget>
  </widget>
  <resources/>
