@@ -63,6 +63,10 @@ class ControllerRinnovoAbbonamento(Controller):
         self.disableView()
 
     def __onDurataChanged(self) -> None:
+        """
+        Si è scelto di non utilizzare il pattern of observer perché comporterebbe la modifica
+        dell'attributo 'tipo' dell'abbonamento anche se poi l'operazione può essere annullata
+        """
         self.view.getImportoTotaleLabel().setText(
             '€ '+str(TipoAbbonamento[self.view.getDurataComboBox().currentText().upper()].cost))
 
