@@ -39,6 +39,7 @@ class ControllerConvalida(Controller):
             previous=self,
             strategy=self.strategy,
         )
+        self.next.initializeUi()
         self.next.showView()
         self.disableView()
 
@@ -60,8 +61,3 @@ class ControllerConvalida(Controller):
         self.strategy.initializeUi(self)
         # TODO
 
-    # def finalizza(self, abbonamento: 'Abbonamento') -> None:
-    #     self.strategy.abbonamento = abbonamento
-    #     self.strategy.finalizza(self)
-    #     self.closeView()
-    #     self.previous.enableView()
