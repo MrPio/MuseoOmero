@@ -9,21 +9,23 @@
 #######################################################
 from PyQt5.QtWidgets import QLabel, QPushButton
 
+from frontend.ui.location import UI_DIR
 from frontend.view.my_widget import MyWidget
 
 
 class WidgetRichiestaDonazione(MyWidget):
+
+    def __init__(self,  parent):
+        super().__init__(UI_DIR + '/richiestaDonazioneWidget.ui', parent)
+
     def getIcon(self) -> QLabel:
-        pass
+        return self.iconLabel
 
     def getTitoloLabel(self) -> QLabel:
-        pass
-
-    def getEmailLabel(self) -> QLabel:
-        pass
+        return self.titoloLabel
 
     def getRifiutaButton(self) -> QPushButton:
-        pass
+        return self.rifiutaButton
 
     def getAccettaButton(self) -> QPushButton:
-        pass
+        return self.AccettaButton

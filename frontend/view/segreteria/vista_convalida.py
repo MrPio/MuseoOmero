@@ -19,7 +19,7 @@ class VistaConvalida(MyMainWindow):
         super().__init__(UI_DIR + '/Convalida.ui')
 
     def getHeaderLabel(self) -> QLabel:
-        return self.headerLabel
+        return self.titoloLabel
 
     def getPreviousButton(self) -> QPushButton:
         return self.previousButton

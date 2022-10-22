@@ -11,7 +11,7 @@ from backend.low_level.network.notification import Notification
 
 
 class SMSMessage(Notification):
-    def __init__(self, telefono: int):
+    def __init__(self, telefono: str):
         self.telefono = telefono
 
     def send(self, title: str, content: str) -> None:

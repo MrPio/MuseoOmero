@@ -7,11 +7,15 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel
+
 import backend.high_level.museo as museo
 from frontend.controller.amministrazione.controller_assumi import ControllerAssumi
 from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
 from frontend.controller.amministrazione.widget.controller_widget_dipendente import ControllerWidgetDipendente
 from frontend.controller.controller import Controller
+from frontend.ui.location import UI_DIR
 from frontend.view.amministrazione.vista_assumi import VistaAssumi
 from frontend.view.amministrazione.vista_gestione_dipendenti import VistaGestioneDipendenti
 from frontend.view.amministrazione.widget.widget_dipendente import WidgetDipendente
@@ -66,5 +70,11 @@ class ControllerGestioneDipendenti(Controller):
         # rimuovo tutti i widget
         for i in reversed(range(self.view.verticalLayout.count())):
             self.view.verticalLayout.itemAt(i).widget().setParent(None)
+
+        if len(self.dipendenti) == 0:
+            label = QLabel('Niente da mostrate qui.', self.view.scrollAreaWidgetContents)
+            label.setStyleSheet(open(UI_DIR + '/css/textLabel.css', 'r').read())
+            label.setAlignment(Qt.AlignCenter)
+            self.view.scrollAreaWidgetContents.addWidget(label)
         for controller in self.dipendenti:
             self.view.verticalLayout.addWidget(controller.view)

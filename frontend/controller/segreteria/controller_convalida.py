@@ -21,8 +21,9 @@ class ControllerConvalida(Controller):
 
     def __gotoPrevious(self) -> None:
         self.closeView()
-        self.previous.initializeUi()
+        self.previous.showView()
         self.previous.enableView()
+        self.previous.initializeUi()
 
     def __init__(self, view: VistaConvalida, previous: Controller, strategy: StrategyConvalida):
         super().__init__(view)
@@ -31,6 +32,7 @@ class ControllerConvalida(Controller):
         self.strategy: StrategyConvalida = strategy
         self.next = None
         self.connettiEventi()
+        self.initializeUi()
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
@@ -51,6 +53,10 @@ class ControllerConvalida(Controller):
             return
 
         self.strategy.finalizza(self, id)
+        # if self.strategy.finalizza(self,id):
+        #     self.closeView()
+        #     self.previous.showView()
+        #     self.previous.enableView()
 
     def connettiEventi(self) -> None:
         self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()

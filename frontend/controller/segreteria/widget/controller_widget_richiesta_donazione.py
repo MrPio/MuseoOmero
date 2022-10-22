@@ -7,7 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+from backend.high_level.museo import Museo
 from backend.high_level.personale.richiesta_donazione import RichiestaDonazione
+from backend.low_level.network.email_message import EmailMessage
 from frontend.controller.controller import Controller
 from frontend.controller.reception.controller_vista_opera import ControllerVistaOpera
 from frontend.view.reception.vista_opera import VistaOpera
@@ -19,22 +21,33 @@ class ControllerWidgetRichiestaDonazione(Controller):
     def __gotoVistaOpera(self) -> None:
         self.next = ControllerVistaOpera(
             view=VistaOpera(),
-            previous=self,
-            model=self.model.opera,  # TODO controllare correttezza
+            previous=self.parent,
+            model=self.model.opera,
+            eliminabile=False,
         )
+        self.next.showView()
+        self.parent.disableView()
 
-    def __init__(self, view: WidgetRichiestaDonazione, model: RichiestaDonazione):
+    def __init__(self, view: WidgetRichiestaDonazione, parent:Controller,model: RichiestaDonazione):
         super().__init__(view)
         self.view: WidgetRichiestaDonazione = view
+        self.parent=parent
         self.model = model
         self.connettiEventi()
         self.initializeUi()
 
     def __onRifiutaClicked(self) -> None:
         self.model.rifiuta()
+        self.parent.initializeUi()
+        mezzo='email'if isinstance(self.model.notification,EmailMessage) else 'sms'
+        self.notifica('Donazione Rifiutata',f'Il donatore sarà notificato per {mezzo}')
+
 
     def __onAccettaClicked(self) -> None:
         self.model.accetta(self.model.ubicazione)
+        self.parent.initializeUi()
+        mezzo='email'if isinstance(self.model.notification,EmailMessage) else 'sms'
+        self.notifica('Donazione Accettata', f'Il donatore sarà notificato per {mezzo}')
 
     def connettiEventi(self) -> None:
         self.view.getAccettaButton().clicked.connect(self.__onAccettaClicked)
@@ -42,5 +55,5 @@ class ControllerWidgetRichiestaDonazione(Controller):
         self.view.getIcon().mouseReleaseEvent = lambda _: self.__gotoVistaOpera()
 
     def initializeUi(self) -> None:
-        # TODO foto
         self.view.getTitoloLabel().setText(self.model.opera.titolo)
+        self.view.getIcon().setMargin(16)

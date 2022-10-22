@@ -18,12 +18,13 @@ from backend.high_level.personale.segretario import Segretario
 
 
 class Segreteria(PostoLavoro):
-    def __init__(self, nome: str, piano: int, numPostazioni: int, sportelli: int, telFisso: str, descr: str = ""):
+    def __init__(self, nome: str, piano: int, numPostazioni: int, sportelli: int, telFisso: str='',
+                 descr: str = '', richieste_donazione:list[RichiestaDonazione]|None=None):
         super().__init__(nome, piano, numPostazioni)
         self.sportelli = sportelli
         self.telefono_fisso = telFisso
         self.descrizione = descr
-        self.richieste_donazione: list[RichiestaDonazione] = []
+        self.richieste_donazione:list[RichiestaDonazione]= richieste_donazione if richieste_donazione is not None else []
 
     def assumi(self, dipendente: Dipendente) -> bool:
         lavoro = Segretario(

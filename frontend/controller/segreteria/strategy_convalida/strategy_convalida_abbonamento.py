@@ -17,15 +17,15 @@ from frontend.view.segreteria.vista_abbonamento import VistaAbbonamento
 
 class StrategyConvalidaAbbonamento(StrategyConvalida):
 
-    def __init__(self) -> None:
-        self.abbonamento: 'Abbonamento' | None = None
-        self.model = Museo.getInstance()
+    # def __init__(self) -> None:
+    #     self.abbonamento: 'Abbonamento' | None = None
+    #     self.model = Museo.getInstance()
 
     def initializeUi(self, c: 'ControllerConvalida') -> None:
         c.view.getHeaderLabel().setText('CompraBiglietto ➜ ConvalidaAbbonamento')
 
     def finalizza(self, c: 'ControllerConvalida', id: str) -> bool:
-        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, self.model.visitatori)):
+        for cliente in list(filter(lambda visitatore: type(visitatore) == Cliente, Museo.getInstance().visitatori)):
             for abbonamento in cliente.abbonamenti:
                 if id == abbonamento.qr_code.id:
                     c.next = ControllerVistaAbbonamento(
