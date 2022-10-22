@@ -145,17 +145,12 @@ def startApp():
     controller_home=ControllerHome(vista_home)
     sys.exit(app.exec())
 
-    # TODO
-    # turno widget
-    # duplicazione
-
 
 if __name__ == '__main__':
-    # TODO fare vista inserisciUbicazione
     # popolaMuseo()
     # from backend.high_level.museo import Museo
     # from backend.high_level.personale.segreteria import Segreteria
     #
     # Museo.getInstance().posti_lavoro = [s for s in Museo.getInstance().posti_lavoro if not isinstance(s ,Segreteria)]
     startApp()
-    #Todo controllare se le heder label vengono sempre aggiornate
+    # Todo controllare se le heder label vengono sempre aggiornate

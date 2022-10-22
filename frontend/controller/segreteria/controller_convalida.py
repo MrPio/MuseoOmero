@@ -68,4 +68,3 @@ class ControllerConvalida(Controller):
 
     def initializeUi(self) -> None:
         self.strategy.initializeUi(self)
-        # TODO

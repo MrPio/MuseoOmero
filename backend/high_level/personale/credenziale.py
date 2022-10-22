@@ -18,7 +18,6 @@ from frontend.ui.location import UI_DIR
 
 
 class Credenziale:
-    # TODO Nella vista account l'utente deve poter cambiare la sua password
     def __init__(self, username: str, password: str = '', hashing: Hashing = SHA256Hashing()):
         self.username = username
         self.hashing: Hashing = hashing
