@@ -30,6 +30,7 @@ class ControllerConvalida(Controller):
         self.previous: Controller = previous
         self.strategy: StrategyConvalida = strategy
         self.next = None
+        self.connettiEventi()
 
     def __gotoVistaInserimentoManuale(self) -> None:
         self.next = ControllerInserimentoManuale(
