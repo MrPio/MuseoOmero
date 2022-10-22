@@ -8,6 +8,7 @@
 # 
 #######################################################
 from backend.high_level.clientela.biglietto import Biglietto
+from backend.high_level.gestione_interna.opera import Opera
 from backend.high_level.museo import Museo
 from backend.high_level.personale.dipendente import Dipendente
 from frontend.controller.controller import Controller
@@ -79,8 +80,8 @@ class ControllerHomeReception(Controller):
             view=VistaAggiungiOpera(),
             previous=self,
             strategy=StrategyRiceviDonazione(),
+            model=Opera()
         )
-        self.next.connettiEventi()
         self.next.showView()
         self.disableView()
 

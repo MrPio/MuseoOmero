@@ -31,7 +31,7 @@ from frontend.view.vista_yes_no import VistaYesNo
 
 class ControllerAggiungiOpera(Controller):
 
-    def __gotoPrevious(self) -> None:
+    def gotoPrevious(self) -> None:
         self.closeView()
         self.previous.enableView()
 
@@ -102,7 +102,7 @@ class ControllerAggiungiOpera(Controller):
 
         def save_and_exit():
             self.strategy.onConfermaClicked(self)
-            self.__gotoPrevious()
+            self.gotoPrevious()
 
         if self.model.immagine is None:
             self.next = ControllerYesNo(VistaYesNo(), None, save_and_exit,
@@ -115,7 +115,7 @@ class ControllerAggiungiOpera(Controller):
         self.hold_start = time.time_ns()
 
     def connettiEventi(self) -> None:
-        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.__gotoPrevious()
+        self.view.getPreviousButton().mouseReleaseEvent = lambda _: self.gotoPrevious()
         self.view.getConfermaButton().mouseReleaseEvent = lambda _: self.__onConfermaClicked()
         self.view.getUbicazioneButton().clicked.connect(self.__onAggiungiUbicazioneClicked)
 
@@ -144,6 +144,7 @@ class ControllerAggiungiOpera(Controller):
         #         '{:03} cm x {:03} cm  x {:03} cm'.format(comp.altezza_cm, comp.larghezza_cm,comp.profondita_cm))
         #
         # self.view.getPeriodoStoricoComboBox().setCurrentIndex(self.model.periodo.value)
+        self.strategy.initializeUi(self)
         self.view.getErrorLabel().setVisible(False)
         if self.model.immagine is not None:
             try:
