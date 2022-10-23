@@ -10,6 +10,7 @@
 from datetime import datetime
 
 from backend.high_level.clientela.abbonamento import Abbonamento
+from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.clientela.cliente import Cliente
 from backend.high_level.museo import Museo
 from frontend.controller.controller import Controller
@@ -34,6 +35,7 @@ class ControllerInserimentoManuale(Controller):
         self.connettiEventi()
         self.initializeUi()
         self.showView()
+
         # ============================================================================
         # Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
         cliente = Cliente(
@@ -51,7 +53,7 @@ class ControllerInserimentoManuale(Controller):
         self.model.visitatori.append(cliente)
         # ============================================================================
         # Parte relativa al test BIGLIETTO, da togliere nel programma terminato
-        '''cliente= Cliente(
+        cliente= Cliente(
                 nome='Ciccio',
                 cognome='Bello',
                 codFis = "codFis",
@@ -61,9 +63,9 @@ class ControllerInserimentoManuale(Controller):
         )
 
         biglietto= Biglietto(dataRilascio= datetime(2022, 9, 17))
-        biglietto.qr_code.id='AAAAA-AAAAA'
+        biglietto.qr_code.id='AAAAAAAAAA'
         cliente.biglietti.append(biglietto)
-        self.model.visitatori.append(cliente)'''
+        self.model.visitatori.append(cliente)
 
     # ============================================================================
 
@@ -71,6 +73,7 @@ class ControllerInserimentoManuale(Controller):
         id = self.view.getIdLineEdit().text()
         if len(id) == 11:
             if self.strategy.finalizza(self.previous, id.replace('-', '')):
+                self.previous.enableView()
                 self.closeView()
             # self.closeView()
             # self.previous.previous.showView()

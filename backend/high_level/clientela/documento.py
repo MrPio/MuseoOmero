@@ -50,3 +50,8 @@ class Documento(abc.ABC):
     def notify(self) -> None:
         for subscriber in self.subscribers:
             subscriber.update()
+
+    def __getstate__(self):
+        self.subscribers=[]
+        state = dict(self.__dict__)
+        return state

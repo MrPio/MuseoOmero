@@ -88,7 +88,8 @@ class ControllerVistaStatistiche(Controller):
             self.statistica_decorator.calcola()
             self.view.getVisualizzaStatisticheFrame().setLayout(self.charts_layout[self.current_index])
         self.__setVisibilitaFrecce()
-        self.view.getSessoCheckBox().click()
+        if not self.view.sessoCheckBoxStatus:
+            self.view.getSessoCheckBox().click()
 
     def __svuotaGrafici(self):
         def __deleteLayout(layout):

@@ -36,11 +36,13 @@ class GraficoSuEta(Grafico):
             for biglietto in visitatore.biglietti:
                 for data in biglietto.date_convalida:
                     if data.year == mese.year and data.month == mese.month:
+                        added=False
                         for i in range(len(etas)):
-                            if visitatore.calcolaEta() < etas[i]:
+                            if visitatore.calcolaEta() < etas[i] and not added:
                                 for j in range(len(days)):
                                     if data.day < days[j]:
                                         sets[i][j] += 1
+                                        added=True
                                         break
 
         self.set_0 = QBarSet("0-5")

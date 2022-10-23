@@ -29,6 +29,7 @@ Assicurati di installare tutte le dipendenze necessarie per eseguire il software
 
 ### • Ridimensionamento testo
 Per una migliore esperienza, utilizza un ridimensionamento del 100%.
+
 ![img.png](img.png)
 
 
