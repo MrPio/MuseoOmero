@@ -24,6 +24,8 @@ class StrategyVendiOpera(StrategyRicercaOpera):
         if c.model.vendi(NexiApi()):
             c.parent.previous.enableView()
             c.parent.closeView()
+            c.notifica('Opera venduta', 'Il pagamento è andato a buon fine, opera venduta con successo!')
+
         else:
             c.notifica('Attenzione', 'Si è verificato un errore nel pagamento, si prega di riprovare...')
 
