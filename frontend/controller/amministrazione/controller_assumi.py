@@ -69,7 +69,7 @@ class ControllerAssumi(Controller):
             if self.lavoro_scelto is not None:
                 self.lavoro_scelto.assumi(nuovo_dip)
                 if type(self.lavoro_scelto) == Amministrazione:
-                    for dipendente in self.model.dipendenti:
+                    for dipendente in reversed(self.model.dipendenti):
                         if dipendente.autogenerato:
                             self.model.dipendenti.remove(dipendente)
             self.model.dipendenti.append(nuovo_dip)

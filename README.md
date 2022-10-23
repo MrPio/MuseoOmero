@@ -23,16 +23,30 @@ Assicurati di avere la versione [Python 3.10.6](https://www.python.org/ftp/pytho
  di python con il seguente comando da linea di comando:
 >python --version
 
+### • Installa le dipendenze necessarie
+Assicurati di installare tutte le dipendenze necessarie per eseguire il software con il seguente comando:
+>pip install -r requirements.txt 
+
 ### • Ridimensionamento testo
 Per una migliore esperienza, utilizza un ridimensionamento del 100%.
-
 ![img.png](img.png)
+
+
+
 ### • Font Lato
 Come ultimo requisito, ti chiediamo di installare il font Lato di Google al seguente link:
 > [Lato Regular](Lato-Regular.ttf)
 
 >[Lato Light](Lato-Light.ttf)
 
+---
+
+# Avvio software:
+### • Interprete Python
+Il punto di avvio è nel seguente script:
+>[__init__.py](frontend/__init__.py)
+
+---
 
 # Diagramma delle classi (legacy) [FRONTEND]:
 ![Diagramma delle classi  PROGETTAZIONE  1-2](https://user-images.githubusercontent.com/22773005/194780274-53287331-ee43-48b0-aa4e-4dc326652181.png)

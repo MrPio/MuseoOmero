@@ -5,6 +5,7 @@ import string
 import sys
 
 from PyQt5.QtWidgets import QApplication
+from fontTools.ttLib import TTFont
 
 from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
@@ -152,5 +153,7 @@ if __name__ == '__main__':
     # from backend.high_level.personale.segreteria import Segreteria
     #
     # Museo.getInstance().posti_lavoro = [s for s in Museo.getInstance().posti_lavoro if not isinstance(s ,Segreteria)]
+
+    # font = TTFont('..\Lato-Regular.ttf').save('ciccio.ttf')
     startApp()
     # Todo controllare se le heder label vengono sempre aggiornate

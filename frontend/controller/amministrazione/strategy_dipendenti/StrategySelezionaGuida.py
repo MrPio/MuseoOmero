@@ -15,7 +15,7 @@ from frontend.ui.location import UI_DIR
 class StrategySelezionaGuida(StrategyDipendenti):
     def initializeUi(self, c: 'ControllerGestioneDipendenti') -> None:
         c.view.getHeaderLabel().setText('ModificaTurnoGuida ➜ SelezionaGuida')
-        for controller in c.dipendenti:
+        for controller in reversed(c.dipendenti):
             if not isinstance(controller.model.lavoro, OperatoreAlPubblico):
                 controller.view.setParent(None)
                 c.dipendenti.remove(controller)

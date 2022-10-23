@@ -28,7 +28,7 @@ class StrategyRiceviDonazione(StrategyAggiungiOpera):
 
     def onConfermaClicked(self, c: 'ControllerAggiungiOpera') -> None:
         museo = Museo.getInstance()
-        richiesta_donazione = RichiestaDonazione(c.model, c.model.ubicazione, SMSMessage(0))
+        richiesta_donazione = RichiestaDonazione(c.model, c.model.ubicazione, SMSMessage('0'))
         segreterie = list(filter(lambda s: isinstance(s, Segreteria), museo.posti_lavoro))
         if segreterie:
             random.choice(segreterie).richieste_donazione.append(richiesta_donazione)
