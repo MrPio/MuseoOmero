@@ -1,11 +1,15 @@
 import ctypes
 import datetime
+import os
 import random
+import shutil
 import string
 import sys
+import time
 
+import win32gui
+import winotify
 from PyQt5.QtWidgets import QApplication
-from fontTools.ttLib import TTFont
 
 from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.clientela.enum.tipo_abbonamento import TipoAbbonamento
@@ -145,15 +149,35 @@ def startApp():
     #                                           Dipendente('a', 'b', datetime.datetime.now()))
     controller_home=ControllerHome(vista_home)
     sys.exit(app.exec())
+def font_presenti():
+    def callback(font, tm, fonttype, names):
+        names.append(font.lfFaceName)
+        return True
+    font_names = []
+    hdc = win32gui.GetDC(None)
+    win32gui.EnumFontFamilies(hdc, None, callback, font_names)
+    win32gui.ReleaseDC(hdc, None)
 
+    if not 'Lato' in font_names or not 'Lato Light' in font_names:
+        notifica = winotify.Notification(
+            app_id='Museo Omero',
+            title='Font necessari [Lato]',
+            msg='Per favore, installa i seguenti fonts e poi riavvia il software',
+            icon=UI_DIR + '/ico/museum_white.ico',
+            duration='short',
+        )
+        notifica.set_audio(winotify.audio.Default,False)
+        notifica.show()
+
+        time.sleep(3)
+        os.startfile(UI_DIR+'/fonts/Lato-Regular.ttf')
+        os.startfile(UI_DIR+'/fonts/Lato-Light.ttf')
+        os.startfile(UI_DIR+'/fonts/Lato-LightItalic.ttf')
+        os._exit(1)
 
 if __name__ == '__main__':
     # popolaMuseo()
-    # from backend.high_level.museo import Museo
-    # from backend.high_level.personale.segreteria import Segreteria
-    #
-    # Museo.getInstance().posti_lavoro = [s for s in Museo.getInstance().posti_lavoro if not isinstance(s ,Segreteria)]
-
-    # font = TTFont('..\Lato-Regular.ttf').save('ciccio.ttf')
+    font_presenti()
     startApp()
+
     # Todo controllare se le heder label vengono sempre aggiornate

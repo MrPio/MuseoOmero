@@ -37,10 +37,9 @@ Per una migliore esperienza, utilizza un ridimensionamento del 100%.
 
 
 ### • Font Lato
-Come ultimo requisito, ti chiediamo di installare il font Lato di Google al seguente link:
+Come ultimo requisito, il software utilizza la famiglia di font [Lato](https://www.latofonts.com/), ma non ti preoccupare, 
+verranno installati al primo avvio se non presenti nel sistema :)
 
-[Lato Regular](Lato-Regular.ttf)
-[Lato Light](Lato-Light.ttf)
 
 ---
 

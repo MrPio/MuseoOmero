@@ -19,9 +19,9 @@ from frontend.view.my_main_window import MyMainWindow
 
 class Controller(abc.ABC):
 
-    def __init__(self, view: MyMainWindow | QWidget,reactOnShift:bool=False) -> None:
+    def __init__(self, view: MyMainWindow | QWidget, reactOnShift: bool = False) -> None:
         self.view = view
-        self.react_on_shift=reactOnShift
+        self.react_on_shift = reactOnShift
         self.shift: bool = False
 
     def initializeUi(self) -> None:
@@ -54,19 +54,23 @@ class Controller(abc.ABC):
         return self
 
     def notifica(self, titolo: str, contenuto: str, durata='short') -> None:
-        winotify.Notification(
+        notifica = winotify.Notification(
             app_id='Museo Omero',
             title=titolo,
             msg=contenuto,
             icon=UI_DIR + '/ico/museum_white.ico',
             duration=durata,
-        ).show()
+        )
+        notifica.set_audio(winotify.audio.Default,False)
+        notifica.show()
+
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Shift:
             self.shift = True
             if self.react_on_shift:
                 self.view.go_debug_mode(True)
+
 
     def keyReleaseEvent(self, e) -> None:
         if e.key() == Qt.Key_Shift:
