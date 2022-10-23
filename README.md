@@ -21,11 +21,13 @@ https://user-images.githubusercontent.com/22773005/197066001-55bb7f74-f06a-4076-
 ### • Interprete Python
 Assicurati di avere la versione [Python 3.10.6](https://www.python.org/ftp/python/3.10.6/)
  di python con il seguente comando da linea di comando:
->python --version
+ 
+`` python --version``
 
 ### • Installa le dipendenze necessarie
 Assicurati di installare tutte le dipendenze necessarie per eseguire il software con il seguente comando:
->pip install -r requirements.txt 
+
+``pip install -r requirements.txt ``
 
 ### • Ridimensionamento testo
 Per una migliore esperienza, utilizza un ridimensionamento del 100%.
@@ -36,16 +38,16 @@ Per una migliore esperienza, utilizza un ridimensionamento del 100%.
 
 ### • Font Lato
 Come ultimo requisito, ti chiediamo di installare il font Lato di Google al seguente link:
-> [Lato Regular](Lato-Regular.ttf)
 
->[Lato Light](Lato-Light.ttf)
+[Lato Regular](Lato-Regular.ttf)
+[Lato Light](Lato-Light.ttf)
 
 ---
 
 # Avvio software:
 ### • Interprete Python
 Il punto di avvio è nel seguente script:
->[__init__.py](frontend/__init__.py)
+>[__ init __.py](frontend/__init__.py)
 
 ---
 
