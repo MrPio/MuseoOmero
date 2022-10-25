@@ -22,8 +22,8 @@ class ControllerInserisciDatiCliente(Controller):
 
     def __gotoPrevious(self) -> None:
         self.closeView()
-        self.previous.closeView()
-        self.previous.previous.enableView()
+        self.previous.showView()
+        self.previous.enableView()
 
     def __init__(self, view: VistaInserisciDatiCliente, previous: Controller, model: Visitatore):
         super().__init__(view)

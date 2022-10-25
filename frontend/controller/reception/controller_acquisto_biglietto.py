@@ -7,6 +7,9 @@
 # Original author: ValerioMorelli
 # 
 #######################################################
+import os
+import tempfile
+
 from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.clientela.enum.tariffa import Tariffa
 from backend.high_level.clientela.subscriber import Subscriber
@@ -61,14 +64,21 @@ class ControllerAcquistoBiglietto(Controller, Subscriber):
         if not self.model.acquista():
             self.notifica('Attenzione', 'Si è verificato un errore nel pagamento, si prega di riprovare...')
             return
-
-        self.next = ControllerInserisciDatiCliente(
-            view=VistaInserisciDatiCliente(),
-            previous=self,
-            model=Visitatore(),
-        )
-
-        self.closeView()
+        if self.model.abbonamento is None:
+            self.next = ControllerInserisciDatiCliente(
+                view=VistaInserisciDatiCliente(),
+                previous=self,
+                model=Visitatore(),
+            )
+            self.closeView()
+        else:
+            self.notifica('Biglietto Acquistato', f'Biglietto acquistato con successo! \r\n'
+                                                  f' ID --> {self.model.qr_code.id}')
+            path = tempfile.gettempdir() + '/qrcode.jpg'
+            self.model.qr_code.getImage().convert('RGB').save(path)
+            os.startfile(path)
+            self.previous.enableView()
+            self.closeView()
 
     def __onTariffaBoxChanged(self) -> None:
         self.model.tariffa=Tariffa[self.view.getTariffaComboBox().currentText().upper()]
