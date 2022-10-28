@@ -34,6 +34,10 @@ class StrategyConvalidaAbbonamento(StrategyConvalida):
                             previous=c,
                             model=abbonamento,
                         )
+                        if not abbonamento.convalida():
+                            c.notifica('Abbonamento scaduto',
+                                       "Spiacenti, l\'abbonamento è scaduto "+ str(abbonamento.giorniAllaScadenza()*-1) +" giorni fa.")
+                            return False
                         c.next.showView()
                         c.disableView()
                         return True

@@ -36,38 +36,17 @@ class ControllerInserimentoManuale(Controller):
         self.initializeUi()
         self.showView()
 
-        # ============================================================================
-        # Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
         cliente = Cliente(
-            nome='Pippo',
-            cognome='Solo',
-            codFis="codFis",
-            email="email",
-            tel="3355",
-            # data_registrazione = datetime.now(),
+            nome='Mario',
+            cognome='Rossi',
+            codFis="RSSMRA01E07D546X",
+            email="email@gmail.com",
+            tel="3466787656",
         )
-
-        documento = Abbonamento(dataRilascio=datetime(2022, 9, 17))
-        documento.qr_code.id = 'AAAAAAAAAA'
-        cliente.abbonamenti.append(documento)
-        self.model.visitatori.append(cliente)
-        # ============================================================================
-        # Parte relativa al test BIGLIETTO, da togliere nel programma terminato
-        cliente= Cliente(
-                nome='Ciccio',
-                cognome='Bello',
-                codFis = "codFis",
-                email = "email",
-                tel = "3355",
-                #data_registrazione = datetime.now(),
-        )
-
-        biglietto= Biglietto(dataRilascio= datetime(2022, 9, 17))
-        biglietto.qr_code.id='AAAAAAAAAA'
-        cliente.biglietti.append(biglietto)
-        self.model.visitatori.append(cliente)
-
-    # ============================================================================
+        abbonamento = Abbonamento(dataRilascio=datetime(2022,1,1))
+        abbonamento.qr_code.id="AAAAAAAAAA"
+        cliente.abbonamenti.append(abbonamento)
+        model.visitatori.append(cliente)
 
     def __onConfermaClicked(self) -> None:
         id = self.view.getIdLineEdit().text()

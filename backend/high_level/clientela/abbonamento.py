@@ -38,10 +38,12 @@ class Abbonamento(Documento):
         return self.pagato and not self.isScaduto()
 
     def isScaduto(self) -> bool:
-        return self.giorniAllaScadenza() > 0
+        #return self.giorniAllaScadenza() > 0
+        return False if self.giorniAllaScadenza() > 0 else True
 
     def giorniAllaScadenza(self) -> int:
         return list(self.date_rinnovo.items())[-1][1].days - (datetime.now() - list(self.date_rinnovo.keys())[-1]).days
+
 
     def rinnova(self, tipo: TipoAbbonamento) -> None:
         self.date_rinnovo[datetime.now()] = tipo

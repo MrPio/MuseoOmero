@@ -36,13 +36,18 @@ class StrategyRicercaAbbonamento(StrategyConvalida):
             if isinstance(cliente, Cliente):
                 for abbonamento in cliente.abbonamenti:
                     if id == abbonamento.qr_code.id:
-                        # c.notifica(titolo, messaggio)
 
                         if isinstance(c.previous, ControllerRinnovoAbbonamento):
                             c.previous.model = abbonamento
                             c.previous.showView()
                         elif isinstance(c.previous, ControllerAcquistoBiglietto):
                             c.previous.model.abbonamento = abbonamento
+
+                        if not abbonamento.convalida():
+                            c.notifica('Abbonamento scaduto',
+                                        "Spiacenti, l\'abbonamento è scaduto " + str(
+                                            abbonamento.giorniAllaScadenza() * -1) + " giorni fa.")
+                            return False
                         c.previous.showView()
                         c.previous.enableView()
                         c.previous.initializeUi()
