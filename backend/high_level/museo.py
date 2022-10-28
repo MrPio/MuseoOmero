@@ -25,7 +25,6 @@ from backend.low_level.io.serializzatore import Serializzatore
 from backend.low_level.io.serializzazione_pickle import SerializzazionePickle
 from backend.low_level.network.cloud_storage import CloudStorage
 from backend.low_level.network.drop_box_api import DropBoxAPI
-from frontend.ui.location import UI_DIR
 
 
 class Museo:
@@ -169,6 +168,7 @@ class Museo:
         )
         if result:
             Museo.__instance = Museo.__serializzatore.deserializza(Museo.__backup_path + self.__get_last_backup())
+            from frontend.ui.location import UI_DIR
             winotify.Notification(
                 app_id='Museo Omero',
                 title='Backup ripristinato',

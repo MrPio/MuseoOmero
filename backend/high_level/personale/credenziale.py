@@ -10,11 +10,12 @@
 import random
 import string
 
+
 import winotify
 
 from backend.low_level.sicurezza.hashing import Hashing
 from backend.low_level.sicurezza.sha256_hashing import SHA256Hashing
-from frontend.ui.location import UI_DIR
+
 
 
 class Credenziale:
@@ -23,6 +24,7 @@ class Credenziale:
         self.hashing: Hashing = hashing
         rand_pass = ''.join(random.choice(string.digits) for _ in range(3))
         if password == '':
+            from frontend.ui.location import UI_DIR
             winotify.Notification(
                 app_id='Museo Omero',
                 title='Nuovo Account',

@@ -16,7 +16,6 @@ class TestAbbonamento(TestCase):
                 self.abbonamento_non_pagato.pagato = False
 
         def test_convalida(self):
-                print(self.abbonamento_scaduto.isScaduto())
                 self.assertEqual(
                         first=self.abbonamento_scaduto.convalida(),
                         second=False
@@ -31,32 +30,3 @@ class TestAbbonamento(TestCase):
                         first=self.abbonamento_non_pagato.convalida(),
                         second=False
                 )
-
-        # ============================================================================
-        '''# Parte relativa al test ABBONAMENTO, da togliere nel programma terminato
-        cliente = Cliente(
-            nome='Mario',
-            cognome='Rossi',
-            codFis="RSSMRA01E07D546X",
-            email="email@gmail.com",
-            tel="3466787656",
-        )'''
-
-
-        # ============================================================================
-        ''''# Parte relativa al test BIGLIETTO, da togliere nel programma terminato
-        cliente= Cliente(
-                nome='Ciccio',
-                cognome='Bello',
-                codFis = "codFis",
-                email = "email",
-                tel = "3355",
-                #data_registrazione = datetime.now(),
-        )
-
-        biglietto= Biglietto(dataRilascio= datetime(2022, 9, 17))
-        biglietto.qr_code.id='AAAAAAAAAA'
-        cliente.biglietti.append(biglietto)
-        self.model.visitatori.append(cliente)'''
-
-    # ============================================================================
