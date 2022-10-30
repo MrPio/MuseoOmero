@@ -10,7 +10,6 @@
 import random
 import string
 
-
 import winotify
 
 from backend.low_level.sicurezza.hashing import Hashing

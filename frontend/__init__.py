@@ -5,8 +5,9 @@ import random
 import string
 import sys
 import time
-import schedule
 from threading import Thread
+
+import schedule
 import win32gui
 import winotify
 from PyQt5.QtWidgets import QApplication
@@ -175,38 +176,32 @@ def font_presenti():
         os.startfile(UI_DIR+'/fonts/Lato-LightItalic.ttf')
         os._exit(1)
 
-#Function to do schedule action
-def action():
-    from backend.high_level.museo import Museo
-    museo = Museo.getInstance()
-    #backup del museo
-    museo.make_backup()
-    #e-mail abbonamenti
-    for cliente in Museo.getInstance().visitatori:
+
+def scheduler():
+    def action():
+        from backend.high_level.museo import Museo
         from backend.high_level.clientela.cliente import Cliente
-        if isinstance(cliente, Cliente):
-            for abbonamento in cliente.abbonamenti:
-                if abbonamento.giorniAllaScadenza() == 5:
-                   from backend.low_level.network.email_message import EmailMessage
-                   EmailMessage.send(title="Museo Omero: scadenza prossima.",
-                                     content="Si comunica che il Suo abbonamento scadrà tra 5 giorni."
-                                             " Si prega di rinnovarlo.\n Cordiali saluti.\nLo staff.")
-def threaded_function():
-    '''Function to create threads'''
-    #crate schedule
+
+        museo = Museo.getInstance()
+        # backup del museo
+        museo.make_backup()
+        # e-mail abbonamenti
+        for cliente in museo.visitatori:
+            if isinstance(cliente, Cliente):
+                for abbonamento in cliente.abbonamenti:
+                    if abbonamento.giorniAllaScadenza() ==5:
+                        cliente.notification.send(title="Museo Omero: scadenza prossima.",
+                                          content="Si comunica che il Suo abbonamento scadrà tra 5 giorni."
+                                                  " Si prega di rinnovarlo.\n Cordiali saluti.\nLo staff.")
     schedule.every().day.at("23:59").do(action)
     while True:
-        #inizialize schedule
         schedule.run_pending()
-        #avoid that the program slows down
-        time.sleep(1)
+        time.sleep(10)
 
 
 if __name__ == '__main__':
     #popolaMuseo()
-    thread = Thread(target=threaded_function)
+    thread = Thread(target=scheduler)
     thread.start()
     font_presenti()
     startApp()
-
-    # Todo controllare se le heder label vengono sempre aggiornate

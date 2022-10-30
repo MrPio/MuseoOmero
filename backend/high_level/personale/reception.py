@@ -34,10 +34,7 @@ class Reception(PostoLavoro):
             qualificaGuida='livello base',
             numPostazione=len(self.lavori) + 1
         )
-        if esito := dipendente.assumi(lavoro=lavoro):
-            dipendente.posto_lavoro = self
-            self.lavori.append(lavoro)
-        return esito
+        return dipendente.assumi(lavoro,self)
 
     def promuovi(self, dipendente: Dipendente) -> bool:
         for posto_lavoro in Museo.getInstance().posti_lavoro:

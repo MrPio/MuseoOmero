@@ -33,10 +33,7 @@ class Segreteria(PostoLavoro):
             numPostazione=len(self.lavori) + 1,
             sportelloAssegnato=len(self.lavori) + 1
         )
-        if esito := dipendente.assumi(lavoro=lavoro):
-            dipendente.posto_lavoro = self
-            self.lavori.append(lavoro)
-        return esito
+        return dipendente.assumi(lavoro,self)
 
     def promuovi(self, dipendente: Dipendente) -> bool:
         for lavoro in Museo.getInstance().posti_lavoro:

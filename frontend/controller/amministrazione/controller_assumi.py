@@ -92,7 +92,7 @@ class ControllerAssumi(Controller):
             'Amministratore': Amministrazione,
         }
         if not selected in matches.keys():
-            raise f'ControllerAssumi -> chiave posto lavoro [{selected}] non trovata'
+            raise Exception(f'ControllerAssumi -> chiave posto lavoro [{selected}] non trovata')
 
         result = []
         for posto_lavoro in self.model.posti_lavoro:

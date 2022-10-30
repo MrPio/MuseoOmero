@@ -33,12 +33,31 @@ class Dipendente():
         self.lavori_passati: list['Lavoro'] = []
         self.data_registrazione = datetime.now()
 
-    def assumi(self, lavoro: 'Lavoro') -> bool:
+    def assumi(self, lavoro: 'Lavoro',posto_lavoro:'PostoLavoro') -> bool:
+        from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+        from backend.high_level.personale.reception import Reception
+        from backend.high_level.personale.amministrazione import Amministrazione
+        from backend.high_level.personale.amministratore import Amministratore
+        from backend.high_level.personale.segretario import Segretario
+        from backend.high_level.personale.segreteria import Segreteria
+
         if self.lavoro is None:
+            matches={
+                OperatoreAlPubblico:Reception,
+                Segretario:Segreteria,
+                Amministratore:Amministrazione,
+            }
+            if not type(posto_lavoro) is  matches[type(lavoro)]:
+                raise Exception('Non posso assumere un {} in una {}!'.format(lavoro.__class__.__name__ ,
+                                                                             posto_lavoro.__class__.__name__))
+
+            self.posto_lavoro = posto_lavoro
+            posto_lavoro.lavori.append(lavoro)
+
             lavoro.dipendente = self
             self.lavoro = lavoro
             return True
-        return False
+        raise Exception('non posso assumere un dipendente che ha già un lavoro, prima devi licenziarlo!')
 
     def licenzia(self, notaLicenziamento: str) -> bool:
         if self.lavoro is not None:
@@ -47,7 +66,7 @@ class Dipendente():
             self.lavori_passati.append(self.lavoro)
             self.lavoro = None
             return True
-        return False
+        raise Exception('Non posso licenziare un dipendente che non ha un lavoro, prima devi assumerlo!')
 
     def autentifica(self, username: str, password: str) -> bool:
         if self.credenziale is not None:

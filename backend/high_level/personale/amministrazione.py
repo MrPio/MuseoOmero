@@ -26,10 +26,7 @@ class Amministrazione(PostoLavoro):
             numPostazione=len(self.lavori) + 1,
             fondatore=False
         )
-        if esito := dipendente.assumi(lavoro=lavoro):
-            dipendente.posto_lavoro = self
-            self.lavori.append(lavoro)
-        return esito
+        return dipendente.assumi(lavoro,self)
 
     def promuovi(self, dipendente: Dipendente) -> bool:
         return False

@@ -8,27 +8,29 @@ from backend.low_level.network.email_message import EmailMessage
 
 class TestRichiestaDonazione(TestCase):
 
+    def setUp(self) -> None:
+        self.ubicazione = Ubicazione()
+        self.opera = Opera()
+        self.richiesta = RichiestaDonazione(
+            opera=self.opera,
+            ubicazioneProvvisoria=self.ubicazione,
+            notification=EmailMessage(''),
+        )
 
-        def setUp(self) -> None:
-            self.ubicazione = Ubicazione()
-            self.opera = Opera()
-            self.richiesta = RichiestaDonazione(opera=self.opera, ubicazioneProvvisoria=self.ubicazione, notification= EmailMessage(""))
+    def test_convalida(self):
+        self.assertEqual(
+            first=self.richiesta.accettata,
+            second=False
+        )
 
-        def test_convalida(self):
+        self.richiesta.accetta(self.ubicazione)
+        self.assertEqual(
+            first=self.richiesta.accettata,
+            second=True
+        )
 
-            self.assertEqual(
-                    first=self.richiesta.accettata,
-                    second=False
-            )
-
-            self.richiesta.accetta(self.ubicazione)
-            self.assertEqual(
-                first=self.richiesta.accettata,
-                second=True
-            )
-
-            self.richiesta.rifiuta()
-            self.assertEqual(
-                first=self.richiesta.accettata,
-                second=False
-            )
+        self.richiesta.rifiuta()
+        self.assertEqual(
+            first=self.richiesta.accettata,
+            second=False
+        )

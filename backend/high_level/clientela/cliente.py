@@ -13,12 +13,14 @@ from backend.high_level.clientela.abbonamento import Abbonamento
 from backend.high_level.clientela.biglietto import Biglietto
 from backend.high_level.clientela.enum.sesso import Sesso
 from backend.high_level.clientela.visitatore import Visitatore
+from backend.low_level.network.email_message import EmailMessage
+from backend.low_level.network.notification import Notification
 
 
 class Cliente(Visitatore):
     def __init__(self, nome: str, cognome: str, codFis: str, prov: str = "", sesso: Sesso = Sesso.NON_SPECIFICATO,
                  nasc: datetime = None, email: str = "", tel: str = '', biglietti: list[Biglietto] = None,
-                 abbonamenti: list[Abbonamento] = None):
+                 abbonamenti: list[Abbonamento] = None, notification:EmailMessage=None):
         super().__init__(prov, sesso, nasc, biglietti)
         self.nome = nome
         self.cognome = cognome
@@ -27,3 +29,4 @@ class Cliente(Visitatore):
         self.telefono = tel
         self.abbonamenti: list[Abbonamento] = abbonamenti if abbonamenti is not None else []
         self.data_registrazione = datetime.now()
+        self.notification:Notification=notification if notification is not None else EmailMessage(email)
