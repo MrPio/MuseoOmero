@@ -1,6 +1,14 @@
 # MuseoOmero
 Implementazione del progetto museo Omero per l'esame del corso ingegneria del software aa 2021/2022. Lo sviluppo ha seguito la metodologia di sviluppo plan-based dettata dall' UP.
 
+## Tesina
+>Puoi trovare qui la tesina completa, scritta in latex, del progetto:
+>
+> *https://www.dropbox.com/s/6hcrl7o1w93vmvf/MuseoOmero%20Morelli-Sbattella-Sumcutean-Achilli.pdf?dl=0*
+----------------------------------------------------------------------------------------------------------------------------------------
+
+## Repository Progetto
+
 >Puoi trovare qui il progetto completo relativo al software:
 >
 > *https://github.com/SbattellaMattia/SoftwareEngineering/*
