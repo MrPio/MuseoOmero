@@ -7,6 +7,12 @@ Implementazione del progetto museo Omero per l'esame del corso ingegneria del so
 > *https://www.dropbox.com/s/6hcrl7o1w93vmvf/MuseoOmero%20Morelli-Sbattella-Sumcutean-Achilli.pdf?dl=0*
 ----------------------------------------------------------------------------------------------------------------------------------------
 
+## Demo Completa
+>Puoi trovare qui la demo di funzionamento completa del software:
+>
+> *https://youtu.be/QMJik-zwCWg*
+----------------------------------------------------------------------------------------------------------------------------------------
+
 ## Repository Progetto
 
 >Puoi trovare qui il progetto completo relativo al software:
