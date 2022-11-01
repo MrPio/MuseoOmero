@@ -76,3 +76,6 @@ class Dipendente():
     def calcolaEta(self) -> int:
         return datetime.today().year - self.data_nascita.year - \
                ((datetime.today().month, datetime.today().day) < (self.data_nascita.month, self.data_nascita.day))
+
+    def isDisoccupato(self)->bool:
+        return self.lavoro is None

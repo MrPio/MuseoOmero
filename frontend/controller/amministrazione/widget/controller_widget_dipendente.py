@@ -15,6 +15,7 @@ from backend.high_level.museo import Museo
 from backend.high_level.personale.amministratore import Amministratore
 from backend.high_level.personale.dipendente import Dipendente
 from backend.high_level.personale.operatore_al_pubblico import OperatoreAlPubblico
+from backend.high_level.personale.posto_lavoro import PostoLavoro
 from backend.high_level.personale.reception import Reception
 from backend.high_level.personale.segretario import Segretario
 from frontend.controller.amministrazione.strategy_dipendenti.StrategyDipendenti import StrategyDipendenti
@@ -80,6 +81,8 @@ class ControllerWidgetDipendente(Controller):
             for posto_lavoro in Museo.getInstance().posti_lavoro:
                 if isinstance(posto_lavoro, Reception) and len(
                         posto_lavoro.lavori) < posto_lavoro.numero_postazioni_totali:
+                    if not self.model.isDisoccupato() and isinstance(self.model.posto_lavoro,PostoLavoro):
+                        self.model.posto_lavoro.licenzia(self.model,'cambio lavoro')
                     posto_lavoro.assumi(self.model)
         self.initializeUi()
 

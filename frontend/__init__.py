@@ -202,6 +202,6 @@ def scheduler():
 if __name__ == '__main__':
     #popolaMuseo()
     thread = Thread(target=scheduler)
-    thread.start()
+    # thread.start()
     font_presenti()
     startApp()

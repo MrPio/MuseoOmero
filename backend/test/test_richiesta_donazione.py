@@ -17,7 +17,7 @@ class TestRichiestaDonazione(TestCase):
             notification=EmailMessage(''),
         )
 
-    def test_convalida(self):
+    def test_gestione_richiesta(self):
         self.assertEqual(
             first=self.richiesta.accettata,
             second=False

@@ -65,7 +65,7 @@ class TestDipendete(TestCase):
             self.assertTrue('Non posso assumere un Segretario in una Amministrazione!' in context.exception.args)
 
         with self.assertRaises(Exception) as context:
-            self.dipendente.licenzia()
+            self.dipendente.licenzia('licenziamento per giusta causa')
             self.assertTrue('Non posso licenziare un dipendente che non ha un lavoro, prima devi assumerlo!' in context.exception.args)
 
         self.assertTrue(self.dipendente.assumi(self.amministratore,self.amministrazione))
